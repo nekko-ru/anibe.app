@@ -7,20 +7,32 @@
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/shapes.svg"></ion-img>
+  <ion-slides class="slider main" style="background: black" id="slides" pager>
+    <ion-slide style="background: red; color: white;">
+      <h1>Slide 1</h1>
+    </ion-slide>
+    <ion-slide style="background: white; color: blue;">
+      <h1>Slide 2</h1>
+    </ion-slide>
+    <ion-slide style="background: blue; color: white;">
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+
+  <ion-card>
+    <ion-list>
       <ion-card-header>
-        <ion-card-subtitle>Начало</ion-card-subtitle>
-        <ion-card-title>Добро пожаловать</ion-card-title>
+        <ion-card-title>Обновления</ion-card-title>
       </ion-card-header>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
+
       <ion-item *ngFor="let item of lastupdates">
+        <ion-thumbnail slot="start" class="cover">
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+        </ion-thumbnail>
         <ion-label>{{ item.name }}</ion-label>
       </ion-item>
-      
+
     </ion-list>
+  </ion-card>
+
 </ion-content>

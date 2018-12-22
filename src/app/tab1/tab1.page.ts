@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HomeService } from '../services/home.service';
 
 @Component({
   selector: 'app-tab1',
@@ -18,24 +19,13 @@ export class Tab1Page {
    * @param itemService сервис
    */
   constructor(
-    private router: Router
-    // public itemService: ItemService
+    private router: Router,
+    public homeService: HomeService
   ) {}
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    this.lastupdates = [
-      {
-        id: 'adasdas',
-        name: 'temp example',
-        annotation: '',
-        cover: '',
-        author: '',
-        genre: '',
-        type: '',
-        rating: ''
-      }
-    ];
+    this.lastupdates = this.homeService.getItems();
   }
 
 }
