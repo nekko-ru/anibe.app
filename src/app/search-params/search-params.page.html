@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Параметры поиска</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="savePicks()">Сохранить</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-list-header>Жанры</ion-list-header>
+  <ion-list>
+    
+    <ion-item *ngFor="let item of genres">
+      <ion-label>{{item.name}}</ion-label>
+      <ion-checkbox mode="ios" slot="end" [(ngModel)]="item.active"></ion-checkbox>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

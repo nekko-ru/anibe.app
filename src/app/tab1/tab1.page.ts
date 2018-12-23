@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HomeService } from '../../core/home';
 import { IShortPostInfo } from '../../core/interfaces/post';
 import { IShortNews } from 'src/core/interfaces/news';
+import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-tab1',
@@ -33,7 +34,6 @@ export class Tab1Page {
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
     this.lastupdates = this.homeService.getUpdates();
-    this.news = this.homeService.getNews()
+    this.news = this.homeService.getNews();
   }
-
 }
