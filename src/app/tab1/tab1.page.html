@@ -1,8 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Главная
-    </ion-title>
+    <!-- <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-searchbar placeholder="Search Favorites"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -27,12 +30,22 @@
 
       <ion-item *ngFor="let item of lastupdates">
         <ion-thumbnail slot="start" class="cover">
-          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+          <img src="{{ item.cover }}">
         </ion-thumbnail>
         <ion-label>{{ item.name }}</ion-label>
       </ion-item>
 
     </ion-list>
+  </ion-card>
+
+  <ion-card *ngFor="let item of news">
+      <ion-img src="{{ item.cover }}"></ion-img>
+      <ion-card-header>
+          <ion-card-title>{{ item.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+          <p>{{ item.annotation }}</p>
+      </ion-card-content>
   </ion-card>
 
 </ion-content>
