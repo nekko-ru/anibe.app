@@ -1,6 +1,8 @@
 {
   "name": "myApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
-  "id": "2f101260"
+  "id": "3cfa1687"
 }

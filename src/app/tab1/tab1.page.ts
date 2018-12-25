@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HomeService } from '../../core/home';
 import { IShortPostInfo } from '../../core/interfaces/post';
 import { IShortNews } from 'src/core/interfaces/news';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
@@ -28,12 +27,10 @@ export class Tab1Page {
    */
   constructor(
     private router: Router,
-    public homeService: HomeService
+    public Core: Core
   ) {}
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    this.lastupdates = this.homeService.getUpdates();
-    this.news = this.homeService.getNews();
   }
 }

@@ -1,4 +1,4 @@
-export interface IShortPostInfo {
+export interface IPost {
   id: string;
   name: string;
   annotation: string;
@@ -9,7 +9,7 @@ export interface IShortPostInfo {
   rating: any;
 }
 
-export interface IFullPostInfo {
+export interface IPostFull {
   id: string;
   name: string;
   annotation: string;
@@ -27,4 +27,11 @@ export interface IFullPostInfo {
   episodes: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface RequestParam {
+  page?: string;
+  limit?: string;
+  sort?: string | string[];
+  fields?: string | string[];
 }
