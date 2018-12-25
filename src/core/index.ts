@@ -1,5 +1,2 @@
-import { API } from './api';
-
-export default {
-  api: API,
-};
+export { API, AxiosSettings } from './api';
+export { Post } from './Post';

@@ -1,9 +1,11 @@
 // tslint:disable:max-line-length
 import { Component, OnInit } from '@angular/core';
-import { IShortPostInfo } from 'src/core/interfaces/post';
 import { ModalController } from '@ionic/angular';
 import { SearchParamsPage } from '../search-params/search-params.page';
-import axios from 'axios';
+
+import { Post } from '../../core';
+import { IPost } from 'src/core/interfaces';
+import { initDomAdapter } from '@angular/platform-browser/src/browser';
 
 @Component({
   selector: 'app-search-results',
@@ -11,10 +13,11 @@ import axios from 'axios';
   styleUrls: ['./search-results.page.scss'],
 })
 export class SearchResultsPage implements OnInit {
-  private result: any[] = [];
+  private Post: Post;
 
-  private query: string;
-  private page: number;
+  private result: IPost[] = [];
+  private query = null;
+  private page = 0;
   private genges: any[] = [
     {
       name: 'Новое',
@@ -30,7 +33,9 @@ export class SearchResultsPage implements OnInit {
     }
   ];
 
-  constructor(public modalController: ModalController) {}
+  constructor(public modalController: ModalController) {
+    this.Post = new Post();
+  }
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -49,30 +54,32 @@ export class SearchResultsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadLates();
+    this.load();
   }
 
-  async loadLates() {
-    const res: any = await axios.get('http://192.168.0.103:8080/posts');
-    console.log(res);
-    this.result = res.data.rows;
+  private async load(query?: string) {
+    // тк первую страницу только что загрузили
+    this.page += 1;
+
+    const temp = await this.Post.getAll(query || this.query, { limit: '10', page: this.page });
+    temp.forEach(i => {
+      this.result.push(i);
+    });
   }
 
-  search(event: any) {
+  async search(event: any) {
     this.query = event.target.value;
+
+    console.log(event.target.value);
     if (this.query !== '') {
-      console.log(event.target.value);
+      await this.load(this.query);
     } else {
-      // todo: show empty result
+      await this.load(null);
     }
   }
 
-  loadData(event) {
-    setTimeout(() => {
-      this.result.forEach(i => {
-        this.result.push(i);
-      });
-      event.target.complete();
-    }, 3000);
+  loadNewPage(event) {
+    this.load();
+    event.target.complete();
   }
 }

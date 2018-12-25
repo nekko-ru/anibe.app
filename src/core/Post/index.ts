@@ -43,13 +43,10 @@ export class Post {
    * @returns {Promise<IPost[]>}
    */
   async getAll(query: string, params: RequestParam): Promise<IPost[]> {
-    let url = `/posts?fields=${params.fields}&page=${params.page}&sort=${params.sort}&limit=${params.limit}`;
-
-    if (query !== null) {
-      url += `&q=${query}`;
-    }
-
-    const res = await this.api.get(url);
-    return res.data;
+    const res = await this.api.get(`/posts`, {
+      ...params,
+      q: query
+    });
+    return res.data.rows;
   }
 }

@@ -30,7 +30,7 @@ export interface IPostFull {
 }
 
 export interface RequestParam {
-  page?: string;
+  page?: number;
   limit?: string;
   sort?: string | string[];
   fields?: string | string[];

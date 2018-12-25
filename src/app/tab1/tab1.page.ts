@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IShortPostInfo } from '../../core/interfaces/post';
-import { IShortNews } from 'src/core/interfaces/news';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { Post } from '../../core';
+import { IPost } from 'src/core/interfaces';
 
 @Component({
   selector: 'app-tab1',
@@ -10,15 +9,16 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  private Post: Post;
   /**
    * Содержит последние изменения и обновления
    */
-  private lastupdates: IShortPostInfo[];
+  private lastupdates: IPost[];
 
   /**
    * Список новостей на главной странице
    */
-  private news: IShortNews[];
+  private news: any[];
 
   /**
    * Конструктор класса
@@ -26,11 +26,13 @@ export class Tab1Page {
    * @param IShortPostInfo сервис
    */
   constructor(
-    private router: Router,
-    public Core: Core
-  ) {}
+    private router: Router
+  ) {
+    this.Post = new Post();
+  }
 
   // tslint:disable-next-line:use-life-cycle-interface
-  ngOnInit() {
+  async ngOnInit() {
+    this.lastupdates = await this.Post.getAll(null, { limit: '5' });
   }
 }
