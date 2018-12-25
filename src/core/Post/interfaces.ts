@@ -34,4 +34,5 @@ export interface RequestParam {
   limit?: string;
   sort?: string | string[];
   fields?: string | string[];
+  q?: string;
 }

@@ -32,7 +32,7 @@ export class Post {
     const url = `/posts/${id}?fields=${params.fields}&page=${params.page}&sort=${params.sort}&limit=${params.limit}`;
 
     const res = await this.api.get(url);
-    return res.data;
+    return JSON.parse(res.data);
   }
 
   /**
@@ -47,6 +47,7 @@ export class Post {
       ...params,
       q: query
     });
-    return res.data.rows;
+
+    return JSON.parse(res.data).rows;
   }
 }

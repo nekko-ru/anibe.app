@@ -1,4 +1,5 @@
-import axios from 'axios';
+import { HTTP } from '@ionic-native/http/ngx';
+import { RequestParam } from './Post/interfaces';
 
 export interface AxiosSettings {
   auth?: {
@@ -11,24 +12,29 @@ export interface AxiosSettings {
 
 export class API {
   private settings: AxiosSettings;
+  private http: HTTP;
+
+  private baseURL = 'http://localhost:8080';
+  private responseType = 'json';
 
   constructor(settings: AxiosSettings) {
-    this.settings = {
-      baseURL: 'http://localhost:8080',
-      responseType: 'json',
-      ...settings,
-    };
+    this.settings = settings;
+    this.http = new HTTP();
+    if (this.settings.auth) {
+      this.http.useBasicAuth(settings.auth.username, settings.auth.password);
+    }
+    this.http.setDataSerializer(this.responseType);
   }
 
   /**
    * Выполняет GET запрос к серверу апи
    * @param {string} url ссылка на метод без учета базы
    */
-  get(url: string, params: any = {}) {
-    return axios.get(url, {
-      params,
-      ...this.settings
-    });
+  get(url: string, params: RequestParam = {}) {
+    url = this.baseURL + `${url}?page=${params.page || ''}` +
+      `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
+      `&fields=${params.fields || ''}`;
+    return this.http.get(url, {}, {});
   }
   /**
    * Выполняет PUT запрос к серверу апи
@@ -36,10 +42,12 @@ export class API {
    * @param body тело запроса
    */
   put(url: string, body: any, params: any = {}) {
-    return axios.put(url, body, {
-      params,
-      ...this.settings
-    });
+    url = this.baseURL + `${url}?page=${params.page || ''}` +
+      `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
+      `&fields=${params.fields || ''}`;
+    return this.http.put(url, {
+      data: body
+    }, {});
   }
   /**
    * Выполняет POST запрос к серверу апи
@@ -47,10 +55,12 @@ export class API {
    * @param body тело запроса
    */
   post(url: string, body: any, params: any = {}) {
-    return axios.post(url, body, {
-      params,
-      ...this.settings
-    });
+    url = this.baseURL + `${url}?page=${params.page || ''}` +
+      `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
+      `&fields=${params.fields || ''}`;
+    return this.http.post(url, {
+      data: body
+    }, {});
   }
   /**
    * Выполняет PATCH запрос к серверу апи
@@ -58,19 +68,18 @@ export class API {
    * @param body тело запроса
    */
   patch(url: string, body: any, params: any = {}) {
-    return axios.patch(url, body, {
-      params,
-      ...this.settings
-    });
+    url = this.baseURL + `${url}?page=${params.page || ''}` +
+      `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
+      `&fields=${params.fields || ''}`;
+    return this.http.patch(url, {
+      data: body
+    }, {});
   }
   /**
    * Выполняет DELETE запрос к серверу апи
    * @param url ссылка
    */
   delete(url: string, params: any = {}) {
-    return axios.delete(url, {
-      params,
-      ...this.settings
-    });
+    return this.http.delete(url, {}, {});
   }
 }
