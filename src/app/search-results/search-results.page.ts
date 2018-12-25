@@ -62,9 +62,14 @@ export class SearchResultsPage implements OnInit {
     this.page += 1;
 
     const temp = await this.Post.getAll(query || this.query, { limit: '10', page: this.page });
-    temp.forEach(i => {
-      this.result.push(i);
-    });
+    if (temp.length === 0) {
+      this.result = [];
+      this.page = 0;
+    } else {
+      temp.forEach(i => {
+        this.result.push(i);
+      });
+    }
   }
 
   async search(event: any) {

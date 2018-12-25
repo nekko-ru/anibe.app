@@ -13,7 +13,7 @@
     
     <ion-item *ngFor="let item of genres">
       <ion-label>{{item.name}}</ion-label>
-      <ion-checkbox mode="ios" slot="end" [(ngModel)]="item.active"></ion-checkbox>
+      <ion-checkbox [(ngModel)]="item.active"></ion-checkbox>
     </ion-item>
 
   </ion-list>

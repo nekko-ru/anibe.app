@@ -34,6 +34,10 @@ export class API {
     url = this.baseURL + `${url}?page=${params.page || ''}` +
       `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
       `&fields=${params.fields || ''}`;
+
+    if (params.q) {
+      url += `&q=${params.q}`;
+    }
     return this.http.get(url, {}, {});
   }
   /**
