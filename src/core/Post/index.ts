@@ -29,7 +29,9 @@ export class Post {
    * @returns {Promise<IPostFull>} результат
    */
   async get(id: string, params: RequestParam): Promise<IPostFull> {
-    const url = `/posts/${id}?fields=${params.fields}&page=${params.page}&sort=${params.sort}&limit=${params.limit}`;
+    const url = `/posts/${id}?page=${params.page || ''}` +
+      `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
+      `&fields=${params.fields || ''}`;
 
     const res = await this.api.get(url);
     return JSON.parse(res.data);
@@ -43,10 +45,15 @@ export class Post {
    * @returns {Promise<IPost[]>}
    */
   async getAll(query: string, params: RequestParam): Promise<IPost[]> {
-    const res = await this.api.get(`/posts`, {
-      ...params,
-      q: query
-    });
+    let url = `/posts?page=${params.page || ''}` +
+    `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
+    `&fields=${params.fields || ''}`;
+
+    if (query) {
+      url += `&q=${query}`;
+    }
+
+    const res = await this.api.get(url);
 
     return JSON.parse(res.data).rows;
   }

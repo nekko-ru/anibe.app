@@ -28,6 +28,7 @@
     "@ionic/pro": "2.0.4",
     "axios": "^0.18.0",
     "cordova": "^8.1.2",
+    "cordova-android": "7.1.4",
     "cordova-browser": "5.0.4",
     "cordova-plugin-advanced-http": "2.0.2",
     "cordova-plugin-device": "^2.0.2",
@@ -80,7 +81,8 @@
       "cordova-plugin-ionic-keyboard": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
