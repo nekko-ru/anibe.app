@@ -14,7 +14,7 @@
 <ion-content>
   <ion-row>
     <ion-col size="6" *ngFor="let item of result">
-      <ion-img src="{{ item.cover }}"></ion-img>
+      <ion-img (click)="openPost(item.id)" src="{{ item.cover }}"></ion-img>
     </ion-col>
   </ion-row>
 

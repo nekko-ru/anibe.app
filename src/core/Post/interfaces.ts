@@ -12,6 +12,7 @@ export interface IPost {
 export interface IPostFull {
   id: string;
   name: string;
+  cover: string;
   annotation: string;
   description: string;
   genre: string[];
@@ -20,11 +21,10 @@ export interface IPostFull {
   status: string;
   date: string;
   author: string;
-  cover: string;
   chapters: string;
   pages: string;
   reading: string;
-  episodes: string;
+  episodes: any;
   createdAt: string;
   updatedAt: string;
 }

@@ -25,13 +25,10 @@ export class Post {
    * Получить полную информацию о посте, включая эпизоды его
    * @async
    * @param {string} id uuid поста
-   * @param {string[]} fields необходимые поля
    * @returns {Promise<IPostFull>} результат
    */
-  async get(id: string, params: RequestParam): Promise<IPostFull> {
-    const url = `/posts/${id}?page=${params.page || ''}` +
-      `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
-      `&fields=${params.fields || ''}`;
+  async get(id: string): Promise<IPostFull> {
+    const url = `/posts/${id}`;
 
     const res = await this.api.get(url);
     return JSON.parse(res.data);

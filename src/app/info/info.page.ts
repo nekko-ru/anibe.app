@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IPostFull } from 'src/core/interfaces';
+import { ActivatedRoute } from '@angular/router';
+import { Post } from 'src/core';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-info',
@@ -7,35 +10,29 @@ import { IPostFull } from 'src/core/interfaces';
   styleUrls: ['./info.page.scss'],
 })
 export class InfoPage implements OnInit {
-  private info = {
-    'id': '5c274a63ee6bb40012106958',
-    'name': 'Kamisama Hajimemashita / Приятно познакомиться, Бог',
-    'annotation': 'Обычная девушка-школьница Момодзоно Нанами, оказавшись на улице и без гроша, вовсе не думала о богах и ёкаях. Но в храме бога земли, где она находит пристанище и друзей, ее ждут загадки времени и одинокий лис-хранитель.',
-    'description': 'Обычная девушка-школьница Момодзоно Нанами, оказавшись на улице и без гроша, вовсе не думала о богах и ёкаях. Но в храме бога земли, где она находит пристанище и друзей, ее ждут загадки времени и одинокий лис-хранитель. Просто ли человеку стать богом? И чем обернется любовь смертной девушки и бессмертного оборотня-кицунэ, однажды уже потерявшего возлюбленную?История эта – совсем не простая. Здесь в канву романтики, школы, гарема и прочих популярных жанров манги вплетены события драматические и неоднозначные. Вместе с героями, Нанами и Томоэ, читатели видят свет бессмертной любви, сметающей все преграды, переживают горечь предательства и боль утраты, которую не вылечит даже время. Два мира – смертных и бессмертных – сплетаются в объятиях девушки и лиса.',
-    'genre': [
-      'Сверхъестественное',
-      'Фантастика',
-      'Романтика',
-      'Школа',
-      'Сёдзе',
-      'Комедия'
-    ],
-    'type': 'Манга',
-    'rating': 9.22,
-    'status': 'Завершен, перевод завершен',
-    'date': '2008',
-    'author': 'Julietta Suzuki',
-    'cover': 'http://shakai.ru/file/manga/Kamisama_Hajimemashita/cover/cover.jpg',
-    'chapters': '156',
-    'pages': '',
-    'reading': '24.4',
-    'episodes': [{}, {}],
-    'createdAt': '2018-12-29T10:20:19.391Z',
-    'updatedAt': '2018-12-29T10:20:19.391Z'
-  };
+  private id: string;
+  private Post: Post;
+  // фикс ошибок при пустой отрисовке
+  private info: IPostFull | any = { cover: '', genre: [] };
+  private spiner: any;
 
-  constructor() {}
+  constructor(private route: ActivatedRoute, public loadingController: LoadingController) {
+    this.Post = new Post();
+  }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.spiner = await this.loadingController.create({
+      message: 'Загрузка...',
+      duration: 5000
+    });
+    await this.spiner.present();
 
+    this.id = this.route.snapshot.paramMap.get('id');
+    await this.load();
+  }
+
+  private async load() {
+    this.info = await this.Post.get(this.id);
+    await this.spiner.dismiss();
+  }
 }

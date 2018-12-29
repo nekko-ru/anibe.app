@@ -5,6 +5,7 @@ import { SearchParamsPage } from '../search-params/search-params.page';
 
 import { Post } from '../../core';
 import { IPost } from 'src/core/interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -141,7 +142,7 @@ export class SearchResultsPage implements OnInit {
     }
   ];
 
-  constructor(public modalController: ModalController) {
+  constructor(public modalController: ModalController, private router: Router) {
     this.Post = new Post();
   }
 
@@ -163,6 +164,14 @@ export class SearchResultsPage implements OnInit {
 
   ngOnInit() {
     this.load();
+  }
+
+  /**
+   * Открывает выбраный пост
+   * @param id uuid поста
+   */
+  private openPost(id: string): void {
+    this.router.navigateByUrl(`/info/${id}`);
   }
 
   private async load(query?: string) {

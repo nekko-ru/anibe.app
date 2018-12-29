@@ -1,7 +1,7 @@
 <ion-content fullpage>
 
   <ion-card>
-    <ion-img src="{{ info.cover }}"></ion-img>
+    <ion-img [src]="info.cover"></ion-img>
     <ion-card-header>
       <ion-card-title>{{ info.name }}</ion-card-title>
     </ion-card-header>
@@ -39,7 +39,7 @@
           <ion-label>
             <h2>Страницы</h2>
           </ion-label>
-          <p>{{ info.chapters }}</p>
+          <p>{{ info.pages }}</p>
         </ion-item>
         <ion-item>
           <ion-label>
@@ -54,10 +54,10 @@
           <p>{{ info.date }}</p>
         </ion-item>
         <ion-item>
-          <ion-label>
+          <ion-label text-wrap>
             <h2>Статус</h2>
+            <p>{{ info.status }}</p>
           </ion-label>
-          <p>{{ info.status }}</p>
         </ion-item>
         <ion-item>
           <ion-label text-wrap>
@@ -72,19 +72,6 @@
           <p>~{{ info.reading }}ч.</p>
         </ion-item>
 
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Главы</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of info.episodes">
-          asd
-        </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>

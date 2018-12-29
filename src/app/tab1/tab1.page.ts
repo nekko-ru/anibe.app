@@ -31,6 +31,14 @@ export class Tab1Page {
     this.Post = new Post();
   }
 
+    /**
+   * Открывает выбраный пост
+   * @param id uuid поста
+   */
+  private openPost(id: string): void {
+    this.router.navigateByUrl(`/info/${id}`);
+  }
+
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
     this.lastupdates = await this.Post.getAll(null, { limit: '5' });

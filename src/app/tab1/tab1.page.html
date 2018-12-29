@@ -17,7 +17,7 @@
         <ion-card-title>Обновления</ion-card-title>
       </ion-card-header>
 
-      <ion-item *ngFor="let item of lastupdates">
+      <ion-item *ngFor="let item of lastupdates" (click)="openPost(item.id)">
         <ion-thumbnail slot="start" class="cover">
           <img src="{{ item.cover }}">
         </ion-thumbnail>
