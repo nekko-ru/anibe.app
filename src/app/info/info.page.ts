@@ -11,6 +11,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class InfoPage implements OnInit {
   private id: string;
+  private liked = 'heart-empty';
   private Post: Post;
   // фикс ошибок при пустой отрисовке
   private info: IPostFull | any = { cover: '', genre: [] };
