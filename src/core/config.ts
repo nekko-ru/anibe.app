@@ -1,6 +1,6 @@
 
 export const config: Config = {
-  url: 'http://localhost:8080',
+  url: 'http://api.anibe.ru',
   logined: false,
   currentUser: {
     id: null,

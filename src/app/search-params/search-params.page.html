@@ -8,9 +8,8 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-list-header>Жанры</ion-list-header>
   <ion-list>
-    
+    <ion-list-header>Жанры</ion-list-header>
     <ion-item *ngFor="let item of genres">
       <ion-label>{{item.name}}</ion-label>
       <ion-checkbox [(ngModel)]="item.active"></ion-checkbox>

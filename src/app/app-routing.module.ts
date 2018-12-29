@@ -7,7 +7,8 @@ const routes: Routes = [
   { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
   { path: 'viewer', loadChildren: './viewer/viewer.module#ViewerPageModule' },
   { path: 'search-results', loadChildren: './search-results/search-results.module#SearchResultsPageModule' },
-  { path: 'search-params', loadChildren: './search-params/search-params.module#SearchParamsPageModule' }
+  { path: 'search-params', loadChildren: './search-params/search-params.module#SearchParamsPageModule' },
+  { path: 'info', loadChildren: './info/info.module#InfoPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
