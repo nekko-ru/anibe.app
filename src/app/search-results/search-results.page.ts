@@ -180,7 +180,8 @@ export class SearchResultsPage implements OnInit {
 
     const temp = await this.Post.getAll(query || this.query, {
       limit: '10',
-      page: this.page
+      page: this.page,
+      sort: '-rating'
     });
     if (temp.length === 0) {
       this.result = [];
