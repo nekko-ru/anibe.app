@@ -1,0 +1,15 @@
+ion-content {
+    --background: #383a3e;
+    --color: #f5f6f9;
+}
+
+ion-toolbar, ion-title {
+    --background: #1e2023;
+    --color: #f5f6f9;
+}
+
+ion-segment-button {
+    --indicator-color-checked: transparent;
+    --color-checked: #f5f6f9;
+    --color: #f5f6f9;
+}

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IPostFull } from 'src/core/interfaces';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
+import { ReaderPage } from '../reader/reader.page';
 
 @Component({
   selector: 'app-info',
@@ -11,13 +12,14 @@ import { LoadingController } from '@ionic/angular';
 })
 export class InfoPage implements OnInit {
   private id: string;
-  private liked = 'heart-empty';
   private Post: Post;
   // фикс ошибок при пустой отрисовке
-  private info: IPostFull | any = { cover: '', genre: [] };
+  private info: IPostFull | any = { cover: '', genre: [], episodes: {} };
   private spiner: any;
 
-  constructor(private route: ActivatedRoute, public loadingController: LoadingController) {
+  private chapters: string[];
+
+  constructor(private route: ActivatedRoute, private router: Router, public loadingController: LoadingController) {
     this.Post = new Post();
   }
 
@@ -35,5 +37,9 @@ export class InfoPage implements OnInit {
   private async load() {
     this.info = await this.Post.get(this.id);
     await this.spiner.dismiss();
+  }
+
+  private async Read() {
+    this.router.navigateByUrl(`/reader/${this.id}`);
   }
 }

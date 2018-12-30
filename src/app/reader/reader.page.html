@@ -1,17 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-back-button icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ info.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content fullpage>
-  <ion-progress-bar value="0.5"></ion-progress-bar>
 
   <ion-slides style="height: 100%" align-items-center>
-    <ion-slide>
-      <ion-img src="https://via.placeholder.com/450"></ion-img>
+    
+    <ion-slide *ngFor="let img of info.episodes[chapter]">
+      <ion-img src="{{ img }}"></ion-img>
     </ion-slide>
-    <ion-slide>
-      <ion-img src="https://via.placeholder.com/450"></ion-img>
-    </ion-slide>
-    <ion-slide>
-      <ion-img src="https://via.placeholder.com/450"></ion-img>
-    </ion-slide>
+
   </ion-slides>
 
-
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment>
+      <ion-segment-button value="back">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="menu">
+
+        <ion-icon name="menu"></ion-icon>
+
+      </ion-segment-button>
+      <ion-segment-button value="next">
+        <ion-icon name="arrow-round-forward"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>
