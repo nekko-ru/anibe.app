@@ -49,6 +49,9 @@ export class Post {
     if (query) {
       url += `&q=${query}`;
     }
+    if (params.custom) {
+      url += params.custom;
+    }
 
     const res = await this.api.get(url);
 

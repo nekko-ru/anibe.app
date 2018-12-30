@@ -35,4 +35,5 @@ export interface RequestParam {
   sort?: string | string[];
   fields?: string | string[];
   q?: string;
+  custom?: string;
 }

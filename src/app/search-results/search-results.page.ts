@@ -159,6 +159,15 @@ export class SearchResultsPage implements OnInit {
     const result = await modal.onDidDismiss();
 
     this.genres = result.data.genres;
+    this.result = [];
+    this.page = 0;
+
+    if (this.query !== '') {
+      await this.load(this.query);
+    } else {
+      await this.load(null);
+    }
+
     console.log(result.data);
   }
 
@@ -181,7 +190,8 @@ export class SearchResultsPage implements OnInit {
     const temp = await this.Post.getAll(query || this.query, {
       limit: '10',
       page: this.page,
-      sort: '-rating'
+      sort: '-rating',
+      custom: (this.activeGenre().length !== 0) ? `&genre=${this.activeGenre().join(',')}` : ''
     });
     if (temp.length === 0) {
       this.result = [];
@@ -214,8 +224,8 @@ export class SearchResultsPage implements OnInit {
   /**
    * Возвращяет активные жанры
    */
-  activeGenre(): { name: string, active: boolean }[] {
-    return this.genres.filter((v) => v.active === true);
+  activeGenre(): string[] {
+    return this.genres.filter((v) => v.active === true).map((v) => v.name);
   }
 
   /**
