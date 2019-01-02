@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Post } from 'src/core';
 import { IPostFull } from 'src/core/interfaces';
-import { ModalController, LoadingController } from '@ionic/angular';
+import { ModalController, LoadingController, Events, IonSlide } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-reader',
@@ -15,8 +16,12 @@ export class ReaderPage implements OnInit {
 
   private Post: Post;
   private spiner: any;
+  @ViewChild('mySlider') private slider: any;
 
-  constructor(private route: ActivatedRoute, public loadingController: LoadingController) {
+  private lastactive: { chapter: string, page: number };
+
+  // tslint:disable-next-line:max-line-length
+  constructor(private events: Events, private storage: Storage, private route: ActivatedRoute, public loadingController: LoadingController) {
     this.Post = new Post();
   }
 
@@ -31,9 +36,30 @@ export class ReaderPage implements OnInit {
 
     // получаем первую главу
     // todo: добавить возможноть открывать последнию главу
-    this.chapter = Object.keys(this.info.episodes)[0];
-    console.log(this.chapter);
+
+    this.lastactive = await this.storage.get(this.info.id);
+    if (this.lastactive !== null) {
+      console.log(this.lastactive);
+
+      this.chapter = this.lastactive.chapter;
+      this.slider.slideTo(this.lastactive.page);
+    } else {
+      this.chapter = Object.keys(this.info.episodes)[0];
+      this.lastactive.page = 1;
+    }
 
     await this.spiner.dismiss();
+  }
+
+  private async sliderEvent() {
+    console.log('slider changed');
+
+    this.lastactive = {
+      chapter: this.chapter,
+      // fixme:
+      page: await this.slider.getActiveIndex()
+    };
+
+    await this.storage.set(this.info.id, this.lastactive);
   }
 }
