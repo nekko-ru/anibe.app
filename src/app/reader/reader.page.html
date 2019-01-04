@@ -1,17 +1,17 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
       <ion-back-button icon="close"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ info.name }}</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content fullpage>
 
   <ion-slides #mySlider (ionSlideDidChange)="sliderEvent()" style="height: 100%" align-items-center>
     
-    <ion-slide *ngFor="let img of info.episodes[chapter]">
+    <ion-slide *ngFor="let img of episode">
       <ion-img src="{{ img }}"></ion-img>
     </ion-slide>
 

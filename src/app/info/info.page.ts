@@ -3,7 +3,6 @@ import { IPostFull } from 'src/core/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/core';
 import { LoadingController, ModalController } from '@ionic/angular';
-import { ReaderPage } from '../reader/reader.page';
 
 @Component({
   selector: 'app-info',
@@ -19,7 +18,11 @@ export class InfoPage implements OnInit {
 
   private chapters: string[];
 
-  constructor(private route: ActivatedRoute, private router: Router, public loadingController: LoadingController) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public loadingController: LoadingController
+  ) {
     this.Post = new Post();
   }
 

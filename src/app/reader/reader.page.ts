@@ -13,6 +13,7 @@ import { Storage } from '@ionic/storage';
 export class ReaderPage implements OnInit {
   private info: IPostFull;
   private chapter: string;
+  private episode: string[];
 
   private Post: Post;
   private spiner: any;
@@ -23,6 +24,7 @@ export class ReaderPage implements OnInit {
   // tslint:disable-next-line:max-line-length
   constructor(private events: Events, private storage: Storage, private route: ActivatedRoute, public loadingController: LoadingController) {
     this.Post = new Post();
+    this.episode = [];
   }
 
   async ngOnInit() {
@@ -45,9 +47,9 @@ export class ReaderPage implements OnInit {
       this.slider.slideTo(this.lastactive.page);
     } else {
       this.chapter = Object.keys(this.info.episodes)[0];
-      this.lastactive.page = 1;
     }
 
+    this.episode = this.info.episodes[this.chapter];
     await this.spiner.dismiss();
   }
 

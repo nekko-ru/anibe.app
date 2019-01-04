@@ -41,6 +41,6 @@ export class Tab1Page {
 
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
-    this.lastupdates = await this.Post.getAll(null, { limit: '5' });
+    this.lastupdates = await this.Post.getAll(null, { limit: '5', sort: '-updatedAt' });
   }
 }

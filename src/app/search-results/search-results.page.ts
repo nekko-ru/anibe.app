@@ -193,7 +193,7 @@ export class SearchResultsPage implements OnInit {
       sort: '-rating',
       custom: (this.activeGenre().length !== 0) ? `&genre=${this.activeGenre().join(',')}` : ''
     });
-    if (temp.length === 0) {
+    if (temp.length === 0 && this.page === 1) {
       this.result = [];
       this.page = 0;
     } else {
