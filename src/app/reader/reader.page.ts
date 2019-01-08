@@ -62,12 +62,15 @@ export class ReaderPage implements OnInit {
       this.allactives = post.allactives;
       this.slider.slideTo(this.active.page);
     } else {
-      this.allactives = {
-        [this.chapter]: {
-          chapter: this.chapter,
-          page: 1
-        }
+      this.active = {
+        chapter: this.chapter,
+        page: 0
       };
+      this.allactives = {
+        ...this.allactives,
+        [this.chapter]: this.active
+      };
+      this.slider.slideTo(0);
     }
 
     this.episode = this.info.episodes[this.chapter];
@@ -117,12 +120,30 @@ export class ReaderPage implements OnInit {
     await modal.present();
     const result = await modal.onDidDismiss();
 
-    this.chapter = result.data.chapter;
-    this.episode = this.info.episodes[this.chapter];
-    this.active = this.allactives[this.chapter];
-    await this.slider.slideTo(this.active.page);
-
+    const post = await this.storage.get(this.info.id);
     console.log(this);
+
+    this.chapter = result.data.chapter;
+    if (post && post.allactives[this.chapter]) {
+      console.log('opened chapter in progress or ended');
+
+      this.episode = this.info.episodes[this.chapter];
+      this.allactives = post.allactives;
+      this.slider.slideTo(this.active.page);
+    } else {
+      console.log('opened new chapter');
+      this.episode = this.info.episodes[this.chapter];
+
+      this.active = {
+        chapter: this.chapter,
+        page: 0
+      };
+      this.allactives = {
+        ...this.allactives,
+        [this.chapter]: this.active
+      };
+      this.slider.slideTo(0);
+    }
 
     await this.storage.set(this.info.id, {
       allactives: {
