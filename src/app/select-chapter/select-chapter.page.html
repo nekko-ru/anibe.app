@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Выбор главы</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-grid>
+    <ion-row class="rows">
+
+      <ion-col (click)="savePicks(item)" class="{{ item === selected ? 'active' : '' }}" size="2" *ngFor="let item of chapters">
+        {{ item }}
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+</ion-content>

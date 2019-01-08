@@ -5,6 +5,8 @@ import { ModalController, LoadingController, Events, IonSlide } from '@ionic/ang
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
+import { SelectChapterPage } from '../select-chapter/select-chapter.page';
+
 @Component({
   selector: 'app-reader',
   templateUrl: './reader.page.html',
@@ -19,10 +21,16 @@ export class ReaderPage implements OnInit {
   private spiner: any;
   @ViewChild('mySlider') private slider: any;
 
-  private lastactive: { chapter: string, page: number };
+  private active: { chapter: string, page: number };
+  private allactives: { [k: string]: { chapter: string, page: number } };
 
-  // tslint:disable-next-line:max-line-length
-  constructor(private events: Events, private storage: Storage, private route: ActivatedRoute, public loadingController: LoadingController) {
+  constructor(
+    private events: Events,
+    private storage: Storage,
+    private route: ActivatedRoute,
+    private loadingController: LoadingController,
+    private modalController: ModalController
+  ) {
     this.Post = new Post();
     this.episode = [];
   }
@@ -33,35 +41,94 @@ export class ReaderPage implements OnInit {
       duration: 5000
     });
     await this.spiner.present();
+    await this.storage.ready();
 
     this.info = await this.Post.get(this.route.snapshot.paramMap.get('id'));
 
     // получаем первую главу
     // todo: добавить возможноть открывать последнию главу
 
-    this.lastactive = await this.storage.get(this.info.id);
-    if (this.lastactive !== null) {
-      console.log(this.lastactive);
+    const post = await this.storage.get(this.info.id);
+    console.log(this);
 
-      this.chapter = this.lastactive.chapter;
-      this.slider.slideTo(this.lastactive.page);
+    // по умолчанию мы открывает первую главу
+    this.chapter = Object.keys(this.info.episodes)[0];
+
+    if (post && post.allactives[this.chapter]) {
+      this.active = post.allactives[this.chapter];
+      console.log(this.active);
+
+      this.chapter = this.active.chapter;
+      this.allactives = post.allactives;
+      this.slider.slideTo(this.active.page);
     } else {
-      this.chapter = Object.keys(this.info.episodes)[0];
+      this.allactives = {
+        [this.chapter]: {
+          chapter: this.chapter,
+          page: 1
+        }
+      };
     }
 
     this.episode = this.info.episodes[this.chapter];
     await this.spiner.dismiss();
   }
 
-  private async sliderEvent() {
-    console.log('slider changed');
+  private async ChapterEnded() {
+    // фикс ошибок при открытии окна
+    // if (!this.active) {
+    //   return;
+    // }
 
-    this.lastactive = {
+    // console.log('chapter ended');
+    // this.allactives[this.chapter] = this.active;
+
+    // await this.storage.set(this.info.id, {
+    //   allactives: this.allactives
+    // });
+  }
+
+  private async sliderEvent() {
+    this.active = {
       chapter: this.chapter,
       // fixme:
       page: await this.slider.getActiveIndex()
     };
 
-    await this.storage.set(this.info.id, this.lastactive);
+    await this.storage.set(this.info.id, {
+      allactives: {
+        ...this.allactives,
+        [this.chapter]: this.active
+      }
+    });
+  }
+
+  private async selectChapter() {
+    const modal = await this.modalController.create({
+      component: SelectChapterPage,
+      backdropDismiss: true,
+      componentProps: {
+        selected: this.chapter,
+        chapters: Object.keys(this.info.episodes),
+        allactives: this.allactives
+      }
+    });
+
+    await modal.present();
+    const result = await modal.onDidDismiss();
+
+    this.chapter = result.data.chapter;
+    this.episode = this.info.episodes[this.chapter];
+    this.active = this.allactives[this.chapter];
+    await this.slider.slideTo(this.active.page);
+
+    console.log(this);
+
+    await this.storage.set(this.info.id, {
+      allactives: {
+        ...this.allactives,
+        [this.chapter]: this.active
+      }
+    });
   }
 }

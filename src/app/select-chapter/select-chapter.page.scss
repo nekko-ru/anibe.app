@@ -1,0 +1,26 @@
+.rows>ion-col {
+    background-color: #1e2023;
+    border: 1px solid #ddd;
+    padding: 10px 5px;
+}
+
+.rows>ion-col.active {
+    background-color: #4c867d;
+}
+
+ion-content {
+    --background: #383a3e;
+    --color: #f5f6f9;
+}
+
+ion-toolbar,
+ion-title {
+    --background: #1e2023;
+    --color: #f5f6f9;
+}
+
+ion-item {
+    --indicator-color-checked: transparent;
+    --color-checked: #f5f6f9;
+    --color: #f5f6f9;
+}

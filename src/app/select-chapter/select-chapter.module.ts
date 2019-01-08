@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ReaderPage } from './reader.page';
-import { SelectChapterPage } from '../select-chapter/select-chapter.page';
+import { SelectChapterPage } from './select-chapter.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ReaderPage
+    component: SelectChapterPage
   }
 ];
 
@@ -22,12 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [
-    ReaderPage,
-    SelectChapterPage
-  ],
-  entryComponents: [
-    SelectChapterPage
-  ]
+  declarations: [SelectChapterPage]
 })
-export class ReaderPageModule {}
+export class SelectChapterPageModule {}

@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'search-results', loadChildren: './search-results/search-results.module#SearchResultsPageModule' },
   { path: 'search-params', loadChildren: './search-params/search-params.module#SearchParamsPageModule' },
   { path: 'info/:id', loadChildren: './info/info.module#InfoPageModule' },
-  { path: 'reader/:id', loadChildren: './reader/reader.module#ReaderPageModule' }
+  { path: 'reader/:id', loadChildren: './reader/reader.module#ReaderPageModule' },
+  { path: 'select-chapter', loadChildren: './select-chapter/select-chapter.module#SelectChapterPageModule' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
