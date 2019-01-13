@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  constructor(private storage: Storage, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  async login() {
+    await this.storage.set('logined', true);
+    this.router.navigateByUrl('/');
   }
 
 }

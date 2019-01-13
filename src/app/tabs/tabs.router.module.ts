@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
+import { LoginGuard } from '../guards/login.guard';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
             path: '',
             loadChildren: '../profile/profile.module#ProfilePageModule'
           }
-        ]
+        ],
+        canActivate: [LoginGuard]
       },
       {
         path: 'search-results',

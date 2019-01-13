@@ -1,25 +1,25 @@
-<ion-header translucent>
-  <ion-toolbar>
-    <ion-title>Авторизация</ion-title>
-  </ion-toolbar>
-</ion-header>,
-
 <ion-content fullscreen padding>
-  <form onSubmit>
-    <ion-list>
-      <ion-item>
-        <ion-label required position="stacked">Логин</ion-label>
-        <ion-input required type="text"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label required position="stacked">Пароль</ion-label>
-        <ion-input type="password"></ion-input>
-      </ion-item>
-    </ion-list>
-
-    <div>
-      <ion-button expand="block" type="submit">Войти</ion-button>
-    </div>
-  </form>
+  <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h4>Авторизация</h4>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input type="text" placeholder="Username"></ion-input>
+            </ion-item>
+    
+            <ion-item>
+              <ion-input type="password" placeholder="Password"></ion-input>
+            </ion-item>
+          </div>
+    
+          <div padding>
+            <ion-button (click)="login()" expand="block">Войти</ion-button>
+            <ion-button fill="outline" expand="block">Регистрация</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 </ion-content>
