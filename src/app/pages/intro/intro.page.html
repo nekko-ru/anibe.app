@@ -17,11 +17,19 @@
         <!-- <ion-img src="https://vignette.wikia.nocookie.net/all-interesting/images/8/80/%D0%90%D0%B2%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%B0%D0%B2%D0%BE.png/revision/latest?cb=20141023171535&path-prefix=ru"></ion-img> -->
         <h1>NDA</h1>
         <p>
-          Нажимая на кнопку Начать вы принимаете NDA (соглашение о неразглашении).
+          Вы принимаете NDA (соглашение о неразглашении) и полностью с ним согласны.
           Пожалуйста никому не говорите и не показывайте приложение.
         </p>
-
-        <ion-button (click)="finish()">Начать</ion-button>
     </ion-slide>
+    <ion-slide class="step-four">
+      <!-- <ion-img src="https://vignette.wikia.nocookie.net/all-interesting/images/8/80/%D0%90%D0%B2%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%BE%D0%B5_%D0%BF%D1%80%D0%B0%D0%B2%D0%BE.png/revision/latest?cb=20141023171535&path-prefix=ru"></ion-img> -->
+      <h1>Код доступа</h1>
+      <p>
+        Для продолжения вам необходимо сканировать QR-код который вы получили ранее.
+        Нажмите на кнопку Сканировать для того что бы считать ваш код.
+      </p>
+
+      <ion-button (click)="scan()">Сканировать</ion-button>
+  </ion-slide>
   </ion-slides>
 </ion-content>
