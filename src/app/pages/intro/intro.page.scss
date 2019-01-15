@@ -1,3 +1,7 @@
+ion-content {
+    --background: var(--ion-background-color, transparent);
+}
+
 ion-slide {
     height: 100vh;
     flex-direction: column;

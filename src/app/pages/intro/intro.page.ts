@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-intro',
@@ -18,24 +19,38 @@ export class IntroPage implements OnInit {
   constructor(
     private storage: Storage,
     private router: Router,
-    private qrScanner: QRScanner
+    private qrScanner: QRScanner,
+    private toastController: ToastController
   ) { }
 
   ngOnInit() {
   }
 
   async scan() {
+    const ionApp = <HTMLElement>document.getElementsByTagName('ion-app')[0];
     const s = await this.qrScanner.prepare();
     if (s.authorized) {
       // у нас есть права на камеру
-      const scanSub = this.qrScanner.scan().subscribe(async (qr: any) => {
+      const scan = this.qrScanner.scan();
+      this.qrScanner.show();
+      ionApp.style.display = 'none';
+
+      const scanSub = scan.subscribe(async (qr: any) => {
         console.log('Scanned: ', qr);
+
+        const toast = await this.toastController.create({
+          message: `Код ${qr.result || qr} успешно активирован на данном устройстве!`,
+          duration: 5000
+        });
 
         this.qrScanner.hide(); // hide camera preview
         scanSub.unsubscribe(); // stop scanning
+        ionApp.style.display = 'block';
 
         // todo: добавить регистрацию кодов!
-        if (qr.result === this.access_key) {
+        if (qr.result === this.access_key || qr === this.access_key) {
+          toast.present();
+
           await this.storage.set('tutorialComplete', true);
           this.router.navigateByUrl('/');
         }
