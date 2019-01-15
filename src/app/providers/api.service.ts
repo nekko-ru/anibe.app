@@ -1,5 +1,4 @@
 import { HTTP } from '@ionic-native/http/ngx';
-import { RequestParam } from './interfaces';
 import { config } from './config';
 
 export interface AxiosSettings {
@@ -45,12 +44,16 @@ export class API {
    * @constructor
    * @param {AxiosSettings} settings параметры для соединения через HTTP
    */
-  constructor(settings: AxiosSettings) {
+  constructor(
+    settings: AxiosSettings
+  ) {
     this.settings = settings;
     this.http = new HTTP();
-    if (this.settings.auth) {
+
+    if (settings.auth) {
       this.http.useBasicAuth(settings.auth.username, settings.auth.password);
     }
+
     this.http.setDataSerializer(this.responseType);
   }
 
@@ -60,8 +63,8 @@ export class API {
    * @param {string} url ссылка на метод без учета базы
    * @returns {Promise<any>}
    */
-  public get(url: string): Promise<any> {
-    return this.http.get(this.baseURL + url, {}, {});
+  public get(url: string, headers: any): Promise<any> {
+    return this.http.get(this.baseURL + url, {}, { ...headers });
   }
   /**
    * Выполняет PUT запрос к серверу апи
@@ -70,10 +73,10 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  public put(url: string, body: any): Promise<any> {
+  public put(url: string, body: any, headers: any): Promise<any> {
     return this.http.put(this.baseURL + url, {
       data: body
-    }, {});
+    }, { ...headers });
   }
   /**
    * Выполняет POST запрос к серверу апи
@@ -82,10 +85,10 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  public post(url: string, body: any): Promise<any> {
-    return this.http.post(url, {
+  public post(url: string, body: any, headers: any): Promise<any> {
+    return this.http.post(this.baseURL + url, {
       data: body
-    }, {});
+    }, { ...headers });
   }
   /**
    * Выполняет PATCH запрос к серверу апи
@@ -94,10 +97,10 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  public patch(url: string, body: any): Promise<any> {
-    return this.http.patch(url, {
+  public patch(url: string, body: any, headers: any): Promise<any> {
+    return this.http.patch(this.baseURL + url, {
       data: body
-    }, {});
+    }, { ...headers });
   }
   /**
    * Выполняет DELETE запрос к серверу апи
@@ -105,7 +108,7 @@ export class API {
    * @param url ссылка
    * @returns {Promise<any>}
    */
-  public delete(url: string): Promise<any> {
-    return this.http.delete(url, {}, {});
+  public delete(url: string, headers: any): Promise<any> {
+    return this.http.delete(this.baseURL + url, {}, { ...headers });
   }
 }

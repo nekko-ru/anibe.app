@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from './api.service';
-import { config } from 'src/app/providers/config';
 import { IPostFull, RequestParam, IPost } from './interfaces';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -11,18 +11,21 @@ export class PostService {
    * Экземпляр класса для работы с апи через небольшую обертку
    */
   private api: API;
+  private token: string;
+  private ready: Promise<any>;
 
-  constructor() {
-    if (config.logined === true) {
-      this.api = new API({
-        auth: {
-          username: config.currentUser.nickname,
-          password: config.currentUser.password
-        }
-      });
-    } else {
-      this.api = new API({  });
-    }
+  constructor(
+    private storage: Storage
+  ) {
+    this.api = new API({  });
+    this.ready = this.setToken();
+  }
+
+  /**
+   * @description загружает и устанавливает токен
+   */
+  private async setToken() {
+    this.token = await this.storage.get('token') || '';
   }
 
   /**
@@ -31,10 +34,13 @@ export class PostService {
    * @param {string} id uuid поста
    * @returns {Promise<IPostFull>} результат
    */
-  async get(id: string): Promise<IPostFull> {
+  public async get(id: string): Promise<IPostFull> {
+    await this.ready;
     const url = `/posts/${id}`;
 
-    const res = await this.api.get(url);
+    const res = await this.api.get(url, {
+      auth: 'Authorization : Bearer ' + this.token || ''
+    });
     return JSON.parse(res.data);
   }
 
@@ -45,7 +51,8 @@ export class PostService {
    * @param {RequestParam} params параметры запроса
    * @returns {Promise<IPost[]>}
    */
-  async getAll(query: string, params: RequestParam): Promise<IPost[]> {
+  public async getAll(query: string, params: RequestParam): Promise<IPost[]> {
+    await this.ready;
     let url = `/posts?page=${params.page || ''}` +
     `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
     `&fields=${params.fields || ''}`;
@@ -57,7 +64,9 @@ export class PostService {
       url += params.custom;
     }
 
-    const res = await this.api.get(url);
+    const res = await this.api.get(url, {
+      auth: 'Authorization : Bearer ' + this.token || ''
+    });
 
     return JSON.parse(res.data).rows;
   }

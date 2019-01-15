@@ -12,12 +12,14 @@ export class LoginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
-    const isComplete = await this.storage.get('logined');
+    const token = await this.storage.get('token');
 
-    if (!isComplete) {
+    if (!token) {
       this.router.navigateByUrl('/login');
+      return false;
+    } else {
+      return true;
     }
 
-    return isComplete;
   }
 }
