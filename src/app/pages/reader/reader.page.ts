@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { Post } from 'src/core';
-import { IPostFull } from 'src/core/interfaces';
 import { ModalController, LoadingController, Events, IonSlide } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
 import { SelectChapterPage } from '../select-chapter/select-chapter.page';
+import { IPostFull } from 'src/app/providers/interfaces';
+import { PostService } from 'src/app/providers/post.service';
 
 @Component({
   selector: 'app-reader',
@@ -17,7 +17,6 @@ export class ReaderPage implements OnInit {
   private chapter: string;
   private episode: string[];
 
-  private Post: Post;
   private spiner: any;
   @ViewChild('mySlider') private slider: any;
 
@@ -29,9 +28,9 @@ export class ReaderPage implements OnInit {
     private storage: Storage,
     private route: ActivatedRoute,
     private loadingController: LoadingController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private post: PostService
   ) {
-    this.Post = new Post();
     this.episode = [];
   }
 
@@ -43,7 +42,7 @@ export class ReaderPage implements OnInit {
     await this.spiner.present();
     await this.storage.ready();
 
-    this.info = await this.Post.get(this.route.snapshot.paramMap.get('id'));
+    this.info = await this.post.get(this.route.snapshot.paramMap.get('id'));
 
     // получаем первую главу
     // todo: добавить возможноть открывать последнию главу

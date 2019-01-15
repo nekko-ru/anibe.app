@@ -1,5 +1,5 @@
 import { HTTP } from '@ionic-native/http/ngx';
-import { RequestParam } from './Post/interfaces';
+import { RequestParam } from './interfaces';
 import { config } from './config';
 
 export interface AxiosSettings {
@@ -34,11 +34,10 @@ export class API {
    * @description содержит ссылку на api
    * @type {string}
    */
-  private baseURL = config.url;
+  private baseURL: string = config.url;
   /**
    * @private
    * @description тип содержимого ответа и запроса
-   * @type {string}
    */
   private responseType = 'json';
 
@@ -61,7 +60,7 @@ export class API {
    * @param {string} url ссылка на метод без учета базы
    * @returns {Promise<any>}
    */
-  get(url: string) {
+  public get(url: string): Promise<any> {
     return this.http.get(this.baseURL + url, {}, {});
   }
   /**
@@ -71,7 +70,7 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  put(url: string, body: any) {
+  public put(url: string, body: any): Promise<any> {
     return this.http.put(this.baseURL + url, {
       data: body
     }, {});
@@ -83,7 +82,7 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  post(url: string, body: any) {
+  public post(url: string, body: any): Promise<any> {
     return this.http.post(url, {
       data: body
     }, {});
@@ -95,7 +94,7 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  patch(url: string, body: any) {
+  public patch(url: string, body: any): Promise<any> {
     return this.http.patch(url, {
       data: body
     }, {});
@@ -106,7 +105,7 @@ export class API {
    * @param url ссылка
    * @returns {Promise<any>}
    */
-  delete(url: string) {
+  public delete(url: string): Promise<any> {
     return this.http.delete(url, {}, {});
   }
 }

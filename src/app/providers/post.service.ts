@@ -1,9 +1,13 @@
-import { API } from '../api';
-import { config } from '../config';
-import { IPostFull, IPost, RequestParam } from './interfaces';
+import { Injectable } from '@angular/core';
+import { API } from './api.service';
+import { config } from 'src/app/providers/config';
+import { IPostFull, RequestParam, IPost } from './interfaces';
 
-export class Post {
-  /**
+@Injectable({
+  providedIn: 'root'
+})
+export class PostService {
+ /**
    * Экземпляр класса для работы с апи через небольшую обертку
    */
   private api: API;

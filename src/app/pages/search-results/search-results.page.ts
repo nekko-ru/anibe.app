@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { SearchParamsPage } from '../search-params/search-params.page';
 
-import { Post } from '../../core';
-import { IPost } from 'src/core/interfaces';
 import { Router } from '@angular/router';
+import { PostService } from 'src/app/providers/post.service';
+import { IPost } from 'src/app/providers/interfaces';
 
 @Component({
   selector: 'app-search-results',
@@ -13,8 +13,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-results.page.scss'],
 })
 export class SearchResultsPage implements OnInit {
-  private Post: Post;
-
   private result: IPost[] = [];
   private query = null;
   private page = 0;
@@ -142,9 +140,11 @@ export class SearchResultsPage implements OnInit {
     }
   ];
 
-  constructor(public modalController: ModalController, private router: Router) {
-    this.Post = new Post();
-  }
+  constructor(
+    private modalController: ModalController,
+    private router: Router,
+    private post: PostService
+  ) {}
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -187,7 +187,7 @@ export class SearchResultsPage implements OnInit {
     // тк первую страницу только что загрузили
     this.page += 1;
 
-    const temp = await this.Post.getAll(query || this.query, {
+    const temp = await this.post.getAll(query || this.query, {
       limit: '10',
       page: this.page,
       sort: '-rating',

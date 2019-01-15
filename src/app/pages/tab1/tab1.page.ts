@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Post } from '../../core';
-import { IPost } from 'src/core/interfaces';
+import { PostService } from 'src/app/providers/post.service';
+import { IPost } from 'src/app/providers/interfaces';
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +9,6 @@ import { IPost } from 'src/core/interfaces';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  private Post: Post;
   /**
    * Содержит последние изменения и обновления
    */
@@ -26,10 +25,9 @@ export class Tab1Page {
    * @param IShortPostInfo сервис
    */
   constructor(
-    private router: Router
-  ) {
-    this.Post = new Post();
-  }
+    private router: Router,
+    private post: PostService
+  ) {}
 
     /**
    * Открывает выбраный пост
@@ -41,6 +39,6 @@ export class Tab1Page {
 
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
-    this.lastupdates = await this.Post.getAll(null, { limit: '5', sort: '-updatedAt' });
+    this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
   }
 }
