@@ -36,6 +36,7 @@ export class LoginPage implements OnInit {
     } catch (e) {
       console.log(e);
       await toast.present();
+      return;
     }
 
     await this.storage.set('token', data.token);
