@@ -14,7 +14,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
+            loadChildren: '../pages/tab1/tab1.module#Tab1PageModule'
           }
         ]
       },
@@ -23,7 +23,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../profile/profile.module#ProfilePageModule'
+            loadChildren: '../pages/profile/profile.module#ProfilePageModule'
           }
         ],
         canActivate: [LoginGuard]
@@ -33,7 +33,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../search-results/search-results.module#SearchResultsPageModule'
+            loadChildren: '../pages/search-results/search-results.module#SearchResultsPageModule'
           }
         ]
       },
