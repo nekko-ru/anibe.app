@@ -1,9 +1,71 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-title>Профиль {{ info.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content fullpage>
 
+  <ion-card>
+    <ion-card-content>
+      <ion-row>
+
+        <ion-col size="5">
+          <img src="{{ info.picture }}">
+        </ion-col>
+
+        <ion-col size="7">
+
+          <ion-chip>
+            <ion-icon name="bug"></ion-icon>
+            <ion-label>Tester</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <ion-icon name="checkmark"></ion-icon>
+            <ion-label>Admin</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <ion-icon name="code"></ion-icon>
+            <ion-label>Dev</ion-label>
+          </ion-chip>
+          <ion-chip>
+            <ion-icon name="megaphone"></ion-icon>
+            <ion-label>Adv</ion-label>
+          </ion-chip>
+
+        </ion-col>
+
+        <ion-col size="12">
+          Lorem ipsum dolor sit amet,
+          consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Ut enim ad minim veniam, quis nostrud exercitation
+          ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-list>
+
+      <ion-item>
+        <ion-label>Любимые</ion-label>
+        <ion-note slot="end">{{ info.favorite.length }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>В процессе</ion-label>
+        <ion-note slot="end">{{ info.inprogress.length }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Прочитано</ion-label>
+        <ion-note slot="end">{{ info.readed.length }}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Брошено</ion-label>
+        <ion-note slot="end">{{ info.thrown.length }}</ion-note>
+      </ion-item>
+
+    </ion-list>
+  </ion-card>
 </ion-content>

@@ -39,7 +39,7 @@ export class PostService {
     const url = `/posts/${id}`;
 
     const res = await this.api.get(url, {
-      auth: 'Authorization : Bearer ' + this.token || ''
+      'Authorization': 'Bearer ' + this.token || ''
     });
     return JSON.parse(res.data);
   }
@@ -65,7 +65,7 @@ export class PostService {
     }
 
     const res = await this.api.get(url, {
-      auth: 'Authorization : Bearer ' + this.token || ''
+      'Authorization': 'Bearer ' + this.token || ''
     });
 
     return JSON.parse(res.data).rows;
