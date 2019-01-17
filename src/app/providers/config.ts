@@ -1,21 +1,10 @@
 
 export const config: Config = {
-  url: 'http://api.anibe.ru',
-  logined: false,
-  currentUser: {
-    id: null,
-    nickname: null,
-    password: null
-  }
+  url: 'http://127.0.0.1:8080',
+  logined: false
 };
 
 interface Config {
   url: string;
   logined: boolean;
-  currentUser: {
-    id: string;
-    nickname: string;
-    password: string;
-    info?: any;
-  };
 }

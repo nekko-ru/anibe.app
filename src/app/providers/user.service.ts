@@ -47,6 +47,7 @@ export class UserService {
       auth: ''
     });
 
+    this.api = new API({});
     return JSON.parse(res.data);
   }
 

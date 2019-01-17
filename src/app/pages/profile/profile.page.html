@@ -16,31 +16,15 @@
 
         <ion-col size="7">
 
-          <ion-chip>
-            <ion-icon name="bug"></ion-icon>
-            <ion-label>Tester</ion-label>
-          </ion-chip>
-          <ion-chip>
-            <ion-icon name="checkmark"></ion-icon>
-            <ion-label>Admin</ion-label>
-          </ion-chip>
-          <ion-chip>
-            <ion-icon name="code"></ion-icon>
-            <ion-label>Dev</ion-label>
-          </ion-chip>
-          <ion-chip>
-            <ion-icon name="megaphone"></ion-icon>
-            <ion-label>Adv</ion-label>
+          <ion-chip *ngFor="let item of info.badges">
+            <ion-icon name="{{ item.icon }}"></ion-icon>
+            <ion-label>{{ item.name }}</ion-label>
           </ion-chip>
 
         </ion-col>
 
         <ion-col size="12">
-          Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Ut enim ad minim veniam, quis nostrud exercitation
-          ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          {{ info.desc }}
         </ion-col>
       </ion-row>
     </ion-card-content>
