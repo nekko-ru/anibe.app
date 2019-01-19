@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
     }
 
     await this.storage.set('token', data.token);
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/tabs/profile');
   }
 
 }

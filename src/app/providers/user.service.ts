@@ -43,9 +43,7 @@ export class UserService {
         password
       }
     });
-    const res = await this.api.post('/auth', {}, {
-      auth: ''
-    });
+    const res = await this.api.post('/auth', {}, {});
 
     this.api = new API({});
     return JSON.parse(res.data);
