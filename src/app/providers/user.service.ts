@@ -11,17 +11,15 @@ export class UserService {
    */
   private api: API;
   private token: string;
-  private ready: Promise<any>;
 
   constructor(
     private storage: Storage
   ) {
     this.api = new API({  });
-    this.ready = this.setToken();
   }
 
   private async setToken() {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token');
   }
 
   public setAuth(u: string, p: string) {
@@ -53,7 +51,7 @@ export class UserService {
    * @description получить текущего пользователя
    */
   public async getSelf() {
-    await this.ready;
+    await this.setToken();
     const url = `/users/me`;
 
     const res = await this.api.get(url, {
@@ -67,7 +65,7 @@ export class UserService {
    * @param id uuid пользователя
    */
   public async get(id: string) {
-    await this.ready;
+    await this.setToken();
     const url = `/users/${id}`;
 
     const res = await this.api.get(url, {

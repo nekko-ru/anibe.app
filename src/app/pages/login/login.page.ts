@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
       duration: 5000
     });
 
-    let data = { token: null };
+    let data: { token: string };
     try {
       this.user.setAuth(this.username, this.password);
       data = await this.user.auth(this.username, this.password);
