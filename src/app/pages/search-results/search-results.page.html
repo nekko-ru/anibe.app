@@ -1,14 +1,15 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-searchbar
-      [(ngModel)]="name"
-      (ionChange)="search($event)"
-      placeholder="Название"
-      type="text"
-      animated="true"
-      debounce="1000"> 
-    </ion-searchbar>
-  </ion-toolbar>
+<ion-header
+  mode="ios"
+>
+  <ion-searchbar
+    mode="ios"
+    [(ngModel)]="name"
+    (ionChange)="search($event)"
+    placeholder="Название"
+    type="text"
+    animated="true"
+    debounce="1000"> 
+  </ion-searchbar>
 </ion-header>
 
 <ion-content>
