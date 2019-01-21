@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { AppComponent } from './app.component';
     StatusBar,
     SplashScreen,
     QRScanner,
+    Firebase,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

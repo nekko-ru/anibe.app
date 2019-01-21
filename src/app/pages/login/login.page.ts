@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { UserService } from 'src/app/providers/user.service';
 import { ToastController } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,12 @@ export class LoginPage implements OnInit {
     private storage: Storage,
     private router: Router,
     private user: UserService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private firebase: Firebase
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.firebase.setScreenName('login');
   }
 
   async login() {
@@ -40,6 +43,7 @@ export class LoginPage implements OnInit {
     }
 
     await this.storage.set('token', data.token);
+    await this.firebase.logEvent('login', { sign_up_method: 'email' });
     this.router.navigateByUrl('/tabs/profile');
   }
 

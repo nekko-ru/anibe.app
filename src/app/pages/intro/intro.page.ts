@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 import { ToastController } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-intro',
@@ -20,13 +21,17 @@ export class IntroPage implements OnInit {
     private storage: Storage,
     private router: Router,
     private qrScanner: QRScanner,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private firebase: Firebase
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.firebase.setScreenName('intro');
   }
 
   async scan() {
+    await this.firebase.logEvent('tutorial_begin', {});
+
     const ionApp = <HTMLElement>document.getElementsByTagName('ion-app')[0];
     const s = await this.qrScanner.prepare();
     if (s.authorized) {
@@ -52,6 +57,7 @@ export class IntroPage implements OnInit {
           toast.present();
 
           await this.storage.set('tutorialComplete', true);
+          await this.firebase.logEvent('tutorial_complete', {});
           this.router.navigateByUrl('/');
         }
       });

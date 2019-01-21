@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
 import { IPost } from 'src/app/providers/interfaces';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-tab1',
@@ -26,7 +27,8 @@ export class Tab1Page {
    */
   constructor(
     private router: Router,
-    private post: PostService
+    private post: PostService,
+    private firebase: Firebase
   ) {}
 
     /**
@@ -40,5 +42,7 @@ export class Tab1Page {
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
     this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
+
+    await this.firebase.setScreenName('home');
   }
 }
