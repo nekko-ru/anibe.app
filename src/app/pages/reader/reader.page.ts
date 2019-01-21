@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { SelectChapterPage } from '../select-chapter/select-chapter.page';
 import { IPostFull } from 'src/app/providers/interfaces';
 import { PostService } from 'src/app/providers/post.service';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-reader',
@@ -30,7 +31,8 @@ export class ReaderPage implements OnInit {
     private route: ActivatedRoute,
     private loadingController: LoadingController,
     private modalController: ModalController,
-    private post: PostService
+    private post: PostService,
+    private firebase: Firebase
   ) {
     this.episode = [];
   }
@@ -77,6 +79,8 @@ export class ReaderPage implements OnInit {
     this.episode = this.info.episodes[this.chapter];
     await this.spiner.dismiss();
     this.ready = true;
+
+    await this.firebase.setScreenName('reader');
   }
 
   private async ChapterEnded() {

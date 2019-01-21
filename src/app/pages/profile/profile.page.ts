@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/providers/user.service';
 import { Storage } from '@ionic/storage';
 import { ActionSheetController } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-profile',
@@ -24,7 +25,8 @@ export class ProfilePage implements OnInit {
     private user: UserService,
     private storage: Storage,
     private router: Router,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private firebase: Firebase
   ) { }
 
   async ngOnInit() {
@@ -35,6 +37,8 @@ export class ProfilePage implements OnInit {
       await this.storage.remove('token');
       this.router.navigateByUrl('/');
     }
+
+    await this.firebase.setScreenName('profile');
   }
 
   async logOut() {

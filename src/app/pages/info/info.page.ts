@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { IPostFull } from 'src/app/providers/interfaces';
 import { PostService } from 'src/app/providers/post.service';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-info',
@@ -21,7 +22,8 @@ export class InfoPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loadingController: LoadingController,
-    private post: PostService
+    private post: PostService,
+    private firebase: Firebase
   ) {}
 
   async ngOnInit() {
@@ -33,6 +35,8 @@ export class InfoPage implements OnInit {
 
     this.id = this.route.snapshot.paramMap.get('id');
     await this.load();
+    await this.firebase.setScreenName('info');
+    await this.firebase.logEvent('select_content', { item_id: this.id, content_type: 'manga' });
   }
 
   private async load() {

@@ -6,6 +6,7 @@ import { SearchParamsPage } from '../search-params/search-params.page';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
 import { IPost } from 'src/app/providers/interfaces';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-search-results',
@@ -143,7 +144,8 @@ export class SearchResultsPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private router: Router,
-    private post: PostService
+    private post: PostService,
+    private firebase: Firebase
   ) {}
 
   async presentModal() {
@@ -171,8 +173,10 @@ export class SearchResultsPage implements OnInit {
     console.log(result.data);
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.load();
+
+    await this.firebase.setScreenName('search');
   }
 
   /**
@@ -216,6 +220,8 @@ export class SearchResultsPage implements OnInit {
     console.log(event.target.value);
     if (this.query !== '') {
       await this.load(this.query);
+
+      await this.firebase.logEvent('search', { genres: this.activeGenre(), query: this.query });
     } else {
       await this.load(null);
     }
