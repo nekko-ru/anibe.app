@@ -1,8 +1,8 @@
 {
-  "name": "myApp",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "ru.anibe.mobile",
+  "version": "0.0.2",
+  "author": "Deissh",
+  "homepage": "http://anibe.ru",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
