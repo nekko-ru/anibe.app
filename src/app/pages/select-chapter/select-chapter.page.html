@@ -8,7 +8,12 @@
   <ion-grid>
     <ion-row class="rows">
 
-      <ion-col (click)="savePicks(item)" class="{{ item === selected ? 'active' : '' }}" size="2" *ngFor="let item of chapters">
+      <ion-col
+        (click)="savePicks(item)"
+        class="{{ getColor(item) }}"
+        size="2"
+        *ngFor="let item of chapters"
+      >
         {{ item }}
       </ion-col>
 

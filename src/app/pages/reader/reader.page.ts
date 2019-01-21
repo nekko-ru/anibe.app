@@ -13,6 +13,7 @@ import { PostService } from 'src/app/providers/post.service';
   styleUrls: ['./reader.page.scss'],
 })
 export class ReaderPage implements OnInit {
+  private ready: boolean;
   private info: IPostFull;
   private chapter: string;
   private episode: string[];
@@ -20,8 +21,8 @@ export class ReaderPage implements OnInit {
   private spiner: any;
   @ViewChild('mySlider') private slider: any;
 
-  private active: { chapter: string, page: number };
-  private allactives: { [k: string]: { chapter: string, page: number } };
+  private active: { chapter: string, page: number, pages: number };
+  private allactives: { [k: string]: { chapter: string, page: number, pages: number } };
 
   constructor(
     private events: Events,
@@ -63,7 +64,8 @@ export class ReaderPage implements OnInit {
     } else {
       this.active = {
         chapter: this.chapter,
-        page: 0
+        page: 0,
+        pages: this.episode.length
       };
       this.allactives = {
         ...this.allactives,
@@ -74,34 +76,44 @@ export class ReaderPage implements OnInit {
 
     this.episode = this.info.episodes[this.chapter];
     await this.spiner.dismiss();
+    this.ready = true;
   }
 
   private async ChapterEnded() {
-    // фикс ошибок при открытии окна
-    // if (!this.active) {
-    //   return;
-    // }
+    if (!this.ready) {
+      return;
+    }
+    console.log('reached end', await this.slider.getActiveIndex());
 
-    // console.log('chapter ended');
-    // this.allactives[this.chapter] = this.active;
+    this.active = {
+      chapter: this.chapter,
+      page: await this.slider.getActiveIndex(),
+      pages: this.episode.length - 1
+    };
 
-    // await this.storage.set(this.info.id, {
-    //   allactives: this.allactives
-    // });
+    this.allactives = {
+      ...this.allactives,
+      [this.chapter]: this.active
+    };
+    await this.storage.set(this.info.id, {
+      allactives: this.allactives
+    });
   }
 
   private async sliderEvent() {
     this.active = {
       chapter: this.chapter,
       // fixme:
-      page: await this.slider.getActiveIndex()
+      page: await this.slider.getActiveIndex(),
+      pages: this.episode.length - 1
     };
 
+    this.allactives = {
+      ...this.allactives,
+      [this.chapter]: this.active
+    };
     await this.storage.set(this.info.id, {
-      allactives: {
-        ...this.allactives,
-        [this.chapter]: this.active
-      }
+      allactives: this.allactives
     });
   }
 
@@ -135,7 +147,8 @@ export class ReaderPage implements OnInit {
 
       this.active = {
         chapter: this.chapter,
-        page: 0
+        page: 0,
+        pages: this.episode.length - 1
       };
       this.allactives = {
         ...this.allactives,

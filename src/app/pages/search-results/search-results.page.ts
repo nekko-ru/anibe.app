@@ -188,7 +188,7 @@ export class SearchResultsPage implements OnInit {
     this.page += 1;
 
     const temp = await this.post.getAll(query || this.query, {
-      limit: '10',
+      limit: '25',
       page: this.page,
       sort: '-rating',
       custom: (this.activeGenre().length !== 0) ? `&genre=${this.activeGenre().join(',')}` : ''

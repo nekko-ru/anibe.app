@@ -5,7 +5,13 @@
 }
 
 .rows>ion-col.active {
-    background-color: #4c867d;
+    background-color: #fff9a9;
+    color: #1e2023;
+}
+
+.rows>ion-col.ended {
+    background-color: #c9ffb8;
+    color: #1e2023;
 }
 
 ion-content {

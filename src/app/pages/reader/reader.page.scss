@@ -9,7 +9,9 @@ ion-toolbar, ion-title {
 }
 
 ion-segment-button {
+    --border-color: #f5f6f9;
     --indicator-color-checked: transparent;
     --color-checked: #f5f6f9;
+    --background-checked: #1e2023;
     --color: #f5f6f9;
 }

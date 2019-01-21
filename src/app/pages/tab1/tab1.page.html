@@ -12,12 +12,15 @@
   </ion-slides>
 
   <ion-card>
+    <ion-card-header>
+      Обновления
+    </ion-card-header>
     <ion-list>
-      <ion-card-header>
-        <ion-card-title>Обновления</ion-card-title>
-      </ion-card-header>
-
-      <ion-item *ngFor="let item of lastupdates" (click)="openPost(item.id)">
+      <ion-item 
+        *ngFor="let item of lastupdates"
+        (click)="openPost(item.id)"
+        lines="none"
+      >
         <ion-thumbnail slot="start" class="cover">
           <img src="{{ item.cover }}">
         </ion-thumbnail>

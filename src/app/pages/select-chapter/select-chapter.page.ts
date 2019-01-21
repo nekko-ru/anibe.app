@@ -9,17 +9,30 @@ import { ModalController } from '@ionic/angular';
 export class SelectChapterPage implements OnInit {
   @Input() private chapters: string[];
   @Input() private selected: string;
-  @Input() private allactives: string[];
+  @Input() private allactives: { [k: string]: { chapter: string, page: number, pages: number } };
 
   constructor(private modalController: ModalController) { }
 
   ngOnInit() {
+    console.log(this);
+
+    console.log(this.allactives[this.selected]);
   }
 
-  savePicks(name: string) {
+  public savePicks(name: string) {
     this.modalController.dismiss({
       chapter: name,
     });
   }
 
+  public getColor(name: string): string {
+    if (this.allactives[name]) {
+      if (this.allactives[name].page === this.allactives[name].pages) {
+        return 'ended';
+      } else {
+        return 'active';
+      }
+    }
+    return '';
+  }
 }
