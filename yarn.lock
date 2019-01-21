@@ -290,17 +290,17 @@
   dependencies:
     "@types/cordova" latest
 
+"@ionic-native/firebase@^5.0.0-beta.24":
+  version "5.0.0-beta.24"
+  resolved "https://registry.yarnpkg.com/@ionic-native/firebase/-/firebase-5.0.0-beta.24.tgz#742f341521f69ea70a4a6f0c26fe275ee5da9692"
+  integrity sha512-fcmRMzz+kXpjn2daPBj0rS0VoZrtduajYWoJaE3tKOjjyAdwDZTYD+pbWQqWGNR2cus9IUSFCAynbMFwZo9xKg==
+  dependencies:
+    "@types/cordova" latest
+
 "@ionic-native/http@^5.0.0-beta.22":
   version "5.0.0-beta.22"
   resolved "https://registry.yarnpkg.com/@ionic-native/http/-/http-5.0.0-beta.22.tgz#068b0444e40133ff31b002e1dcaec71e6ec93183"
   integrity sha512-+uzTRZEP937Unsu75mrYkhuLQ6Ytz6N233gtRHVibxeiva9a5dku6sg3ao05MZHChXCAX474ZYqQjcpUninX+A==
-  dependencies:
-    "@types/cordova" latest
-
-"@ionic-native/qr-scanner@^5.0.0-beta.23":
-  version "5.0.0-beta.23"
-  resolved "https://registry.yarnpkg.com/@ionic-native/qr-scanner/-/qr-scanner-5.0.0-beta.23.tgz#6021b0187d0f360c51ebb087b0c8eb1f3ea4e4ef"
-  integrity sha512-kn00nC2YHCwDs9CtOGlV+jS6pMsa+2hDZHmIoBVdj3kulFSW0cLoyXKCfXgyib4+0QzK+jWKu1pHk/5VzBA5oQ==
   dependencies:
     "@types/cordova" latest
 
@@ -2383,14 +2383,6 @@ cordova-plugin-ionic-webview@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-2.3.2.tgz#f4b1d669cefe7d25cfe47cfc9c6fe820211b63fa"
   integrity sha512-f7nXWTT93ZAJP4fMUxZWd8BacegTJNUK9Cocu0n2SH8gliAIjKzJtvSzEONSJ5b1Xp2osdUF6f5x+oWvyM90jQ==
-
-cordova-plugin-qrscanner@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-qrscanner/-/cordova-plugin-qrscanner-2.6.0.tgz#e981be29d024cb37c11e28bbee87ba2544a29e2a"
-  integrity sha512-bgy+cG0HdpuSW/JxHDFQYaO46Ma8nYTjwduhhWhMmuYeljozqQ4RJcwhJQaxHnjuDi3XDz+rHkszOEOhlSG23w==
-  dependencies:
-    qrcode-reader "^1.0.4"
-    webrtc-adapter "^3.1.4"
 
 cordova-plugin-splashscreen@^5.0.2:
   version "5.0.2"
@@ -6889,11 +6881,6 @@ qjobs@^1.1.4:
   resolved "https://registry.yarnpkg.com/qjobs/-/qjobs-1.2.0.tgz#c45e9c61800bd087ef88d7e256423bdd49e5d071"
   integrity sha512-8YOJEHtxpySA3fFDyCRxA+UUV+fA+rTWnuWvylOK/NCjhY+b4ocCtmu8TtsWb+mYeU+GCHf/S66KZF/AsteKHg==
 
-qrcode-reader@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/qrcode-reader/-/qrcode-reader-1.0.4.tgz#95d9bb9e8130800361a96cb5a43124ad1d9e06b8"
-  integrity sha512-rRjALGNh9zVqvweg1j5OKIQKNsw3bLC+7qwlnead5K/9cb1cEIAGkwikt/09U0K+2IDWGD9CC6SP7tHAjUeqvQ==
-
 qs@6.5.1:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
@@ -7474,11 +7461,6 @@ scss-tokenizer@^0.2.3:
   dependencies:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
-
-sdp@^1.5.0:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/sdp/-/sdp-1.5.4.tgz#8e038f6ddb14bd765ae1f4b5216e12094511e0d0"
-  integrity sha1-jgOPbdsUvXZa4fS1IW4SCUUR4NA=
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -9056,13 +9038,6 @@ webpack@4.23.1:
     uglifyjs-webpack-plugin "^1.2.4"
     watchpack "^1.5.0"
     webpack-sources "^1.3.0"
-
-webrtc-adapter@^3.1.4:
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/webrtc-adapter/-/webrtc-adapter-3.4.3.tgz#b636062eee9a6ef158acd0d8501b678434b56f16"
-  integrity sha1-tjYGLu6abvFYrNDYUBtnhDS1bxY=
-  dependencies:
-    sdp "^1.5.0"
 
 websocket-driver@>=0.5.1:
   version "0.7.0"
