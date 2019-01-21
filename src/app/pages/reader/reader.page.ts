@@ -55,7 +55,7 @@ export class ReaderPage implements OnInit {
     this.chapter = Object.keys(this.info.episodes)[0];
 
     if (post && post.allactives[this.chapter]) {
-      this.active = post.allactives[this.chapter];
+      this.active = post.active;
       console.log(this.active);
 
       this.chapter = this.active.chapter;
@@ -96,7 +96,8 @@ export class ReaderPage implements OnInit {
       [this.chapter]: this.active
     };
     await this.storage.set(this.info.id, {
-      allactives: this.allactives
+      allactives: this.allactives,
+      active: this.active
     });
   }
 
@@ -113,7 +114,8 @@ export class ReaderPage implements OnInit {
       [this.chapter]: this.active
     };
     await this.storage.set(this.info.id, {
-      allactives: this.allactives
+      allactives: this.allactives,
+      active: this.active
     });
   }
 
@@ -161,7 +163,8 @@ export class ReaderPage implements OnInit {
       allactives: {
         ...this.allactives,
         [this.chapter]: this.active
-      }
+      },
+      active: this.active
     });
   }
 }
