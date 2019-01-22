@@ -31,6 +31,18 @@ export class UserService {
     });
   }
 
+  public async reg(v: { email: string, name: string, password: string, picture?: string }) {
+    const url = `/users`;
+
+    const res = await this.api.post(url, {
+      email: v.email,
+      password: v.password,
+      name: v.name,
+      picture: v.picture
+    }, {});
+    return JSON.parse(res.data);
+  }
+
   /**
    * Авторизация и получение токена
    */

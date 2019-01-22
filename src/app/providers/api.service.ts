@@ -75,7 +75,7 @@ export class API {
    */
   public put(url: string, body: any, headers: any): Promise<any> {
     return this.http.put(this.baseURL + url, {
-      data: body
+      ...body
     }, { ...headers });
   }
   /**
@@ -87,7 +87,7 @@ export class API {
    */
   public post(url: string, body: any, headers: any): Promise<any> {
     return this.http.post(this.baseURL + url, {
-      data: body
+      ...body
     }, { ...headers });
   }
   /**
@@ -99,7 +99,7 @@ export class API {
    */
   public patch(url: string, body: any, headers: any): Promise<any> {
     return this.http.patch(this.baseURL + url, {
-      data: body
+      ...body
     }, { ...headers });
   }
   /**

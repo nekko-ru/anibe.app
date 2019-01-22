@@ -1,6 +1,6 @@
 
 export const config: Config = {
-  url: 'https://api.anibe.ru/'
+  url: 'https://api.anibe.ru'
 };
 
 interface Config {

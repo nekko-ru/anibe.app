@@ -49,4 +49,7 @@ export class LoginPage implements OnInit {
     this.router.navigateByUrl('/tabs/profile');
   }
 
+  async gotoreg() {
+    await this.router.navigateByUrl('/register');
+  }
 }
