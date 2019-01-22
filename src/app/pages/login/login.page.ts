@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
       duration: 5000
     });
 
-    let data: { token: string };
+    let data: { token: string, user: any };
     try {
       this.user.setAuth(this.username, this.password);
       data = await this.user.auth(this.username, this.password);
@@ -44,6 +44,8 @@ export class LoginPage implements OnInit {
 
     await this.storage.set('token', data.token);
     await this.firebase.logEvent('login', { sign_up_method: 'email' });
+    await this.firebase.setUserId(data.user.ud);
+
     this.router.navigateByUrl('/tabs/profile');
   }
 

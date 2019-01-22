@@ -1,5 +1,11 @@
 <ion-content>
-  <ion-slides class="slider main" style="background: black" id="slides" pager>
+  <ion-slides
+    class="slider main"
+    style="background: black"
+    id="slides"
+    pager
+  >
+    <!-- todo: добавил создание слайдов из MOTD -->
     <ion-slide style="background: red; color: white;">
       <h1>Slide 1</h1>
     </ion-slide>
@@ -9,25 +15,54 @@
     <ion-slide style="background: blue; color: white;">
       <h1>Slide 3</h1>
     </ion-slide>
+    
   </ion-slides>
 
   <ion-card>
     <ion-card-header>
       Обновления
     </ion-card-header>
-    <ion-list>
-      <ion-item 
-        *ngFor="let item of lastupdates"
-        (click)="openPost(item.id)"
-        lines="none"
-      >
-        <ion-thumbnail slot="start" class="cover">
-          <img src="{{ item.cover }}">
-        </ion-thumbnail>
-        <ion-label>{{ item.name }}</ion-label>
-      </ion-item>
+    <ion-card-content>
+      <ion-list>
+        <ion-item 
+          *ngFor="let item of lastupdates"
+          (click)="openPost(item.id)"
+          lines="none"
+        >
+          <ion-thumbnail slot="start" class="cover">
+            <img src="{{ item.cover }}">
+          </ion-thumbnail>
+          <ion-label>{{ item.name }}</ion-label>
+        </ion-item>
+  
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
-    </ion-list>
+  <ion-card>
+    <ion-card-header>
+      Новости
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list *ngIf="news">
+
+        <ion-item 
+          *ngFor="let item of news"
+          (click)="openPost(item.id)"
+          lines="none"
+        >
+          <ion-thumbnail slot="start" class="cover">
+            <img src="{{ item.cover }}">
+          </ion-thumbnail>
+          <ion-label>{{ item.name }}</ion-label>
+        </ion-item>
+  
+      </ion-list>
+
+      <div *ngIf="!news">
+        Пусто!
+      </div>
+    </ion-card-content>
   </ion-card>
 
   <ion-card *ngFor="let item of news">

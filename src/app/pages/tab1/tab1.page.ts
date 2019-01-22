@@ -13,12 +13,12 @@ export class Tab1Page {
   /**
    * Содержит последние изменения и обновления
    */
-  private lastupdates: IPost[];
+  public lastupdates: IPost[];
 
   /**
    * Список новостей на главной странице
    */
-  private news: any[];
+  public news: any[];
 
   /**
    * Конструктор класса
@@ -42,7 +42,6 @@ export class Tab1Page {
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
     this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
-
     await this.firebase.setScreenName('home');
   }
 }
