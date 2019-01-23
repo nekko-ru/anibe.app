@@ -39,7 +39,7 @@ export class PostService {
     const url = `/posts/${id}`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token || ''
+      'Authorization': 'Bearer ' + this.token
     });
     return JSON.parse(res.data);
   }
@@ -65,7 +65,20 @@ export class PostService {
     }
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token || ''
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return JSON.parse(res.data).rows;
+  }
+
+  public async addToList(id: string, status: string) {
+    await this.ready;
+    const url = `/posts/${id}/user-list`;
+
+    const res = await this.api.post(url, {
+      status
+    }, {
+      'Authorization': 'Bearer ' + this.token
     });
 
     return JSON.parse(res.data).rows;

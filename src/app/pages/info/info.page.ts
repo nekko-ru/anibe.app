@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, PopoverController, ActionSheetController } from '@ionic/angular';
 import { IPostFull } from 'src/app/providers/interfaces';
 import { PostService } from 'src/app/providers/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
@@ -23,6 +23,7 @@ export class InfoPage implements OnInit {
     private router: Router,
     private loadingController: LoadingController,
     private post: PostService,
+    private asc: ActionSheetController,
     private firebase: Firebase
   ) {}
 
@@ -44,7 +45,52 @@ export class InfoPage implements OnInit {
     await this.spiner.dismiss();
   }
 
-  private async Read() {
+  public async Read() {
     this.router.navigateByUrl(`/reader/${this.id}`);
+  }
+
+  public async showMore() {
+    const actionSheet = await this.asc.create({
+      buttons: [
+        {
+          text: 'Читаю',
+          handler: () => {
+            this.post.addToList(this.id, 'inprogress').catch((e) => {
+              console.log(e);
+            });
+          }
+        },
+        {
+          text: 'Прочитано',
+          handler: () => {
+            this.post.addToList(this.id, 'readed').catch((e) => {
+              console.log(e);
+            });
+          }
+        },
+        {
+          text: 'Любимое',
+          handler: () => {
+            this.post.addToList(this.id, 'favorite').catch((e) => {
+              console.log(e);
+            });
+          }
+        },
+        {
+          text: 'Брошено',
+          handler: () => {
+            this.post.addToList(this.id, 'thrown').catch((e) => {
+              console.log(e);
+            });
+          }
+        },
+        {
+          text: 'Отмена',
+          role: 'cancel',
+          handler: () => {}
+        }
+      ]
+    });
+    await actionSheet.present();
   }
 }

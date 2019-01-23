@@ -64,7 +64,7 @@ export class RegisterPage implements OnInit {
       await this.storage.set('token', user.token);
       await this.firebase.logEvent('sign_up', { sign_up_method: 'email' });
       await this.firebase.setUserId(user.user.id);
-      await this.router.navigateByUrl('/');
+      await this.router.navigateByUrl('/tabs/profile');
     } catch (err) {
       if (err.status === 409) {
         (await this.toast.create({

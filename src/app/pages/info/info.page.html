@@ -6,16 +6,19 @@
       <ion-card-title>{{ info.name }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-button color="primary" (click)="Read()">Читать</ion-button>
+      <ion-button color="primary" (click)="Read()">
+        Читать
+      </ion-button>
+      <ion-button (click)="showMore()" color="primary" fill="outline">
+          <ion-icon name="bookmark"></ion-icon>
+        </ion-button>
       <ion-button color="primary" fill="outline">
-        <ion-icon name="heart"></ion-icon>
+        <ion-icon name="redo"></ion-icon>
       </ion-button>
       <ion-button color="primary" fill="outline">
-        <ion-icon name="share"></ion-icon>
+        <ion-icon name="warning"></ion-icon>
       </ion-button>
-      <ion-button color="primary" fill="outline">
-        <ion-icon name="brush"></ion-icon>
-      </ion-button>
+
       <p>{{ info.description }}</p>
     </ion-card-content>
   </ion-card>
