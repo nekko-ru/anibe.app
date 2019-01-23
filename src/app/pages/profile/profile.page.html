@@ -36,25 +36,27 @@
   </ion-card>
 
   <ion-card>
-    <ion-list>
+    <ion-card-content>
+      <ion-list lines="none">
 
-      <ion-item>
-        <ion-label>Любимые</ion-label>
-        <ion-note slot="end">{{ info.favorite.length }}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>В процессе</ion-label>
-        <ion-note slot="end">{{ info.inprogress.length }}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Прочитано</ion-label>
-        <ion-note slot="end">{{ info.readed.length }}</ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Брошено</ion-label>
-        <ion-note slot="end">{{ info.thrown.length }}</ion-note>
-      </ion-item>
+        <ion-item>
+          <ion-label>Любимые</ion-label>
+          <ion-note slot="end">{{ info.favorite.length }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>В процессе</ion-label>
+          <ion-note slot="end">{{ info.inprogress.length }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Прочитано</ion-label>
+          <ion-note slot="end">{{ info.readed.length }}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Брошено</ion-label>
+          <ion-note slot="end">{{ info.thrown.length }}</ion-note>
+        </ion-item>
 
-    </ion-list>
+      </ion-list>
+    </ion-card-content>
   </ion-card>
 </ion-content>

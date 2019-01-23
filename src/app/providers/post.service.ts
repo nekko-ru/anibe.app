@@ -18,14 +18,6 @@ export class PostService {
     private storage: Storage
   ) {
     this.api = new API({  });
-    this.ready = this.setToken();
-  }
-
-  /**
-   * @description загружает и устанавливает токен
-   */
-  private async setToken() {
-    this.token = await this.storage.get('token') || '';
   }
 
   /**
@@ -35,7 +27,7 @@ export class PostService {
    * @returns {Promise<IPostFull>} результат
    */
   public async get(id: string): Promise<IPostFull> {
-    await this.ready;
+    this.token = await this.storage.get('token') || '';
     const url = `/posts/${id}`;
 
     const res = await this.api.get(url, {
@@ -52,7 +44,7 @@ export class PostService {
    * @returns {Promise<IPost[]>}
    */
   public async getAll(query: string, params: RequestParam): Promise<IPost[]> {
-    await this.ready;
+    this.token = await this.storage.get('token') || '';
     let url = `/posts?page=${params.page || ''}` +
     `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
     `&fields=${params.fields || ''}`;
@@ -72,7 +64,7 @@ export class PostService {
   }
 
   public async addToList(id: string, status: string) {
-    await this.ready;
+    this.token = await this.storage.get('token') || '';
     const url = `/posts/${id}/user-list`;
 
     const res = await this.api.post(url, {

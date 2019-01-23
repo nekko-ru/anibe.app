@@ -29,7 +29,9 @@ export class ProfilePage implements OnInit {
     private firebase: Firebase
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {}
+
+  async ionViewDidEnter() {
     try {
       Object.assign(this.info, await this.user.getSelf());
     } catch (e) {
