@@ -43,15 +43,15 @@
           <ion-label>Любимые</ion-label>
           <ion-note slot="end">{{ info.favorite.length }}</ion-note>
         </ion-item>
-        <ion-item (click)="openList('Читаю', info.favorite)">
+        <ion-item (click)="openList('Читаю', info.inprogress)">
           <ion-label>Читаю</ion-label>
           <ion-note slot="end">{{ info.inprogress.length }}</ion-note>
         </ion-item>
-        <ion-item (click)="openList('Прочитано', info.favorite)">
+        <ion-item (click)="openList('Прочитано', info.readed)">
           <ion-label>Прочитано</ion-label>
           <ion-note slot="end">{{ info.readed.length }}</ion-note>
         </ion-item>
-        <ion-item (click)="openList('Брошено', info.favorite)">
+        <ion-item (click)="openList('Брошено', info.thrown)">
           <ion-label>Брошено</ion-label>
           <ion-note slot="end">{{ info.thrown.length }}</ion-note>
         </ion-item>
