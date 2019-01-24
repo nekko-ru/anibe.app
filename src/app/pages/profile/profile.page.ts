@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/providers/user.service';
 import { Storage } from '@ionic/storage';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { Firebase } from '@ionic-native/firebase/ngx';
+
+import { ViewlistPage } from '../viewlist/viewlist.page';
 
 @Component({
   selector: 'app-profile',
@@ -26,6 +28,7 @@ export class ProfilePage implements OnInit {
     private storage: Storage,
     private router: Router,
     private actionSheetController: ActionSheetController,
+    private modalController: ModalController,
     private firebase: Firebase
   ) { }
 
@@ -66,4 +69,17 @@ export class ProfilePage implements OnInit {
     await actionSheet.present();
   }
 
+  async openList(name: string, list: any[]) {
+    const modal = await this.modalController.create({
+      component: ViewlistPage,
+      backdropDismiss: true,
+      showBackdrop: true,
+      componentProps: {
+        name,
+        list
+      }
+    });
+
+    await modal.present();
+  }
 }

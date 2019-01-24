@@ -14,6 +14,9 @@ import { Firebase } from '@ionic-native/firebase/ngx';
   styleUrls: ['./search-results.page.scss'],
 })
 export class SearchResultsPage implements OnInit {
+  // используется для переключения вида отображения данных
+  private mode: boolean;
+
   private result: IPost[] = [];
   private query = null;
   private page = 0;

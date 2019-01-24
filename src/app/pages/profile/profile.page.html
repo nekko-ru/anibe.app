@@ -39,19 +39,19 @@
     <ion-card-content>
       <ion-list lines="none">
 
-        <ion-item>
+        <ion-item (click)="openList('Любимые', info.favorite)">
           <ion-label>Любимые</ion-label>
           <ion-note slot="end">{{ info.favorite.length }}</ion-note>
         </ion-item>
-        <ion-item>
-          <ion-label>В процессе</ion-label>
+        <ion-item (click)="openList('Читаю', info.favorite)">
+          <ion-label>Читаю</ion-label>
           <ion-note slot="end">{{ info.inprogress.length }}</ion-note>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="openList('Прочитано', info.favorite)">
           <ion-label>Прочитано</ion-label>
           <ion-note slot="end">{{ info.readed.length }}</ion-note>
         </ion-item>
-        <ion-item>
+        <ion-item (click)="openList('Брошено', info.favorite)">
           <ion-label>Брошено</ion-label>
           <ion-note slot="end">{{ info.thrown.length }}</ion-note>
         </ion-item>

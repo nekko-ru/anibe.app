@@ -1,14 +1,6 @@
-<ion-header
-  mode="ios"
->
-  <ion-searchbar
-    mode="ios"
-    [(ngModel)]="name"
-    (ionChange)="search($event)"
-    placeholder="Название"
-    type="text"
-    animated="true"
-    debounce="1000"> 
+<ion-header mode="ios">
+  <ion-searchbar mode="ios" [(ngModel)]="name" (ionChange)="search($event)" placeholder="Название" type="text" animated="true"
+    debounce="1000">
   </ion-searchbar>
 </ion-header>
 
@@ -16,23 +8,18 @@
   <ion-row>
     <ion-col size="6" *ngFor="let item of result">
       <ion-img (click)="openPost(item.id)" src="{{ item.cover }}"></ion-img>
+      {{ item.name }}
     </ion-col>
   </ion-row>
 
   <ion-infinite-scroll threshold="50px" (ionInfinite)="loadNewPage($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Загрузка...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Загрузка...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
 
-<ion-fab
-  (click)="presentModal()"
-  vertical="bottom"
-  horizontal="end"
-  slot="fixed">
-  <ion-fab-button>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="presentModal()">
     <ion-icon name="settings"></ion-icon>
   </ion-fab-button>
 </ion-fab>

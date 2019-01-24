@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="togle()">
+        <ion-icon *ngIf="!mode" name="keypad"></ion-icon>
+        <ion-icon *ngIf="mode" name="list"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="this.modalController.dismiss()">Закрыть</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullpage>
+
+  <ion-list *ngIf="!mode">
+    <ion-item *ngFor="let item of list" (click)="open(item.id)" lines="none">
+      <ion-thumbnail slot="start" class="cover">
+        <img src="{{ item.cover }}">
+      </ion-thumbnail>
+      <ion-label>{{ item.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-row *ngIf="mode">
+    <ion-col size="6" *ngFor="let item of list">
+      <ion-img (click)="open(item.id)" src="{{ item.cover }}"></ion-img>
+      {{ item.name }}
+    </ion-col>
+  </ion-row>
+
+</ion-content>
