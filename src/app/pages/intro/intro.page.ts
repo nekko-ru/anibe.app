@@ -9,12 +9,6 @@ import { Firebase } from '@ionic-native/firebase/ngx';
   styleUrls: ['./intro.page.scss'],
 })
 export class IntroPage implements OnInit {
-
-  /**
-   * @description код который необходимо сканировать
-   */
-  private access_key = 'nz4jzj8rwtp5cu7g';
-
   constructor(
     private storage: Storage,
     private router: Router,
@@ -25,7 +19,7 @@ export class IntroPage implements OnInit {
     await this.firebase.setScreenName('intro');
   }
 
-  async end() {
+  public async end() {
     await this.storage.set('tutorialComplete', true);
     await this.firebase.logEvent('tutorial_complete', {});
     this.router.navigateByUrl('/');

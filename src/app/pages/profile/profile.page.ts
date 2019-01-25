@@ -15,7 +15,7 @@ import { ProfilePopoverPage } from '../../popover/profile/profile.page';
 })
 export class ProfilePage implements OnInit {
   // дефолтная информация о пользователе, что бы не кидало ошибок
-  private info: any = {
+  public info: any = {
     name: '',
     picture: 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png',
     favorite: [],
@@ -35,7 +35,7 @@ export class ProfilePage implements OnInit {
 
   ngOnInit() {}
 
-  async ionViewDidEnter() {
+  public async ionViewDidEnter() {
     try {
       Object.assign(this.info, await this.user.getSelf());
     } catch (e) {
@@ -56,7 +56,7 @@ export class ProfilePage implements OnInit {
     await popover.present();
   }
 
-  async openList(name: string, list: any[]) {
+  public async openList(name: string, list: any[]) {
     const modal = await this.modalController.create({
       component: ViewlistPage,
       backdropDismiss: true,

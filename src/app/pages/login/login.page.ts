@@ -11,8 +11,8 @@ import { Firebase } from '@ionic-native/firebase/ngx';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  private username: string;
-  private password: string;
+  public username: string;
+  public password: string;
 
   constructor(
     private storage: Storage,

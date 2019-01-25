@@ -8,14 +8,14 @@ import { NavParams, ModalController } from '@ionic/angular';
 })
 export class SearchParamsPage implements OnInit {
   // добавить нормальные жанры
-  @Input() genres: any[];
+  @Input() public genres: any[];
 
   constructor(navParams: NavParams, private modalController: ModalController) { }
 
   ngOnInit() {
   }
 
-  savePicks() {
+  public savePicks() {
     this.modalController.dismiss({
       genres: this.genres
     });

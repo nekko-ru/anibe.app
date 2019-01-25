@@ -17,16 +17,15 @@ export class ReaderPage implements OnInit {
   private ready: boolean;
   private info: IPostFull;
   private chapter: string;
-  private episode: string[];
+  public episode: string[];
 
   private spiner: any;
-  @ViewChild('mySlider') private slider: any;
+  @ViewChild('mySlider') public slider: any;
 
   private active: { chapter: string, page: number, pages: number };
   private allactives: { [k: string]: { chapter: string, page: number, pages: number } };
 
   constructor(
-    private events: Events,
     private storage: Storage,
     private route: ActivatedRoute,
     private loadingController: LoadingController,
@@ -83,7 +82,7 @@ export class ReaderPage implements OnInit {
     await this.firebase.setScreenName('reader');
   }
 
-  private async ChapterEnded() {
+  public async ChapterEnded() {
     if (!this.ready) {
       return;
     }
@@ -105,7 +104,7 @@ export class ReaderPage implements OnInit {
     });
   }
 
-  private async sliderEvent() {
+  public async sliderEvent() {
     this.active = {
       chapter: this.chapter,
       // fixme:
@@ -123,7 +122,7 @@ export class ReaderPage implements OnInit {
     });
   }
 
-  private async selectChapter() {
+  public async selectChapter() {
     const modal = await this.modalController.create({
       component: SelectChapterPage,
       backdropDismiss: true,

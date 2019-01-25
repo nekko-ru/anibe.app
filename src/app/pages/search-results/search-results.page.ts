@@ -17,7 +17,7 @@ export class SearchResultsPage implements OnInit {
   // используется для переключения вида отображения данных
   private mode: boolean;
 
-  private result: IPost[] = [];
+  public result: IPost[] = [];
   private query = null;
   private page = 0;
   private genres: { name: string, active: boolean } [] = [
@@ -186,7 +186,7 @@ export class SearchResultsPage implements OnInit {
    * Открывает выбраный пост
    * @param id uuid поста
    */
-  private openPost(id: string): void {
+  public openPost(id: string): void {
     this.router.navigateByUrl(`/info/${id}`);
   }
 
@@ -233,7 +233,7 @@ export class SearchResultsPage implements OnInit {
   /**
    * Возвращяет активные жанры
    */
-  activeGenre(): string[] {
+  private activeGenre(): string[] {
     return this.genres.filter((v) => v.active === true).map((v) => v.name);
   }
 
@@ -241,7 +241,7 @@ export class SearchResultsPage implements OnInit {
    * Подзагрузка содержимого, вызывается из шаблона
    * @param event событие
    */
-  loadNewPage(event) {
+  public loadNewPage(event: any) {
     this.load();
     event.target.complete();
   }

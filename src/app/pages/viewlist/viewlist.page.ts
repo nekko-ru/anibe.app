@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./viewlist.page.scss'],
 })
 export class ViewlistPage implements OnInit {
-  @Input() name: string;
-  @Input() list: any[];
+  @Input() public name: string;
+  @Input() public list: any[];
 
   public mode: boolean;
 
   constructor(
     private navParams: NavParams,
-    private modalController: ModalController,
+    public modalController: ModalController,
     private router: Router
   ) { }
 

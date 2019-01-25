@@ -13,7 +13,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 export class InfoPage implements OnInit {
   private id: string;
   // фикс ошибок при пустой отрисовке
-  private info: IPostFull | any = { cover: '', genre: [], episodes: {} };
+  public info: IPostFull | any = { cover: '', genre: [], episodes: {} };
   private spiner: any;
 
   private chapters: string[];

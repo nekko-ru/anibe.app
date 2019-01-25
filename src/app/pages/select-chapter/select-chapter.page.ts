@@ -7,7 +7,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./select-chapter.page.scss'],
 })
 export class SelectChapterPage implements OnInit {
-  @Input() private chapters: string[];
+  @Input() public chapters: string[];
   @Input() private selected: string;
   @Input() private allactives: { [k: string]: { chapter: string, page: number, pages: number } };
 
