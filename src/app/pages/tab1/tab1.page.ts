@@ -35,7 +35,7 @@ export class Tab1Page {
    * Открывает выбраный пост
    * @param id uuid поста
    */
-  private openPost(id: string): void {
+  public openPost(id: string): void {
     this.router.navigateByUrl(`/info/${id}`);
   }
 
