@@ -5,14 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ProfilePage } from './profile.page';
-import { ViewlistPage } from '../viewlist/viewlist.page';
-import { ProfilePopoverPage } from '../../popover/profile/profile.page';
+import { ProfilePopoverPage } from './profile.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ProfilePage
+    component: ProfilePopoverPage
   }
 ];
 
@@ -23,11 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [
-    ProfilePage,
-    ViewlistPage,
-    ProfilePopoverPage
-  ],
-  entryComponents: [ViewlistPage, ProfilePopoverPage]
+  declarations: [ProfilePopoverPage]
 })
-export class ProfilePageModule {}
+export class ProfilePopoverPageModule {}
