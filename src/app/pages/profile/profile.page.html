@@ -27,10 +27,8 @@
           </ion-chip>
 
         </ion-col>
-
-        Описание
         <ion-col size="12">
-          {{ info.desc }}
+          О себе: {{ info.desc || '...' }}
         </ion-col>
       </ion-row>
     </ion-card-content>
