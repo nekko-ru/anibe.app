@@ -19,6 +19,10 @@ export class ReaderPage implements OnInit {
   private chapter: string;
   public episode: string[];
 
+  public slideOpts: any = {
+    preloadImages: true
+  };
+
   private spiner: any;
   @ViewChild('mySlider') public slider: any;
 

@@ -15,6 +15,7 @@
     (ionSlideDidChange)="sliderEvent()"
     style="height: 100%"
     align-items-center
+    [options]="slideOpts"
   >
     
     <ion-slide *ngFor="let img of episode">
