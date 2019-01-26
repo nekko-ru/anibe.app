@@ -25,12 +25,12 @@ export class ConfigProvider {
     if (this.platform.is('cordova')) {
       this.fb.fetch(600)
         .then(() => {
-          console.info('fetched remote config ');
+          console.log('fetched remote config ');
           this.fb.activateFetched()
             .then(async () => {
-              console.info('activated remote config');
+              console.log('activated remote config');
 
-              console.info(await this.getValue('home_slider_enable'));
+              console.log(await this.getValue('home_slider_enable'));
             })
             .catch(error => {
               console.error('error initializing remote config', error);
@@ -43,22 +43,22 @@ export class ConfigProvider {
   }
 
   public async getValue(key: string) {
-    console.info('get value from firebase cloud config');
+    console.warn('get value from firebase cloud config');
 
     if (this.platform.is('cordova')) {
 
       try {
         const remoteVal = await this.fb.getValue(key);
 
-        console.info('config', remoteVal);
+        console.log('config', remoteVal);
         return remoteVal || this.defaults[key];
       } catch (e) {
-        console.info('Cloud config error: ', e);
+        console.warn('Cloud config error: ', e);
         return null;
       }
     } else {
       // PWA Implementation
-      console.info('its pwa');
+      console.log('its pwa');
 
       return this.defaults[key];
     }
