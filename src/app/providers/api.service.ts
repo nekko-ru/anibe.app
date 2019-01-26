@@ -33,7 +33,7 @@ export class API {
    * @description содержит ссылку на api
    * @type {string}
    */
-  private baseURL: string = config.url;
+  private baseURL: string = config.host_api;
   /**
    * @private
    * @description тип содержимого ответа и запроса

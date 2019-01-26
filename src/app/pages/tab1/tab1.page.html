@@ -1,21 +1,27 @@
 <ion-content>
-  <ion-slides
+  <!-- <ion-slides
     class="slider main"
-    style="background: black"
-    id="slides"
     pager
   >
-    <!-- todo: добавил создание слайдов из MOTD -->
-    <ion-slide style="background: red; color: white;">
-      <h1>Slide 1</h1>
-    </ion-slide>
-    <ion-slide style="background: white; color: blue;">
-      <h1>Slide 2</h1>
-    </ion-slide>
-    <ion-slide style="background: blue; color: white;">
-      <h1>Slide 3</h1>
+    <ion-slide *ngFor="let item of slider_data.slides">
+      <a *ngIf="item.inapp_page === false" href="{{ item.url }}">
+        <ion-img  src="{{ item.img }}"></ion-img>
+      </a>
+      <ion-img (click)="openPage(item.url)" *ngIf="item.inapp_page === true" src="{{ item.img }}"></ion-img>
     </ion-slide>
     
+  </ion-slides> -->
+
+  <ion-slides
+    class="slider main"
+    align-items-center
+    *ngIf="enableSlider"
+  >
+    
+    <ion-slide *ngFor="let item of slider_data.slides">
+      <ion-img src="{{ item.img }}" (click)="openPage(item)"></ion-img>
+    </ion-slide>
+
   </ion-slides>
 
   <ion-card>
