@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
 import { IPost } from 'src/app/providers/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { config } from '../../providers/config';
+import { ConfigProvider } from '../../providers/config.provider';
 
 @Component({
   selector: 'app-tab1',
@@ -39,7 +39,8 @@ export class Tab1Page {
   constructor(
     private router: Router,
     private post: PostService,
-    private firebase: Firebase
+    private firebase: Firebase,
+    private remote_config: ConfigProvider
   ) {}
 
     /**
@@ -60,8 +61,8 @@ export class Tab1Page {
 
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
-    this.enableSlider = config.home_slider_enable;
-    this.slider_data = config.home_slider_data;
+    this.enableSlider = await this.remote_config.getValue('home_slider_enable');
+    this.slider_data = await this.remote_config.getValue('home_slider_data');
 
     this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
     await this.firebase.setScreenName('home');

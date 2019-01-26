@@ -10,6 +10,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ConfigProvider } from './providers/config.provider';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { AppComponent } from './app.component';
     StatusBar,
     SplashScreen,
     Firebase,
+    ConfigProvider,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
