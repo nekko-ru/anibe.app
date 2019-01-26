@@ -5,7 +5,7 @@ import { Platform } from '@ionic/angular';
 @Injectable()
 export class ConfigProvider {
   private defaults: IConfig = {
-    home_slider_enable: true,
+    home_slider_enable: 'false',
     home_slider_data: {
       slides: [
         {
@@ -22,46 +22,31 @@ export class ConfigProvider {
   constructor(private fb: Firebase, private platform: Platform) {}
 
   initialize() {
-    if (this.platform.is('cordova')) {
-      this.fb.fetch(600)
-        .then(() => {
-          console.log('fetched remote config ');
-          this.fb.activateFetched()
-            .then(async () => {
-              console.log('activated remote config');
-
-              console.log(await this.getValue('home_slider_enable'));
-            })
-            .catch(error => {
-              console.error('error initializing remote config', error);
-            });
-        })
-        .catch(error => {
-          console.error('error fetching remote config', error);
+    if ((<any>window).FirebasePlugin !== undefined) {
+      (<any>window).FirebasePlugin.fetch(600, () => {
+        (<any>window).FirebasePlugin.activateFetched(() => {
+          console.log('Firebase activateFetched() ran.');
+        }, (err) => {
+          console.log('Firebase Error running activateFetched(). Err: ' + err);
         });
-    }
+      }, (err) => {
+        console.log('Firebase Error running fetch(). Err: ' + err);
+      });
+  }
   }
 
-  public async getValue(key: string) {
-    console.warn('get value from firebase cloud config');
+  public getValue(key: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      (<any>window).FirebasePlugin.getValue(key, (value: any) => {
+        console.log('Firebase getValue("' + key + '") ran. Result:' + value);
+        resolve(value || this.defaults[key]);
+      }, (err: any) => {
+        console.warn(err);
 
-    if (this.platform.is('cordova')) {
-
-      try {
-        const remoteVal = await this.fb.getValue(key);
-
-        console.log('config', remoteVal);
-        return remoteVal || this.defaults[key];
-      } catch (e) {
-        console.warn('Cloud config error: ', e);
-        return null;
-      }
-    } else {
-      // PWA Implementation
-      console.log('its pwa');
-
-      return this.defaults[key];
-    }
+        console.log('Firebase getValue("' + key + '") get error. Result:' + this.defaults[key]);
+        resolve(this.defaults[key]);
+      });
+    });
   }
 }
 
@@ -69,7 +54,7 @@ export interface IConfig {
   /**
    * @description enable show slider in home page
    */
-  home_slider_enable: boolean;
+  home_slider_enable: string;
   /**
    * @description slider information
    */

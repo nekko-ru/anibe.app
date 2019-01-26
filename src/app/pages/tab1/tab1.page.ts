@@ -29,7 +29,8 @@ export class Tab1Page {
   /**
    * Включен ли слайдер
    */
-  public enableSlider: boolean;
+  // tslint:disable-next-line:no-inferrable-types
+  public enableSlider: string = 'false';
 
   /**
    * Конструктор класса
@@ -61,8 +62,8 @@ export class Tab1Page {
 
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
-    this.enableSlider = await this.remote_config.getValue('home_slider_enable');
     this.slider_data = await this.remote_config.getValue('home_slider_data');
+    this.enableSlider = await this.remote_config.getValue('home_slider_enable');
 
     this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
     await this.firebase.setScreenName('home');

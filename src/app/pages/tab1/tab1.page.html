@@ -15,7 +15,7 @@
   <ion-slides
     class="slider main"
     align-items-center
-    *ngIf="enableSlider"
+    *ngIf="enableSlider === 'true'"
   >
     
     <ion-slide *ngFor="let item of slider_data.slides">
