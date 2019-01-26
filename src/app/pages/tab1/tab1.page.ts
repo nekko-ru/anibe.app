@@ -62,7 +62,7 @@ export class Tab1Page {
 
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
-    this.slider_data = await this.remote_config.getValue('home_slider_data');
+    this.slider_data = JSON.parse(await this.remote_config.getValue('home_slider_data'));
     this.enableSlider = await this.remote_config.getValue('home_slider_enable');
 
     this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
