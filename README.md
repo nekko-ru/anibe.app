@@ -7,20 +7,17 @@ Sorry, but at the moment the application is being developed in Russian language.
 
 * Use [Ionic 4](https://ionicframework.com/)
 * Use only [Ionicons](https://ionicons.com/)
-* Use REST API
-* Easy compile to Andoid/IOS/Windows Mobile/Browser native app
-* Easy change theame and create new fuatures
+* Use [Firebase Analitics](https://firebase.google.com/products/analytics/) with 
+* Use [Firebase Remote Config](https://firebase.google.com/products/remote-config/) and customize app renders for each user
 
-##  Screanshots
+## Functional
 
-### Pages
+* User Login/Signin with JWT token
+* User custom manga lists (favorite, in progress, readed, thrown)
+* Powerful search with genres and ratings
+* Full manga information with fullscrean cover
+* Saving progress while reading manga
 
-| Home | Search | Manga info with cover | Full manga info  |
-|--|--|--|--|
-| ![enter image description here](https://i.imgur.com/ZtiK23l.png) | ![enter image description here](https://i.imgur.com/ejEJZDR.png) | ![enter image description here](https://i.imgur.com/eYp8Pik.png) | ![enter image description here](https://i.imgur.com/m0HLX9i.png) |
+## Screenshots
 
-### Reader
-
-| First page | Second page |
-|--|--|
-| ![enter image description here](https://i.imgur.com/pH5krhw.png) | ![enter image description here](https://i.imgur.com/MR8iJmh.png) |
+In progress
