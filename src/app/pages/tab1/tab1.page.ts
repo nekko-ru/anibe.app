@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
 import { IPost } from 'src/app/providers/interfaces';
@@ -10,7 +10,7 @@ import { ConfigProvider } from '../../providers/config.provider';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   /**
    * Содержит последние изменения и обновления
    */
@@ -60,10 +60,13 @@ export class Tab1Page {
     }
   }
 
-  // tslint:disable-next-line:use-life-cycle-interface
-  async ngOnInit() {
+  protected async ionViewWillEnter() {
     this.slider_data = JSON.parse(await this.remote_config.getValue('home_slider_data'));
     this.enableSlider = await this.remote_config.getValue('home_slider_enable');
+  }
+
+  // tslint:disable-next-line:use-life-cycle-interface
+  async ngOnInit() {
 
     this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
     await this.firebase.setScreenName('home');
