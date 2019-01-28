@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: 'info/:id', loadChildren: './pages/info/info.module#InfoPageModule' },
   { path: 'reader/:id', loadChildren: './pages/reader/reader.module#ReaderPageModule' },
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
+  { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

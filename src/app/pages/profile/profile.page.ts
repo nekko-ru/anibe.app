@@ -17,7 +17,8 @@ export class ProfilePage implements OnInit {
   // дефолтная информация о пользователе, что бы не кидало ошибок
   public info: any = {
     name: '',
-    picture: 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png',
+    // white space
+    picture: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     favorite: [],
     inprogress: [],
     readed: [],
@@ -33,17 +34,12 @@ export class ProfilePage implements OnInit {
     private firebase: Firebase
   ) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+    this.info = await this.storage.get(`user_local`) || this.info;
+  }
 
   public async ionViewDidEnter() {
-    try {
-      Object.assign(this.info, await this.user.getSelf());
-    } catch (e) {
-      console.log(e);
-      await this.storage.remove('token');
-      this.router.navigateByUrl('/');
-    }
-
+    await this.load();
     await this.firebase.setScreenName('profile');
   }
 
@@ -68,5 +64,18 @@ export class ProfilePage implements OnInit {
     });
 
     await modal.present();
+    await modal.onDidDismiss();
+    await this.load();
+  }
+
+  private async load() {
+    try {
+      Object.assign(this.info, await this.user.getSelf());
+      await this.storage.set(`user_local`, this.info);
+    } catch (e) {
+      console.log(e);
+      await this.storage.remove('token');
+      this.router.navigateByUrl('/');
+    }
   }
 }

@@ -75,4 +75,15 @@ export class PostService {
 
     return JSON.parse(res.data).rows;
   }
+
+  public async removeFromList(id: string) {
+    this.token = await this.storage.get('token') || '';
+    const url = `/posts/${id}/user-list`;
+
+    const res = await this.api.delete(url, {
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return JSON.parse(res.data).rows;
+  }
 }

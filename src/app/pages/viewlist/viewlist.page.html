@@ -16,17 +16,25 @@
 <ion-content fullpage>
 
   <ion-list *ngIf="!mode">
-    <ion-item *ngFor="let item of list" (click)="open(item.id)" lines="none">
-      <ion-thumbnail slot="start" class="cover">
-        <img src="{{ item.cover }}">
-      </ion-thumbnail>
-      <ion-label>{{ item.name }}</ion-label>
-    </ion-item>
+
+    <ion-item-sliding *ngFor="let item of list" #myList>
+      <ion-item (click)="open(item.id)" lines="none">
+        <ion-thumbnail slot="start" class="cover">
+          <img src="{{ item.cover }}">
+        </ion-thumbnail>
+        <ion-label>{{ item.name }}</ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="move(item.id)">Перенести</ion-item-option>
+        <ion-item-option (click)="remove(item.id)" color="warning">Удалить</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
   </ion-list>
 
   <ion-row *ngIf="mode">
     <ion-col size="6" *ngFor="let item of list">
-      <ion-img (click)="open(item.id)" src="{{ item.cover }}"></ion-img>
+      <ion-img (click)="open(item.id)" (press)="move(item.id)" src="{{ item.cover }}"></ion-img>
       {{ item.name }}
     </ion-col>
   </ion-row>

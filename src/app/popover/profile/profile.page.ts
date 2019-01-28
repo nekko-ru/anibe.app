@@ -19,7 +19,15 @@ export class ProfilePopoverPage implements OnInit {
   ngOnInit() {
   }
 
-  async logOut() {
+  public async openSettings() {
+    await this.router.navigateByUrl('/settings');
+  }
+
+  public async openAbout() {
+    await this.router.navigateByUrl('/about');
+  }
+
+  public async logOut() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Вы точно хотите выйти из аккаунта?',
       buttons: [{
