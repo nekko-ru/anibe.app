@@ -38,7 +38,7 @@ export class ProfilePage implements OnInit {
     this.info = await this.storage.get(`user_local`) || this.info;
   }
 
-  public async ionViewDidEnter() {
+  public async ionViewWillEnter() {
     await this.load();
     await this.firebase.setScreenName('profile');
   }
@@ -66,6 +66,12 @@ export class ProfilePage implements OnInit {
     await modal.present();
     await modal.onDidDismiss();
     await this.load();
+  }
+
+  public update(event: any) {
+    this.load()
+      .then(() => event.target.complete())
+      .catch(() => event.target.cansel());
   }
 
   private async load() {

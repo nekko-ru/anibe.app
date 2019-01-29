@@ -26,11 +26,24 @@ export class ViewlistPage implements OnInit {
   ngOnInit() {
   }
 
+  private async ionViewWillLeave() {
+    await this.slidingList.closeOpened();
+  }
+
+  /**
+   * @description открывает выбраную мангу
+   * @param id uuid манги
+   * @public
+   */
   public open(id: string): void {
     this.router.navigateByUrl(`/info/${id}`);
     this.modalController.dismiss();
   }
 
+  /**
+   * @description переключает режим отображения
+   * @public
+   */
   public togle() {
     this.mode = !this.mode;
   }
@@ -38,16 +51,38 @@ export class ViewlistPage implements OnInit {
   /**
    * @description Позволяет удалит из списка выбраную мангу
    * @param {string} id
+   * @async
+   * @public
    */
   public async remove(id: string) {
-    await this.post.removeFromList(id);
-    await this.slidingList.closeOpened();
-    this.list = this.list.filter((v: any) => v.id !== id);
+    const actionSheet = await this.asc.create({
+      header: 'Вы точно хотите удалить?',
+      buttons: [{
+        text: 'Да',
+        role: 'destructive',
+        icon: '',
+        handler: async () => {
+          await this.slidingList.closeOpened();
+          this.list = this.list.filter((v: any) => v.id !== id);
+          await this.post.removeFromList(id);
+        }
+      }, {
+        text: 'Отмена',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
   }
 
   /**
    * @description позволяет перенести между списками мангу
    * @param {string} id uuid manga
+   * @async
+   * @public
    */
   public async move(id: string) {
     const actionSheet = await this.asc.create({

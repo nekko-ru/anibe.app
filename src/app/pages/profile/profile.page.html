@@ -11,6 +11,19 @@
 
 <ion-content fullpage>
 
+  <!-- Page refrasher -->
+  <ion-refresher slot="fixed" (ionRefresh)="update($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Для обновления потяни вниз"
+      refreshingSpinner="circles"
+      refreshingText="Обновление"
+      cancelable="false"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- end of page refresher -->
+
   <ion-card>
     <ion-card-content>
       <ion-row>

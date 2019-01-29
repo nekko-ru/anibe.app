@@ -24,7 +24,7 @@ export class ConfigProvider {
       }, (err) => {
         console.log('Firebase Error running fetch(). Err: ' + err);
       });
-  }
+    }
   }
 
   public getValue(key: string): Promise<any> {
