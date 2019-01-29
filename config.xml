@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ru.anibe.mobile" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="ru.anibe.mobile" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Anibe.ru</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="deissh@yandex,ru" href="http://vk.com/keelvel/">Deissh</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://172.17.0.1:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -87,6 +87,7 @@
     <plugin name="cordova-sqlite-storage" spec="~2.6.0" />
     <plugin name="cordova-plugin-android-permissions" spec="~1.0.0" />
     <plugin name="cordova-plugin-firebase" spec="~2.0.5" />
+    <allow-navigation href="http://172.17.0.1:8100" sessionid="b7a20308" />
     <engine name="android" spec="7.1.4" />
     <engine name="browser" spec="5.0.4" />
 </widget>
