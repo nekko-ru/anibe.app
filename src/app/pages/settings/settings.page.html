@@ -5,18 +5,77 @@
 </ion-header>
 
 <ion-content fullpage>
-  <ion-card>
+  <ion-card *ngIf="showProfile">
     <ion-card-content>
 
       <ion-list lines="none">
         <ion-list-header>
           <ion-label>Профиль</ion-label>
         </ion-list-header>
-        <ion-item>Item 1</ion-item>
-        <ion-item>Item 2</ion-item>
-        <ion-item>Item 3</ion-item>
-        <ion-item>Item 4</ion-item>
-        <ion-item>Item 5</ion-item>
+        <ion-item>
+          <ion-thumbnail>
+            <img src="{{ info.avatar }}">
+          </ion-thumbnail>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ник</ion-label>
+          <ion-input value="{{ info.name }}" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Почта</ion-label>
+            <ion-input value="{{ info.email }}" type="email"></ion-input>
+          </ion-item>
+        <ion-item>
+          <ion-label>
+            Ваш пол
+          </ion-label>
+          <ion-select placeholder="Выбрать" value="0">
+            <ion-select-option value="1">
+              Мужской
+            </ion-select-option>
+            <ion-select-option value="2">
+              Женский
+            </ion-select-option>
+            <ion-select-option value="3">
+              Другой
+            </ion-select-option>
+            <ion-select-option value="0">
+              Не указан
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            Описание
+          </ion-label>
+          <ion-input value="{{ info.desc }}" type="text"></ion-input>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+
+      <ion-list lines="none">
+        <ion-list-header>
+          <ion-label>Общие</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Включить уведомления</ion-label>
+          <ion-toggle checked></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Сохранять прогресс</ion-label>
+            <ion-toggle checked></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label text-wrap>
+              Рекомендации на основе прочитаного
+            </ion-label>
+            <ion-toggle checked></ion-toggle>
+        </ion-item>
       </ion-list>
 
     </ion-card-content>
