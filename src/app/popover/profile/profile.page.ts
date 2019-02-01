@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -13,13 +13,25 @@ export class ProfilePopoverPage implements OnInit {
   constructor(
     private router: Router,
     private storage: Storage,
-    private actionSheetController: ActionSheetController
+    private actionSheetController: ActionSheetController,
+    private popoverController: PopoverController
   ) { }
 
   ngOnInit() {
   }
 
-  async logOut() {
+  public async openSettings() {
+    await this.popoverController.dismiss();
+    await this.router.navigateByUrl('/settings');
+  }
+
+  public async openAbout() {
+    await this.popoverController.dismiss();
+    await this.router.navigateByUrl('/about');
+  }
+
+  public async logOut() {
+    await this.popoverController.dismiss();
     const actionSheet = await this.actionSheetController.create({
       header: 'Вы точно хотите выйти из аккаунта?',
       buttons: [{

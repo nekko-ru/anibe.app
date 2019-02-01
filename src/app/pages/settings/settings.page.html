@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Настройки</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="saveChanges()">
+        Сохранить
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullpage>
+  <ion-card *ngIf="showProfile">
+    <ion-card-content>
+
+      <ion-list lines="none">
+        <ion-list-header>
+          <ion-label>Профиль</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-img [src]="info.picture" slot="start"></ion-img>
+          <ion-button slot="end">
+            Загрузить
+          </ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ник: </ion-label>
+          <ion-input [(ngModel)]="info.name" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Почта: </ion-label>
+            <ion-input [(ngModel)]="info.email" type="email" readonly></ion-input>
+          </ion-item>
+        <!-- <ion-item>
+          <ion-label>
+            Пол:
+          </ion-label>
+          <ion-select placeholder="Выбрать" value="0">
+            <ion-select-option value="1">
+              Мужской
+            </ion-select-option>
+            <ion-select-option value="2">
+              Женский
+            </ion-select-option>
+            <ion-select-option value="3">
+              Другой
+            </ion-select-option>
+            <ion-select-option value="0">
+              Не указан
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Дата рождения:</ion-label>
+          <ion-datetime
+            display-format="DD.MM.YYYY"
+            placeholder="Выбрать"
+            cancelText="Отмена"
+            doneText="Выбрать"
+          ></ion-datetime>
+        </ion-item> -->
+        <ion-item>
+          <ion-label>
+            О себе
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-textarea [(ngModel)]="info.desc" maxlength="500"></ion-textarea>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+
+      <ion-list lines="none">
+        <ion-list-header>
+          <ion-label>Общие</ion-label>
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Включить уведомления</ion-label>
+          <ion-toggle checked></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Сохранять прогресс</ion-label>
+            <ion-toggle checked></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label text-wrap>
+              Рекомендации на основе прочитаного
+            </ion-label>
+            <ion-toggle checked></ion-toggle>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

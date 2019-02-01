@@ -14,7 +14,7 @@ ion-img {
 }
 
 .step-one {
-    background: var(--ion-color-primary);
+    background: var(--ion-color-tertiary);
     color: var(--ion-color-primary-contrast);
 }
 
@@ -24,6 +24,6 @@ ion-img {
 }
 
 .step-three {
-    background: var(--ion-color-tertiary);
-    color: var(--ion-color-dark-contrast);
+    background: var(--ion-color-light);
+    color: var(--ion-color-light-contrast);
 }
