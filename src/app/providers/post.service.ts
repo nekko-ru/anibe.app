@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { API } from './api.service';
 import { IPostFull, RequestParam, IPost } from './interfaces';
 import { Storage } from '@ionic/storage';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class PostService {
   private ready: Promise<any>;
 
   constructor(
-    private storage: Storage
+    private storage: Storage,
+    private toast: ToastController
   ) {
     this.api = new API({  });
   }
@@ -72,7 +74,10 @@ export class PostService {
     }, {
       'Authorization': 'Bearer ' + this.token
     });
-
+    (await this.toast.create({
+      message: 'Добавлено',
+      duration: 2000
+    })).present();
     return JSON.parse(res.data).rows;
   }
 
@@ -84,6 +89,10 @@ export class PostService {
       'Authorization': 'Bearer ' + this.token
     });
 
+    (await this.toast.create({
+      message: 'Удалено',
+      duration: 2000
+    })).present();
     return JSON.parse(res.data).rows;
   }
 }

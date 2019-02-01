@@ -14,6 +14,8 @@ export class SettingsPage implements OnInit {
   public showProfile: boolean;
   public toDay = new Date();
 
+  public preload_img: boolean;
+
   constructor(
     private user: UserService,
     private storage: Storage,
@@ -21,8 +23,10 @@ export class SettingsPage implements OnInit {
     private navController: NavController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.load();
+
+    this.preload_img = (await this.storage.get('image_preload'));
   }
 
   private async load() {
@@ -33,6 +37,7 @@ export class SettingsPage implements OnInit {
   }
 
   public async saveChanges() {
+    await this.storage.set('image_preload', this.preload_img);
     try {
       this.info = await this.user.update({
         picture: this.info.picture,

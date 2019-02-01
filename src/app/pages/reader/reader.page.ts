@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { ModalController, LoadingController, Events, IonSlide } from '@ionic/angular';
+import { ModalController, LoadingController, Events, IonSlide, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
@@ -19,8 +19,10 @@ export class ReaderPage implements OnInit {
   private chapter: string;
   public episode: string[];
 
+  public preload = false;
   public slideOpts: any = {
-    preloadImages: true
+    preloadImages: false,
+    updateOnImagesReady: true
   };
 
   private spiner: any;
@@ -35,6 +37,7 @@ export class ReaderPage implements OnInit {
     private loadingController: LoadingController,
     private modalController: ModalController,
     private post: PostService,
+    private toast: ToastController,
     private firebase: Firebase
   ) {
     this.episode = [];
@@ -47,6 +50,8 @@ export class ReaderPage implements OnInit {
     });
     await this.spiner.present();
     await this.storage.ready();
+
+    this.preload = (await this.storage.get('image_preload'));
 
     this.info = await this.post.get(this.route.snapshot.paramMap.get('id'));
 
@@ -87,9 +92,15 @@ export class ReaderPage implements OnInit {
   }
 
   public async ChapterEnded() {
+    // фикс срабатываний при не полной загрузке слайдера
+    if (await this.slider.getActiveIndex() !== this.episode.length - 1) {
+      return;
+    }
+    // проверка на то что мы загрузились
     if (!this.ready) {
       return;
     }
+
     console.log('reached end', await this.slider.getActiveIndex());
 
     this.active = {
@@ -102,6 +113,7 @@ export class ReaderPage implements OnInit {
       ...this.allactives,
       [this.chapter]: this.active
     };
+    // записываем всю активность и сохраняем, относительно последней и глобально по манге
     await this.storage.set(this.info.id, {
       allactives: this.allactives,
       active: this.active
@@ -109,6 +121,7 @@ export class ReaderPage implements OnInit {
   }
 
   public async sliderEvent() {
+    // срабатывает при перелистывании
     this.active = {
       chapter: this.chapter,
       // fixme:
@@ -127,6 +140,7 @@ export class ReaderPage implements OnInit {
   }
 
   public async selectChapter() {
+    // открываем новое окно с выбором глав
     const modal = await this.modalController.create({
       component: SelectChapterPage,
       backdropDismiss: true,
@@ -143,6 +157,7 @@ export class ReaderPage implements OnInit {
     const post = await this.storage.get(this.info.id);
     console.log(this);
 
+    // проверяем на то что глава была наньше открыта и загружаем прогресс с нее
     this.chapter = result.data.chapter;
     if (post && post.allactives[this.chapter]) {
       console.log('opened chapter in progress or ended');
@@ -166,6 +181,7 @@ export class ReaderPage implements OnInit {
       this.slider.slideTo(0);
     }
 
+    // еще раз все сохроняем, после наших всех переходов
     await this.storage.set(this.info.id, {
       allactives: {
         ...this.allactives,
