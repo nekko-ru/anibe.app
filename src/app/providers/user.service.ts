@@ -85,4 +85,18 @@ export class UserService {
     });
     return JSON.parse(res.data);
   }
+
+  /**
+   * @description обновить информацию о пользователе
+   * @param body новая информация о пользователе
+   */
+  public async update(body: any) {
+    await this.setToken();
+    const url = `/users/me`;
+
+    const res = await this.api.put(url, body, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data);
+  }
 }

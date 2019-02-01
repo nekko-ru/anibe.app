@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Настройки</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="saveChanges()">
+        Сохранить
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,21 +18,22 @@
           <ion-label>Профиль</ion-label>
         </ion-list-header>
         <ion-item>
-          <ion-thumbnail>
-            <img src="{{ info.avatar }}">
-          </ion-thumbnail>
+          <ion-img [src]="info.picture" slot="start"></ion-img>
+          <ion-button slot="end">
+            Загрузить
+          </ion-button>
         </ion-item>
         <ion-item>
-          <ion-label>Ник</ion-label>
-          <ion-input value="{{ info.name }}" type="text"></ion-input>
+          <ion-label>Ник: </ion-label>
+          <ion-input [(ngModel)]="info.name" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label>Почта</ion-label>
-            <ion-input value="{{ info.email }}" type="email"></ion-input>
+            <ion-label>Почта: </ion-label>
+            <ion-input [(ngModel)]="info.email" type="email" readonly></ion-input>
           </ion-item>
-        <ion-item>
+        <!-- <ion-item>
           <ion-label>
-            Ваш пол
+            Пол:
           </ion-label>
           <ion-select placeholder="Выбрать" value="0">
             <ion-select-option value="1">
@@ -45,10 +51,21 @@
           </ion-select>
         </ion-item>
         <ion-item>
+          <ion-label>Дата рождения:</ion-label>
+          <ion-datetime
+            display-format="DD.MM.YYYY"
+            placeholder="Выбрать"
+            cancelText="Отмена"
+            doneText="Выбрать"
+          ></ion-datetime>
+        </ion-item> -->
+        <ion-item>
           <ion-label>
-            Описание
+            О себе
           </ion-label>
-          <ion-input value="{{ info.desc }}" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea [(ngModel)]="info.desc" maxlength="500"></ion-textarea>
         </ion-item>
       </ion-list>
 

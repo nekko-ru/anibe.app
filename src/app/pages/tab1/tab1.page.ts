@@ -4,6 +4,7 @@ import { PostService } from 'src/app/providers/post.service';
 import { IPost } from 'src/app/providers/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { ConfigProvider } from '../../providers/config.provider';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -40,6 +41,7 @@ export class Tab1Page implements OnInit {
   constructor(
     private router: Router,
     private post: PostService,
+    private toast: ToastController,
     private firebase: Firebase,
     private remote_config: ConfigProvider
   ) {}
@@ -67,8 +69,16 @@ export class Tab1Page implements OnInit {
 
   // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
-
-    this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
+    try {
+      this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
+    } catch (e) {
+      if (e.error === 'advanced-http: please check browser console for error messages') {
+        (await this.toast.create({
+          message: 'Необходимо интернет соединение!',
+          duration: 5000
+        })).present();
+      }
+    }
     await this.firebase.setScreenName('home');
   }
 }
