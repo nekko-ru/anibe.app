@@ -127,4 +127,8 @@ export class ViewlistPage implements OnInit {
     }
     await actionSheet.present();
   }
+
+  public async Close() {
+    await this.modalController.dismiss();
+  }
 }

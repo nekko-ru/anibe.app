@@ -1,14 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="togle()">
-        <ion-icon *ngIf="!mode" name="keypad"></ion-icon>
-        <ion-icon *ngIf="mode" name="list"></ion-icon>
+      <ion-button (click)="togle()" *ngIf="!mode" >
+        <ion-icon name="keypad"></ion-icon>
+      </ion-button>
+      <ion-button (click)="togle()" *ngIf="mode" >
+        <ion-icon name="list"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>{{ name }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="this.modalController.dismiss()">Закрыть</ion-button>
+      <ion-button (click)="Close()">Закрыть</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -34,7 +36,7 @@
 
   <ion-row *ngIf="mode">
     <ion-col size="6" *ngFor="let item of list">
-      <ion-img (click)="open(item.id)" (press)="move(item.id)" src="{{ item.cover }}"></ion-img>
+      <ion-img (click)="open(item.id)" src="{{ item.cover }}"></ion-img>
       {{ item.name }}
     </ion-col>
   </ion-row>

@@ -21,7 +21,7 @@ export class ReaderPage implements OnInit {
 
   public preload = false;
   public slideOpts: any = {
-    preloadImages: false,
+    preloadImages: true,
     updateOnImagesReady: true
   };
 
