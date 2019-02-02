@@ -88,6 +88,13 @@ export class ViewlistPage implements OnInit {
     const actionSheet = await this.asc.create({
       buttons: [
         {
+          text: 'Буду читать',
+          handler: () => {
+            this.post.addToList(id, 'willread');
+            this.list = this.list.filter((v: any) => v.id !== id);
+          }
+        },
+        {
           text: 'Читаю',
           handler: () => {
             this.post.addToList(id, 'inprogress');

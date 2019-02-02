@@ -53,6 +53,14 @@ export class InfoPage implements OnInit {
     const actionSheet = await this.asc.create({
       buttons: [
         {
+          text: 'Буду читать',
+          handler: () => {
+            this.post.addToList(this.id, 'willread').catch((e) => {
+              console.log(e);
+            });
+          }
+        },
+        {
           text: 'Читаю',
           handler: () => {
             this.post.addToList(this.id, 'inprogress').catch((e) => {
