@@ -22,7 +22,8 @@ export class ProfilePage implements OnInit {
     favorite: [],
     inprogress: [],
     readed: [],
-    thrown: []
+    thrown: [],
+    willread: []
   };
 
   constructor(

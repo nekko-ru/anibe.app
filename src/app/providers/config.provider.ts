@@ -5,6 +5,7 @@ import { Platform } from '@ionic/angular';
 @Injectable()
 export class ConfigProvider {
   private defaults: any = {
+    enable_registration: 'true',
     home_slider_enable: 'false',
     // default value
     // tslint:disable-next-line:max-line-length
