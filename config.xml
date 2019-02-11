@@ -88,6 +88,6 @@
     <plugin name="cordova-plugin-android-permissions" spec="~1.0.0" />
     <plugin name="cordova-plugin-firebase" spec="~2.0.5" />
     <allow-navigation href="http://172.27.0.1:8100" sessionid="ef47eca0" />
-    <engine name="android" spec="7.1.4" />
     <engine name="browser" spec="5.0.4" />
+    <engine name="android" spec="7.1.4" />
 </widget>

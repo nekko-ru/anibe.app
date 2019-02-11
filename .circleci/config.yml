@@ -1,0 +1,84 @@
+version: 2
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:11
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn lint
+
+  test:
+    docker:
+      - image: circleci/node:8.9.0
+    working_dirictory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn test
+
+  build:
+    docker:
+      - image: kusumoto/docker-ionic-android-sdk
+    working_dirictory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: 
+          command: yes | /opt/android-sdk/tools/bin/sdkmanager --licenses || true
+          name: "Accept Android SDK Licenses"
+
+      - run:
+          command: ionic cordova build android
+          name: "Build APK with Cordova"
+
+      - store_artifacts:
+          path: platforms/android/build/outputs/apk/app-debug.apk
+          destination: Android App
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - lint
+      - test:
+        requires:
+          - lint
+      - build:
+        requires:
+          - test
+          - lint
+        filters:
+          branches:
+            only: master
