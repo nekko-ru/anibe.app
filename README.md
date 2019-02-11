@@ -1,4 +1,7 @@
 # Anibe Manga Reader
+
+[![CircleCI](https://circleci.com/gh/deissh/anibe.app/tree/master.svg?style=svg&circle-token=aba99847bae43629ad4c7cd71cf33bd98bafaf5a)](https://circleci.com/gh/deissh/anibe.app/tree/master)
+
 :fire: WIP | Simple app to read manga on your phone
 
 Sorry, but at the moment the application is being developed in Russian language. But in the near future it is planned to add several languages, namely English and French.
