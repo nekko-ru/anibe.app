@@ -48,7 +48,7 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
 
-      - run: yarn install
+      - run: npm install
 
       - save_cache:
           paths:
@@ -56,16 +56,16 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: 
-        command: yes | /opt/android-sdk/tools/bin/sdkmanager --licenses || true
-        name: "Accept Android SDK Licenses"
+          command: yes | /opt/android-sdk/tools/bin/sdkmanager --licenses || true
+          name: "Accept Android SDK Licenses"
 
       - run:
-        command: ionic cordova build android
-        name: "Build APK with Cordova"
+          command: ionic cordova build android
+          name: "Build APK with Cordova"
 
       - store_artifacts:
-        path: platforms/android/build/outputs/apk/app-debug.apk
-        destination: Android App
+          path: platforms/android/build/outputs/apk/app-debug.apk
+          destination: Android App
 
 workflows:
   version: 2
