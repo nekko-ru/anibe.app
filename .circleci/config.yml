@@ -64,7 +64,7 @@ jobs:
             - v1-cordova-{{ checksum "config.xml" }}
       
       - run:
-          command: echo $GOOGLE_SERVICES | base64 --decode > ~/${HOME}/app/google-services.json
+          command: echo $GOOGLE_SERVICES | base64 --decode > ${HOME}/repo/platforms/android/app/google-services.json
           name: "Import Google Firebase config"
       
       - run:
