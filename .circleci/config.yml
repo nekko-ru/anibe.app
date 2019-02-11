@@ -18,7 +18,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn lint
 
-  test:
+  build:
     docker:
       - image: circleci/node:8.9.0
     working_dirictory: ~/repo
@@ -36,7 +36,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn test
 
-  build:
+  build-apk:
     docker:
       - image: kusumoto/docker-ionic-android-sdk
     working_dirictory: ~/repo
