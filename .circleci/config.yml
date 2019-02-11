@@ -74,11 +74,11 @@ workflows:
       - lint
       - build
       - buildapk:
-        requires:
-          - lint
-          - build
-        filters:
-          tags:
-            only: /^v.*/
-          branches:
-            only: master
+          requires:
+            - lint
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master
