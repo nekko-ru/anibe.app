@@ -59,6 +59,23 @@ jobs:
           command: yes | /opt/android-sdk/tools/bin/sdkmanager --licenses || true
           name: "Accept Android SDK Licenses"
 
+      - restore_cache:
+          keys:
+            - v1-cordova-{{ checksum "config.xml" }}
+      
+      - run:
+          command: echo $GOOGLE_SERVICES | base64 --decode > ~/${HOME}/app/google-services.json
+          name: "Import Google Firebase config"
+      
+      - run:
+          command: ionic cordova compile
+          name: "First Cordova compile"
+          
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-cordova-{{ checksum "config.xml" }}
+          
       - run:
           command: ionic cordova build android
           name: "Build APK with Cordova"
@@ -69,20 +86,16 @@ jobs:
 
 workflows:
   version: 2
-  untagged-build:
-    jobs:
-      - lint
-      - build
-  tagged-build:
+  build_and_test:
     jobs:
       - lint
       - build
       - buildapk:
           requires:
-           - lint
-           - build
+            - lint
+            - build
           filters:
-            branches:
-              only: master
             tags:
               only: /^v.*/
+            branches:
+              only: master
