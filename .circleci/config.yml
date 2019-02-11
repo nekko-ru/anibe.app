@@ -2,8 +2,8 @@ version: 2
 jobs:
   lint:
     docker:
-      - image: circleci/node:11
-    working_directory: ~/repo
+      - image: circleci/node:8.9.0
+    working_dirictory: ~/repo
 
     steps:
       - checkout
@@ -34,7 +34,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test
+      - run: yarn build
 
   build-apk:
     docker:
@@ -75,10 +75,12 @@ workflows:
       - test:
         requires:
           - lint
-      - build:
+      - build
+      - build-apk:
         requires:
           - test
           - lint
+          - build
         filters:
           branches:
             only: master
