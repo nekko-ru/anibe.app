@@ -36,7 +36,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn lint
 
-  buidapk:
+  buildapk:
     docker:
       - image: kusumoto/docker-ionic-android-sdk
     working_dirictory: ~/repo
@@ -69,7 +69,7 @@ jobs:
 
 workflows:
   version: 2
-  test_and_build:
+  build_and_test:
     jobs:
       - lint
       - build
