@@ -69,16 +69,20 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  untagged-build:
+    jobs:
+      - lint
+      - build
+  tagged-build:
     jobs:
       - lint
       - build
       - buildapk:
           requires:
-            - lint
-            - build
+           - lint
+           - build
           filters:
-            tags:
-              only: /^v.*/
             branches:
               only: master
+            tags:
+              only: /^v.*/
