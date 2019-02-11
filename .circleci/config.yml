@@ -69,7 +69,7 @@ jobs:
           name: "Import Google Firebase config"
       
       - run:
-          command: ionic cordova compile
+          command: ionic cordova compile android
           name: "First Cordova compile"
           
       - save_cache:
