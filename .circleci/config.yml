@@ -1,23 +1,5 @@
 version: 2
 jobs:
-  lint:
-    docker:
-      - image: circleci/node:8.9.0
-    working_dirictory: ~/repo
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn lint
-
   build:
     docker:
       - image: circleci/node:8.9.0
@@ -36,7 +18,25 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
 
-  build_apk:
+  lint:
+    docker:
+      - image: circleci/node:8.9.0
+    working_dirictory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn lint
+
+  buidapk:
     docker:
       - image: kusumoto/docker-ionic-android-sdk
     working_dirictory: ~/repo
@@ -69,18 +69,16 @@ jobs:
 
 workflows:
   version: 2
-  test:
+  test_and_build:
     jobs:
       - lint
-      - test:
-        requires:
-          - lint
       - build
-      - build-apk:
+      - buildapk:
         requires:
-          - test
           - lint
           - build
         filters:
+          tags:
+            only: /^v.*/
           branches:
             only: master
