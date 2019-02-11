@@ -36,7 +36,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn build
 
-  build-apk:
+  build_apk:
     docker:
       - image: kusumoto/docker-ionic-android-sdk
     working_dirictory: ~/repo
