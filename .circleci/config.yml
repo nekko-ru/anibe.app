@@ -54,21 +54,17 @@ jobs:
             - v1-cordova-{{ checksum "config.xml" }}
       
       - run:
-          command: yes | ionic cordova prepare || true
-          name: "Prepere Cordova build"
-
-      - run:
-          command: echo $GOOGLE_SERVICES | base64 --decode > ${CIRCLE_WORKING_DIRECTORY}/platforms/android/app/google-services.json
+          command: echo $GOOGLE_SERVICES | base64 --decode > ${CIRCLE_WORKING_DIRECTORY}/google-services.json
           name: "Import Google Firebase config"
-          
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-cordova-{{ checksum "config.xml" }}
           
       - run:
           command: ionic cordova build android
           name: "Build APK with Cordova"
+
+      - save_cache:
+          paths:
+            - platforms
+          key: v1-cordova-{{ checksum "config.xml" }}
 
       - store_artifacts:
           path: platforms/android/build/outputs/apk/app-debug.apk
