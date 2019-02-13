@@ -89,7 +89,7 @@ workflows:
   build_and_test:
     jobs:
       - lint
-      - build
+      # - build
       - buildapk:
           requires:
             - lint
