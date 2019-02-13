@@ -67,7 +67,7 @@ jobs:
           key: v1-cordova-{{ checksum "config.xml" }}
 
       - store_artifacts:
-          path: platforms/android/build/outputs/apk/app-debug.apk
+          path: platforms/android/build/outputs/
           destination: Android App
 
 workflows:
