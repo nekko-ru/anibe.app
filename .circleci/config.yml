@@ -6,7 +6,7 @@ jobs:
     working_dirictory: ~/repo
 
     steps:
-      - echo "ToDo"
+      - run: echo "ToDo"
 
   lint:
     docker:
