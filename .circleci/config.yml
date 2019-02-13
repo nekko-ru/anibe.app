@@ -64,7 +64,7 @@ jobs:
             - v1-cordova-{{ checksum "config.xml" }}
       
       - run:
-          command: yes | ionic cordova prepare
+          command: yes | ionic cordova prepare || true
           name: "Prepere Cordova build"
 
       - run:
