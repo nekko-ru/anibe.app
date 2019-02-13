@@ -64,6 +64,7 @@ jobs:
       - save_cache:
           paths:
             - platforms
+            - plugins
           key: v1-cordova-{{ checksum "config.xml" }}
 
       - store_artifacts:
