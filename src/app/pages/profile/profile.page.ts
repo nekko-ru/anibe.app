@@ -36,12 +36,12 @@ export class ProfilePage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.info = await this.storage.get(`user_local`) || this.info;
+    // this.load();
   }
 
   public async ionViewWillEnter() {
-    await this.load();
     await this.firebase.setScreenName('profile');
+    this.load();
   }
 
   public async popover(ev: any) {
@@ -70,15 +70,20 @@ export class ProfilePage implements OnInit {
   }
 
   public update(event: any) {
-    this.load()
+    this.load(true)
       .then(() => event.target.complete())
       .catch(() => event.target.cansel());
   }
 
-  private async load() {
+  private async load(full: boolean = false) {
     try {
-      Object.assign(this.info, await this.user.getSelf());
-      await this.storage.set(`user_local`, this.info);
+      const temp = await this.storage.get('user_local');
+      if (temp && !full) {
+        this.info = temp;
+      } else {
+        Object.assign(this.info, await this.user.getSelf());
+        await this.storage.set(`user_local`, this.info);
+      }
     } catch (e) {
       console.log(e);
       await this.storage.remove('token');

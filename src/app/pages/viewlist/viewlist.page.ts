@@ -2,6 +2,9 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NavParams, ModalController, ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
+import { async } from 'q';
+import { UserService } from 'src/app/providers/user.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-viewlist',
@@ -20,6 +23,8 @@ export class ViewlistPage implements OnInit {
     public modalController: ModalController,
     private router: Router,
     private post: PostService,
+    private user: UserService,
+    private storage: Storage,
     private asc: ActionSheetController
   ) { }
 
@@ -89,36 +94,41 @@ export class ViewlistPage implements OnInit {
       buttons: [
         {
           text: 'Буду читать',
-          handler: () => {
-            this.post.addToList(id, 'willread');
+          handler: async (): Promise<any> => {
+            await this.post.addToList(id, 'willread');
+            await this.storage.set('user_local', await this.user.getSelf());
             this.list = this.list.filter((v: any) => v.id !== id);
           }
         },
         {
           text: 'Читаю',
-          handler: () => {
-            this.post.addToList(id, 'inprogress');
+          handler: async (): Promise<any> => {
+            await this.post.addToList(id, 'inprogress');
+            await this.storage.set('user_local', await this.user.getSelf());
             this.list = this.list.filter((v: any) => v.id !== id);
           }
         },
         {
           text: 'Прочитано',
-          handler: () => {
-            this.post.addToList(id, 'readed');
+          handler: async (): Promise<any> => {
+            await this.post.addToList(id, 'readed');
+            await this.storage.set('user_local', await this.user.getSelf());
             this.list = this.list.filter((v: any) => v.id !== id);
           }
         },
         {
           text: 'Любимое',
-          handler: () => {
-            this.post.addToList(id, 'favorite');
+          handler: async (): Promise<any> => {
+            await this.post.addToList(id, 'favorite');
+            await this.storage.set('user_local', await this.user.getSelf());
             this.list = this.list.filter((v: any) => v.id !== id);
           }
         },
         {
           text: 'Брошено',
-          handler: () => {
-            this.post.addToList(id, 'thrown');
+          handler: async (): Promise<any> => {
+            await this.post.addToList(id, 'thrown');
+            await this.storage.set('user_local', await this.user.getSelf());
             this.list = this.list.filter((v: any) => v.id !== id);
           }
         },
