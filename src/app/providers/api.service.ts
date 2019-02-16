@@ -111,4 +111,17 @@ export class API {
   public delete(url: string, headers: any): Promise<any> {
     return this.http.delete(this.baseURL + url, {}, { ...headers });
   }
+
+  /**
+   * Выполняет PUT запрос к серверу апи и загружает файл по ссылке
+   * @async
+   * @param url ссылка
+   * @param body тело запроса
+   * @returns {Promise<any>}
+   */
+  public putFile(url: string, body: any, headers: any, file: string): Promise<any> {
+    return this.http.uploadFile(this.baseURL + url, {
+      ...body
+    }, { ...headers }, file, 'picture');
+  }
 }

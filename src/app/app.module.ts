@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { ConfigProvider } from './providers/config.provider';
     StatusBar,
     SplashScreen,
     Firebase,
+    ImagePicker,
     ConfigProvider,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
