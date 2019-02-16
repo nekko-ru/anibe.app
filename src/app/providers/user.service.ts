@@ -99,4 +99,13 @@ export class UserService {
     });
     return JSON.parse(res.data);
   }
+  public async updateAvatar(file: string) {
+    await this.setToken();
+    const url = `/users/update/avatar`;
+
+    const res = await this.api.putFile(url, {}, {
+      'Authorization': 'Bearer ' + this.token
+    }, file);
+    return JSON.parse(res.data);
+  }
 }

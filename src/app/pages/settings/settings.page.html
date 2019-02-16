@@ -19,7 +19,7 @@
         </ion-list-header>
         <ion-item>
           <ion-img [src]="info.picture" slot="start" style="max-width: 150px;max-height: 150px;"></ion-img>
-          <ion-button slot="end">
+          <ion-button (click)="pickImage()" slot="end">
             Загрузить
           </ion-button>
         </ion-item>
