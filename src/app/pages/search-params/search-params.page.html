@@ -11,10 +11,171 @@
   <ion-list>
 
     <ion-list-header>Жанры</ion-list-header>
-    <ion-item *ngFor="let item of genres">
+    <!-- <ion-item *ngFor="let item of genres">
       <ion-label>{{item.name}}</ion-label>
       <ion-checkbox [(ngModel)]="item.active"></ion-checkbox>
+    </ion-item> -->
+    <ion-item>
+      <ion-label>Безумие</ion-label>
+      <ion-checkbox [(ngModel)]="genres[0].active"></ion-checkbox>
     </ion-item>
+    <ion-item>
+      <ion-label>Боевые искусства</ion-label>
+      <ion-checkbox [(ngModel)]="genres[1].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Вампиры</ion-label>
+      <ion-checkbox [(ngModel)]="genres[2].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Военное</ion-label>
+      <ion-checkbox [(ngModel)]="genres[3].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Гарем</ion-label>
+      <ion-checkbox [(ngModel)]="genres[4].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Гендерная интрига</ion-label>
+      <ion-checkbox [(ngModel)]="genres[5].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Детское</ion-label>
+      <ion-checkbox [(ngModel)]="genres[6].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Дзёсей</ion-label>
+      <ion-checkbox [(ngModel)]="genres[7].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Драма</ion-label>
+      <ion-checkbox [(ngModel)]="genres[8].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Игры</ion-label>
+      <ion-checkbox [(ngModel)]="genres[9].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Исторический</ion-label>
+      <ion-checkbox [(ngModel)]="genres[10].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Комедия</ion-label>
+      <ion-checkbox [(ngModel)]="genres[11].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Космос</ion-label>
+      <ion-checkbox [(ngModel)]="genres[12].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Магия</ion-label>
+      <ion-checkbox [(ngModel)]="genres[13].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Машины</ion-label>
+      <ion-checkbox [(ngModel)]="genres[14].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Меха</ion-label>
+      <ion-checkbox [(ngModel)]="genres[15].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Мистика</ion-label>
+      <ion-checkbox [(ngModel)]="genres[16].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Музыка</ion-label>
+      <ion-checkbox [(ngModel)]="genres[17].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Пародия</ion-label>
+      <ion-checkbox [(ngModel)]="genres[18].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Повседневность</ion-label>
+      <ion-checkbox [(ngModel)]="genres[19].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Приключения</ion-label>
+      <ion-checkbox [(ngModel)]="genres[20].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Психологическое</ion-label>
+      <ion-checkbox [(ngModel)]="genres[21].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Романтика</ion-label>
+      <ion-checkbox [(ngModel)]="genres[22].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Сверхъестественное</ion-label>
+      <ion-checkbox [(ngModel)]="genres[23].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Сёдзе</ion-label>
+      <ion-checkbox [(ngModel)]="genres[24].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Сёдзе Ай</ion-label>
+      <ion-checkbox [(ngModel)]="genres[25].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Сёнен</ion-label>
+      <ion-checkbox [(ngModel)]="genres[26].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Сейнен</ion-label>
+      <ion-checkbox [(ngModel)]="genres[27].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Сёнен Ай</ion-label>
+      <ion-checkbox [(ngModel)]="genres[28].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Спорт</ion-label>
+      <ion-checkbox [(ngModel)]="genres[29].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Супер сила</ion-label>
+      <ion-checkbox [(ngModel)]="genres[30].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Триллер</ion-label>
+      <ion-checkbox [(ngModel)]="genres[31].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Ужасы</ion-label>
+      <ion-checkbox [(ngModel)]="genres[32].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Фантастика</ion-label>
+      <ion-checkbox [(ngModel)]="genres[33].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Хентай</ion-label>
+      <ion-checkbox [(ngModel)]="genres[34].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Школа</ion-label>
+      <ion-checkbox [(ngModel)]="genres[35].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Экшен</ion-label>
+      <ion-checkbox [(ngModel)]="genres[36].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Этти</ion-label>
+      <ion-checkbox [(ngModel)]="genres[37].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Юри</ion-label>
+      <ion-checkbox [(ngModel)]="genres[38].active"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>Яой</ion-label>
+      <ion-checkbox [(ngModel)]="genres[39].active"></ion-checkbox>
+    </ion-item>
+
 
   </ion-list>
 </ion-content>
