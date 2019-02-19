@@ -5,7 +5,6 @@ import { IPostFull } from 'src/app/providers/interfaces';
 import { PostService } from 'src/app/providers/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Storage } from '@ionic/storage';
-import { UserService } from 'src/app/providers/user.service';
 
 @Component({
   selector: 'app-info',
@@ -18,17 +17,6 @@ export class InfoPage implements OnInit {
   public info: IPostFull | any = { cover: '', genre: [], episodes: {} };
   private spiner: any;
 
-  public user_info: any = {
-    name: '',
-    // white space
-    picture: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
-    favorite: [],
-    inprogress: [],
-    readed: [],
-    thrown: [],
-    willread: []
-  };
-
   private chapters: string[];
 
   constructor(
@@ -38,8 +26,7 @@ export class InfoPage implements OnInit {
     private post: PostService,
     private storage: Storage,
     private asc: ActionSheetController,
-    private firebase: Firebase,
-    private user: UserService
+    private firebase: Firebase
   ) {}
 
   async ngOnInit() {
@@ -122,7 +109,5 @@ export class InfoPage implements OnInit {
       ]
     });
     await actionSheet.present();
-    Object.assign(this.user_info, await this.user.getSelf());
-    await this.storage.set(`user_local`, this.user_info);
   }
 }
