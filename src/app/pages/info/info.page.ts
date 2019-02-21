@@ -5,6 +5,7 @@ import { IPostFull } from 'src/app/providers/interfaces';
 import { PostService } from 'src/app/providers/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Storage } from '@ionic/storage';
+import { UserService } from 'src/app/providers/user.service';
 
 @Component({
   selector: 'app-info',
@@ -24,6 +25,7 @@ export class InfoPage implements OnInit {
     private router: Router,
     private loadingController: LoadingController,
     private post: PostService,
+    private user: UserService,
     private storage: Storage,
     private asc: ActionSheetController,
     private firebase: Firebase
@@ -63,42 +65,37 @@ export class InfoPage implements OnInit {
       buttons: [
         {
           text: 'Буду читать',
-          handler: () => {
-            this.post.addToList(this.id, 'willread').catch((e) => {
-              console.log(e);
-            });
+          handler: async (): Promise<any> => {
+            await this.post.addToList(this.id, 'willread');
+            await this.storage.set('user_local', await this.user.getSelf());
           }
         },
         {
           text: 'Читаю',
-          handler: () => {
-            this.post.addToList(this.id, 'inprogress').catch((e) => {
-              console.log(e);
-            });
+          handler: async (): Promise<any> => {
+            await this.post.addToList(this.id, 'inprogress');
+            await this.storage.set('user_local', await this.user.getSelf());
           }
         },
         {
           text: 'Прочитано',
-          handler: () => {
-            this.post.addToList(this.id, 'readed').catch((e) => {
-              console.log(e);
-            });
+          handler: async (): Promise<any> => {
+            await this.post.addToList(this.id, 'readed');
+            await this.storage.set('user_local', await this.user.getSelf());
           }
         },
         {
           text: 'Любимое',
-          handler: () => {
-            this.post.addToList(this.id, 'favorite').catch((e) => {
-              console.log(e);
-            });
+          handler: async (): Promise<any> => {
+            await this.post.addToList(this.id, 'favorite');
+            await this.storage.set('user_local', await this.user.getSelf());
           }
         },
         {
           text: 'Брошено',
-          handler: () => {
-            this.post.addToList(this.id, 'thrown').catch((e) => {
-              console.log(e);
-            });
+          handler: async (): Promise<any> => {
+            await this.post.addToList(this.id, 'thrown');
+            await this.storage.set('user_local', await this.user.getSelf());
           }
         },
         {
