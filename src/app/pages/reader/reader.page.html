@@ -17,9 +17,6 @@
     align-items-center
     [options]="slideOpts"
   >
-    <ion-slide>
-      Глава: {{ chapter }}
-    </ion-slide>
     <ion-slide class="swiper-zoom-container" *ngFor="let img of episode">
       <img *ngIf="preload" src="{{ img }}">
       <ion-img *ngIf="!preload" src="{{ img }}"></ion-img>
