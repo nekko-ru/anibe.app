@@ -23,4 +23,10 @@ Sorry, but at the moment the application is being developed in Russian language.
 
 ## Screenshots
 
-In progress
+| Search page  | Favorite  | Profile | User settings  |
+| - | - | - | - |
+| ![](https://i.imgur.com/ZrhpFFu.png)  | ![](https://i.imgur.com/KdDSQE7.png)  | ![](https://i.imgur.com/7vW1x8U.png) |  ![](https://i.imgur.com/Ss9yiP0.png)  |
+
+| Manga info  | Reader  | General settings |
+| - | - | - |
+| ![](https://i.imgur.com/YaF9PLK.png)  | ![](https://i.imgur.com/h2WJ2n9.png)  | ![](https://i.imgur.com/FCHVEbI.png) |
