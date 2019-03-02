@@ -14,6 +14,7 @@ const routes: Routes = [
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
   { path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' },
   { path: 'comments/:id', loadChildren: './pages/comments/comments.module#CommentsPageModule', canActivate: [LoginGuard] },
+  { path: 'user/:id', loadChildren: './pages/user/user.module#UserPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

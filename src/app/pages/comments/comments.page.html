@@ -10,7 +10,7 @@
 
     <ion-item-sliding *ngFor="let item of comments" #myList>
       <ion-item (click)="reply(item.user.name)">
-        <ion-avatar slot="start">
+        <ion-avatar slot="start" (click)="openUser(item.user.id)">
           <img src="{{ item.user.picture }}">
         </ion-avatar>
         <ion-label text-wrap>
