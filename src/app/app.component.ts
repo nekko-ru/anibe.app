@@ -37,6 +37,8 @@ export class AppComponent {
           const toast = await this.toastController.create({
             message: data.message,
             showCloseButton: true,
+            duration: 15000,
+            position: 'top',
             closeButtonText: 'Перейти'
           });
           toast.present();
