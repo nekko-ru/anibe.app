@@ -117,10 +117,10 @@ export class PostService {
    * Получение всех коментов
    * @param {string} id айдишник поста
    */
-  public async getComments(id: string): Promise<IComment[]> {
+  public async getComments(id: string, page: number = 1): Promise<IComment[]> {
     this.token = await this.storage.get('token') || '';
 
-    const res = await this.api.get(`/comments/${id}`, {
+    const res = await this.api.get(`/comments/${id}?page=${page}`, {
       'Authorization': 'Bearer ' + this.token
     });
 
