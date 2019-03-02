@@ -130,10 +130,8 @@ export class PostService {
   public async deleteComment(id: string): Promise<any> {
     this.token = await this.storage.get('token') || '';
 
-    const res = await this.api.delete(`/comments/${id}`, {
+    await this.api.delete(`/comments/${id}`, {
       'Authorization': 'Bearer ' + this.token
     });
-
-    return JSON.parse(res.data);
   }
 }
