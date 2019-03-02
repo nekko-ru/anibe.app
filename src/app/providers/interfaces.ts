@@ -40,6 +40,7 @@ export interface RequestParam {
 
 export interface IComment {
   id: string;
+  body: string;
   user: {
     id: string;
     name: string;

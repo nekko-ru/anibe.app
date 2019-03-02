@@ -8,7 +8,7 @@ import { ToastController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class PostService {
- /**
+  /**
    * Экземпляр класса для работы с апи через небольшую обертку
    */
   private api: API;

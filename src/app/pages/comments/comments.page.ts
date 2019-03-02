@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { ToastController } from '@ionic/angular';
+import { ReportService } from 'src/app/providers/report.service';
 
 @Component({
   selector: 'app-comments',
@@ -24,6 +25,7 @@ export class CommentsPage implements OnInit {
   @ViewChild('myList') private slidingList: any;
 
   constructor(
+    private rep: ReportService,
     private post: PostService,
     private route: ActivatedRoute,
     private router: Router,
@@ -42,6 +44,9 @@ export class CommentsPage implements OnInit {
   }
 
   public async createComment() {
+    if (!this.body) {
+      return;
+    }
     // отправляем через апи новый комент и результат записываем в начало массива
     this.comments.unshift(await this.post.createComment(this.id, this.body));
     // обнуляем форму
@@ -91,10 +96,28 @@ export class CommentsPage implements OnInit {
   }
 
   public async report(item: IComment) {
-    (await this.toast.create({
-      message: 'ToDo this',
-      duration: 5000
-    })).present();
+    try {
+      await this.rep.send({
+        body: 'comment',
+        post_id: this.id,
+        user_id: item.user.id,
+        authod_id: this.local_user.id
+      });
+
+      (await this.toast.create({
+        message: 'Спасибо за репорт!',
+        duration: 5000
+      })).present();
+    } catch (e) {
+      // логируем в консоль браузера
+      console.error(e);
+      // логируем в фаербейс
+      await this.firebase.logError(e);
+      (await this.toast.create({
+        message: 'Ошибка при отправке, попробуйте чуть позже',
+        duration: 5000
+      })).present();
+    }
   }
 
   private async load() {
@@ -102,6 +125,10 @@ export class CommentsPage implements OnInit {
     this.info = await this.post.get(this.id);
 
     this.local_user = await this.storage.get('user_local');
+  }
+
+  public openUser(id: string): void {
+    this.router.navigateByUrl(`/user/${id}`);
   }
 
   public async ionViewWillLeave() {
