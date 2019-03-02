@@ -60,6 +60,10 @@ export class InfoPage implements OnInit {
     this.router.navigateByUrl(`/reader/${this.id}`);
   }
 
+  public async Comments() {
+    this.router.navigateByUrl(`/comments/${this.id}`);
+  }
+
   public async showMore() {
     const actionSheet = await this.asc.create({
       buttons: [

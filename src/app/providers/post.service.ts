@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { API } from './api.service';
-import { IPostFull, RequestParam, IPost } from './interfaces';
+import { IPostFull, RequestParam, IPost, IComment } from './interfaces';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 
@@ -94,5 +94,46 @@ export class PostService {
       duration: 2000
     })).present();
     return JSON.parse(res.data).rows;
+  }
+
+  /**
+   * Добавляет новый комент
+   * @param post_id айди к которому нужно добавить комент
+   * @param body тело комента
+   */
+  public async createComment(post_id: string, body: string) {
+    this.token = await this.storage.get('token') || '';
+
+    const res = await this.api.post('/comments', {
+      body,
+      post_id
+    }, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data);
+  }
+
+  /**
+   * Получение всех коментов
+   * @param {string} id айдишник поста
+   */
+  public async getComments(id: string): Promise<IComment[]> {
+    this.token = await this.storage.get('token') || '';
+
+    const res = await this.api.get(`/comments/${id}`, {
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return JSON.parse(res.data);
+  }
+
+  public async deleteComment(id: string): Promise<any> {
+    this.token = await this.storage.get('token') || '';
+
+    const res = await this.api.delete(`/comments/${id}`, {
+      'Authorization': 'Bearer ' + this.token
+    });
+
+    return JSON.parse(res.data);
   }
 }
