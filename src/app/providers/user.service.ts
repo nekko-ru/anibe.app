@@ -108,4 +108,23 @@ export class UserService {
     }, file);
     return JSON.parse(res.data);
   }
+
+  public async addFCM(token: string) {
+    await this.setToken();
+
+    const res = await this.api.post('/users/me/fcm', { token }, {
+      'Authorization': 'Bearer ' + this.token
+    });
+  }
+
+  public async updateFCM(newtoken: string, oldtoken: string) {
+    await this.setToken();
+
+    const res = await this.api.put('/users/me/fcm', {
+      new: newtoken,
+      old: oldtoken
+    }, {
+      'Authorization': 'Bearer ' + this.token
+    });
+  }
 }

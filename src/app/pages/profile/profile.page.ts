@@ -32,11 +32,13 @@ export class ProfilePage implements OnInit {
     private router: Router,
     private popoverController: PopoverController,
     private modalController: ModalController,
+    private toast: ToastController,
     private firebase: Firebase
   ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     // this.load();
+    this.FCMToken();
   }
 
   public async ionViewWillEnter() {
@@ -89,5 +91,24 @@ export class ProfilePage implements OnInit {
       await this.storage.remove('token');
       this.router.navigateByUrl('/');
     }
+  }
+
+  private async FCMToken () {
+    let token = await this.storage.get('user_local_fcm');
+    if (!token) {
+      token = await this.firebase.getToken();
+      if (!token) {
+        // its browser
+        return;
+      }
+      await this.user.addFCM(token);
+      await this.storage.set('user_local_fcm', token);
+    }
+
+    this.firebase.onTokenRefresh()
+      .subscribe(async (t: string) => {
+        await this.storage.set('user_local_fcm', t);
+        await this.user.updateFCM(t, token);
+      });
   }
 }
