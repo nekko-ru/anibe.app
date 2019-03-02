@@ -1,27 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Comments</ion-title>
+    <ion-title>{{ info.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullpage>
 
   <ion-list>
-    <ion-item>
+
+    <ion-item *ngFor="let item of comments">
       <ion-avatar slot="start">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
+        <img src="{{ item.user.picture }}">
       </ion-avatar>
       <ion-label text-wrap>
-        <h3>H3 Title Text</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        <h3>{{ item.user.name }}</h3>
+        <p>{{ item.body }}</p>
       </ion-label>
     </ion-item>
+
   </ion-list>
 
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <ion-input clearInput placeholder="..."></ion-input>
+    <!-- <ion-input clearInput></ion-input> -->
+    <ion-item lines="none">
+      <ion-textarea
+        [(ngModel)]="body" 
+        clearOnEdit="true"
+        placeholder="Комментарий ..."
+      ></ion-textarea>
+
+      <ion-button color="primary" size="default" fill="outline" (click)="createComment()">
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
+    </ion-item>
+    
   </ion-toolbar>
 </ion-footer>

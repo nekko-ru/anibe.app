@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
   { path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' },
-  { path: 'comments', loadChildren: './pages/comments/comments.module#CommentsPageModule' },
+  { path: 'comments/:id', loadChildren: './pages/comments/comments.module#CommentsPageModule' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

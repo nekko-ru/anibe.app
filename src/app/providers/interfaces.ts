@@ -37,3 +37,12 @@ export interface RequestParam {
   q?: string;
   custom?: string;
 }
+
+export interface IComment {
+  id: string;
+  user: {
+    id: string;
+    name: string;
+    role: string;
+  };
+}
