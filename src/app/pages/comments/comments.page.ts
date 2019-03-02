@@ -23,7 +23,7 @@ export class CommentsPage implements OnInit {
 
   async ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.comments = await this.post.getComments(this.id);
+    this.comments = (await this.post.getComments(this.id)).reverse();
     this.info = await this.post.get(this.id);
   }
 
