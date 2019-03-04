@@ -21,8 +21,8 @@ export class ReaderPage implements OnInit {
 
   public preload = false;
   public slideOpts: any = {
-    // preloadImages: true,
-    // updateOnImagesReady: true
+    preloadImages: true,
+    updateOnImagesReady: true
   };
 
   private spiner: any;
