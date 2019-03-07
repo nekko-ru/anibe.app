@@ -44,13 +44,8 @@ export class NewsPage implements OnInit {
 
   private async load() {
     try {
-      const temp = await this.storage.get(`news_${this.id}`);
-      if (temp) {
-        this.info = temp;
-      } else {
-        this.info = await this.news.get(this.id);
-        await this.storage.set(`news_${this.id}`, this.info);
-      }
+      this.info = await this.news.get(this.id);
+      await this.storage.set(`news_${this.id}`, this.info);
     } catch (e) {
       // логируем в консоль браузера
       console.error(e);
