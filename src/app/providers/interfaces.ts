@@ -47,3 +47,39 @@ export interface IComment {
     role: string;
   };
 }
+
+export interface INewsPost {
+  id: string;
+  /**
+   * @description Заголовок новости
+   */
+  title: string;
+  /**
+   * @description Rich text содержимое новости (html)
+   */
+  body: string;
+  /**
+   * @description id автора новости
+   */
+  author_id: string;
+  /**
+   * @description ссылка на картинку которая будет на превью
+   */
+  preview: string;
+  /**
+   * @description ссылка на картинку которая будет на заднем фоне при отпрытии новости
+   */
+  background: string;
+  /**
+   * @description Тип новости, а точнее категория (Приложение, новая манга и т.п.)
+   */
+  type: string;
+  /**
+   * @description Дата и время создания новости
+   */
+  createdAt?: string;
+  /**
+   * @description Дата и время полсденего редактирования
+   */
+  updatedAt?: string;
+}

@@ -1,0 +1,16 @@
+<ion-content fullpage *ngIf="info">
+
+  <ion-card>
+    <ion-img *ngIf="info.background" [src]="info.background"></ion-img>
+    <ion-img *ngIf="!info.background" [src]="info.preview"></ion-img>
+
+    <ion-card-header>
+        <ion-card-subtitle>{{ info.type }}</ion-card-subtitle>
+        <ion-card-title>{{ info.title }}</ion-card-title>
+      </ion-card-header>
+
+    <ion-card-content [innerHTML]="info.body">
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

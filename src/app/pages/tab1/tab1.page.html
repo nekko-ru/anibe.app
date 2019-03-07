@@ -45,29 +45,39 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card>
+
+  <ion-card *ngFor="let item of lastnews" (click)="openNews(item.id)">
+    <ion-img src="{{ item.preview }}"></ion-img>
+
+    <ion-item lines="none">
+      <ion-label>{{ item.title }}</ion-label>
+      <!-- <ion-button fill="outline" slot="end">Открыть</ion-button> -->
+    </ion-item>
+
+    <ion-card-content>
+      <p>{{ item.annotation }}</p>
+    </ion-card-content>
+  </ion-card>
+  <!-- <ion-card *ngIf="lastnews">
     <ion-card-header>
       Новости
     </ion-card-header>
     <ion-card-content>
-      <ion-list *ngIf="news">
+      <ion-list>
 
         <ion-item 
-          *ngFor="let item of news"
+          *ngFor="let item of lastnews"
           (click)="openPost(item.id)"
           lines="none"
         >
           <ion-thumbnail slot="start" class="cover">
-            <img src="{{ item.cover }}">
+            <img [src]="item.preview">
           </ion-thumbnail>
-          <ion-label>{{ item.name }}</ion-label>
+          <ion-label>{{ item.title }}</ion-label>
         </ion-item>
   
       </ion-list>
 
-      <div *ngIf="!news">
-        Пусто!
-      </div>
     </ion-card-content>
   </ion-card>
 
@@ -79,6 +89,6 @@
     <ion-card-content>
       <p>{{ item.annotation }}</p>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
 </ion-content>

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
-import { IPost } from 'src/app/providers/interfaces';
+import { IPost, INewsPost } from 'src/app/providers/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { ConfigProvider } from '../../providers/config.provider';
 import { ToastController } from '@ionic/angular';
+import { NewsService } from 'src/app/providers/news.service';
 
 @Component({
   selector: 'app-tab1',
@@ -18,9 +19,9 @@ export class Tab1Page implements OnInit {
   public lastupdates: IPost[];
 
   /**
-   * Список новостей на главной странице
+   * Содержит послдедние новости
    */
-  public news: any[];
+  public lastnews: INewsPost[];
 
   /**
    * Список слайдов которые необходимо будет показать
@@ -41,6 +42,7 @@ export class Tab1Page implements OnInit {
   constructor(
     private router: Router,
     private post: PostService,
+    private news: NewsService,
     private toast: ToastController,
     private firebase: Firebase,
     private remote_config: ConfigProvider
@@ -50,8 +52,8 @@ export class Tab1Page implements OnInit {
    * Открывает выбраный пост
    * @param id uuid поста
    */
-  public openPost(id: string): void {
-    this.router.navigateByUrl(`/info/${id}`);
+  public async openPost(id: string): Promise<any> {
+    await this.router.navigateByUrl(`/info/${id}`);
   }
 
   public async openPage(item: { img: string, inapp_page: boolean, url: string }) {
@@ -71,6 +73,7 @@ export class Tab1Page implements OnInit {
   async ngOnInit() {
     try {
       this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
+      this.lastnews = await this.news.getAll();
     } catch (e) {
       if (e.error === 'advanced-http: please check browser console for error messages') {
         (await this.toast.create({
@@ -80,5 +83,9 @@ export class Tab1Page implements OnInit {
       }
     }
     await this.firebase.setScreenName('home');
+  }
+
+  public async openNews(id: string): Promise<any> {
+    await this.router.navigateByUrl(`/news/${id}`);
   }
 }
