@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from './api.service';
 import { Storage } from '@ionic/storage';
+import { INotif } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -126,5 +127,14 @@ export class UserService {
     }, {
       'Authorization': 'Bearer ' + this.token
     });
+  }
+
+  public async getNotif({ page, limit } = { page: 1, limit: 25 }): Promise<INotif[]> {
+    await this.setToken();
+
+    const res = await this.api.get(`/notifications?page=${page}&limit=${limit}`, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data).rows;
   }
 }

@@ -83,3 +83,15 @@ export interface INewsPost {
    */
   updatedAt?: string;
 }
+
+export interface INotif {
+  id: string;
+  title: string;
+  body: string;
+  type: string;
+  picture: string;
+  url: string;
+  user: string;
+  createdAt: string;
+  updatedAt: string;
+}

@@ -38,6 +38,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'notifications',
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/notifications/notifications.module#NotificationsPageModule'
+          }
+        ],
+        canActivate: [LoginGuard]
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

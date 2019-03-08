@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Центр уведомлений</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullpage>
+  <ion-list>
+    
+    <ion-item
+      *ngFor="let item of notif" 
+      (click)="openUrl(item.url)"
+    >
+      
+      <ion-avatar slot="start" *ngIf="item.type === 'comment'">
+        <img [src]="item.picture">
+      </ion-avatar>
+      <ion-thumbnail slot="start" *ngIf="item.type === 'manga'">
+        <img [src]="item.picture">
+      </ion-thumbnail>
+
+      <ion-label *ngIf="item.type === 'comment'">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.updatedAt | date: 'dd.MM.yy, HH:mm' }}</p>
+        <p text-wrap>{{ item.body }}</p>
+      </ion-label>
+      <ion-label *ngIf="item.type === 'manga'">
+        <h2>{{ item.title }}</h2>
+        <p>{{ item.body }}</p>
+      </ion-label>
+      
+      <!-- <ion-button
+        fill="outline"
+        slot="end"
+        *ngIf="item.type === 'comment'"
+      >
+        Перейти
+      </ion-button> -->
+
+    </ion-item>
+
+  </ion-list>
+</ion-content>
