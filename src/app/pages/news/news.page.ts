@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { INewsPost } from 'src/app/providers/interfaces';
@@ -21,6 +21,7 @@ export class NewsPage implements OnInit {
   constructor(
     private news: NewsService,
     private route: ActivatedRoute,
+    private router: Router,
     private firebase: Firebase,
     private storage: Storage,
     private loadingController: LoadingController,
@@ -40,6 +41,10 @@ export class NewsPage implements OnInit {
 
     await this.firebase.setScreenName('news');
     await this.firebase.logEvent('select_content', { item_id: this.id, content_type: 'news' });
+  }
+
+  public async Comments() {
+    this.router.navigateByUrl(`/comments/${this.id}`);
   }
 
   private async load() {

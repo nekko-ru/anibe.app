@@ -21,7 +21,7 @@
 
       <ion-button (click)="Comments()" expand="full" fill="outline">Комментарии</ion-button>
 
-      <p>{{ info.description }}</p>
+      <p [innerHTML]="info.description"></p>
     </ion-card-content>
   </ion-card>
 

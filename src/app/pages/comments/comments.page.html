@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{ info.name }}</ion-title>
+    <ion-title>Комментарии</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +14,12 @@
           <img src="{{ item.user.picture }}">
         </ion-avatar>
         <ion-label text-wrap>
-          <h3>{{ item.user.name }}</h3>
+          <h3>
+            {{ item.user.name }}
+            <ion-text color="danger" *ngIf="item.user.role !== 'user'">
+              {{ item.user.role }}
+            </ion-text>
+          </h3>
           <p>{{ item.body }}</p>
         </ion-label>
       </ion-item>

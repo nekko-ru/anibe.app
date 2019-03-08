@@ -16,7 +16,6 @@ export class CommentsPage implements OnInit {
 
   private id: string;
   public comments: IComment[];
-  public info: IPost | any = { name: '' };
   public body: string;
   public local_user: any;
 
@@ -122,7 +121,6 @@ export class CommentsPage implements OnInit {
 
   private async load() {
     this.comments = await this.post.getComments(this.id);
-    this.info = await this.post.get(this.id);
 
     this.local_user = await this.storage.get('user_local');
   }
@@ -132,6 +130,11 @@ export class CommentsPage implements OnInit {
   }
 
   public async ionViewWillLeave() {
-    await this.slidingList.closeOpened();
+    // заглушка, иногда пользователь не использует у коментов доп кнопки
+    try {
+      await this.slidingList.closeOpened();
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
