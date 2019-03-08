@@ -34,17 +34,25 @@ export class AppComponent {
 
       this.firebase.onNotificationOpen()
         .subscribe(async data => {
+          const counter: any = document.getElementById('notif-count');
+          counter.innerHTML = Number(counter.innerHTML) + 1;
+
           const toast = await this.toastController.create({
             message: data.body,
             showCloseButton: true,
             duration: 5000,
             position: 'top',
-            closeButtonText: 'Перейти'
+            closeButtonText: 'Открыть'
           });
           toast.present();
 
-          await toast.onDidDismiss();
-          await this.router.navigateByUrl(data.url);
+          toast.onDidDismiss().then(async (value) => {
+            console.log(value);
+
+            if (value.role === 'cancel') {
+              await this.router.navigateByUrl(data.url);
+            }
+          });
         });
     });
   }

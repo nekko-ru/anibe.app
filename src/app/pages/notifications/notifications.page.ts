@@ -30,6 +30,9 @@ export class NotificationsPage implements OnInit {
 
   protected async ionViewDidEnter() {
     await this.load();
+
+    const counter: any = document.getElementById('notif-count');
+    counter.innerHTML = '';
   }
 
   private async load() {
