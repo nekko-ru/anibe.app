@@ -35,9 +35,9 @@ export class AppComponent {
       this.firebase.onNotificationOpen()
         .subscribe(async data => {
           const toast = await this.toastController.create({
-            message: data.message,
+            message: data.body,
             showCloseButton: true,
-            duration: 15000,
+            duration: 5000,
             position: 'top',
             closeButtonText: 'Перейти'
           });
