@@ -149,4 +149,16 @@ export class UserService {
     });
     return JSON.parse(res.data).rows;
   }
+
+  /**
+   * Список рекомендаций (более крутой и точный, но более затратный по ресурсам сервера)
+   */
+  public async getRecommendations(): Promise<IPost[]> {
+    await this.setToken();
+
+    const res = await this.api.get('/users/me/recommendations', {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data).rows;
+  }
 }
