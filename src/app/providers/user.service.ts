@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from './api.service';
 import { Storage } from '@ionic/storage';
-import { INotif } from './interfaces';
+import { INotif, IPost } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -133,6 +133,18 @@ export class UserService {
     await this.setToken();
 
     const res = await this.api.get(`/notifications?page=${page}&limit=${limit}`, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data).rows;
+  }
+
+  /**
+   * Список рекомендаций
+   */
+  public async getOffer(): Promise<IPost[]> {
+    await this.setToken();
+
+    const res = await this.api.get('/users/me/offer', {
       'Authorization': 'Bearer ' + this.token
     });
     return JSON.parse(res.data).rows;

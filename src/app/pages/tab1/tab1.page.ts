@@ -6,6 +6,8 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { ConfigProvider } from '../../providers/config.provider';
 import { ToastController } from '@ionic/angular';
 import { NewsService } from 'src/app/providers/news.service';
+import { Storage } from '@ionic/storage';
+import { UserService } from 'src/app/providers/user.service';
 
 @Component({
   selector: 'app-tab1',
@@ -24,6 +26,11 @@ export class Tab1Page implements OnInit {
   public lastnews: INewsPost[];
 
   /**
+   * Список рекомендаций для пользователя (если он вошел в аккаунт)
+   */
+  public recommendations: IPost[];
+
+  /**
    * Список слайдов которые необходимо будет показать
    */
   public slider_data: any;
@@ -35,6 +42,19 @@ export class Tab1Page implements OnInit {
   public enableSlider: string = 'false';
 
   /**
+   * Параметры для слайдера на странице
+   */
+  public slideOpts: any = {
+    slidesPerView: 1.5,
+    spaceBetween: 5,
+    centeredSlides: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+  };
+
+  /**
    * Конструктор класса
    * @param router роутер
    * @param IShortPostInfo сервис
@@ -43,9 +63,10 @@ export class Tab1Page implements OnInit {
     private router: Router,
     private post: PostService,
     private news: NewsService,
+    private user: UserService,
     private toast: ToastController,
     private firebase: Firebase,
-    private remote_config: ConfigProvider
+    private storage: Storage
   ) {}
 
     /**
@@ -65,11 +86,10 @@ export class Tab1Page implements OnInit {
   }
 
   protected async ionViewWillEnter() {
-    this.slider_data = JSON.parse(await this.remote_config.getValue('home_slider_data'));
-    this.enableSlider = await this.remote_config.getValue('home_slider_enable');
+    // this.slider_data = JSON.parse(await this.remote_config.getValue('home_slider_data'));
+    // this.enableSlider = await this.remote_config.getValue('home_slider_enable');
   }
 
-  // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
     try {
       this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
@@ -82,6 +102,12 @@ export class Tab1Page implements OnInit {
         })).present();
       }
     }
+    if (this.storage.get('token')) {
+      this.recommendations = await this.user.getOffer();
+    }
+  }
+
+  protected async ionViewDidEnter() {
     await this.firebase.setScreenName('home');
   }
 
