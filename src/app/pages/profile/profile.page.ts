@@ -41,9 +41,9 @@ export class ProfilePage implements OnInit {
     this.FCMToken();
   }
 
-  public async ionViewWillEnter() {
+  public async ionViewDidEnter() {
     await this.firebase.setScreenName('profile');
-    this.load();
+    await this.load();
   }
 
   public async popover(ev: any) {

@@ -39,9 +39,14 @@ export class SearchResultsPage implements OnInit {
     await modal.present();
     const result = await modal.onDidDismiss();
 
+    if (!result.data.changed) {
+      // отменяем запрос, только если предыдущий выбор жанров был таким же
+      return;
+    }
+
     this.activegenres = result.data.activegenres;
     this.result = [];
-    this.page = 0;
+    this.page = 1;
 
     if (this.query !== '') {
       await this.load(this.query);
@@ -52,10 +57,12 @@ export class SearchResultsPage implements OnInit {
     console.log(result.data);
   }
 
-  async ngOnInit() {
-    this.load();
+  ngOnInit() {
+  }
 
+  protected async ionViewDidEnter () {
     await this.firebase.setScreenName('search');
+    await this.load();
   }
 
   /**
@@ -67,8 +74,6 @@ export class SearchResultsPage implements OnInit {
   }
 
   private async load(query?: string) {
-    // тк первую страницу только что загрузили
-    this.page += 1;
 
     const temp = await this.post.getAll(query || this.query, {
       limit: '25',
@@ -79,11 +84,15 @@ export class SearchResultsPage implements OnInit {
     if (temp.length === 0 && this.page === 1) {
       this.result = [];
       this.page = 0;
+      return;
     } else {
       temp.forEach(i => {
         this.result.push(i);
       });
     }
+
+    // инкрементируем страницу
+    this.page += 1;
   }
 
   /**
