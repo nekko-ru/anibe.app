@@ -8,7 +8,7 @@
 
   </ion-slides> -->
 
-  <ion-slides [options]="slideOpts" *ngIf="recommendations">
+  <ion-slides [options]="slideOpts" *ngIf="recommendations.length >= 3">
       <ion-slide *ngFor="let item of recommendations">
   
         <ion-card (click)="openPost(item.id)">

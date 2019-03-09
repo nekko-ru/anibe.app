@@ -46,7 +46,7 @@ export class SearchResultsPage implements OnInit {
 
     this.activegenres = result.data.activegenres;
     this.result = [];
-    this.page = 1;
+    this.page = 0;
 
     if (this.query !== '') {
       await this.load(this.query);
@@ -74,7 +74,8 @@ export class SearchResultsPage implements OnInit {
   }
 
   private async load(query?: string) {
-
+    // инкрементируем страницу
+    this.page += 1;
     const temp = await this.post.getAll(query || this.query, {
       limit: '25',
       page: this.page,
@@ -90,9 +91,6 @@ export class SearchResultsPage implements OnInit {
         this.result.push(i);
       });
     }
-
-    // инкрементируем страницу
-    this.page += 1;
   }
 
   /**
