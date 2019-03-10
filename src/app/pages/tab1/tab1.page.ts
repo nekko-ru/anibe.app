@@ -103,7 +103,7 @@ export class Tab1Page implements OnInit {
       }
     }
     if (this.storage.get('token')) {
-      this.recommendations = await this.user.getRecommendations();
+      this.recommendations = await this.user.getOffer();
     }
   }
 
