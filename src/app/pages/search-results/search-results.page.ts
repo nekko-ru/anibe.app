@@ -65,7 +65,14 @@ export class SearchResultsPage implements OnInit {
 
   protected async ionViewDidEnter () {
     await this.firebase.setScreenName('search');
-    this.activegenres = await this.storage.get('search_genres');
+
+    const genres = await this.storage.get('search_genres');
+    if (!genres) {
+      this.activegenres = [];
+    } else {
+      this.activegenres = genres.filter((v) => v.active === true).map((v) => v.name);
+    }
+
     await this.load();
   }
 
