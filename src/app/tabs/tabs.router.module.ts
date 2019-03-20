@@ -3,7 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
 import { LoginGuard } from '../guards/login.guard';
-
+import { Tab1Page } from '../pages/tab1/tab1.page';
+import { ProfilePage } from '../pages/profile/profile.page';
+import { SearchResultsPage } from '../pages/search-results/search-results.page';
+import { NotificationsPage } from '../pages/notifications/notifications.page';
 const routes: Routes = [
   {
     path: 'tabs',
@@ -14,7 +17,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../pages/tab1/tab1.module#Tab1PageModule'
+            // loadChildren: '../pages/tab1/tab1.module#Tab1PageModule',
+            component: Tab1Page
           }
         ]
       },
@@ -23,7 +27,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../pages/profile/profile.module#ProfilePageModule'
+            // loadChildren: '../pages/profile/profile.module#ProfilePageModule'
+            component: ProfilePage
           }
         ],
         canActivate: [LoginGuard]
@@ -33,7 +38,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../pages/search-results/search-results.module#SearchResultsPageModule'
+            // loadChildren: '../pages/search-results/search-results.module#SearchResultsPageModule'
+            component: SearchResultsPage
           }
         ]
       },
@@ -42,7 +48,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            loadChildren: '../pages/notifications/notifications.module#NotificationsPageModule'
+            // loadChildren: '../pages/notifications/notifications.module#NotificationsPageModule'
+            component: NotificationsPage
           }
         ],
         canActivate: [LoginGuard]

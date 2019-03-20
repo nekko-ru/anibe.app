@@ -28,7 +28,7 @@ export class Tab1Page implements OnInit {
   /**
    * Список рекомендаций для пользователя (если он вошел в аккаунт)
    */
-  public recommendations: IPost[];
+  public recommendations: IPost[] = [];
 
   /**
    * Список слайдов которые необходимо будет показать

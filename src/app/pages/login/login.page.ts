@@ -5,7 +5,6 @@ import { UserService } from 'src/app/providers/user.service';
 import { ToastController } from '@ionic/angular';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { ConfigProvider } from 'src/app/providers/config.provider';
-import { config } from 'src/app/providers/config';
 
 @Component({
   selector: 'app-login',

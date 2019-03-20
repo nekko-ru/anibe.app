@@ -7,6 +7,10 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
+import { Tab1Page } from '../pages/tab1/tab1.page';
+import { SearchResultsPage } from '../pages/search-results/search-results.page';
+import { NotificationsPage } from '../pages/notifications/notifications.page';
+import { ProfilePage } from '../pages/profile/profile.page';
 
 @NgModule({
   imports: [
@@ -15,6 +19,12 @@ import { TabsPage } from './tabs.page';
     FormsModule,
     TabsPageRoutingModule
   ],
-  declarations: [TabsPage]
+  declarations: [
+    TabsPage,
+    Tab1Page,
+    SearchResultsPage,
+    NotificationsPage,
+    ProfilePage
+  ]
 })
 export class TabsPageModule {}

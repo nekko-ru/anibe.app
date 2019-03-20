@@ -1,5 +1,4 @@
 import { HTTP } from '@ionic-native/http/ngx';
-import { config } from './config';
 
 export interface AxiosSettings {
   auth?: {
@@ -33,7 +32,7 @@ export class API {
    * @description содержит ссылку на api
    * @type {string}
    */
-  private baseURL: string = config.host_api;
+  private baseURL = 'https://api.anibe.ru';
   /**
    * @private
    * @description тип содержимого ответа и запроса
