@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
 import { IPost } from 'src/app/providers/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-search-results',
@@ -25,6 +26,7 @@ export class SearchResultsPage implements OnInit {
   constructor(
     private modalController: ModalController,
     private router: Router,
+    private storage: Storage,
     private post: PostService,
     private firebase: Firebase
   ) {}
@@ -49,6 +51,7 @@ export class SearchResultsPage implements OnInit {
     this.page = 0;
 
     if (this.query !== '') {
+      this.result = [];
       await this.load(this.query);
     } else {
       await this.load(null);
@@ -62,6 +65,7 @@ export class SearchResultsPage implements OnInit {
 
   protected async ionViewDidEnter () {
     await this.firebase.setScreenName('search');
+    this.activegenres = await this.storage.get('search_genres');
     await this.load();
   }
 
