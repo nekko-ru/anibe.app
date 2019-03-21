@@ -7,6 +7,7 @@ import { SelectChapterPage } from '../select-chapter/select-chapter.page';
 import { IPostFull } from 'src/app/providers/interfaces';
 import { PostService } from 'src/app/providers/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-reader',
@@ -38,12 +39,19 @@ export class ReaderPage implements OnInit {
     private modalController: ModalController,
     private post: PostService,
     private toast: ToastController,
-    private firebase: Firebase
+    private firebase: Firebase,
+    private statusBar: StatusBar
   ) {
     this.episode = [];
   }
 
+  protected async ionViewDidLeave() {
+    await this.statusBar.show();
+  }
+
   async ngOnInit() {
+    await this.statusBar.hide();
+
     this.spiner = await this.loadingController.create({
       message: 'Загрузка...',
       duration: 5000
