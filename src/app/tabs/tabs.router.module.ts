@@ -17,8 +17,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            // loadChildren: '../pages/tab1/tab1.module#Tab1PageModule',
-            component: Tab1Page
+            loadChildren: '../pages/tab1/tab1.module#Tab1PageModule',
+            // component: Tab1Page
           }
         ]
       },
@@ -27,8 +27,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            // loadChildren: '../pages/profile/profile.module#ProfilePageModule'
-            component: ProfilePage
+            loadChildren: '../pages/profile/profile.module#ProfilePageModule'
+            // component: ProfilePage
           }
         ],
         canActivate: [LoginGuard]
@@ -38,8 +38,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            // loadChildren: '../pages/search-results/search-results.module#SearchResultsPageModule'
-            component: SearchResultsPage
+            loadChildren: '../pages/search-results/search-results.module#SearchResultsPageModule'
+            // component: SearchResultsPage
           }
         ]
       },
@@ -48,8 +48,8 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            // loadChildren: '../pages/notifications/notifications.module#NotificationsPageModule'
-            component: NotificationsPage
+            loadChildren: '../pages/notifications/notifications.module#NotificationsPageModule'
+            // component: NotificationsPage
           }
         ],
         canActivate: [LoginGuard]

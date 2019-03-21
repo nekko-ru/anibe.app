@@ -5,13 +5,16 @@
 </ion-header>
 
 <ion-content fullpage>
+  <ion-refresher slot="fixed" (ionRefresh)="load($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Потяните вниз для обновления" refreshingSpinner="crescent"
+      refreshingText="Обновление...">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <ion-list>
-    
-    <ion-item
-      *ngFor="let item of notif" 
-      (click)="openUrl(item.url)"
-    >
-      
+
+    <ion-item *ngFor="let item of notif" (click)="openUrl(item.url)">
+
       <ion-avatar slot="start" *ngIf="item.type === 'comment'">
         <ion-img [src]="item.picture"></ion-img>
       </ion-avatar>
@@ -28,7 +31,7 @@
         <h2>{{ item.title }}</h2>
         <p>{{ item.body }}</p>
       </ion-label>
-      
+
       <!-- <ion-button
         fill="outline"
         slot="end"

@@ -90,7 +90,7 @@
     <allow-navigation href="http://172.27.0.1:8100" sessionid="ef47eca0" />
     <allow-navigation href="http://192.168.1.45:8100" sessionid="fe6b0f34" />
     <allow-navigation href="http://192.168.43.165:8100" sessionid="72b26593" />
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.0.104:8100" />
+    <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.1.4" />
-    <engine name="browser" spec="~5.0.4" />
 </widget>

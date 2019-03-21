@@ -21,7 +21,8 @@ export class NotificationsPage implements OnInit {
     private firebase: Firebase
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.load();
   }
 
   public async openUrl(url: string) {
@@ -29,13 +30,16 @@ export class NotificationsPage implements OnInit {
   }
 
   protected async ionViewDidEnter() {
-    await this.load();
+    // await this.load();
 
     const counter: any = document.getElementById('notif-count');
     counter.innerHTML = '';
   }
 
-  private async load() {
+  public async load(event?: any) {
     this.notif = await this.user.getNotif();
+    if (event) {
+      event.target.complete();
+    }
   }
 }

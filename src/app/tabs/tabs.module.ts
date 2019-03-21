@@ -7,11 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
-import { Tab1Page } from '../pages/tab1/tab1.page';
-import { SearchResultsPage } from '../pages/search-results/search-results.page';
-import { NotificationsPage } from '../pages/notifications/notifications.page';
-import { ProfilePage } from '../pages/profile/profile.page';
-
 @NgModule({
   imports: [
     IonicModule,
@@ -19,12 +14,6 @@ import { ProfilePage } from '../pages/profile/profile.page';
     FormsModule,
     TabsPageRoutingModule
   ],
-  declarations: [
-    TabsPage,
-    Tab1Page,
-    SearchResultsPage,
-    NotificationsPage,
-    ProfilePage
-  ]
+  declarations: [TabsPage]
 })
 export class TabsPageModule {}
