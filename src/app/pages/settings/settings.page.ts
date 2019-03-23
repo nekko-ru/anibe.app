@@ -16,6 +16,7 @@ export class SettingsPage implements OnInit {
   public toDay = new Date();
 
   public preload_img: boolean;
+  public enablefcm: boolean;
 
   constructor(
     private user: UserService,
@@ -29,6 +30,7 @@ export class SettingsPage implements OnInit {
     this.load();
 
     this.preload_img = (await this.storage.get('image_preload'));
+    this.enablefcm = (await this.storage.get('enablefcm')) || true;
   }
 
   public async pickImage() {
@@ -63,11 +65,13 @@ export class SettingsPage implements OnInit {
 
   public async saveChanges() {
     await this.storage.set('image_preload', this.preload_img);
+    await this.storage.set('enablefcm', this.enablefcm);
     try {
       this.info = await this.user.update({
         picture: this.info.picture,
         name: this.info.name,
-        desc: this.info.desc
+        desc: this.info.desc,
+        enablefcm: this.enablefcm
       });
       await this.storage.set('user_local', this.info);
 

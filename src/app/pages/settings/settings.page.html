@@ -81,18 +81,18 @@
         </ion-list-header>
         <ion-item>
           <ion-label>Включить уведомления</ion-label>
-          <ion-toggle checked></ion-toggle>
+          <ion-toggle [(ngModel)]="enablefcm"></ion-toggle>
         </ion-item>
         <ion-item>
             <ion-label>Предзагрузка при чтении</ion-label>
             <ion-toggle [(ngModel)]="preload_img"></ion-toggle>
         </ion-item>
-        <ion-item>
+        <!-- <ion-item>
             <ion-label text-wrap>
               Рекомендации на основе прочитаного
             </ion-label>
             <ion-toggle checked></ion-toggle>
-        </ion-item>
+        </ion-item> -->
       </ion-list>
 
     </ion-card-content>
