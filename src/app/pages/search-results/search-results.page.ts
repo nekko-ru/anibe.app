@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
 import { IPost } from 'src/app/providers/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-search-results',
@@ -20,133 +21,12 @@ export class SearchResultsPage implements OnInit {
   public result: IPost[] = [];
   private query = null;
   private page = 0;
-  private genres: { name: string, active: boolean } [] = [
-    {
-      name: 'Безумие',
-      active: false
-    }, {
-      name: 'Боевые искусства',
-      active: false
-    }, {
-      name: 'Вампиры',
-      active: false
-    }, {
-      name: 'Военное',
-      active: false
-    }, {
-      name: 'Гарем',
-      active: false
-    }, {
-      name: 'Гендерная интрига',
-      active: false
-    }, {
-      name: 'Детское',
-      active: false
-    }, {
-      name: 'Дзёсей',
-      active: false
-    }, {
-      name: 'Драма',
-      active: false
-    }, {
-      name: 'Игры',
-      active: false
-    }, {
-      name: 'Исторический',
-      active: false
-    }, {
-      name: 'Комедия',
-      active: false
-    }, {
-      name: 'Космос',
-      active: false
-    }, {
-      name: 'Магия',
-      active: false
-    }, {
-      name: 'Машины',
-      active: false
-    }, {
-      name: 'Меха',
-      active: false
-    }, {
-      name: 'Мистика',
-      active: false
-    }, {
-      name: 'Музыка',
-      active: false
-    }, {
-      name: 'Пародия',
-      active: false
-    }, {
-      name: 'Повседневность',
-      active: false
-    }, {
-      name: 'Приключения',
-      active: false
-    }, {
-      name: 'Психологическое',
-      active: false
-    }, {
-      name: 'Романтика',
-      active: false
-    }, {
-      name: 'Сверхъестественное',
-      active: false
-    }, {
-      name: 'Сёдзе',
-      active: false
-    }, {
-      name: 'Сёдзе Ай',
-      active: false
-    }, {
-      name: 'Сёнен',
-      active: false
-    }, {
-      name: 'Сейнен',
-      active: false
-    }, {
-      name: 'Сёнен Ай',
-      active: false
-    }, {
-      name: 'Спорт',
-      active: false
-    }, {
-      name: 'Супер сила',
-      active: false
-    }, {
-      name: 'Триллер',
-      active: false
-    }, {
-      name: 'Ужасы',
-      active: false
-    }, {
-      name: 'Фантастика',
-      active: false
-    }, {
-      name: 'Хентай',
-      active: false
-    }, {
-      name: 'Школа',
-      active: false
-    }, {
-      name: 'Экшен',
-      active: false
-    }, {
-      name: 'Этти',
-      active: false
-    }, {
-      name: 'Юри',
-      active: false
-    }, {
-      name: 'Яой',
-      active: false
-    }
-  ];
+  private activegenres: string[] = [];
 
   constructor(
     private modalController: ModalController,
     private router: Router,
+    private storage: Storage,
     private post: PostService,
     private firebase: Firebase
   ) {}
@@ -155,19 +35,23 @@ export class SearchResultsPage implements OnInit {
     const modal = await this.modalController.create({
       component: SearchParamsPage,
       backdropDismiss: true,
-      componentProps: {
-        genres: this.genres
-      }
+      componentProps: {}
     });
 
     await modal.present();
     const result = await modal.onDidDismiss();
 
-    this.genres = result.data.genres;
+    if (!result.data.changed) {
+      // отменяем запрос, только если предыдущий выбор жанров был таким же
+      return;
+    }
+
+    this.activegenres = result.data.activegenres;
     this.result = [];
     this.page = 0;
 
     if (this.query !== '') {
+      this.result = [];
       await this.load(this.query);
     } else {
       await this.load(null);
@@ -176,10 +60,20 @@ export class SearchResultsPage implements OnInit {
     console.log(result.data);
   }
 
-  async ngOnInit() {
-    this.load();
+  ngOnInit() {
+  }
 
+  protected async ionViewDidEnter () {
     await this.firebase.setScreenName('search');
+
+    const genres = await this.storage.get('search_genres');
+    if (!genres) {
+      this.activegenres = [];
+    } else {
+      this.activegenres = genres.filter((v) => v.active === true).map((v) => v.name);
+    }
+
+    await this.load();
   }
 
   /**
@@ -191,18 +85,18 @@ export class SearchResultsPage implements OnInit {
   }
 
   private async load(query?: string) {
-    // тк первую страницу только что загрузили
+    // инкрементируем страницу
     this.page += 1;
-
     const temp = await this.post.getAll(query || this.query, {
       limit: '25',
       page: this.page,
       sort: '-rating',
-      custom: (this.activeGenre().length !== 0) ? `&genre=${this.activeGenre().join(',')}` : ''
+      custom: (this.activegenres.length !== 0) ? `&genre=${this.activegenres.join(',')}` : ''
     });
     if (temp.length === 0 && this.page === 1) {
       this.result = [];
       this.page = 0;
+      return;
     } else {
       temp.forEach(i => {
         this.result.push(i);
@@ -224,17 +118,10 @@ export class SearchResultsPage implements OnInit {
     if (this.query !== '') {
       await this.load(this.query);
 
-      await this.firebase.logEvent('search', { genres: this.activeGenre(), query: this.query });
+      await this.firebase.logEvent('search', { genres: this.activegenres, query: this.query });
     } else {
       await this.load(null);
     }
-  }
-
-  /**
-   * Возвращяет активные жанры
-   */
-  private activeGenre(): string[] {
-    return this.genres.filter((v) => v.active === true).map((v) => v.name);
   }
 
   /**

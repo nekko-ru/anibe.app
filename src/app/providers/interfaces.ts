@@ -37,3 +37,61 @@ export interface RequestParam {
   q?: string;
   custom?: string;
 }
+
+export interface IComment {
+  id: string;
+  body: string;
+  user: {
+    id: string;
+    name: string;
+    role: string;
+  };
+}
+
+export interface INewsPost {
+  id: string;
+  /**
+   * @description Заголовок новости
+   */
+  title: string;
+  /**
+   * @description Rich text содержимое новости (html)
+   */
+  body: string;
+  /**
+   * @description id автора новости
+   */
+  author_id: string;
+  /**
+   * @description ссылка на картинку которая будет на превью
+   */
+  preview: string;
+  /**
+   * @description ссылка на картинку которая будет на заднем фоне при отпрытии новости
+   */
+  background: string;
+  /**
+   * @description Тип новости, а точнее категория (Приложение, новая манга и т.п.)
+   */
+  type: string;
+  /**
+   * @description Дата и время создания новости
+   */
+  createdAt?: string;
+  /**
+   * @description Дата и время полсденего редактирования
+   */
+  updatedAt?: string;
+}
+
+export interface INotif {
+  id: string;
+  title: string;
+  body: string;
+  type: string;
+  picture: string;
+  url: string;
+  user: string;
+  createdAt: string;
+  updatedAt: string;
+}

@@ -17,10 +17,11 @@
     align-items-center
     [options]="slideOpts"
   >
-    
-    <ion-slide class="swiper-zoom-container" *ngFor="let img of episode">
-      <img *ngIf="preload" src="{{ img }}">
-      <ion-img *ngIf="!preload" src="{{ img }}"></ion-img>
+    <ion-slide *ngFor="let img of episode">
+      <div class="swiper-zoom-container">
+        <img *ngIf="preload" [src]="img">
+        <ion-img *ngIf="!preload" [src]="img"></ion-img>
+      </div>
     </ion-slide>
 
   </ion-slides>

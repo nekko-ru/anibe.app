@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from './api.service';
 import { Storage } from '@ionic/storage';
+import { INotif, IPost } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -98,5 +99,66 @@ export class UserService {
       'Authorization': 'Bearer ' + this.token
     });
     return JSON.parse(res.data);
+  }
+  public async updateAvatar(file: string) {
+    await this.setToken();
+    const url = `/users/update/avatar`;
+
+    const res = await this.api.putFile(url, {}, {
+      'Authorization': 'Bearer ' + this.token
+    }, file);
+    return JSON.parse(res.data);
+  }
+
+  public async addFCM(token: string) {
+    await this.setToken();
+
+    const res = await this.api.post('/users/me/fcm', { token }, {
+      'Authorization': 'Bearer ' + this.token
+    });
+  }
+
+  public async updateFCM(newtoken: string, oldtoken: string) {
+    await this.setToken();
+
+    const res = await this.api.put('/users/me/fcm', {
+      new: newtoken,
+      old: oldtoken
+    }, {
+      'Authorization': 'Bearer ' + this.token
+    });
+  }
+
+  public async getNotif({ page, limit } = { page: 1, limit: 25 }): Promise<INotif[]> {
+    await this.setToken();
+
+    const res = await this.api.get(`/notifications?page=${page}&limit=${limit}`, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data).rows;
+  }
+
+  /**
+   * Список рекомендаций
+   */
+  public async getOffer(): Promise<IPost[]> {
+    await this.setToken();
+
+    const res = await this.api.get('/users/me/offer', {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data).rows;
+  }
+
+  /**
+   * Список рекомендаций (более крутой и точный, но более затратный по ресурсам сервера)
+   */
+  public async getRecommendations(): Promise<IPost[]> {
+    await this.setToken();
+
+    const res = await this.api.get('/users/me/recommendations', {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data).rows;
   }
 }

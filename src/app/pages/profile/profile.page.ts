@@ -32,16 +32,18 @@ export class ProfilePage implements OnInit {
     private router: Router,
     private popoverController: PopoverController,
     private modalController: ModalController,
+    private toast: ToastController,
     private firebase: Firebase
   ) { }
 
-  async ngOnInit() {
-    this.info = await this.storage.get(`user_local`) || this.info;
+  ngOnInit() {
+    // this.load();
+    this.FCMToken();
   }
 
-  public async ionViewWillEnter() {
-    await this.load();
+  public async ionViewDidEnter() {
     await this.firebase.setScreenName('profile');
+    await this.load();
   }
 
   public async popover(ev: any) {
@@ -70,19 +72,43 @@ export class ProfilePage implements OnInit {
   }
 
   public update(event: any) {
-    this.load()
+    this.load(true)
       .then(() => event.target.complete())
       .catch(() => event.target.cansel());
   }
 
-  private async load() {
+  private async load(full: boolean = false) {
     try {
-      Object.assign(this.info, await this.user.getSelf());
-      await this.storage.set(`user_local`, this.info);
+      const temp = await this.storage.get('user_local');
+      if (temp && !full) {
+        this.info = temp;
+      } else {
+        Object.assign(this.info, await this.user.getSelf());
+        await this.storage.set(`user_local`, this.info);
+      }
     } catch (e) {
       console.log(e);
       await this.storage.remove('token');
       this.router.navigateByUrl('/');
     }
+  }
+
+  private async FCMToken () {
+    let token = await this.storage.get('user_local_fcm');
+    if (!token) {
+      token = await this.firebase.getToken();
+      if (!token) {
+        // its browser
+        return;
+      }
+      await this.user.addFCM(token);
+      await this.storage.set('user_local_fcm', token);
+    }
+
+    this.firebase.onTokenRefresh()
+      .subscribe(async (t: string) => {
+        await this.storage.set('user_local_fcm', t);
+        await this.user.updateFCM(t, token);
+      });
   }
 }

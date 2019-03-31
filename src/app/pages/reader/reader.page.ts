@@ -7,6 +7,7 @@ import { SelectChapterPage } from '../select-chapter/select-chapter.page';
 import { IPostFull } from 'src/app/providers/interfaces';
 import { PostService } from 'src/app/providers/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-reader',
@@ -16,7 +17,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 export class ReaderPage implements OnInit {
   private ready: boolean;
   private info: IPostFull;
-  private chapter: string;
+  public chapter: string;
   public episode: string[];
 
   public preload = false;
@@ -38,12 +39,19 @@ export class ReaderPage implements OnInit {
     private modalController: ModalController,
     private post: PostService,
     private toast: ToastController,
-    private firebase: Firebase
+    private firebase: Firebase,
+    private statusBar: StatusBar
   ) {
     this.episode = [];
   }
 
+  protected async ionViewDidLeave() {
+    await this.statusBar.show();
+  }
+
   async ngOnInit() {
+    await this.statusBar.hide();
+
     this.spiner = await this.loadingController.create({
       message: 'Загрузка...',
       duration: 5000
@@ -70,7 +78,6 @@ export class ReaderPage implements OnInit {
 
       this.chapter = this.active.chapter;
       this.allactives = post.allactives;
-      this.slider.slideTo(this.active.page);
     } else {
       this.active = {
         chapter: this.chapter,
@@ -81,12 +88,12 @@ export class ReaderPage implements OnInit {
         ...this.allactives,
         [this.chapter]: this.active
       };
-      this.slider.slideTo(0);
     }
 
     this.episode = this.info.episodes[this.chapter];
-    await this.spiner.dismiss();
     this.ready = true;
+    await this.slider.slideTo(this.active.page);
+    await this.spiner.dismiss();
 
     await this.firebase.setScreenName('reader');
   }
@@ -154,17 +161,31 @@ export class ReaderPage implements OnInit {
     await modal.present();
     const result = await modal.onDidDismiss();
 
-    const post = await this.storage.get(this.info.id);
-    console.log(this);
+    const post: {
+      allactives: {
+        [k: string]: {
+          chapter: string,
+          page: number,
+          pages: number
+        }
+      },
+      active: {
+        chapter: string,
+        page: number,
+        pages: number
+      }
+    } = await this.storage.get(this.info.id);
+
+    console.log(post, this.chapter in post.allactives);
 
     // проверяем на то что глава была наньше открыта и загружаем прогресс с нее
     this.chapter = result.data.chapter;
-    if (post && post.allactives[this.chapter]) {
+    if (post && this.chapter in post.allactives) {
       console.log('opened chapter in progress or ended');
 
       this.episode = this.info.episodes[this.chapter];
       this.allactives = post.allactives;
-      this.slider.slideTo(this.active.page);
+      await this.slider.slideTo(this.active.page);
     } else {
       console.log('opened new chapter');
       this.episode = this.info.episodes[this.chapter];
@@ -178,7 +199,7 @@ export class ReaderPage implements OnInit {
         ...this.allactives,
         [this.chapter]: this.active
       };
-      this.slider.slideTo(0);
+      await this.slider.slideTo(0);
     }
 
     // еще раз все сохроняем, после наших всех переходов

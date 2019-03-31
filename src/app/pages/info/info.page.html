@@ -10,16 +10,18 @@
         Читать
       </ion-button>
       <ion-button (click)="showMore()" color="primary" fill="outline">
-          <ion-icon name="bookmark"></ion-icon>
-        </ion-button>
-      <ion-button color="primary" fill="outline">
-        <ion-icon name="redo"></ion-icon>
+        <ion-icon name="bookmark"></ion-icon>
       </ion-button>
-      <ion-button color="primary" fill="outline">
+      <!-- <ion-button color="primary" fill="outline">
+        <ion-icon name="redo"></ion-icon>
+      </ion-button> -->
+      <ion-button color="primary" fill="outline" (click)="report()">
         <ion-icon name="warning"></ion-icon>
       </ion-button>
 
-      <p>{{ info.description }}</p>
+      <ion-button (click)="Comments()" expand="full" fill="outline">Комментарии</ion-button>
+
+      <p [innerHTML]="info.description"></p>
     </ion-card-content>
   </ion-card>
 

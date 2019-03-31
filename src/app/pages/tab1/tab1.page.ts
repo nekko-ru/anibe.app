@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
-import { IPost } from 'src/app/providers/interfaces';
+import { IPost, INewsPost } from 'src/app/providers/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { ConfigProvider } from '../../providers/config.provider';
 import { ToastController } from '@ionic/angular';
+import { NewsService } from 'src/app/providers/news.service';
+import { Storage } from '@ionic/storage';
+import { UserService } from 'src/app/providers/user.service';
 
 @Component({
   selector: 'app-tab1',
@@ -18,9 +21,14 @@ export class Tab1Page implements OnInit {
   public lastupdates: IPost[];
 
   /**
-   * Список новостей на главной странице
+   * Содержит послдедние новости
    */
-  public news: any[];
+  public lastnews: INewsPost[];
+
+  /**
+   * Список рекомендаций для пользователя (если он вошел в аккаунт)
+   */
+  public recommendations: IPost[] = [];
 
   /**
    * Список слайдов которые необходимо будет показать
@@ -34,6 +42,19 @@ export class Tab1Page implements OnInit {
   public enableSlider: string = 'false';
 
   /**
+   * Параметры для слайдера на странице
+   */
+  public slideOpts: any = {
+    slidesPerView: 1.5,
+    spaceBetween: 5,
+    centeredSlides: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false
+    },
+  };
+
+  /**
    * Конструктор класса
    * @param router роутер
    * @param IShortPostInfo сервис
@@ -41,17 +62,19 @@ export class Tab1Page implements OnInit {
   constructor(
     private router: Router,
     private post: PostService,
+    private news: NewsService,
+    private user: UserService,
     private toast: ToastController,
     private firebase: Firebase,
-    private remote_config: ConfigProvider
+    private storage: Storage
   ) {}
 
     /**
    * Открывает выбраный пост
    * @param id uuid поста
    */
-  public openPost(id: string): void {
-    this.router.navigateByUrl(`/info/${id}`);
+  public async openPost(id: string): Promise<any> {
+    await this.router.navigateByUrl(`/info/${id}`);
   }
 
   public async openPage(item: { img: string, inapp_page: boolean, url: string }) {
@@ -63,14 +86,14 @@ export class Tab1Page implements OnInit {
   }
 
   protected async ionViewWillEnter() {
-    this.slider_data = JSON.parse(await this.remote_config.getValue('home_slider_data'));
-    this.enableSlider = await this.remote_config.getValue('home_slider_enable');
+    // this.slider_data = JSON.parse(await this.remote_config.getValue('home_slider_data'));
+    // this.enableSlider = await this.remote_config.getValue('home_slider_enable');
   }
 
-  // tslint:disable-next-line:use-life-cycle-interface
   async ngOnInit() {
     try {
       this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
+      this.lastnews = await this.news.getAll();
     } catch (e) {
       if (e.error === 'advanced-http: please check browser console for error messages') {
         (await this.toast.create({
@@ -79,6 +102,16 @@ export class Tab1Page implements OnInit {
         })).present();
       }
     }
+    if (this.storage.get('token')) {
+      this.recommendations = await this.user.getOffer();
+    }
+  }
+
+  protected async ionViewDidEnter() {
     await this.firebase.setScreenName('home');
+  }
+
+  public async openNews(id: string): Promise<any> {
+    await this.router.navigateByUrl(`/news/${id}`);
   }
 }

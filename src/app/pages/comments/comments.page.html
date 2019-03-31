@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Комментарии</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullpage>
+
+  <ion-list>
+
+    <ion-item-sliding *ngFor="let item of comments" #myList>
+      <ion-item (click)="reply(item.user.name)">
+        <ion-avatar slot="start" (click)="openUser(item.user.id)">
+          <img src="{{ item.user.picture }}">
+        </ion-avatar>
+        <ion-label text-wrap>
+          <h3>
+            {{ item.user.name }}
+            <ion-text color="danger" *ngIf="item.user.role !== 'user'">
+              {{ item.user.role }}
+            </ion-text>
+          </h3>
+          <p>{{ item.body }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="report(item)">Пожаловаться</ion-item-option>
+        <ion-item-option (click)="delete(item)" color="danger">Удалить</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <!-- <ion-item *ngFor="let item of comments" (click)="reply(item.user.name)">
+      <ion-avatar slot="start">
+        <img src="{{ item.user.picture }}">
+      </ion-avatar>
+      <ion-label text-wrap>
+        <h3>{{ item.user.name }}</h3>
+        <p>{{ item.body }}</p>
+      </ion-label>
+    </ion-item> -->
+
+    <!-- <ion-item-sliding *ngFor="let item of comments" #myList>
+        <ion-item lines="none" (click)="reply(item.user.name)">
+          <ion-avatar slot="start">
+            <img src="{{ item.user.picture }}">
+          </ion-avatar>
+          <ion-label text-wrap>
+            <h3>{{ item.user.name }}</h3>
+            <p>{{ item.body }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option>Пожаловаться</ion-item-option>
+          <ion-item-option
+            *ngIf="item.user.id === user_local.id || user_local.role !== 'user'"
+            color="danger"
+          >
+            Удалить
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding> -->
+
+  </ion-list>
+
+  <ion-infinite-scroll
+    *ngIf="comments"
+    threshold="50px"
+    (ionInfinite)="loadMore($event)"
+  >
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Загрузка...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <!-- <ion-input clearInput></ion-input> -->
+    <ion-item lines="none">
+      <ion-textarea
+        [(ngModel)]="body" 
+        placeholder="Комментарий ..."
+      ></ion-textarea>
+
+      <ion-button color="primary" size="default" fill="outline" (click)="createComment()">
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
+    </ion-item>
+    
+  </ion-toolbar>
+</ion-footer>
