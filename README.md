@@ -5,7 +5,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors-anon/deissh/anibe.app.svg?style=flat-square)
 ![GitHub All Releases](https://img.shields.io/github/downloads/deissh/anibe.app/total.svg?style=flat-square)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e090898408464407b580b6ed997cd53f)](https://www.codacy.com/app/Deissh/anibe.app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=deissh/anibe.app&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0397ead617943baa02730fe82ffad11)](https://www.codacy.com/app/Deissh/anibe.app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=deissh/anibe.app&amp;utm_campaign=Badge_Grade)
 [![CircleCI](https://circleci.com/gh/deissh/anibe.app/tree/master.svg?style=svg&circle-token=aba99847bae43629ad4c7cd71cf33bd98bafaf5a)](https://circleci.com/gh/deissh/anibe.app/tree/master)
 
 :fire: WIP | Simple app to read manga on your phone
