@@ -29,6 +29,7 @@ export class ChatIdPage implements OnInit {
       duration: 5000
     });
     await this.spiner.present();
+    await this.load();
   }
 
   private async load() {
