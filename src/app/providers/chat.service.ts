@@ -64,7 +64,7 @@ export class ChatService {
    * @param body сообщение
    * @param attachments прикрепления к сообщению
    */
-  public async createComment(
+  public async createMessage(
     chat_id: string,
     body: string,
     attachments?: {
@@ -89,7 +89,7 @@ export class ChatService {
    * Получение сообщений с паджинацией
    * @param {string} id uuid чата
    */
-  public async getMessage(id: string, page: number = 1): Promise<IMessage[]> {
+  public async getMessages(id: string, page: number = 1): Promise<IMessage[]> {
     this.token = await this.storage.get('token') || '';
 
     const res = await this.api.get(`/chats/${id}?page=${page}`, {

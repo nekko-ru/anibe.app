@@ -29,7 +29,6 @@ ion-footer {
 
 .message-wrap {
     padding: 0 10px;
-
     .message {
         position: relative;
         padding: 7px 0;
@@ -68,14 +67,12 @@ ion-footer {
                 max-width: 80%;
 
                 span.triangle {
-                    background-color: #fff;
                     border-radius: 2px;
                     height: 8px;
                     width: 8px;
                     top: 12px;
                     display: block;
                     border-style: solid;
-                    border-color: #ddd;
                     border-width: 1px;
                     -webkit-transform: rotate(45deg);
                     transform: rotate(45deg);
@@ -104,6 +101,8 @@ ion-footer {
             color: #343434 !important;
 
             span.triangle {
+                background-color: $toUserBackgroundColor;
+                border-color: $toUserBackgroundColor;
                 border-top-width: 0;
                 border-right-width: 0;
                 left: -5px;
@@ -137,6 +136,7 @@ ion-footer {
 
             span.triangle {
                 background-color: $userBackgroundColor;
+                border-color: $userBackgroundColor;
                 border-bottom-width: 0;
                 border-left-width: 0;
                 right: -5px;
