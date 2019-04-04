@@ -102,7 +102,8 @@ export interface IChat {
   id: string;
   name: string;
   picture: string;
-  users: IUser[];
+  users: string[];
+  admin: string;
   lastmessage?: IMessage;
 
   createdAt: string;

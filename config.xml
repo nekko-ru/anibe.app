@@ -90,8 +90,9 @@
     <allow-navigation href="http://172.27.0.1:8100" sessionid="ef47eca0" />
     <allow-navigation href="http://192.168.1.45:8100" sessionid="fe6b0f34" />
     <allow-navigation href="http://192.168.43.165:8100" sessionid="72b26593" />
-    <content original-src="index.html" src="http://172.17.0.1:8100" />
+    <content original-src="index.html" src="http://192.168.0.101:8100" />
     <allow-navigation href="http://172.17.0.1:8100" sessionid="24230ce3" />
+    <allow-navigation href="http://192.168.0.101:8100" sessionid="edc2e0ef" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.1.4" />
 </widget>

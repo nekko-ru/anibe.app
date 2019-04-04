@@ -67,16 +67,16 @@ export class ChatService {
   public async createMessage(
     chat_id: string,
     body: string,
-    attachments?: {
+    attachments: {
       images: string[],
       links: string[],
       videos: string[],
       sticker: string
-    }
+    } = { images: [], links: [], videos: [], sticker: ''}
   ): Promise<any> {
     this.token = await this.storage.get('token') || '';
 
-    const res = await this.api.post(`/chats/${chat_id}`, {
+    const res = await this.api.post(`/messages/${chat_id}`, {
       body,
       attachments
     }, {
@@ -92,10 +92,10 @@ export class ChatService {
   public async getMessages(id: string, page: number = 1): Promise<IMessage[]> {
     this.token = await this.storage.get('token') || '';
 
-    const res = await this.api.get(`/chats/${id}?page=${page}`, {
+    const res = await this.api.get(`/messages/${id}?page=${page}`, {
       'Authorization': 'Bearer ' + this.token
     });
 
-    return JSON.parse(res.data);
+    return JSON.parse(res.data).rows;
   }
 }

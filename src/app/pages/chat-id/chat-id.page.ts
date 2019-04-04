@@ -4,6 +4,7 @@ import { LoadingController } from '@ionic/angular';
 import { IChat, IMessage, IUserSelf } from 'src/app/providers/interfaces';
 import { ChatService } from 'src/app/providers/chat.service';
 import { Storage } from '@ionic/storage';
+import { UserService } from 'src/app/providers/user.service';
 
 @Component({
   selector: 'app-chat-id',
@@ -17,7 +18,7 @@ export class ChatIdPage implements OnInit {
   public user: IUserSelf;
   public messages: IMessage[];
 
-  private page: number = 0;
+  private page: number = 1;
   private attachments: any;
 
   /**
@@ -31,7 +32,7 @@ export class ChatIdPage implements OnInit {
     private cs: ChatService,
     private route: ActivatedRoute,
     private router: Router,
-    private storage: Storage,
+    private us: UserService,
     private loadingController: LoadingController,
   ) { }
 
@@ -42,10 +43,14 @@ export class ChatIdPage implements OnInit {
       duration: 5000
     });
 
-    this.user = <IUserSelf> await this.storage.get('user_local');
-
     await this.spiner.present();
     await this.load();
+  }
+
+  public async update(event: any) {
+    this.load()
+      .then(() => event.target.complete())
+      .catch(() => event.target.cansel());
   }
 
   public async msgmenu(event: any) {
@@ -57,14 +62,10 @@ export class ChatIdPage implements OnInit {
     this.messages.push(msg);
   }
 
-  public online(): number {
-    const online = this.chatinfo.users.filter((u) => u.online !== '0');
-    return online.length;
-  }
-
   private async load() {
-    // this.messages = await this.cs.getMessages(this.id, this.page);
-    // this.chatinfo = await this.cs.get(this.id);
+    this.user = await this.us.getSelf();
+    this.messages = (await this.cs.getMessages(this.id, this.page)).reverse();
+    this.chatinfo = await this.cs.get(this.id);
     await this.spiner.dismiss();
   }
 }

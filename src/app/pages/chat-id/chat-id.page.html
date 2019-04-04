@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar *ngIf="chatinfo">
-    <ion-title>{{ chatinfo.name }} Онлайн {{online()}}/{{ chatinfo.users.length }}</ion-title>
+    <ion-title>{{ chatinfo.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,14 +11,14 @@
     <div *ngFor="let msg of messages"
       class="message"
       [class.left]="msg.user.id !== user.id"
-      [class.right]=" msg.user.id === user.id "
+      [class.right]="msg.user.id === user.id"
       (hold)="msgmenu($event)"
     >
       <img class="user-img" [src]="msg.user.picture">
       <div class="msg-detail">
         <div class="msg-info">
           <p>
-            {{ msg.user.name }}&nbsp;&nbsp;&nbsp;{{ msg.createdAt | date }}
+            {{ msg.user.name }}&nbsp;&nbsp;&nbsp;{{ msg.createdAt | date:'dd.MM, HH:mm'}}
           </p>
         </div>
         <div class="msg-content">
@@ -27,38 +27,6 @@
         </div>
       </div>
     </div>
-
-    <div class="message right" (press)="msgmenu($event)" *ngFor="let asd of [1,2,3,4,5,6,7,8,8,4,3,5]">
-      <img class="user-img" src="https://cdn.anibe.ru/avatars/5c533dbb889e940019ec1d9c/1551757027703">
-      <div class="msg-detail">
-        <div class="msg-info">
-          <p>
-            deissh&nbsp;&nbsp;&nbsp;09:20
-          </p>
-        </div>
-        <div class="msg-content">
-          <span class="triangle"></span>
-          <p class="line-breaker ">Ну, тут будет не менее крутое сообщение. А так же текст который позволит сделать
-            сообщение подлинее!</p>
-        </div>
-      </div>
-    </div>
-    <div class="message left" (press)="msgmenu($event)">
-        <img class="user-img" src="https://cdn.anibe.ru/avatars/5c533dbb889e940019ec1d9c/1551757027703">
-        <div class="msg-detail">
-          <div class="msg-info">
-            <p>
-              deissh&nbsp;&nbsp;&nbsp;09:20
-            </p>
-          </div>
-          <div class="msg-content">
-            <span class="triangle"></span>
-            <p class="line-breaker ">Ну, тут будет не менее крутое сообщение. А так же текст который позволит сделать
-              сообщение подлинее!</p>
-          </div>
-        </div>
-      </div>
-
 
   </div>
 </ion-content>
