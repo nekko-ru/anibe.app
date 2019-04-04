@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Активные чаты</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullpage>
+  <!-- Page refrasher -->
+  <ion-refresher slot="fixed" (ionRefresh)="update($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Для обновления потяни вниз"
+      refreshingSpinner="circles"
+      refreshingText="Обновление"
+      cancelable="false"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- end of page refresher -->
+
+  <ion-virtual-scroll [items]="chats">
+    <ion-item *virtualItem="let item" (click)="open(item.id)">
+      <ion-avatar slot="start">
+        <ion-img [src]="item.picture"></ion-img>
+      </ion-avatar>
+      <ion-label text-wrap>
+        <ion-text>
+          {{ item.name }}
+        </ion-text>
+        <p>{{ item.lastmessage.user.name }}: {{ item.lastmessage.body }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-virtual-scroll>
+</ion-content>
