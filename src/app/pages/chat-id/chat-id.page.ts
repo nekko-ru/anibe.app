@@ -14,6 +14,11 @@ export class ChatIdPage implements OnInit {
   public chatinfo: IChat;
   public messages: IMessage;
 
+  /**
+   * @description contain current message
+   */
+  public editorMsg: string;
+
   private spiner: HTMLIonLoadingElement;
 
   constructor(
@@ -30,6 +35,10 @@ export class ChatIdPage implements OnInit {
     });
     await this.spiner.present();
     await this.load();
+  }
+
+  public async send() {
+    // todo this
   }
 
   private async load() {
