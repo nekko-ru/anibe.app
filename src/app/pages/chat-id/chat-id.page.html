@@ -1,6 +1,11 @@
 <ion-header>
-  <ion-toolbar *ngIf="chatinfo">
-    <ion-title>{{ chatinfo.name }}</ion-title>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button>
+        <ion-back-button defaultHref="/tabs/chats" text="Назад"></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="chatinfo">{{ chatinfo.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,12 +13,13 @@
 
   <div class="message-wrap" id="scroll">
 
-    <div *ngFor="let msg of messages"
-      class="message"
-      [class.left]="msg.user.id !== user.id"
-      [class.right]="msg.user.id === user.id"
-      (hold)="msgmenu($event)"
-    >
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Загрузка...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <div *ngFor="let msg of messages" class="message" [class.left]="msg.user.id !== user.id"
+      [class.right]="msg.user.id === user.id" (hold)="msgmenu($event)">
       <img class="user-img" [src]="msg.user.picture" (click)="openUser(msg.user.id)">
       <div class="msg-detail">
         <div class="msg-info">

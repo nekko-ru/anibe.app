@@ -16,7 +16,6 @@ const routes: Routes = [
   { path: 'comments/:id', loadChildren: './pages/comments/comments.module#CommentsPageModule', canActivate: [LoginGuard] },
   { path: 'user/:id', loadChildren: './pages/user/user.module#UserPageModule' },
   { path: 'news/:id', loadChildren: './pages/news/news.module#NewsPageModule' },
-  { path: 'chats', loadChildren: './pages/chats/chats.module#ChatsPageModule', canActivate: [LoginGuard] },
   { path: 'chat-id/:id', loadChildren: './pages/chat-id/chat-id.module#ChatIdPageModule', canActivate: [LoginGuard] },
 ];
 @NgModule({

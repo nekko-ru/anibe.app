@@ -45,8 +45,7 @@ export class ChatIdPage implements OnInit {
 
     await this.spiner.present();
     await this.load();
-
-    this.scrollToBottom();
+    this.scrollToBottom()
   }
 
   public async update(event: any) {
@@ -55,8 +54,22 @@ export class ChatIdPage implements OnInit {
       .catch(() => event.target.cansel());
   }
 
+  public async loadMore(event: any) {
+    if (this.page !== 1) {
+      this.page += 1;
+    }
+    this.load()
+      .then(() => event.target.complete())
+      .then(() => this.scrollToBottom())
+      .catch(() => event.target.cansel());
+  }
+
   public async msgmenu(event: any) {
     console.log(this);
+  }
+
+  public async goback() {
+    
   }
 
   public openUser(id: string): void {
