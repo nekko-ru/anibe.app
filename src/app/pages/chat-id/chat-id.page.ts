@@ -59,7 +59,7 @@ export class ChatIdPage implements OnInit {
   }
 
   public async loadMore(event: any) {
-    event.target.complete()
+    event.target.complete();
     // this.load()
     //   .then(() => event.target.complete())
     //   .then(() => this.scrollToBottom())
