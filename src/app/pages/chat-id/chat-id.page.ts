@@ -15,10 +15,10 @@ export class ChatIdPage implements OnInit {
   private id: string;
   public chatinfo: IChat;
   public user: IUserSelf;
-  public messages: IMessage[];
+  public messages: IMessage[] = [];
 
   @ViewChild(IonContent) contentArea: IonContent;
-  private page: number = 1;
+  private page = 0;
   private attachments: any;
 
   /**
@@ -45,7 +45,7 @@ export class ChatIdPage implements OnInit {
 
     await this.spiner.present();
     await this.load();
-    this.scrollToBottom()
+    this.scrollToBottom();
   }
 
   public goBack() {
@@ -59,13 +59,11 @@ export class ChatIdPage implements OnInit {
   }
 
   public async loadMore(event: any) {
-    if (this.page !== 1) {
-      this.page += 1;
-    }
-    this.load()
-      .then(() => event.target.complete())
-      .then(() => this.scrollToBottom())
-      .catch(() => event.target.cansel());
+    event.target.complete()
+    // this.load()
+    //   .then(() => event.target.complete())
+    //   .then(() => this.scrollToBottom())
+    //   .catch(() => event.target.cansel());
   }
 
   public async msgmenu(event: any) {
@@ -80,15 +78,21 @@ export class ChatIdPage implements OnInit {
     if (!this.editorMsg) {
       return;
     }
-    const msg = await this.cs.createMessage(this.id, this.editorMsg, this.attachments)
+    const msg = await this.cs.createMessage(this.id, this.editorMsg, this.attachments);
     this.messages.push(msg);
     this.scrollToBottom();
   }
 
   private async load() {
+    this.page += 1;
     this.user = await this.us.getSelf();
-    this.messages = (await this.cs.getMessages(this.id, this.page)).reverse();
+    const messages = await this.cs.getMessages(this.id, this.page);
     this.chatinfo = await this.cs.get(this.id);
+
+    messages.forEach((msg: IMessage) => {
+      this.messages.unshift(msg);
+    });
+
     await this.spiner.dismiss();
   }
 
