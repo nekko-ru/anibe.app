@@ -19,6 +19,11 @@ ion-footer {
     padding: 5px;
     display: flex;
 
+    ion-button {
+        --padding-end: 0px;
+        --padding-start: 0px;
+    }
+
     textarea {
         flex: 1;
         border: 0;

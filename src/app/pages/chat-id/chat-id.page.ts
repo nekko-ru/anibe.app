@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, IonContent } from '@ionic/angular';
 import { IChat, IMessage, IUserSelf } from 'src/app/providers/interfaces';
 import { ChatService } from 'src/app/providers/chat.service';
-import { Storage } from '@ionic/storage';
 import { UserService } from 'src/app/providers/user.service';
 
 @Component({
@@ -18,6 +17,7 @@ export class ChatIdPage implements OnInit {
   public user: IUserSelf;
   public messages: IMessage[];
 
+  @ViewChild(IonContent) contentArea: IonContent;
   private page: number = 1;
   private attachments: any;
 
@@ -45,6 +45,8 @@ export class ChatIdPage implements OnInit {
 
     await this.spiner.present();
     await this.load();
+
+    this.scrollToBottom();
   }
 
   public async update(event: any) {
@@ -57,9 +59,17 @@ export class ChatIdPage implements OnInit {
     console.log(this);
   }
 
+  public openUser(id: string): void {
+    this.router.navigateByUrl(`/user/${id}`);
+  }
+
   public async send() {
+    if (!this.editorMsg) {
+      return;
+    }
     const msg = await this.cs.createMessage(this.id, this.editorMsg, this.attachments)
     this.messages.push(msg);
+    this.scrollToBottom();
   }
 
   private async load() {
@@ -67,5 +77,16 @@ export class ChatIdPage implements OnInit {
     this.messages = (await this.cs.getMessages(this.id, this.page)).reverse();
     this.chatinfo = await this.cs.get(this.id);
     await this.spiner.dismiss();
+  }
+
+  /**
+   * @description Позволяет спускаться вниз
+   */
+  private scrollToBottom() {
+    setTimeout(() => {
+      if (this.contentArea.scrollToBottom) {
+        this.contentArea.scrollToBottom();
+      }
+    }, 0);
   }
 }
