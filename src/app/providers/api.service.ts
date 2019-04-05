@@ -32,7 +32,7 @@ export class API {
    * @description содержит ссылку на api
    * @type {string}
    */
-  private baseURL = 'http://127.0.0.1:8080';
+  private baseURL = 'http://192.168.43.165:8080';
   /**
    * @private
    * @description тип содержимого ответа и запроса

@@ -48,6 +48,10 @@ export class ChatIdPage implements OnInit {
     this.scrollToBottom()
   }
 
+  public goBack() {
+    this.router.navigateByUrl('/tabs/chats');
+  }
+
   public async update(event: any) {
     this.load()
       .then(() => event.target.complete())
@@ -66,10 +70,6 @@ export class ChatIdPage implements OnInit {
 
   public async msgmenu(event: any) {
     console.log(this);
-  }
-
-  public async goback() {
-    
   }
 
   public openUser(id: string): void {

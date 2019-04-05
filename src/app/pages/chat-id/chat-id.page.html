@@ -1,8 +1,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons>
-      <ion-button>
-        <ion-back-button defaultHref="/tabs/chats" text="Назад"></ion-back-button>
+      <ion-button (click)="goBack()">
+          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title *ngIf="chatinfo">{{ chatinfo.name }}</ion-title>
@@ -30,6 +30,10 @@
         <div class="msg-content">
           <!-- <span class="triangle"></span> -->
           <p class="line-breaker ">{{ msg.body }}</p>
+        </div>
+
+        <div class="images">
+          <img *ngIf="msg.attachments.images[0]" [src]="msg.attachments.images[0]">
         </div>
       </div>
     </div>

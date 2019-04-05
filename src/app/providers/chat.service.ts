@@ -3,6 +3,10 @@ import { API } from './api.service';
 import { IPostFull, RequestParam, IPost, IComment, IChat, IMessage } from './interfaces';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
+import * as socketIo from 'socket.io-client';
+import { Observable } from 'rxjs';
+
+const SERVER_URL = 'http://localhost:8080';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +18,30 @@ export class ChatService {
   private api: API;
   private token: string;
   private ready: Promise<any>;
+  private socket: any;
 
   constructor(
     private storage: Storage,
     private toast: ToastController
   ) {
     this.api = new API({  });
+  }
+
+  public initSocket(): void {
+      this.socket = socketIo(SERVER_URL);
+  }
+  public send(message: IMessage): void {
+      this.socket.emit('message', message);
+  }
+  public onMessage(): Observable<IMessage> {
+      return new Observable<IMessage>((observer: { next: (arg0: IMessage) => void; }) => {
+          this.socket.on('message', (data: IMessage) => observer.next(data));
+      });
+  }
+  public onEvent(event: Event): Observable<any> {
+      return new Observable<Event>((observer: { next: () => void; }) => {
+          this.socket.on(event, () => observer.next());
+      });
   }
 
   /**
