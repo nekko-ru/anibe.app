@@ -6,7 +6,7 @@ import { ToastController } from '@ionic/angular';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 
-const SERVER_URL = 'http://localhost:8080';
+const SERVER_URL = 'http://127.0.0.1:2300';
 
 @Injectable({
   providedIn: 'root'
@@ -27,15 +27,32 @@ export class ChatService {
     this.api = new API({  });
   }
 
-  public initSocket(): void {
-      this.socket = socketIo(SERVER_URL);
+  public async initSocket(): Promise<void> {
+      this.socket = socketIo(SERVER_URL, {
+        query: {
+          token: await this.storage.get('token') || ''
+        }
+      });
   }
-  public send(message: IMessage): void {
-      this.socket.emit('message', message);
+  public send(
+    chat_id: string,
+    body: string,
+    attachments: {
+      images: string[],
+      links: string[],
+      videos: string[],
+      sticker: string
+    } = { images: [], links: [], videos: [], sticker: ''}
+  ): void {
+      this.socket.emit('new_message', {
+        chat_id,
+        body,
+        attachments
+      });
   }
   public onMessage(): Observable<IMessage> {
       return new Observable<IMessage>((observer: { next: (arg0: IMessage) => void; }) => {
-          this.socket.on('message', (data: IMessage) => observer.next(data));
+          this.socket.on('new_message', (data: IMessage) => observer.next(data));
       });
   }
   public onEvent(event: Event): Observable<any> {

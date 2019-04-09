@@ -46,6 +46,12 @@ export class ChatIdPage implements OnInit {
     await this.spiner.present();
     await this.load();
     this.scrollToBottom();
+
+    await this.cs.initSocket();
+    this.cs.onMessage().subscribe((msg: IMessage) => {
+      this.messages.push(msg);
+      this.scrollToBottom();
+    });
   }
 
   public goBack() {
@@ -78,9 +84,8 @@ export class ChatIdPage implements OnInit {
     if (!this.editorMsg) {
       return;
     }
-    const msg = await this.cs.createMessage(this.id, this.editorMsg, this.attachments);
-    this.messages.push(msg);
-    this.scrollToBottom();
+    await this.cs.send(this.id, this.editorMsg, this.attachments);
+    this.editorMsg = '';
   }
 
   private async load() {
