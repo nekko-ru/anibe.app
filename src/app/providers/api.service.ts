@@ -32,7 +32,7 @@ export class API {
    * @description содержит ссылку на api
    * @type {string}
    */
-  private baseURL = 'http://127.0.0.1:8080';
+  private baseURL = 'https://api.anibe.ru';
   /**
    * @private
    * @description тип содержимого ответа и запроса

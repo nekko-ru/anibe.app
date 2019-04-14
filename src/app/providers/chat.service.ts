@@ -6,7 +6,7 @@ import { ToastController } from '@ionic/angular';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 
-const SERVER_URL = 'http://127.0.0.1:2300';
+const SERVER_URL = 'https://api.anibe.ru';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,7 @@ export class ChatService {
 
   public async initSocket(): Promise<void> {
       this.socket = socketIo(SERVER_URL, {
+        // path: '/ws/',
         query: {
           token: await this.storage.get('token') || ''
         }
