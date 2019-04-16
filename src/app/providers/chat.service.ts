@@ -138,4 +138,56 @@ export class ChatService {
 
     return JSON.parse(res.data).rows;
   }
+
+  /**
+   * Отправляет сообщение в чат
+   * @param {string} name имя нового чата
+   * @param {string} picture картинка нового чата
+   */
+  public async createChat(
+    name: string,
+    picture: string
+  ): Promise<any> {
+    this.token = await this.storage.get('token') || '';
+
+    const res = await this.api.post(`/chats`, {
+      name,
+      picture
+    }, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data);
+  }
+
+  /**
+   * Удаляет чат по его айди (только если админ или создатель)
+   * @param {string} chat_id id чата
+   */
+  public async deleteChat(chat_id: string) {
+    this.token = await this.storage.get('token') || '';
+
+    const res = await this.api.delete(`/chats`, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data);
+  }
+
+  /**
+   * ВЫполняет действия внутри чата, например добавить нового пользователя
+   * @param chat_id id чата
+   * @param action действие (add, ban)
+   */
+  public async actionsChat(
+    chat_id: string,
+    action: string,
+  ): Promise<any> {
+    this.token = await this.storage.get('token') || '';
+
+    const res = await this.api.post(`/chats/${chat_id}/actions`, {
+      action
+    }, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data);
+  }
 }
