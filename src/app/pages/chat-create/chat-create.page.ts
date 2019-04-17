@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ModalController, ToastController } from '@ionic/angular';
+import { IChat, IUser } from 'src/app/providers/interfaces';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { ChatService } from 'src/app/providers/chat.service';
+import { UserService } from 'src/app/providers/user.service';
 
 @Component({
   selector: 'app-chat-create',
@@ -6,10 +11,67 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-create.page.scss'],
 })
 export class ChatCreatePage implements OnInit {
+  @Input() public info?: IChat;
+  @Input() public title: string;
+  public name: string;
+  public picture = 'https://avatars.mds.yandex.net/get-pdb/1532603/ac56ac6f-b354-4c5b-bf06-533910e0fae8/s1200';
 
-  constructor() { }
+  public users: IUser[] = [];
+  public selectedUsers: IUser[] = [];
+
+  constructor(
+    private modalController: ModalController,
+    private imagePicker: ImagePicker,
+    private toast: ToastController,
+    private chat: ChatService,
+    private user: UserService
+  ) { }
 
   ngOnInit() {
+    if (this.info) {
+      this.name = this.info.name;
+      this.picture = this.info.picture;
+
+      this.info.users.forEach(async (id: string) => {
+        this.users.push(await this.user.get(id));
+      });
+    }
   }
 
+  public async save() {
+    if (this.info) {
+      await this.chat.editChat(this.info.id, this.info.name, this.info.picture)
+    } else {
+      await this.chat.createChat(this.name, this.picture);
+    }
+
+    this.modalController.dismiss();
+  }
+
+  public async pickImage() {
+    if (!await this.imagePicker.hasReadPermission()) {
+      await this.imagePicker.requestReadPermission();
+
+      (await this.toast.create({
+        message: 'Попробуйте снова',
+        duration: 2000
+      })).present();
+      return;
+    }
+    const result = await this.imagePicker.getPictures({
+      maximumImagesCount: 1
+    });
+
+    // this.picture = await this.user.updateAvatar(result[0]);
+
+    (await this.toast.create({
+      message: 'Ваша аватарка успешно загружена и скоро обновиться',
+      duration: 5000
+    })).present();
+  }
+
+  public async remove(id: string) {
+    await this.chat.actionsChat(this.info.id, id, 'ban');
+    this.users = this.users.filter((v: any) => v.id !== id);
+  }
 }

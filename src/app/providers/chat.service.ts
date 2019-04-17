@@ -6,7 +6,8 @@ import { ToastController } from '@ionic/angular';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 
-const SERVER_URL = 'https://api.anibe.ru';
+// const SERVER_URL = 'https://api.anibe.ru';
+const SERVER_URL = 'http://127.0.0.1:2300';
 
 @Injectable({
   providedIn: 'root'
@@ -166,10 +167,10 @@ export class ChatService {
   public async deleteChat(chat_id: string) {
     this.token = await this.storage.get('token') || '';
 
-    const res = await this.api.delete(`/chats`, {
+    await this.api.delete(`/chats/${chat_id}`, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data);
+    return true;
   }
 
   /**
@@ -179,12 +180,36 @@ export class ChatService {
    */
   public async actionsChat(
     chat_id: string,
+    user_id: string,
     action: string,
   ): Promise<any> {
     this.token = await this.storage.get('token') || '';
 
-    const res = await this.api.post(`/chats/${chat_id}/actions`, {
-      action
+    await this.api.post(`/chats/${chat_id}/actions`, {
+      action,
+      user_id
+    }, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return true;
+  }
+
+  /**
+   * Изменяет картинку и название чата
+   * @param chat_id id чата
+   * @param name название
+   * @param picture картинка
+   */
+  public async editChat(
+    chat_id: string,
+    name: string,
+    picture: string
+  ): Promise<any> {
+    this.token = await this.storage.get('token') || '';
+
+    const res = await this.api.patch(`/chats/${chat_id}`, {
+      name,
+      picture
     }, {
       'Authorization': 'Bearer ' + this.token
     });

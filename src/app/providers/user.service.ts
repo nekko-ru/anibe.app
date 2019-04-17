@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from './api.service';
 import { Storage } from '@ionic/storage';
-import { INotif, IPost } from './interfaces';
+import { INotif, IPost, IUser } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -77,7 +77,7 @@ export class UserService {
    * @description получить информацию о пользователе
    * @param id uuid пользователя
    */
-  public async get(id: string) {
+  public async get(id: string): Promise<IUser> {
     await this.setToken();
     const url = `/users/${id}`;
 
