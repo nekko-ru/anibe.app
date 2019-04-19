@@ -13,7 +13,7 @@
 
   <div class="message-wrap" id="scroll">
 
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)" *ngIf="messages.length >= 30">
       <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Загрузка...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>

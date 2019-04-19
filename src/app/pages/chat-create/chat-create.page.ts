@@ -67,7 +67,7 @@ export class ChatCreatePage implements OnInit {
     // this.picture = await this.user.updateAvatar(result[0]);
 
     (await this.toast.create({
-      message: 'Ваша аватарка успешно загружена и скоро обновиться',
+      message: 'Ваша аватарка успешно загружена и скоро обновиться (наверно)',
       duration: 5000
     })).present();
   }
