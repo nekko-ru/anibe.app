@@ -11,22 +11,31 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item>
+    <ion-item lines="none">
       <ion-img [src]="picture" slot="start" style="max-width: 150px;max-height: 150px;"></ion-img>
       <ion-button (click)="pickImage()" slot="end">
         Загрузить
       </ion-button>
     </ion-item>
     <ion-item>
-      <ion-label position="floating">Название: </ion-label>
+      <ion-label position="floating">Название чата</ion-label>
       <ion-input [(ngModel)]="name" type="text"></ion-input>
     </ion-item>
   </ion-list>
 
-  <ion-list>
+  <ion-list *ngIf="info">
     <ion-list-header>
       <ion-label>Пользователи</ion-label>
     </ion-list-header>
+
+    <ion-item>
+      <ion-label>Пригласить:</ion-label>
+      <ion-input type="text" [(ngModel)]="newinvite"></ion-input>
+      <ion-button slot="end" fill="outline" (click)="invite()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-item>
+
     <ion-item-sliding *ngFor="let user of users">
       <ion-item>
         <ion-thumbnail slot="start" class="cover">

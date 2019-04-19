@@ -18,6 +18,7 @@ export class ChatCreatePage implements OnInit {
 
   public users: IUser[] = [];
   public selectedUsers: IUser[] = [];
+  public newinvite = '';
 
   constructor(
     private modalController: ModalController,
@@ -44,6 +45,7 @@ export class ChatCreatePage implements OnInit {
     } else {
       await this.chat.createChat(this.name, this.picture);
     }
+    console.log(this);
 
     this.modalController.dismiss();
   }
@@ -73,5 +75,21 @@ export class ChatCreatePage implements OnInit {
   public async remove(id: string) {
     await this.chat.actionsChat(this.info.id, id, 'ban');
     this.users = this.users.filter((v: any) => v.id !== id);
+  }
+
+  public async invite() {
+    try {
+      const user = await this.user.getName(this.newinvite);
+      await this.chat.actionsChat(this.info.id, user.id, 'add');
+
+      this.users.push(user);
+    } catch (e) {
+      console.error(e);
+
+      (await this.toast.create({
+        message: 'Пользователь с таким ником не найден!',
+        duration: 5000
+      })).present();
+    }
   }
 }

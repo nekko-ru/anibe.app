@@ -88,6 +88,20 @@ export class UserService {
   }
 
   /**
+   * @description получить информацию о пользователе по его нику
+   * @param name
+   */
+  public async getName(name: string): Promise<IUser> {
+    await this.setToken();
+    const url = `/users/name/${name}`;
+
+    const res = await this.api.get(url, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data);
+  }
+
+  /**
    * @description обновить информацию о пользователе
    * @param body новая информация о пользователе
    */

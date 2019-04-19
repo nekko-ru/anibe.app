@@ -207,7 +207,7 @@ export class ChatService {
   ): Promise<any> {
     this.token = await this.storage.get('token') || '';
 
-    const res = await this.api.patch(`/chats/${chat_id}`, {
+    const res = await this.api.put(`/chats/${chat_id}`, {
       name,
       picture
     }, {
