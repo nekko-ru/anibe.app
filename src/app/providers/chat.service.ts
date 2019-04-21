@@ -6,8 +6,8 @@ import { ToastController } from '@ionic/angular';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 
-// const SERVER_URL = 'https://api.anibe.ru';
-const SERVER_URL = 'http://127.0.0.1:2300';
+const SERVER_URL = 'https://api.anibe.ru';
+// const SERVER_URL = 'http://127.0.0.1:2300';
 
 @Injectable({
   providedIn: 'root'

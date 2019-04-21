@@ -28,7 +28,7 @@
         <ion-label>{{ item.name }}</ion-label>
       </ion-item>
 
-      <ion-item-options side="end" *ngIf="userlocal"> <!-- add && item.admin === userlocal.id" -->
+      <ion-item-options side="end" *ngIf="userlocal && item.admin === userlocal.id">
         <ion-item-option (click)="createChat(item)">Изменить</ion-item-option>
         <ion-item-option (click)="remove(item.id)" color="danger">Удалить</ion-item-option>
       </ion-item-options>
