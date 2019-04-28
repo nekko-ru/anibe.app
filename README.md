@@ -41,6 +41,7 @@ Service Anibe Manga can boast of its simplicity and reliability! A huge range of
 * Manga comments
 * User notifications (new reply or new manga)
 * News with RichText
+* Real time messaging
 
 ## Video
 
@@ -52,12 +53,12 @@ In proggress
 
 | Home page with recommendations | Search page | Notifications page | User profile |
 | -         | -           | -                  | -            |
-| ![](https://i.imgur.com/a3G73We.jpg) | ![](https://i.imgur.com/4MaxU1E.jpg) | ![](https://i.imgur.com/wGiznmo.png) | ![](https://i.imgur.com/efaR8TM.png) |
+| ![](https://i.imgur.com/a3G73We.jpg) | ![](https://i.imgur.com/Mz8NLKL.jpg) | ![](https://i.imgur.com/wGiznmo.png) | ![](https://i.imgur.com/efaR8TM.png) |
 
 | News screen | User's custom list | Search by name and genres | Manga info screen |
 | -         | -           | -                  | -            |
 | ![](https://i.imgur.com/j9rAB1n.jpg) | ![](https://i.imgur.com/kzoecZn.png) | ![](https://i.imgur.com/EcQMQdd.jpg) | ![](https://i.imgur.com/VO5bJeW.png) |
 
-| Reader | Reader (second chapter) | Select chapter | Another manga screen | 
-| -      | - | -             | - |
-| ![](https://i.imgur.com/UAecKC6.jpg) | ![](https://i.imgur.com/kn30kCH.png) | ![](https://i.imgur.com/mIPumrD.png) | ![](https://i.imgur.com/khZyH2l.png) |
+| Reader | Select chapter | Another manga screen | Active chats | Chat |
+| -      | - | -             | - | - |
+| ![](https://i.imgur.com/UAecKC6.jpg) | ![](https://i.imgur.com/mIPumrD.png) | ![](https://i.imgur.com/khZyH2l.png) | ![](https://i.imgur.com/pEXdJzZ.png) | ![](https://i.imgur.com/zollkqp.png) |
