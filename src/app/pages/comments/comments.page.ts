@@ -4,8 +4,9 @@ import { IComment, IPost } from 'src/app/providers/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { ToastController } from '@ionic/angular';
+import { ToastController, ModalController } from '@ionic/angular';
 import { ReportService } from 'src/app/providers/report.service';
+import { ReportPage } from 'src/app/modal/report/report.page';
 
 @Component({
   selector: 'app-comments',
@@ -31,6 +32,7 @@ export class CommentsPage implements OnInit {
     private storage: Storage,
     private firebase: Firebase,
     private toast: ToastController,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -95,28 +97,14 @@ export class CommentsPage implements OnInit {
   }
 
   public async report(item: IComment) {
-    try {
-      await this.rep.send({
-        body: 'comment',
-        post_id: this.id,
-        user_id: item.user.id,
-        authod_id: this.local_user.id
-      });
-
-      (await this.toast.create({
-        message: 'Спасибо за репорт!',
-        duration: 5000
-      })).present();
-    } catch (e) {
-      // логируем в консоль браузера
-      console.error(e);
-      // логируем в фаербейс
-      await this.firebase.logError(e);
-      (await this.toast.create({
-        message: 'Ошибка при отправке, попробуйте чуть позже',
-        duration: 5000
-      })).present();
-    }
+    const modal = await this.modalController.create({
+      component: ReportPage,
+      componentProps: {
+        post_id: this.id
+      }
+    });
+    await modal.present();
+    await modal.onDidDismiss();
   }
 
   private async load() {
