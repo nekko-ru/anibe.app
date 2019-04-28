@@ -60,6 +60,9 @@ export class ReaderPage implements OnInit {
     await this.storage.ready();
 
     this.preload = (await this.storage.get('image_preload'));
+    if (this.preload === undefined) {
+      this.preload = true;
+    }
 
     this.info = await this.post.get(this.route.snapshot.paramMap.get('id'));
 

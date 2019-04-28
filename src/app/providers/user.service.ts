@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from './api.service';
 import { Storage } from '@ionic/storage';
-import { INotif, IPost } from './interfaces';
+import { INotif, IPost, IUser } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -77,9 +77,23 @@ export class UserService {
    * @description получить информацию о пользователе
    * @param id uuid пользователя
    */
-  public async get(id: string) {
+  public async get(id: string): Promise<IUser> {
     await this.setToken();
     const url = `/users/${id}`;
+
+    const res = await this.api.get(url, {
+      'Authorization': 'Bearer ' + this.token
+    });
+    return JSON.parse(res.data);
+  }
+
+  /**
+   * @description получить информацию о пользователе по его нику
+   * @param name
+   */
+  public async getName(name: string): Promise<IUser> {
+    await this.setToken();
+    const url = `/users/name/${name}`;
 
     const res = await this.api.get(url, {
       'Authorization': 'Bearer ' + this.token
