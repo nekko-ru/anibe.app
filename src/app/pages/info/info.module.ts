@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { InfoPage } from './info.page';
+import { ReportPage } from 'src/app/modal/report/report.page';
+import { ReportPageModule } from 'src/app/modal/report/report.module';
 
 const routes: Routes = [
   {
@@ -19,7 +21,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ReportPageModule
   ],
   declarations: [InfoPage]
 })

@@ -92,7 +92,7 @@
     <allow-navigation href="http://192.168.43.165:8100" sessionid="72b26593" />
     <content original-src="index.html" src="http://192.168.0.102:8100" />
     <allow-navigation href="http://172.17.0.1:8100" sessionid="24230ce3" />
-    <allow-navigation href="http://192.168.0.102:8100" sessionid="2d0472d2" />
+    <allow-navigation href="http://192.168.0.102:8100" sessionid="ec3080c3" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="7.1.4" />
 </widget>

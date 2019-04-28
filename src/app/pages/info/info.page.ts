@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LoadingController, ModalController, PopoverController, ActionSheetController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ActionSheetController } from '@ionic/angular';
 import { IPostFull } from 'src/app/providers/interfaces';
 import { PostService } from 'src/app/providers/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Storage } from '@ionic/storage';
 import { UserService } from 'src/app/providers/user.service';
-import { ReportService } from 'src/app/providers/report.service';
+import { ReportPage } from 'src/app/modal/report/report.page';
 
 @Component({
   selector: 'app-info',
@@ -29,8 +29,7 @@ export class InfoPage implements OnInit {
     private user: UserService,
     private storage: Storage,
     private asc: ActionSheetController,
-    private toast: ToastController,
-    private rep: ReportService,
+    private modalController: ModalController,
     private firebase: Firebase
   ) {}
 
@@ -116,27 +115,13 @@ export class InfoPage implements OnInit {
   }
 
   public async report() {
-    const user_local = await this.storage.get('user_local');
-    try {
-      await this.rep.send({
-        body: 'manga',
-        post_id: this.id,
-        authod_id: user_local.id || ''
-      });
-
-      (await this.toast.create({
-        message: 'Спасибо за репорт!',
-        duration: 5000
-      })).present();
-    } catch (e) {
-      // логируем в консоль браузера
-      console.error(e);
-      // логируем в фаербейс
-      await this.firebase.logError(e);
-      (await this.toast.create({
-        message: 'Ошибка при отправке, попробуйте чуть позже',
-        duration: 5000
-      })).present();
-    }
+    const modal = await this.modalController.create({
+      component: ReportPage,
+      componentProps: {
+        post_id: this.id
+      }
+    });
+    await modal.present();
+    await modal.onDidDismiss();
   }
 }
