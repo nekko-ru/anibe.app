@@ -1,0 +1,12 @@
+.scroller {
+    .post {
+        .cover {
+            width: 150px;
+            padding-right: var(--padding-start);
+            
+            img {
+                border-radius: 5px;
+            }
+        }
+    }
+}

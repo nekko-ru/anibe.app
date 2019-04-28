@@ -1,6 +1,6 @@
 // tslint:disable:max-line-length
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalController, IonVirtualScroll } from '@ionic/angular';
 import { SearchParamsPage } from '../search-params/search-params.page';
 
 import { Router } from '@angular/router';
@@ -15,13 +15,14 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./search-results.page.scss'],
 })
 export class SearchResultsPage implements OnInit {
-  // используется для переключения вида отображения данных
-  private mode: boolean;
-
-  public result: IPost[] = [];
   private query = null;
   private page = 0;
   private activegenres: string[] = [];
+
+  // virtualScroll
+  public render: any[] = [];
+
+  @ViewChild('scroller') private scroller: IonVirtualScroll;
 
   constructor(
     private modalController: ModalController,
@@ -47,11 +48,11 @@ export class SearchResultsPage implements OnInit {
     }
 
     this.activegenres = result.data.activegenres;
-    this.result = [];
+    this.render = [];
     this.page = 0;
 
     if (this.query !== '') {
-      this.result = [];
+      this.render = [];
       await this.load(this.query);
     } else {
       await this.load(null);
@@ -94,14 +95,15 @@ export class SearchResultsPage implements OnInit {
       custom: (this.activegenres.length !== 0) ? `&genre=${this.activegenres.join(',')}` : ''
     });
     if (temp.length === 0 && this.page === 1) {
-      this.result = [];
+      this.render = [];
       this.page = 0;
       return;
     } else {
-      temp.forEach(i => {
-        this.result.push(i);
-      });
+      temp.forEach((i: IPost) => this.render.push(i));
     }
+
+    // this.render = this.result;
+    this.scroller.checkEnd();
   }
 
   /**
@@ -112,7 +114,7 @@ export class SearchResultsPage implements OnInit {
     this.query = event.target.value;
 
     this.page = 0;
-    this.result = [];
+    this.render = [];
 
     console.log(event.target.value);
     if (this.query !== '') {
@@ -131,5 +133,6 @@ export class SearchResultsPage implements OnInit {
   public loadNewPage(event: any) {
     this.load();
     event.target.complete();
+    console.log(this);
   }
 }
