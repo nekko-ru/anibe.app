@@ -58,6 +58,17 @@ const routes: Routes = [
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
+      },
+      {
+        path: 'chats',
+        children: [
+          {
+            path: '',
+            loadChildren: '../pages/chats/chats.module#ChatsPageModule'
+            // component: ChatsPage
+          }
+        ],
+        canActivate: [LoginGuard]
       }
     ]
   },

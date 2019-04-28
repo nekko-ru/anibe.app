@@ -5,7 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-row>
+  <!-- old -->
+  <!-- <ion-row>
     <ion-col size="6" *ngFor="let item of result">
       <ion-img (click)="openPost(item.id)" [src]="item.cover"></ion-img>
       {{ item.name }}
@@ -13,6 +14,28 @@
   </ion-row>
 
   <ion-infinite-scroll threshold="50px" (ionInfinite)="loadNewPage($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Загрузка...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+  <!-- old -->
+
+
+  <ion-virtual-scroll [items]="render" approxItemHeight="20px" #scroller class="scroller">
+    <ion-item *virtualItem="let item" class="post" (click)="openPost(item.id)">
+      <ion-img (click)="openPost(item.id)" [src]="item.cover" class="cover"></ion-img>
+      <ion-label text-wrap>
+        <ion-text>
+          {{ item.name }}
+        </ion-text>
+        <p>{{ item.annotation }}</p>
+        <ion-text color="secondary">
+          <p>{{ item.genre.join(', ') }}</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-virtual-scroll>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadNewPage($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Загрузка...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>

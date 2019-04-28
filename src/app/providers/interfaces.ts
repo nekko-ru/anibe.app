@@ -95,3 +95,64 @@ export interface INotif {
   createdAt: string;
   updatedAt: string;
 }
+
+
+
+export interface IChat {
+  id: string;
+  name: string;
+  picture: string;
+  users: string[];
+  admin: string;
+  lastmessage?: IMessage;
+
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IMessage {
+  id: string;
+  body: string;
+  user: IUser;
+  attachments?: {
+    images?: string[];
+    links?: string[];
+    sticker?: string;
+  };
+
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IUserBadge {
+  name: string;
+  icon: string;
+}
+
+export interface IUser {
+  id: string;
+  online: string;
+  name: string;
+  picture: string;
+  role: string;
+  badges: IUserBadge[];
+}
+
+export interface IUserSelf {
+  id: string;
+  online: string;
+  name: string;
+  picture: string;
+  desc: string;
+  email: string;
+  enablefcm: boolean;
+  role: string;
+  favorite: IPost[];
+  thrown: IPost[];
+  inprogress: IPost[];
+  readed: IPost[];
+  willread: IPost[];
+  createdAt: string;
+  updatedAt: string;
+  badges: IUserBadge[];
+}

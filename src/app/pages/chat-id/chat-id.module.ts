@@ -5,14 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InfoPage } from './info.page';
-import { ReportPage } from 'src/app/modal/report/report.page';
-import { ReportPageModule } from 'src/app/modal/report/report.module';
+import { ChatIdPage } from './chat-id.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: InfoPage
+    component: ChatIdPage
   }
 ];
 
@@ -21,9 +19,8 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes),
-    ReportPageModule
+    RouterModule.forChild(routes)
   ],
-  declarations: [InfoPage]
+  declarations: [ChatIdPage]
 })
-export class InfoPageModule {}
+export class ChatIdPageModule {}

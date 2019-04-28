@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="close()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Создание репорта</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="report()">
+          Отправить
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content fullpage>
+    <ion-item>
+      <ion-label position="stacked">Название</ion-label>
+      <ion-input minlength="8" [(ngModel)]="name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">
+        Описание проблемы
+      </ion-label>
+      <ion-textarea
+        minlength="10"
+        [(ngModel)]="body"
+        placeholder="Подробно опишите вашу проблему"
+        style="height: 250px;"
+      >
+      </ion-textarea>
+    </ion-item>
+  </ion-content>
