@@ -41,7 +41,7 @@ export class ChatCreatePage implements OnInit {
 
   public async save() {
     if (this.info) {
-      await this.chat.editChat(this.info.id, this.info.name, this.info.picture)
+      await this.chat.editChat(this.info.id, this.info.name, this.info.picture);
     } else {
       await this.chat.createChat(this.name, this.picture);
     }
