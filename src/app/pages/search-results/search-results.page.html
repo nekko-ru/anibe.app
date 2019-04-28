@@ -20,7 +20,7 @@
   <!-- old -->
 
 
-  <ion-virtual-scroll [items]="render" #scroller class="scroller">
+  <ion-virtual-scroll [items]="render" approxItemHeight="20px" #scroller class="scroller">
     <ion-item *virtualItem="let item" class="post" (click)="openPost(item.id)">
       <ion-img (click)="openPost(item.id)" [src]="item.cover" class="cover"></ion-img>
       <ion-label text-wrap>
