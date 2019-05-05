@@ -19,6 +19,7 @@ Service Anibe Manga can boast of its simplicity and reliability! A huge range of
 > Sorry, but at the moment the application is being developed in Russian language. But in the near future it is planned to add several languages, namely English and French.
 
 [API Server](https://github.com/deissh/anibe.api)
+
 [Online Docs](https://api.anibe.ru/docs/)
 
 ## Dowanload
