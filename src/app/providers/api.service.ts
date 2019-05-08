@@ -1,4 +1,3 @@
-import { HTTP } from '@ionic-native/http/ngx';
 import axios, { AxiosInstance, AxiosPromise } from 'axios';
 
 export interface AxiosSettings {
@@ -51,13 +50,14 @@ export class API {
     this.settings = settings;
     if (this.settings.auth) {
       this.http = axios.create({
+        baseURL: this.baseURL,
         auth: {
           username: settings.auth.username,
           password: settings.auth.password
         },
       });
     } else {
-      this.http = axios.create({});
+      this.http = axios.create({ baseURL: this.baseURL, });
     }
   }
 
@@ -68,7 +68,7 @@ export class API {
    * @returns {AxiosPromise<any>}
    */
   public get(url: string, headers: any): AxiosPromise<any> {
-    return this.http.get(this.baseURL + url, {
+    return this.http.get(url, {
       headers
     });
   }
@@ -80,7 +80,7 @@ export class API {
    * @returns {AxiosPromise<any>}
    */
   public put(url: string, body: any, headers: any): AxiosPromise<any> {
-    return this.http.put(this.baseURL + url, {
+    return this.http.put(url, {
       data: body,
       headers
     });
@@ -93,7 +93,7 @@ export class API {
    * @returns {AxiosPromise<any>}
    */
   public post(url: string, body: any, headers: any): AxiosPromise<any> {
-    return this.http.post(this.baseURL + url, {
+    return this.http.post(url, {
       ...body
     }, { ...headers });
   }
@@ -105,7 +105,7 @@ export class API {
    * @returns {AxiosPromise<any>}
    */
   public patch(url: string, body: any, headers: any): AxiosPromise<any> {
-    return this.http.patch(this.baseURL + url, {
+    return this.http.patch(url, {
       data: body,
       headers
     });
@@ -117,7 +117,7 @@ export class API {
    * @returns {AxiosPromise<any>}
    */
   public delete(url: string, headers: any): AxiosPromise<any> {
-    return this.http.delete(this.baseURL + url, {
+    return this.http.delete(url, {
       headers
     });
   }
@@ -133,7 +133,7 @@ export class API {
     const data = new FormData();
     data.append('picture', file.rawFile, file.name);
 
-    return this.http.post(this.baseURL + url, {
+    return this.http.post(url, {
       data: body,
       headers
     });
