@@ -41,7 +41,7 @@ export class UserService {
       name: v.name,
       picture: v.picture
     }, {});
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -57,7 +57,7 @@ export class UserService {
     const res = await this.api.post('/auth', {}, {});
 
     this.api = new API({});
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -70,7 +70,7 @@ export class UserService {
     const res = await this.api.get(url, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -84,7 +84,7 @@ export class UserService {
     const res = await this.api.get(url, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -98,7 +98,7 @@ export class UserService {
     const res = await this.api.get(url, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -112,7 +112,7 @@ export class UserService {
     const res = await this.api.put(url, body, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
   public async updateAvatar(file: string) {
     await this.setToken();
@@ -121,7 +121,7 @@ export class UserService {
     const res = await this.api.putFile(url, {}, {
       'Authorization': 'Bearer ' + this.token
     }, file);
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   public async addFCM(token: string) {
@@ -149,7 +149,7 @@ export class UserService {
     const res = await this.api.get(`/notifications?page=${page}&limit=${limit}`, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   /**
@@ -161,7 +161,7 @@ export class UserService {
     const res = await this.api.get('/users/me/offer', {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   /**
@@ -173,6 +173,6 @@ export class UserService {
     const res = await this.api.get('/users/me/recommendations', {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 }

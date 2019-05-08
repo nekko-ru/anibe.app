@@ -1,4 +1,5 @@
 import { HTTP } from '@ionic-native/http/ngx';
+import axios, { AxiosInstance, AxiosPromise } from 'axios';
 
 export interface AxiosSettings {
   auth?: {
@@ -26,7 +27,7 @@ export class API {
    * @description переменная для хранения экземпляра класса для работы с http
    * @type {HTTP}
    */
-  private http: HTTP;
+  private http: AxiosInstance;
   /**
    * @private
    * @description содержит ссылку на api
@@ -48,44 +49,50 @@ export class API {
     settings: AxiosSettings
   ) {
     this.settings = settings;
-    this.http = new HTTP();
-
-    if (settings.auth) {
-      this.http.useBasicAuth(settings.auth.username, settings.auth.password);
+    if (this.settings.auth) {
+      this.http = axios.create({
+        auth: {
+          username: settings.auth.username,
+          password: settings.auth.password
+        },
+      });
+    } else {
+      this.http = axios.create({});
     }
-
-    this.http.setDataSerializer(this.responseType);
   }
 
   /**
    * Выполняет GET запрос к серверу апи
    * @async
    * @param {string} url ссылка на метод без учета базы
-   * @returns {Promise<any>}
+   * @returns {AxiosPromise<any>}
    */
-  public get(url: string, headers: any): Promise<any> {
-    return this.http.get(this.baseURL + url, {}, { ...headers });
+  public get(url: string, headers: any): AxiosPromise<any> {
+    return this.http.get(this.baseURL + url, {
+      headers
+    });
   }
   /**
    * Выполняет PUT запрос к серверу апи
    * @async
    * @param url ссылка
    * @param body тело запроса
-   * @returns {Promise<any>}
+   * @returns {AxiosPromise<any>}
    */
-  public put(url: string, body: any, headers: any): Promise<any> {
+  public put(url: string, body: any, headers: any): AxiosPromise<any> {
     return this.http.put(this.baseURL + url, {
-      ...body
-    }, { ...headers });
+      data: body,
+      headers
+    });
   }
   /**
    * Выполняет POST запрос к серверу апи
    * @async
    * @param url ссылка
    * @param body тело запроса
-   * @returns {Promise<any>}
+   * @returns {AxiosPromise<any>}
    */
-  public post(url: string, body: any, headers: any): Promise<any> {
+  public post(url: string, body: any, headers: any): AxiosPromise<any> {
     return this.http.post(this.baseURL + url, {
       ...body
     }, { ...headers });
@@ -95,21 +102,24 @@ export class API {
    * @async
    * @param url ссылка
    * @param body тело запроса
-   * @returns {Promise<any>}
+   * @returns {AxiosPromise<any>}
    */
-  public patch(url: string, body: any, headers: any): Promise<any> {
+  public patch(url: string, body: any, headers: any): AxiosPromise<any> {
     return this.http.patch(this.baseURL + url, {
-      ...body
-    }, { ...headers });
+      data: body,
+      headers
+    });
   }
   /**
    * Выполняет DELETE запрос к серверу апи
    * @async
    * @param url ссылка
-   * @returns {Promise<any>}
+   * @returns {AxiosPromise<any>}
    */
-  public delete(url: string, headers: any): Promise<any> {
-    return this.http.delete(this.baseURL + url, {}, { ...headers });
+  public delete(url: string, headers: any): AxiosPromise<any> {
+    return this.http.delete(this.baseURL + url, {
+      headers
+    });
   }
 
   /**
@@ -117,11 +127,15 @@ export class API {
    * @async
    * @param url ссылка
    * @param body тело запроса
-   * @returns {Promise<any>}
+   * @returns {AxiosPromise<any>}
    */
-  public putFile(url: string, body: any, headers: any, file: string): Promise<any> {
-    return this.http.uploadFile(this.baseURL + url, {
-      ...body
-    }, { ...headers }, file, 'picture');
+  public putFile(url: string, body: any, headers: any, file: any): AxiosPromise<any> {
+    const data = new FormData();
+    data.append('picture', file.rawFile, file.name);
+
+    return this.http.post(this.baseURL + url, {
+      data: body,
+      headers
+    });
   }
 }

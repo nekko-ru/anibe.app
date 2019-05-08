@@ -35,7 +35,7 @@ export class PostService {
     const res = await this.api.get(url, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -62,7 +62,7 @@ export class PostService {
       'Authorization': 'Bearer ' + this.token
     });
 
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   public async addToList(id: string, status: string) {
@@ -78,7 +78,7 @@ export class PostService {
       message: 'Добавлено',
       duration: 2000
     })).present();
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   public async removeFromList(id: string) {
@@ -93,7 +93,7 @@ export class PostService {
       message: 'Удалено',
       duration: 2000
     })).present();
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   /**
@@ -110,7 +110,7 @@ export class PostService {
     }, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -124,7 +124,7 @@ export class PostService {
       'Authorization': 'Bearer ' + this.token
     });
 
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   public async deleteComment(id: string): Promise<any> {

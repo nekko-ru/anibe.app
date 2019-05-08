@@ -35,7 +35,7 @@ export class NewsService {
     const res = await this.api.get(url, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   public async getAll(page: number = 1, limit: number = 5): Promise<INewsPost[]> {
@@ -45,6 +45,6 @@ export class NewsService {
     const res = await this.api.get(url, {
       'Authorization': 'Bearer ' + this.token
     });
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 }
