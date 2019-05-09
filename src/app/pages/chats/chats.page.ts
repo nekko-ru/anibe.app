@@ -5,6 +5,7 @@ import { ChatService } from 'src/app/providers/chat.service';
 import { ModalController } from '@ionic/angular';
 import { ChatCreatePage } from '../chat-create/chat-create.page';
 import { Storage } from '@ionic/storage';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-chats',
@@ -22,13 +23,15 @@ export class ChatsPage implements OnInit {
     private router: Router,
     private cs: ChatService,
     private modalController: ModalController,
-    private storage: Storage
+    private storage: Storage,
+    private firebase: Firebase
   ) { }
 
   async ngOnInit() {
     await this.load();
 
     this.userlocal = await this.storage.get('user_local');
+    await this.firebase.setScreenName('chats');
   }
 
   public async createChat(chatinfo?: IChat) {

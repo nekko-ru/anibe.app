@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { NavController, ToastController } from '@ionic/angular';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-settings',
@@ -23,7 +24,8 @@ export class SettingsPage implements OnInit {
     private storage: Storage,
     private toast: ToastController,
     private navController: NavController,
-    private imagePicker: ImagePicker
+    private imagePicker: ImagePicker,
+    private firebase: Firebase
   ) { }
 
   async ngOnInit() {
@@ -31,6 +33,8 @@ export class SettingsPage implements OnInit {
 
     this.preload_img = (await this.storage.get('image_preload'));
     this.enablefcm = (await this.storage.get('enablefcm')) || true;
+
+    await this.firebase.setScreenName('settings');
   }
 
   public async pickImage() {

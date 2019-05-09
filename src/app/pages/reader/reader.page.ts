@@ -99,6 +99,7 @@ export class ReaderPage implements OnInit {
     await this.spiner.dismiss();
 
     await this.firebase.setScreenName('reader');
+    await this.firebase.logEvent('select_content', { item_id: this.info.id, content_type: 'manga' });
   }
 
   public async ChapterEnded() {

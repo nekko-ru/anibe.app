@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-select-chapter',
@@ -11,12 +12,13 @@ export class SelectChapterPage implements OnInit {
   @Input() private selected: string;
   @Input() private allactives: { [k: string]: { chapter: string, page: number, pages: number } };
 
-  constructor(private modalController: ModalController) { }
+  constructor(private modalController: ModalController, private firebase: Firebase) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     console.log(this);
 
     console.log(this.allactives[this.selected]);
+    await this.firebase.setScreenName('select-chapter');
   }
 
   public savePicks(name: string) {

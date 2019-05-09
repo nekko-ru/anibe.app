@@ -23,6 +23,8 @@ export class NotificationsPage implements OnInit {
 
   async ngOnInit() {
     await this.load();
+
+    await this.firebase.setScreenName('notifications');
   }
 
   public async openUrl(url: string) {
