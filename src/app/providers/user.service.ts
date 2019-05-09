@@ -143,7 +143,7 @@ export class UserService {
     });
   }
 
-  public async getNotif({ page, limit } = { page: 1, limit: 25 }): Promise<INotif[]> {
+  public async getNotif(page: string, limit: string): Promise<INotif[]> {
     await this.setToken();
 
     const res = await this.api.get(`/notifications`, {

@@ -76,7 +76,7 @@ export class ChatService {
     const res = await this.api.get(url, {
       'access_token': this.token
     });
-    return res.data;
+    return JSON.parse(res.data);
   }
 
   /**
@@ -96,7 +96,7 @@ export class ChatService {
       'access_token': this.token
     });
 
-    return res.data.rows;
+    return JSON.parse(res.data).rows;
   }
 
   /**
@@ -123,7 +123,7 @@ export class ChatService {
     }, {
       'access_token': this.token
     });
-    return res.data;
+    return JSON.parse(res.data);
   }
 
   /**
@@ -138,7 +138,7 @@ export class ChatService {
       page
     });
 
-    return res.data.rows;
+    return JSON.parse(res.data).rows;
   }
 
   /**
@@ -158,7 +158,7 @@ export class ChatService {
     }, {
       'access_token': this.token
     });
-    return res.data;
+    return JSON.parse(res.data);
   }
 
   /**
@@ -214,6 +214,6 @@ export class ChatService {
     }, {
       'access_token': this.token
     });
-    return res.data;
+    return JSON.parse(res.data);
   }
 }
