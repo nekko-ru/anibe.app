@@ -34,6 +34,12 @@ export class SettingsPage implements OnInit {
   }
 
   public async pickImage() {
+    (await this.toast.create({
+      message: 'Загрузка аватарок временно отключена',
+      duration: 5000
+    })).present();
+    return;
+
     if (!await this.imagePicker.hasReadPermission()) {
       await this.imagePicker.requestReadPermission();
 
@@ -48,6 +54,7 @@ export class SettingsPage implements OnInit {
     });
 
     this.info = await this.user.updateAvatar(result[0]);
+
     await this.storage.set('user_local', this.info);
 
     (await this.toast.create({

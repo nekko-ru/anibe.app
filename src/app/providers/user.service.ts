@@ -114,11 +114,11 @@ export class UserService {
     });
     return res.data;
   }
-  public async updateAvatar(file: string) {
+  public async updateAvatar(file: any) {
     await this.setToken();
     const url = `/users/update/avatar`;
 
-    const res = await this.api.putFile(url, {}, {
+    const res = await this.api.putFile(url, {
       'Authorization': 'Bearer ' + this.token
     }, file);
     return res.data;

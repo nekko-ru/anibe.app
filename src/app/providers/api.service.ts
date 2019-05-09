@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosPromise } from 'axios';
+import { HTTP } from '@ionic-native/http/ngx';
 
 export interface AxiosSettings {
   auth?: {
@@ -129,13 +130,17 @@ export class API {
    * @param body тело запроса
    * @returns {AxiosPromise<any>}
    */
-  public putFile(url: string, body: any, headers: any, file: any): AxiosPromise<any> {
-    const data = new FormData();
-    data.append('picture', file.rawFile, file.name);
+  public putFile(url: string, headers: any, file: any): AxiosPromise<any> {
+    const client = new HTTP();
 
-    return this.http.post(url, {
-      data: body,
-      headers
-    });
+    return client.uploadFile(this.baseURL + url, {}, { ...headers }, file, 'picture');
+
+    // const formData = new FormData();
+    // formData.append('picture', file);
+
+    // return this.http.post(url, {
+    //   data: formData,
+    //   headers
+    // });
   }
 }
