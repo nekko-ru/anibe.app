@@ -30,12 +30,12 @@ export interface IPostFull {
 }
 
 export interface RequestParam {
-  page?: number;
+  page?: string;
   limit?: string;
   sort?: string | string[];
   fields?: string | string[];
   q?: string;
-  custom?: string;
+  genre?: string;
 }
 
 export interface IComment {

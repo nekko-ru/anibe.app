@@ -23,6 +23,8 @@ export class NotificationsPage implements OnInit {
 
   async ngOnInit() {
     await this.load();
+
+    await this.firebase.setScreenName('notifications');
   }
 
   public async openUrl(url: string) {
@@ -37,7 +39,7 @@ export class NotificationsPage implements OnInit {
   }
 
   public async load(event?: any) {
-    this.notif = await this.user.getNotif();
+    this.notif = await this.user.getNotif('1', '50');
     if (event) {
       event.target.complete();
     }

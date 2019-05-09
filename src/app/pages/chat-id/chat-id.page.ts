@@ -4,6 +4,8 @@ import { LoadingController, IonContent } from '@ionic/angular';
 import { IChat, IMessage, IUserSelf } from 'src/app/providers/interfaces';
 import { ChatService } from 'src/app/providers/chat.service';
 import { UserService } from 'src/app/providers/user.service';
+import { Firebase } from '@ionic-native/firebase/ngx';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chat-id',
@@ -28,12 +30,15 @@ export class ChatIdPage implements OnInit {
 
   private spiner: HTMLIonLoadingElement;
 
+  private chatpipe: Subscription;
+
   constructor(
     private cs: ChatService,
     private route: ActivatedRoute,
     private router: Router,
     private us: UserService,
     private loadingController: LoadingController,
+    private firebase: Firebase
   ) { }
 
   async ngOnInit() {
@@ -48,10 +53,17 @@ export class ChatIdPage implements OnInit {
     this.scrollToBottom();
 
     await this.cs.initSocket();
-    this.cs.onMessage().subscribe((msg: IMessage) => {
+    this.chatpipe = this.cs.onMessage().subscribe((msg: IMessage) => {
       this.messages.push(msg);
       this.scrollToBottom();
     });
+
+    await this.firebase.setScreenName('info');
+    await this.firebase.logEvent('select_content', { item_id: this.id, content_type: 'chat' });
+  }
+
+  public ionViewWillLeave() {
+    this.chatpipe.unsubscribe();
   }
 
   public goBack() {

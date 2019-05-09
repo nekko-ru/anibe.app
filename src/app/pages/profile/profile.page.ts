@@ -36,9 +36,11 @@ export class ProfilePage implements OnInit {
     private firebase: Firebase
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     // this.load();
-    this.FCMToken();
+    await this.FCMToken();
+
+    await this.firebase.setScreenName('profile');
   }
 
   public async ionViewDidEnter() {

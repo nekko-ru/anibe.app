@@ -34,7 +34,7 @@ export class ReportService {
       ...body,
       status: 'created'
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': 'Bearer ' + this.token
     });
     return JSON.parse(res.data);
   }

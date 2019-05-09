@@ -63,32 +63,36 @@ export class API {
    * @param {string} url ссылка на метод без учета базы
    * @returns {Promise<any>}
    */
-  public get(url: string, headers: any): Promise<any> {
-    return this.http.get(this.baseURL + url, {}, { ...headers });
+  public get(url: string, params: any): Promise<any> {
+    return this.http.get(this.baseURL + url, params, {});
   }
   /**
    * Выполняет PUT запрос к серверу апи
    * @async
    * @param url ссылка
-   * @param body тело запроса
+   * @param data тело запроса
    * @returns {Promise<any>}
    */
-  public put(url: string, body: any, headers: any): Promise<any> {
-    return this.http.put(this.baseURL + url, {
-      ...body
-    }, { ...headers });
+  public put(url: string, data: any, params: any): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'put',
+      data,
+      params
+    });
   }
   /**
    * Выполняет POST запрос к серверу апи
    * @async
    * @param url ссылка
-   * @param body тело запроса
+   * @param data тело запроса
    * @returns {Promise<any>}
    */
-  public post(url: string, body: any, headers: any): Promise<any> {
-    return this.http.post(this.baseURL + url, {
-      ...body
-    }, { ...headers });
+  public post(url: string, data: any, params: any): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'post',
+      data,
+      params
+    });
   }
   /**
    * Выполняет PATCH запрос к серверу апи
@@ -97,10 +101,12 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  public patch(url: string, body: any, headers: any): Promise<any> {
-    return this.http.patch(this.baseURL + url, {
-      ...body
-    }, { ...headers });
+  public patch(url: string, data: any, params: any): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'patch',
+      data,
+      params
+    });
   }
   /**
    * Выполняет DELETE запрос к серверу апи
@@ -108,8 +114,11 @@ export class API {
    * @param url ссылка
    * @returns {Promise<any>}
    */
-  public delete(url: string, headers: any): Promise<any> {
-    return this.http.delete(this.baseURL + url, {}, { ...headers });
+  public delete(url: string, params: any): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'delete',
+      params
+    });
   }
 
   /**
@@ -119,9 +128,11 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  public putFile(url: string, body: any, headers: any, file: string): Promise<any> {
-    return this.http.uploadFile(this.baseURL + url, {
-      ...body
-    }, { ...headers }, file, 'picture');
+  public putFile(url: string, params: any, file: string): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'upload',
+      filePath: file,
+      params
+    });
   }
 }

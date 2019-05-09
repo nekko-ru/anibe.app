@@ -33,7 +33,7 @@ export class PostService {
     const url = `/posts/${id}`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return JSON.parse(res.data);
   }
@@ -47,19 +47,11 @@ export class PostService {
    */
   public async getAll(query: string, params: RequestParam): Promise<IPost[]> {
     this.token = await this.storage.get('token') || '';
-    let url = `/posts?page=${params.page || ''}` +
-    `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
-    `&fields=${params.fields || ''}`;
-
-    if (query) {
-      url += `&q=${query}`;
-    }
-    if (params.custom) {
-      url += params.custom;
-    }
+    const url = `/posts`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token,
+      ...params
     });
 
     return JSON.parse(res.data).rows;
@@ -72,7 +64,7 @@ export class PostService {
     const res = await this.api.post(url, {
       status
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     (await this.toast.create({
       message: 'Добавлено',
@@ -86,7 +78,7 @@ export class PostService {
     const url = `/posts/${id}/user-list`;
 
     const res = await this.api.delete(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
 
     (await this.toast.create({
@@ -108,7 +100,7 @@ export class PostService {
       body,
       post_id
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return JSON.parse(res.data);
   }
@@ -121,7 +113,7 @@ export class PostService {
     this.token = await this.storage.get('token') || '';
 
     const res = await this.api.get(`/comments/${id}?page=${page}`, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
 
     return JSON.parse(res.data);
@@ -131,7 +123,7 @@ export class PostService {
     this.token = await this.storage.get('token') || '';
 
     await this.api.delete(`/comments/${id}`, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
   }
 }

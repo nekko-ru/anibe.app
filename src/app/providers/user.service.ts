@@ -68,7 +68,7 @@ export class UserService {
     const url = `/users/me`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return JSON.parse(res.data);
   }
@@ -82,7 +82,7 @@ export class UserService {
     const url = `/users/${id}`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return JSON.parse(res.data);
   }
@@ -96,7 +96,7 @@ export class UserService {
     const url = `/users/name/${name}`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return JSON.parse(res.data);
   }
@@ -110,16 +110,16 @@ export class UserService {
     const url = `/users/me`;
 
     const res = await this.api.put(url, body, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return JSON.parse(res.data);
   }
-  public async updateAvatar(file: string) {
+  public async updateAvatar(file: any) {
     await this.setToken();
     const url = `/users/update/avatar`;
 
-    const res = await this.api.putFile(url, {}, {
-      'Authorization': 'Bearer ' + this.token
+    const res = await this.api.putFile(url, {
+      'access_token': this.token
     }, file);
     return JSON.parse(res.data);
   }
@@ -128,7 +128,7 @@ export class UserService {
     await this.setToken();
 
     const res = await this.api.post('/users/me/fcm', { token }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
   }
 
@@ -139,15 +139,17 @@ export class UserService {
       new: newtoken,
       old: oldtoken
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
   }
 
-  public async getNotif({ page, limit } = { page: 1, limit: 25 }): Promise<INotif[]> {
+  public async getNotif(page: string, limit: string): Promise<INotif[]> {
     await this.setToken();
 
-    const res = await this.api.get(`/notifications?page=${page}&limit=${limit}`, {
-      'Authorization': 'Bearer ' + this.token
+    const res = await this.api.get(`/notifications`, {
+      'access_token': this.token,
+      page,
+      limit
     });
     return JSON.parse(res.data).rows;
   }
@@ -159,7 +161,7 @@ export class UserService {
     await this.setToken();
 
     const res = await this.api.get('/users/me/offer', {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return JSON.parse(res.data).rows;
   }
@@ -171,7 +173,7 @@ export class UserService {
     await this.setToken();
 
     const res = await this.api.get('/users/me/recommendations', {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return JSON.parse(res.data).rows;
   }

@@ -88,12 +88,17 @@ export class SearchResultsPage implements OnInit {
   private async load(query?: string) {
     // инкрементируем страницу
     this.page += 1;
-    const temp = await this.post.getAll(query || this.query, {
+    const opt = {
       limit: '25',
-      page: this.page,
+      page: Number(this.page).toString(),
       sort: '-rating',
-      custom: (this.activegenres.length !== 0) ? `&genre=${this.activegenres.join(',')}` : ''
-    });
+    };
+
+    if (this.activegenres.length !== 0) {
+      opt['genre'] = this.activegenres.join(',');
+    }
+
+    const temp = await this.post.getAll(query || this.query, { ...opt });
     if (temp.length === 0 && this.page === 1) {
       this.render = [];
       this.page = 0;

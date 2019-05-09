@@ -37,8 +37,7 @@ export class UserPage implements OnInit {
 
     await this.spiner.dismiss();
 
-    await this.firebase.setScreenName('info');
-    await this.firebase.logEvent('select_content', { item_id: this.id, content_type: 'manga' });
+    await this.firebase.setScreenName('user');
   }
 
   private async load(full: boolean = false) {

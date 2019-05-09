@@ -297,10 +297,10 @@
   dependencies:
     "@types/cordova" latest
 
-"@ionic-native/http@^5.0.0-beta.22":
-  version "5.0.0-beta.22"
-  resolved "https://registry.yarnpkg.com/@ionic-native/http/-/http-5.0.0-beta.22.tgz#068b0444e40133ff31b002e1dcaec71e6ec93183"
-  integrity sha512-+uzTRZEP937Unsu75mrYkhuLQ6Ytz6N233gtRHVibxeiva9a5dku6sg3ao05MZHChXCAX474ZYqQjcpUninX+A==
+"@ionic-native/http@^5.5.1":
+  version "5.5.1"
+  resolved "https://registry.yarnpkg.com/@ionic-native/http/-/http-5.5.1.tgz#bbae7ecd0a1cee379243ddc7bcec3cbc10dfefb0"
+  integrity sha512-ByEH8/KMY1VMel4D4lePIJoYdPbMfw7alEyAijlAM4SZMbMhlUppAA+jCxXSa4sB1cL6oTBZ0nSTnEItMs7aqA==
   dependencies:
     "@types/cordova" latest
 
@@ -2366,10 +2366,10 @@ cordova-lib@8.1.1:
     which "^1.3.1"
     xcode "^1.0.0"
 
-cordova-plugin-advanced-http@^2.0.6:
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-advanced-http/-/cordova-plugin-advanced-http-2.0.7.tgz#07b1fdf320f8694eb5cb61de78eeac69e49c0735"
-  integrity sha512-dG7Vsjc64QPna1jFyqmd+q+Hjj9Cpl4Mz8D2ItKfzgAD3as1U9sTbtdUcaw2AZD/qsK1bkLcRdogTmtKFe8L+g==
+cordova-plugin-advanced-http@^2.0.9:
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-advanced-http/-/cordova-plugin-advanced-http-2.0.9.tgz#f255aca67a6c4d100115a47e82dae4bbf85c512b"
+  integrity sha512-JCaDg5+mn+6vv/TAjFb+8PVOPgdx+qN6slrIeukAmxbL/QEO8x1fvHffPd1AAWrgnrn6FVvrbLA14rlKpBKVqg==
 
 cordova-plugin-android-permissions@^1.0.0:
   version "1.0.0"
@@ -2386,17 +2386,16 @@ cordova-plugin-file@^6.0.1:
   resolved "https://registry.yarnpkg.com/cordova-plugin-file/-/cordova-plugin-file-6.0.1.tgz#49606b8c15a5688d4728f92e4a7325a061de07f5"
   integrity sha1-SWBrjBWlaI1HKPkuSnMloGHeB/U=
 
-cordova-plugin-firebase@^2.0.5:
+"cordova-plugin-firebase@git+https://github.com/dpa99c/cordova-plugin-firebase.git#GH-1057-April-05-android-build-issue":
   version "2.0.5"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-firebase/-/cordova-plugin-firebase-2.0.5.tgz#11acfb4784711e62a31f84ae414b1ef601a6afd9"
-  integrity sha512-ArrP/FhqrTu+udu1DNFHIMVdwFl2+IskYPsKXHHougfZ0w9WBgQxubWYHy/ds6fabj/QQaANYPpR7mSVpL6hTg==
+  resolved "git+https://github.com/dpa99c/cordova-plugin-firebase.git#cfc261c32ca346f5c107b6a1b458299390d38d08"
 
 cordova-plugin-ionic-keyboard@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-keyboard/-/cordova-plugin-ionic-keyboard-2.1.3.tgz#6b050d5b7cb4393d5758b55f45a46372f25178fe"
   integrity sha512-6ucQ6FdlLdBm8kJfFnzozmBTjru/0xekHP/dAhjoCZggkGRlgs8TsUJFkxa/bV+qi7Dlo50JjmpE4UMWAO+aOQ==
 
-cordova-plugin-ionic-webview@^2.4.0:
+cordova-plugin-ionic-webview@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/cordova-plugin-ionic-webview/-/cordova-plugin-ionic-webview-2.4.1.tgz#102d258c58e83f540fecf6bd010d53cb3c9cc084"
   integrity sha512-//Ul3P6LbsglY7NaeSgttcR2KRIJ9XAbUCRWlH5SlZE0JZ6Y5hCyS5VX9Wqct04nwJ+rEF3fHv74h/JyRr/BoA==
@@ -2411,7 +2410,7 @@ cordova-plugin-statusbar@^2.4.2:
   resolved "https://registry.yarnpkg.com/cordova-plugin-statusbar/-/cordova-plugin-statusbar-2.4.2.tgz#fc1fbdc0d8d7033a7e8e1f1f7ff167ac9bd4faf6"
   integrity sha1-/B+9wNjXAzp+jh8ff/FnrJvU+vY=
 
-cordova-plugin-telerik-imagepicker@^2.2.3:
+cordova-plugin-telerik-imagepicker@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/cordova-plugin-telerik-imagepicker/-/cordova-plugin-telerik-imagepicker-2.3.2.tgz#cd95b23292893f0ca4e5a22b871a664e27a9673c"
   integrity sha512-YF98mdjv4jtSvY/nyPj2AQpqSLb2HsulHtQFkznjGkcU9gLeNLQutc48gejsFxL7hMKctQHnIHFi1mj20awqJg==
@@ -7408,10 +7407,17 @@ rx-lite@^3.1.2:
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
   integrity sha1-Gc5QLKVyZl87ZHsQk5+X/RYV8QI=
 
-rxjs@6.3.3, rxjs@^6.1.0, rxjs@~6.3.3:
+rxjs@6.3.3, rxjs@^6.1.0:
   version "6.3.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.3.tgz#3c6a7fa420e844a81390fb1158a9ec614f4bad55"
   integrity sha512-JTWmoY9tWCs7zvIk/CvRjhjGaOd+OVBM987mxFo+OW66cGpdKjZcpmc74ES1sB//7Kl/PAe8+wEakuhG4pcgOw==
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.1.tgz#f7a005a9386361921b8524f38f54cbf80e5d08f4"
+  integrity sha512-y0j31WJc83wPu31vS1VlAFW5JGrnGC+j+TtGAa1fRQphy48+fDYiDmX8tjGloToEsMkxnouOg/1IzXGKkJnZMg==
   dependencies:
     tslib "^1.9.0"
 
