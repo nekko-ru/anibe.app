@@ -74,7 +74,7 @@ export class ChatService {
     const url = `/chats/${id}`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return res.data;
   }
@@ -93,7 +93,7 @@ export class ChatService {
     }
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
 
     return res.data.rows;
@@ -121,7 +121,7 @@ export class ChatService {
       body,
       attachments
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return res.data;
   }
@@ -133,8 +133,9 @@ export class ChatService {
   public async getMessages(id: string, page: number = 1): Promise<IMessage[]> {
     this.token = await this.storage.get('token') || '';
 
-    const res = await this.api.get(`/messages/${id}?page=${page}`, {
-      'Authorization': 'Bearer ' + this.token
+    const res = await this.api.get(`/messages/${id}`, {
+      'access_token': this.token,
+      page
     });
 
     return res.data.rows;
@@ -155,7 +156,7 @@ export class ChatService {
       name,
       picture
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return res.data;
   }
@@ -168,7 +169,7 @@ export class ChatService {
     this.token = await this.storage.get('token') || '';
 
     await this.api.delete(`/chats/${chat_id}`, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return true;
   }
@@ -189,7 +190,7 @@ export class ChatService {
       action,
       user_id
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return true;
   }
@@ -211,7 +212,7 @@ export class ChatService {
       name,
       picture
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     return res.data;
   }

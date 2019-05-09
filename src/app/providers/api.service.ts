@@ -1,4 +1,3 @@
-import axios, { AxiosInstance, AxiosPromise } from 'axios';
 import { HTTP } from '@ionic-native/http/ngx';
 
 export interface AxiosSettings {
@@ -27,7 +26,7 @@ export class API {
    * @description переменная для хранения экземпляра класса для работы с http
    * @type {HTTP}
    */
-  private http: AxiosInstance;
+  private http: HTTP;
   /**
    * @private
    * @description содержит ссылку на api
@@ -49,77 +48,76 @@ export class API {
     settings: AxiosSettings
   ) {
     this.settings = settings;
-    if (this.settings.auth) {
-      this.http = axios.create({
-        baseURL: this.baseURL,
-        auth: {
-          username: settings.auth.username,
-          password: settings.auth.password
-        },
-      });
-    } else {
-      this.http = axios.create({ baseURL: this.baseURL, });
+    this.http = new HTTP();
+
+    if (settings.auth) {
+      this.http.useBasicAuth(settings.auth.username, settings.auth.password);
     }
+
+    this.http.setDataSerializer(this.responseType);
   }
 
   /**
    * Выполняет GET запрос к серверу апи
    * @async
    * @param {string} url ссылка на метод без учета базы
-   * @returns {AxiosPromise<any>}
+   * @returns {Promise<any>}
    */
-  public get(url: string, headers: any): AxiosPromise<any> {
-    return this.http.get(url, {
-      headers
-    });
+  public get(url: string, params: any): Promise<any> {
+    return this.http.get(this.baseURL + url, params, {});
   }
   /**
    * Выполняет PUT запрос к серверу апи
    * @async
    * @param url ссылка
-   * @param body тело запроса
-   * @returns {AxiosPromise<any>}
+   * @param data тело запроса
+   * @returns {Promise<any>}
    */
-  public put(url: string, body: any, headers: any): AxiosPromise<any> {
-    return this.http.put(url, {
-      data: body,
-      headers
+  public put(url: string, data: any, params: any): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'put',
+      data,
+      params
     });
   }
   /**
    * Выполняет POST запрос к серверу апи
    * @async
    * @param url ссылка
-   * @param body тело запроса
-   * @returns {AxiosPromise<any>}
+   * @param data тело запроса
+   * @returns {Promise<any>}
    */
-  public post(url: string, body: any, headers: any): AxiosPromise<any> {
-    return this.http.post(url, {
-      ...body
-    }, { ...headers });
+  public post(url: string, data: any, params: any): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'post',
+      data,
+      params
+    });
   }
   /**
    * Выполняет PATCH запрос к серверу апи
    * @async
    * @param url ссылка
    * @param body тело запроса
-   * @returns {AxiosPromise<any>}
+   * @returns {Promise<any>}
    */
-  public patch(url: string, body: any, headers: any): AxiosPromise<any> {
-    return this.http.patch(url, {
-      data: body,
-      headers
+  public patch(url: string, data: any, params: any): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'patch',
+      data,
+      params
     });
   }
   /**
    * Выполняет DELETE запрос к серверу апи
    * @async
    * @param url ссылка
-   * @returns {AxiosPromise<any>}
+   * @returns {Promise<any>}
    */
-  public delete(url: string, headers: any): AxiosPromise<any> {
-    return this.http.delete(url, {
-      headers
+  public delete(url: string, params: any): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'delete',
+      params
     });
   }
 
@@ -128,19 +126,13 @@ export class API {
    * @async
    * @param url ссылка
    * @param body тело запроса
-   * @returns {AxiosPromise<any>}
+   * @returns {Promise<any>}
    */
-  public putFile(url: string, headers: any, file: any): AxiosPromise<any> {
-    const client = new HTTP();
-
-    return client.uploadFile(this.baseURL + url, {}, { ...headers }, file, 'picture');
-
-    // const formData = new FormData();
-    // formData.append('picture', file);
-
-    // return this.http.post(url, {
-    //   data: formData,
-    //   headers
-    // });
+  public putFile(url: string, params: any, file: string): Promise<any> {
+    return this.http.sendRequest(this.baseURL + url, {
+      method: 'upload',
+      filePath: file,
+      params
+    });
   }
 }

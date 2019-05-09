@@ -33,9 +33,9 @@ export class PostService {
     const url = `/posts/${id}`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
-    return res.data;
+    return JSON.parse(res.data);
   }
 
   /**
@@ -47,22 +47,14 @@ export class PostService {
    */
   public async getAll(query: string, params: RequestParam): Promise<IPost[]> {
     this.token = await this.storage.get('token') || '';
-    let url = `/posts?page=${params.page || ''}` +
-    `&limit=${params.limit || ''}&sort=${params.sort || ''}` +
-    `&fields=${params.fields || ''}`;
-
-    if (query) {
-      url += `&q=${query}`;
-    }
-    if (params.custom) {
-      url += params.custom;
-    }
+    const url = `/posts`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token,
+      ...params
     });
 
-    return res.data.rows;
+    return JSON.parse(res.data).rows;
   }
 
   public async addToList(id: string, status: string) {
@@ -72,13 +64,13 @@ export class PostService {
     const res = await this.api.post(url, {
       status
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
     (await this.toast.create({
       message: 'Добавлено',
       duration: 2000
     })).present();
-    return res.data.rows;
+    return JSON.parse(res.data).rows;
   }
 
   public async removeFromList(id: string) {
@@ -86,14 +78,14 @@ export class PostService {
     const url = `/posts/${id}/user-list`;
 
     const res = await this.api.delete(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
 
     (await this.toast.create({
       message: 'Удалено',
       duration: 2000
     })).present();
-    return res.data.rows;
+    return JSON.parse(res.data).rows;
   }
 
   /**
@@ -108,9 +100,9 @@ export class PostService {
       body,
       post_id
     }, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
-    return res.data;
+    return JSON.parse(res.data);
   }
 
   /**
@@ -121,17 +113,17 @@ export class PostService {
     this.token = await this.storage.get('token') || '';
 
     const res = await this.api.get(`/comments/${id}?page=${page}`, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
 
-    return res.data;
+    return JSON.parse(res.data);
   }
 
   public async deleteComment(id: string): Promise<any> {
     this.token = await this.storage.get('token') || '';
 
     await this.api.delete(`/comments/${id}`, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
   }
 }

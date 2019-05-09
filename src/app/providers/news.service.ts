@@ -33,18 +33,20 @@ export class NewsService {
     const url = `/news/${id}`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token
     });
-    return res.data;
+    return JSON.parse(res.data);
   }
 
-  public async getAll(page: number = 1, limit: number = 5): Promise<INewsPost[]> {
+  public async getAll(page: string = '1', limit: string = '5'): Promise<INewsPost[]> {
     this.token = await this.storage.get('token') || '';
-    const url = `/news?page=${page}&limit=${limit}`;
+    const url = `/news`;
 
     const res = await this.api.get(url, {
-      'Authorization': 'Bearer ' + this.token
+      'access_token': this.token,
+      page,
+      limit
     });
-    return res.data.rows;
+    return JSON.parse(res.data).rows;
   }
 }

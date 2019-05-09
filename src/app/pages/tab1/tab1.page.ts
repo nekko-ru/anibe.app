@@ -92,9 +92,10 @@ export class Tab1Page implements OnInit {
 
   async ngOnInit() {
     try {
-      this.lastupdates = await this.post.getAll(null, { limit: '5', sort: '-updatedAt' });
       this.lastnews = await this.news.getAll();
     } catch (e) {
+      console.error(e);
+
       if (e.error === 'advanced-http: please check browser console for error messages') {
         (await this.toast.create({
           message: 'Необходимо интернет соединение!',
