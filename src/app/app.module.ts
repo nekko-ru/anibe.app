@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler, Injectable } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -12,6 +12,20 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConfigProvider } from './providers/config.provider';
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({
+  dsn: 'https://3763f1cfc48e41b391a10055b777f868@sentry.io/1456993'
+});
+
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {}
+  handleError(error) {
+    const eventId = Sentry.captureException(error.originalError || error);
+    Sentry.showReportDialog({ eventId });
+  }
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +41,8 @@ import { ConfigProvider } from './providers/config.provider';
     Firebase,
     ImagePicker,
     ConfigProvider,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: ErrorHandler, useClass: SentryErrorHandler }
   ],
   bootstrap: [AppComponent]
 })

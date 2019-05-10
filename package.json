@@ -29,6 +29,7 @@
     "@ionic/angular": "4.0.0-rc.0",
     "@ionic/pro": "2.0.4",
     "@ionic/storage": "^2.2.0",
+    "@sentry/browser": "^5.2.0",
     "axios": "^0.18.0",
     "cordova": "^8.1.2",
     "cordova-android": "7.1.4",
