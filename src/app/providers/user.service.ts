@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { API } from './api.service';
+import { API, baseURL } from './api.service';
 import { Storage } from '@ionic/storage';
 import { INotif, IPost, IUser } from './interfaces';
+
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -39,16 +41,13 @@ export class UserService {
    * Авторизация и получение токена
    */
   public async auth(username: string, password: string) {
-    const client = new API({
+    const res = await axios.post(baseURL + '/auth', {}, {
       auth: {
         username,
         password
-      }
+      },
     });
-    const res = await client.post('/auth', {}, {});
-
-    this.api = new API({});
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**

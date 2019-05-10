@@ -1,5 +1,12 @@
 import { HTTP } from '@ionic-native/http/ngx';
 
+/**
+ * @private
+ * @description содержит ссылку на api
+ * @type {string}
+*/
+export const baseURL = 'https://api.anibe.ru';
+
 export interface AxiosSettings {
   auth?: {
     username: string,
@@ -29,13 +36,6 @@ export class API {
   private http: HTTP;
   /**
    * @private
-   * @description содержит ссылку на api
-   * @type {string}
-   */
-  private baseURL = 'https://api.anibe.ru';
-  // private baseURL = 'http://127.0.0.1:8080';
-  /**
-   * @private
    * @description тип содержимого ответа и запроса
    */
   private responseType = 'json';
@@ -57,6 +57,11 @@ export class API {
     this.http.setDataSerializer(this.responseType);
   }
 
+  public clearHeaders() {
+    this.http = new HTTP();
+    this.http.setDataSerializer(this.responseType);
+  }
+
   /**
    * Выполняет GET запрос к серверу апи
    * @async
@@ -64,7 +69,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public get(url: string, params: any): Promise<any> {
-    return this.http.get(this.baseURL + url, params, {});
+    return this.http.get(baseURL + url, params, {});
   }
   /**
    * Выполняет PUT запрос к серверу апи
@@ -74,7 +79,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public put(url: string, data: any, params: any): Promise<any> {
-    return this.http.sendRequest(this.baseURL + url, {
+    return this.http.sendRequest(baseURL + url, {
       method: 'put',
       data,
       params
@@ -88,7 +93,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public post(url: string, data: any, params: any): Promise<any> {
-    return this.http.sendRequest(this.baseURL + url, {
+    return this.http.sendRequest(baseURL + url, {
       method: 'post',
       data,
       params
@@ -102,7 +107,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public patch(url: string, data: any, params: any): Promise<any> {
-    return this.http.sendRequest(this.baseURL + url, {
+    return this.http.sendRequest(baseURL + url, {
       method: 'patch',
       data,
       params
@@ -115,7 +120,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public delete(url: string, params: any): Promise<any> {
-    return this.http.sendRequest(this.baseURL + url, {
+    return this.http.sendRequest(baseURL + url, {
       method: 'delete',
       params
     });
@@ -129,7 +134,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public putFile(url: string, params: any, file: string): Promise<any> {
-    return this.http.sendRequest(this.baseURL + url, {
+    return this.http.sendRequest(baseURL + url, {
       method: 'upload',
       filePath: file,
       params

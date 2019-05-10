@@ -37,13 +37,13 @@ export class LoginPage implements OnInit {
     let data: { token: string, user: any };
     try {
       data = await this.user.auth(this.username, this.password);
-      console.log(data);
     } catch (e) {
       console.log(e);
       await toast.present();
       return;
     }
 
+    console.log(this);
     await this.storage.set('token', data.token);
     await this.firebase.logEvent('login', { sign_up_method: 'email' });
     await this.firebase.setUserId(data.user.ud);
