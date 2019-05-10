@@ -36,8 +36,8 @@ export class LoginPage implements OnInit {
 
     let data: { token: string, user: any };
     try {
-      this.user.setAuth(this.username, this.password);
       data = await this.user.auth(this.username, this.password);
+      console.log(data);
     } catch (e) {
       console.log(e);
       await toast.present();

@@ -29,7 +29,7 @@ export class PostService {
    * @returns {Promise<IPostFull>} результат
    */
   public async get(id: string): Promise<IPostFull> {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
     const url = `/posts/${id}`;
 
     const res = await this.api.get(url, {
@@ -46,7 +46,7 @@ export class PostService {
    * @returns {Promise<IPost[]>}
    */
   public async getAll(query: string, params: RequestParam): Promise<IPost[]> {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
     const url = `/posts`;
 
     const res = await this.api.get(url, {
@@ -58,7 +58,7 @@ export class PostService {
   }
 
   public async addToList(id: string, status: string) {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
     const url = `/posts/${id}/user-list`;
 
     const res = await this.api.post(url, {
@@ -74,7 +74,7 @@ export class PostService {
   }
 
   public async removeFromList(id: string) {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
     const url = `/posts/${id}/user-list`;
 
     const res = await this.api.delete(url, {
@@ -94,7 +94,7 @@ export class PostService {
    * @param body тело комента
    */
   public async createComment(post_id: string, body: string) {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
 
     const res = await this.api.post('/comments', {
       body,
@@ -110,7 +110,7 @@ export class PostService {
    * @param {string} id айдишник поста
    */
   public async getComments(id: string, page: number = 1): Promise<IComment[]> {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
 
     const res = await this.api.get(`/comments/${id}?page=${page}`, {
       'access_token': this.token
@@ -120,7 +120,7 @@ export class PostService {
   }
 
   public async deleteComment(id: string): Promise<any> {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
 
     await this.api.delete(`/comments/${id}`, {
       'access_token': this.token

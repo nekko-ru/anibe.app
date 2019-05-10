@@ -29,7 +29,7 @@ export class NewsService {
    * @returns {Promise<INewsPost>} результат
    */
   public async get(id: string): Promise<INewsPost> {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
     const url = `/news/${id}`;
 
     const res = await this.api.get(url, {
@@ -38,8 +38,8 @@ export class NewsService {
     return JSON.parse(res.data);
   }
 
-  public async getAll(page: string = '1', limit: string = '5'): Promise<INewsPost[]> {
-    this.token = await this.storage.get('token') || '';
+  public async getAll(page: string = '1', limit: string = '25'): Promise<INewsPost[]> {
+    this.token = await this.storage.get('token') || 'invalid';
     const url = `/news`;
 
     const res = await this.api.get(url, {

@@ -98,6 +98,10 @@ export class SearchResultsPage implements OnInit {
       opt['genre'] = this.activegenres.join(',');
     }
 
+    if (this.query) {
+      opt['q'] = this.query;
+    }
+
     const temp = await this.post.getAll(query || this.query, { ...opt });
     if (temp.length === 0 && this.page === 1) {
       this.render = [];

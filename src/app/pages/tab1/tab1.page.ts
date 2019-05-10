@@ -93,6 +93,9 @@ export class Tab1Page implements OnInit {
   async ngOnInit() {
     try {
       this.lastnews = await this.news.getAll();
+      if (this.storage.get('token')) {
+        this.recommendations = await this.user.getOffer();
+      }
     } catch (e) {
       console.error(e);
 
@@ -102,9 +105,6 @@ export class Tab1Page implements OnInit {
           duration: 5000
         })).present();
       }
-    }
-    if (this.storage.get('token')) {
-      this.recommendations = await this.user.getOffer();
     }
   }
 

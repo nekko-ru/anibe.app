@@ -23,15 +23,6 @@ export class UserService {
     this.token = await this.storage.get('token');
   }
 
-  public setAuth(u: string, p: string) {
-    this.api = new API({
-      auth: {
-        username: u,
-        password: p
-      }
-    });
-  }
-
   public async reg(v: { email: string, name: string, password: string, picture?: string }) {
     const url = `/users`;
 
@@ -48,13 +39,13 @@ export class UserService {
    * Авторизация и получение токена
    */
   public async auth(username: string, password: string) {
-    this.api = new API({
+    const client = new API({
       auth: {
         username,
         password
       }
     });
-    const res = await this.api.post('/auth', {}, {});
+    const res = await client.post('/auth', {}, {});
 
     this.api = new API({});
     return JSON.parse(res.data);

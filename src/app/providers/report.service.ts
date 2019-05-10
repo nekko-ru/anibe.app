@@ -28,7 +28,7 @@ export class ReportService {
    * @returns {Promise<IPostFull>} результат
    */
   public async send(body: IReportBody): Promise<any> {
-    this.token = await this.storage.get('token') || '';
+    this.token = await this.storage.get('token') || 'invalid';
 
     const res = await this.api.post('/reports', {
       ...body,
