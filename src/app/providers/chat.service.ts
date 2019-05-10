@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { API } from './api.service';
+import { API, baseURL } from './api.service';
 import { IPostFull, RequestParam, IPost, IComment, IChat, IMessage } from './interfaces';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
+import axios from 'axios';
 
 const SERVER_URL = 'https://api.anibe.ru';
 // const SERVER_URL = 'http://127.0.0.1:2300';
@@ -117,13 +118,12 @@ export class ChatService {
   ): Promise<any> {
     this.token = await this.storage.get('token') || 'invalid';
 
-    const res = await this.api.post(`/messages/${chat_id}`, {
+    const res = await axios.post(baseURL + `/messages/${chat_id}`, {
       body,
-      attachments
-    }, {
+      attachments,
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -135,7 +135,7 @@ export class ChatService {
 
     const res = await this.api.get(`/messages/${id}`, {
       'access_token': this.token,
-      page
+      page: Number(page).toString()
     });
 
     return JSON.parse(res.data).rows;
@@ -152,13 +152,12 @@ export class ChatService {
   ): Promise<any> {
     this.token = await this.storage.get('token') || 'invalid';
 
-    const res = await this.api.post(`/chats`, {
+    const res = await axios.post(baseURL + `/chats`, {
       name,
-      picture
-    }, {
+      picture,
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -186,10 +185,9 @@ export class ChatService {
   ): Promise<any> {
     this.token = await this.storage.get('token') || 'invalid';
 
-    await this.api.post(`/chats/${chat_id}/actions`, {
+    await axios.post(baseURL + `/chats/${chat_id}`, {
       action,
-      user_id
-    }, {
+      user_id,
       'access_token': this.token
     });
     return true;
@@ -208,12 +206,11 @@ export class ChatService {
   ): Promise<any> {
     this.token = await this.storage.get('token') || 'invalid';
 
-    const res = await this.api.put(`/chats/${chat_id}`, {
+    const res = await axios.put(baseURL + `/chats/${chat_id}`, {
       name,
-      picture
-    }, {
+      picture,
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 }

@@ -97,12 +97,13 @@ export class UserService {
    */
   public async update(body: any) {
     await this.setToken();
-    const url = `/users/me`;
-
-    const res = await this.api.put(url, body, {
-      'access_token': this.token
+    const res = await axios.post(baseURL + `/users/me`, body, {
+      headers: {
+        'Authorization': 'Bearer ' + this.token
+      }
     });
-    return JSON.parse(res.data);
+
+    return res.data;
   }
   public async updateAvatar(file: any) {
     await this.setToken();
@@ -117,18 +118,15 @@ export class UserService {
   public async addFCM(token: string) {
     await this.setToken();
 
-    const res = await this.api.post('/users/me/fcm', { token }, {
-      'access_token': this.token
-    });
+    const res = await axios.post(baseURL + '/users/me/fcm', { token, 'access_token': this.token });
   }
 
   public async updateFCM(newtoken: string, oldtoken: string) {
     await this.setToken();
 
-    const res = await this.api.put('/users/me/fcm', {
+    await axios.put(baseURL + `/users/me/fcm`, {
       new: newtoken,
-      old: oldtoken
-    }, {
+      old: oldtoken,
       'access_token': this.token
     });
   }

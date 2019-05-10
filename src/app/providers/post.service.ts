@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { API } from './api.service';
+import { API, baseURL } from './api.service';
 import { IPostFull, RequestParam, IPost, IComment } from './interfaces';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
+import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -61,16 +62,15 @@ export class PostService {
     this.token = await this.storage.get('token') || 'invalid';
     const url = `/posts/${id}/user-list`;
 
-    const res = await this.api.post(url, {
-      status
-    }, {
+    const res = await axios.post(baseURL + url, {
+      status,
       'access_token': this.token
     });
     (await this.toast.create({
       message: 'Добавлено',
       duration: 2000
     })).present();
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   public async removeFromList(id: string) {
@@ -96,13 +96,12 @@ export class PostService {
   public async createComment(post_id: string, body: string) {
     this.token = await this.storage.get('token') || 'invalid';
 
-    const res = await this.api.post('/comments', {
+    const res = await axios.post(baseURL + `/comments`, {
       body,
-      post_id
-    }, {
+      post_id,
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**

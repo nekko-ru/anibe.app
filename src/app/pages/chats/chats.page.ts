@@ -60,6 +60,7 @@ export class ChatsPage implements OnInit {
   public async remove(id: string) {
     await this.cs.deleteChat(id);
     await this.load();
+    await this.slidingList.closeOpened();
   }
 
   private async load(): Promise<any> {
@@ -67,5 +68,14 @@ export class ChatsPage implements OnInit {
       await this.slidingList.closeOpened();
     }
     this.chats = await this.cs.getAll();
+  }
+
+  public async ionViewWillLeave() {
+    // заглушка, иногда пользователь не использует у коментов доп кнопки
+    try {
+      await this.slidingList.closeOpened();
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
