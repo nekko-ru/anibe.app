@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -136,7 +136,6 @@ export class SearchParamsPage implements OnInit {
   private changed = false;
 
   constructor(
-    navParams: NavParams,
     private modalController: ModalController,
     private storage: Storage
   ) { }
