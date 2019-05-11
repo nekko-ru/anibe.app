@@ -64,6 +64,7 @@ export class ChatIdPage implements OnInit {
 
   public ionViewWillLeave() {
     this.chatpipe.unsubscribe();
+    this.cs.closeConn();
   }
 
   public goBack() {
@@ -84,7 +85,7 @@ export class ChatIdPage implements OnInit {
     //   .catch(() => event.target.cansel());
   }
 
-  public async msgmenu(event: any) {
+  public async msgmenu(_event: any) {
     console.log(this);
   }
 

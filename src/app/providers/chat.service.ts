@@ -17,7 +17,7 @@ export class ChatService {
    */
   private api: API;
   private token: string;
-  private socket: any;
+  private socket: SocketIOClient.Socket;
 
   constructor(
     private storage: Storage  ) {
@@ -53,10 +53,17 @@ export class ChatService {
           this.socket.on('new_message', (data: IMessage) => observer.next(data));
       });
   }
-  public onEvent(event: Event): Observable<any> {
+  public onEvent(event: string): Observable<any> {
       return new Observable<Event>((observer: { next: () => void; }) => {
           this.socket.on(event, () => observer.next());
       });
+  }
+
+  public closeConn(): Observable<any> {
+    return new Observable<Event>((observer: { next: () => void; }) => {
+        this.socket.close()
+        observer.next();
+    });
   }
 
   /**
