@@ -32,7 +32,7 @@ export class API {
    * @description содержит ссылку на api
    * @type {string}
   */
-  private baseURL: string = 'https://api.anibe.ru';
+  private baseURL = 'https://api.anibe.ru';
 
   /**
    * @constructor

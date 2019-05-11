@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
 import { IChat, IUser } from 'src/app/providers/interfaces';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { ChatService } from 'src/app/providers/chat.service';
 import { UserService } from 'src/app/providers/user.service';
 
@@ -21,7 +20,6 @@ export class ChatCreatePage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private imagePicker: ImagePicker,
     private toast: ToastController,
     private chat: ChatService,
     private user: UserService
@@ -44,33 +42,11 @@ export class ChatCreatePage implements OnInit {
     if (this.info) {
       await this.chat.editChat(this.info.id, this.info.name, this.info.picture);
     } else {
-      await this.chat.createChat(this.name, this.picture);
+      await this.chat.createChat(this.name, this.info.picture);
     }
     console.log(this);
 
     this.modalController.dismiss();
-  }
-
-  public async pickImage() {
-    if (!await this.imagePicker.hasReadPermission()) {
-      await this.imagePicker.requestReadPermission();
-
-      (await this.toast.create({
-        message: 'Попробуйте снова',
-        duration: 2000
-      })).present();
-      return;
-    }
-    const result = await this.imagePicker.getPictures({
-      maximumImagesCount: 1
-    });
-
-    // this.picture = await this.user.updateAvatar(result[0]);
-
-    (await this.toast.create({
-      message: 'Ваша аватарка успешно загружена и скоро обновиться (наверно)',
-      duration: 5000
-    })).present();
   }
 
   public async remove(id: string) {

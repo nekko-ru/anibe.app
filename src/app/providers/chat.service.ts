@@ -61,7 +61,7 @@ export class ChatService {
 
   public closeConn(): Observable<any> {
     return new Observable<Event>((observer: { next: () => void; }) => {
-        this.socket.close()
+        this.socket.close();
         observer.next();
     });
   }
@@ -90,7 +90,7 @@ export class ChatService {
    */
   public async getAll(query?: string): Promise<IChat[]> {
     this.token = await this.storage.get('token') || 'invalid';
-    let url = `/chats`;
+    const url = `/chats`;
 
     const res = await this.api.get(url, {
       q: query,
