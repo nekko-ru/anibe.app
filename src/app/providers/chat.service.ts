@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { API, baseURL } from './api.service';
-import { IPostFull, RequestParam, IPost, IComment, IChat, IMessage } from './interfaces';
+import { API } from './api.service';
+import { IChat, IMessage } from './interfaces';
 import { Storage } from '@ionic/storage';
-import { ToastController } from '@ionic/angular';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 
@@ -18,13 +17,10 @@ export class ChatService {
    */
   private api: API;
   private token: string;
-  private ready: Promise<any>;
   private socket: any;
 
   constructor(
-    private storage: Storage,
-    private toast: ToastController
-  ) {
+    private storage: Storage  ) {
     this.api = new API({  });
   }
 

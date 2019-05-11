@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { API, baseURL } from './api.service';
+import { API } from './api.service';
 import { IPostFull, RequestParam, IPost, IComment } from './interfaces';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';

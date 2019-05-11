@@ -1,12 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
 
-/**
- * @private
- * @description содержит ссылку на api
- * @type {string}
-*/
-export const baseURL = 'https://api.anibe.ru';
-
 export interface AxiosSettings {
   auth?: {
     username: string,
@@ -20,23 +13,26 @@ export interface AxiosSettings {
  * @class
  */
 export class API {
-  /**
-   * @private
-   * @description параметры для установки http соединения
-   * @type {AxiosSettings}
-   */
-  private settings: AxiosSettings;
+
   /**
    * @private
    * @description переменная для хранения экземпляра класса для работы с http
    * @type {HTTP}
    */
   private http: AxiosInstance;
+
   /**
    * @private
    * @description тип содержимого ответа и запроса
    */
   private responseType = 'json';
+
+  /**
+   * @private
+   * @description содержит ссылку на api
+   * @type {string}
+  */
+  private baseURL: string = 'https://api.anibe.ru';
 
   /**
    * @constructor
@@ -45,9 +41,8 @@ export class API {
   constructor(
     settings: AxiosSettings
   ) {
-    this.settings = settings;
     this.http = axios.create({
-      baseURL: baseURL,
+      baseURL: this.baseURL,
       timeout: 1000,
       responseType: this.responseType,
       ...settings
@@ -62,7 +57,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public auth(url: string, username: string, password: string): Promise<any> {
-    return this.http.post(url, {
+    return this.http.post(url, {}, {
       auth: {
         username,
         password
@@ -90,9 +85,8 @@ export class API {
    */
   public put(url: string, data: any, params: any): Promise<any> {
     return this.http.put(url, {
-      data,
-      params
-    });
+      ...data,
+    }, { params });
   }
   /**
    * Выполняет POST запрос к серверу апи
@@ -103,9 +97,8 @@ export class API {
    */
   public post(url: string, data: any, params: any): Promise<any> {
     return this.http.post(url, {
-      data,
-      params
-    });
+      ...data,
+    }, { params });
   }
   /**
    * Выполняет PATCH запрос к серверу апи
@@ -116,9 +109,8 @@ export class API {
    */
   public patch(url: string, data: any, params: any): Promise<any> {
     return this.http.patch(url, {
-      data,
-      params
-    });
+      ...data,
+    }, { params });
   }
   /**
    * Выполняет DELETE запрос к серверу апи
@@ -127,8 +119,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public delete(url: string, params: any): Promise<any> {
-    return this.http.patch(url, {
-      method: 'delete',
+    return this.http.delete(url, {
       params
     });
   }
@@ -140,7 +131,7 @@ export class API {
    * @param body тело запроса
    * @returns {Promise<any>}
    */
-  public putFile(url: string, params: any, file: string): Promise<any> {
+  public putFile(url: string, params: any, _file: string): Promise<any> {
     return this.http.post(url, {
       params
     });

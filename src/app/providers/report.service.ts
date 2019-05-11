@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { API, baseURL } from './api.service';
+import { API } from './api.service';
 import { Storage } from '@ionic/storage';
 
 @Injectable({

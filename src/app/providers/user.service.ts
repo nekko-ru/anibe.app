@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { API, baseURL } from './api.service';
+import { API } from './api.service';
 import { Storage } from '@ionic/storage';
 import { INotif, IPost, IUser } from './interfaces';
 
@@ -90,7 +90,7 @@ export class UserService {
    */
   public async update(body: any) {
     await this.setToken();
-    const res = await this.api.post(`/users/me`, body, {
+    const res = await this.api.put(`/users/me`, body, {
       'access_token': this.token
     });
 
