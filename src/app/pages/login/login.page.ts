@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 import { UserService } from 'src/app/providers/user.service';
 import { ToastController } from '@ionic/angular';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { ConfigProvider } from 'src/app/providers/config.provider';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +19,6 @@ export class LoginPage implements OnInit {
     private router: Router,
     private user: UserService,
     private toastController: ToastController,
-    private cfg: ConfigProvider,
     private firebase: Firebase
   ) { }
 
@@ -52,13 +50,6 @@ export class LoginPage implements OnInit {
   }
 
   async gotoreg() {
-    if (await this.cfg.getValue('enable_registration') === 'true') {
-      await this.router.navigateByUrl('/register');
-    } else {
-      (await this.toastController.create({
-        message: `Регистрация отключена!`,
-        duration: 5000
-      })).present();
-    }
+    await this.router.navigateByUrl('/register');
   }
 }

@@ -3,7 +3,6 @@ import { UserService } from 'src/app/providers/user.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { NavController, ToastController } from '@ionic/angular';
-import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
@@ -24,7 +23,6 @@ export class SettingsPage implements OnInit {
     private storage: Storage,
     private toast: ToastController,
     private navController: NavController,
-    private imagePicker: ImagePicker,
     private firebase: Firebase
   ) { }
 
@@ -35,35 +33,6 @@ export class SettingsPage implements OnInit {
     this.enablefcm = (await this.storage.get('enablefcm')) || true;
 
     await this.firebase.setScreenName('settings');
-  }
-
-  public async pickImage() {
-    (await this.toast.create({
-      message: 'Загрузка временно отключена',
-      duration: 5000
-    })).present();
-    return;
-    if (!await this.imagePicker.hasReadPermission()) {
-      await this.imagePicker.requestReadPermission();
-
-      (await this.toast.create({
-        message: 'Попробуйте снова',
-        duration: 2000
-      })).present();
-      return;
-    }
-    const result = await this.imagePicker.getPictures({
-      maximumImagesCount: 1
-    });
-
-    this.info = await this.user.updateAvatar('result[0]');
-
-    await this.storage.set('user_local', this.info);
-
-    (await this.toast.create({
-      message: 'Ваша аватарка успешно загружена и скоро обновиться',
-      duration: 5000
-    })).present();
   }
 
   private async load() {

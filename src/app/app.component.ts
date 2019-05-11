@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ConfigProvider } from './providers/config.provider';
 
 import 'hammerjs';
 import { Firebase } from '@ionic-native/firebase/ngx';
@@ -18,7 +17,6 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private remote_config: ConfigProvider,
     private firebase: Firebase,
     private router: Router,
     private toastController: ToastController
@@ -30,7 +28,6 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
-      this.remote_config.initialize();
 
       this.firebase.onNotificationOpen()
         .subscribe(async data => {

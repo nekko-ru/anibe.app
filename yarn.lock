@@ -316,13 +316,6 @@
   dependencies:
     "@types/cordova" latest
 
-"@ionic-native/image-picker@^5.1.0":
-  version "5.5.1"
-  resolved "https://registry.yarnpkg.com/@ionic-native/image-picker/-/image-picker-5.5.1.tgz#7379e7c4c1d754f2dedc876c892630c1352eccf0"
-  integrity sha512-5hF/bXiqWFtliFt/xqXno9oRj0e8UZnK+c1Dnts+mxiJBvv2vHNNJgjFbsNzjscxEInvyvaNGDLXrJu2BPL7mQ==
-  dependencies:
-    "@types/cordova" latest
-
 "@ionic-native/splash-screen@5.0.0-beta.21":
   version "5.0.0-beta.21"
   resolved "https://registry.yarnpkg.com/@ionic-native/splash-screen/-/splash-screen-5.0.0-beta.21.tgz#4cd961351e6cd60320ece1ecfd83d629b00d234d"
@@ -7610,7 +7603,7 @@ rxjs@6.3.3:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@^6.1.0, rxjs@^6.4.0, rxjs@^6.5.1:
+rxjs@^6.1.0, rxjs@^6.4.0, rxjs@^6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.2.tgz#2e35ce815cd46d84d02a209fb4e5921e051dbec7"
   integrity sha512-HUb7j3kvb7p7eCUHE3FqjoDsC1xfZQ4AHFWfTKSpZ+sAhhz5X1WX0ZuUqWbzB2QhSLp3DoLUG+hMdEDKqWo2Zg==

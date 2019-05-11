@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { PostService } from 'src/app/providers/post.service';
 import { IPost, INewsPost } from 'src/app/providers/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { ConfigProvider } from '../../providers/config.provider';
 import { ToastController } from '@ionic/angular';
 import { NewsService } from 'src/app/providers/news.service';
 import { Storage } from '@ionic/storage';
