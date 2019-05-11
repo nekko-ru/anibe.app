@@ -24,7 +24,11 @@
       <div class="msg-detail">
         <div class="msg-info">
           <p>
-            {{ msg.user.name }}&nbsp;&nbsp;&nbsp;{{ msg.createdAt | date:'dd.MM, HH:mm'}}
+            {{ msg.user.name }}
+            <ion-text color="danger" *ngIf="msg.user.role !== 'user'">
+              {{ msg.user.role }}
+            </ion-text>
+            &nbsp;&nbsp;&nbsp;{{ msg.createdAt | date:'dd.MM, HH:mm'}}
           </p>
         </div>
         <div class="msg-content">
