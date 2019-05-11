@@ -23,13 +23,17 @@
             Загрузить
           </ion-button> -->
           <div class="avatar-upload">
-            <div class="avatar-edit" (click)="pickImage()">
+            <!-- <div class="avatar-edit" (click)="pickImage()">
               <ion-icon name="create"></ion-icon>
-            </div>
+            </div> -->
             <div class="avatar-preview">
               <div id="imagePreview" [ngStyle]="{'background-image': 'url('+info.picture+')'}"></div>
             </div>
           </div>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Ссылка на аватарку: </ion-label>
+          <ion-input [(ngModel)]="info.picture" type="text"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label>Ник: </ion-label>

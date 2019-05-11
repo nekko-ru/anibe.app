@@ -12,10 +12,14 @@
 <ion-content padding>
   <ion-list>
     <ion-item lines="none">
-      <ion-img [src]="picture" slot="start" style="max-width: 150px;max-height: 150px;"></ion-img>
-      <ion-button (click)="pickImage()" slot="end">
+      <ion-img [src]="info.picture" slot="start" style="max-width: 150px;max-height: 150px;"></ion-img>
+      <!-- <ion-button (click)="pickImage()" slot="end">
         Загрузить
-      </ion-button>
+      </ion-button> -->
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Ссылка на аватарку: </ion-label>
+      <ion-input [(ngModel)]="info.picture" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floating">Название чата</ion-label>
