@@ -14,7 +14,6 @@ export class ChatCreatePage implements OnInit {
   @Input() public info?: IChat;
   @Input() public title: string;
   public name: string;
-  public picture = 'https://avatars.mds.yandex.net/get-pdb/1532603/ac56ac6f-b354-4c5b-bf06-533910e0fae8/s1200';
 
   public users: IUser[] = [];
   public selectedUsers: IUser[] = [];
@@ -31,11 +30,13 @@ export class ChatCreatePage implements OnInit {
   ngOnInit() {
     if (this.info) {
       this.name = this.info.name;
-      this.picture = this.info.picture;
 
       this.info.users.forEach(async (id: string) => {
         this.users.push(await this.user.get(id));
       });
+    } else {
+      // set default chat image
+      this.info.picture = 'https://avatars.mds.yandex.net/get-pdb/1532603/ac56ac6f-b354-4c5b-bf06-533910e0fae8/s1200';
     }
   }
 
