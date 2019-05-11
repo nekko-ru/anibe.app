@@ -42,7 +42,7 @@ export class SearchResultsPage implements OnInit {
     await modal.present();
     const result = await modal.onDidDismiss();
 
-    if (!result.data.changed) {
+    if (result.data && !result.data.changed) {
       // отменяем запрос, только если предыдущий выбор жанров был таким же
       return;
     }
