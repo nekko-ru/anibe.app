@@ -35,7 +35,7 @@ export class NewsService {
     const res = await this.api.get(url, {
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   public async getAll(page: string = '1', limit: string = '25'): Promise<INewsPost[]> {
@@ -47,6 +47,6 @@ export class NewsService {
       page,
       limit
     });
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 }

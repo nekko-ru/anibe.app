@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConfigProvider } from './providers/config.provider';
 import * as Sentry from '@sentry/browser';
+import { environment } from '../environments/environment';
 
 Sentry.init({
   dsn: 'https://3763f1cfc48e41b391a10055b777f868@sentry.io/1456993'
@@ -24,7 +25,9 @@ export class SentryErrorHandler implements ErrorHandler {
   handleError(error) {
     const eventId = Sentry.captureException(error.originalError || error);
     console.error(error);
-    Sentry.showReportDialog({ eventId });
+    if (environment.production) {
+      Sentry.showReportDialog({ eventId });
+    }
   }
 }
 

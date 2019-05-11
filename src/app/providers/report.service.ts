@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { API, baseURL } from './api.service';
 import { Storage } from '@ionic/storage';
-import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -31,9 +30,10 @@ export class ReportService {
   public async send(body: IReportBody): Promise<any> {
     this.token = await this.storage.get('token') || 'invalid';
 
-    const res = await axios.post(baseURL + `/reports`, {
+    const res = await this.api.post(`/reports`, {
       ...body,
       status: 'Created',
+    }, {
       'access_token': this.token
     });
     return res.data;

@@ -3,7 +3,6 @@ import { API, baseURL } from './api.service';
 import { IPostFull, RequestParam, IPost, IComment } from './interfaces';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
-import axios from 'axios';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +35,7 @@ export class PostService {
     const res = await this.api.get(url, {
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -55,15 +54,14 @@ export class PostService {
       ...params
     });
 
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   public async addToList(id: string, status: string) {
     this.token = await this.storage.get('token') || 'invalid';
-    const url = `/posts/${id}/user-list`;
-
-    const res = await axios.post(baseURL + url, {
+    const res = await this.api.post(`/posts/${id}/user-list`, {
       status,
+    }, {
       'access_token': this.token
     });
     (await this.toast.create({
@@ -85,7 +83,7 @@ export class PostService {
       message: 'Удалено',
       duration: 2000
     })).present();
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   /**
@@ -96,9 +94,10 @@ export class PostService {
   public async createComment(post_id: string, body: string) {
     this.token = await this.storage.get('token') || 'invalid';
 
-    const res = await axios.post(baseURL + `/comments`, {
+    const res = await this.api.post(`/comments`, {
       body,
       post_id,
+    }, {
       'access_token': this.token
     });
     return res.data;
@@ -115,7 +114,7 @@ export class PostService {
       'access_token': this.token
     });
 
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   public async deleteComment(id: string): Promise<any> {

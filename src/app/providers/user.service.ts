@@ -3,8 +3,6 @@ import { API, baseURL } from './api.service';
 import { Storage } from '@ionic/storage';
 import { INotif, IPost, IUser } from './interfaces';
 
-import axios from 'axios';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -34,19 +32,14 @@ export class UserService {
       name: v.name,
       picture: v.picture
     }, {});
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
    * Авторизация и получение токена
    */
   public async auth(username: string, password: string) {
-    const res = await axios.post(baseURL + '/auth', {}, {
-      auth: {
-        username,
-        password
-      },
-    });
+    const res = await this.api.auth('/auth', username, password);
     return res.data;
   }
 
@@ -60,7 +53,7 @@ export class UserService {
     const res = await this.api.get(url, {
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -74,7 +67,7 @@ export class UserService {
     const res = await this.api.get(url, {
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -88,7 +81,7 @@ export class UserService {
     const res = await this.api.get(url, {
       'access_token': this.token
     });
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   /**
@@ -97,10 +90,8 @@ export class UserService {
    */
   public async update(body: any) {
     await this.setToken();
-    const res = await axios.post(baseURL + `/users/me`, body, {
-      headers: {
-        'Authorization': 'Bearer ' + this.token
-      }
+    const res = await this.api.post(`/users/me`, body, {
+      'access_token': this.token
     });
 
     return res.data;
@@ -112,21 +103,26 @@ export class UserService {
     const res = await this.api.putFile(url, {
       'access_token': this.token
     }, file);
-    return JSON.parse(res.data);
+    return res.data;
   }
 
   public async addFCM(token: string) {
     await this.setToken();
 
-    const res = await axios.post(baseURL + '/users/me/fcm', { token, 'access_token': this.token });
+    const res = await this.api.post('/users/me/fcm', {
+      token,
+    }, {
+      'access_token': this.token
+    });
   }
 
   public async updateFCM(newtoken: string, oldtoken: string) {
     await this.setToken();
 
-    await axios.put(baseURL + `/users/me/fcm`, {
+    await this.api.put(`/users/me/fcm`, {
       new: newtoken,
       old: oldtoken,
+    }, {
       'access_token': this.token
     });
   }
@@ -139,7 +135,7 @@ export class UserService {
       page,
       limit
     });
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   /**
@@ -151,7 +147,7 @@ export class UserService {
     const res = await this.api.get('/users/me/offer', {
       'access_token': this.token
     });
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 
   /**
@@ -163,6 +159,6 @@ export class UserService {
     const res = await this.api.get('/users/me/recommendations', {
       'access_token': this.token
     });
-    return JSON.parse(res.data).rows;
+    return res.data.rows;
   }
 }

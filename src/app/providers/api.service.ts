@@ -1,4 +1,4 @@
-import { HTTP } from '@ionic-native/http/ngx';
+import axios, { AxiosInstance } from 'axios';
 
 /**
  * @private
@@ -12,8 +12,6 @@ export interface AxiosSettings {
     username: string,
     password: string,
   };
-  baseURL?: string;
-  responseType?: string;
 }
 
 /**
@@ -33,7 +31,7 @@ export class API {
    * @description переменная для хранения экземпляра класса для работы с http
    * @type {HTTP}
    */
-  private http: HTTP;
+  private http: AxiosInstance;
   /**
    * @private
    * @description тип содержимого ответа и запроса
@@ -48,18 +46,28 @@ export class API {
     settings: AxiosSettings
   ) {
     this.settings = settings;
-    this.http = new HTTP();
-
-    if (settings.auth) {
-      this.http.useBasicAuth(settings.auth.username, settings.auth.password);
-    }
-
-    this.http.setDataSerializer(this.responseType);
+    this.http = axios.create({
+      baseURL: baseURL,
+      timeout: 1000,
+      responseType: this.responseType,
+      ...settings
+    });
   }
 
-  public clearHeaders() {
-    this.http = new HTTP();
-    this.http.setDataSerializer(this.responseType);
+  /**
+   * Выполняет POST с авторизацией
+   * @async
+   * @param url ссылка
+   * @param data тело запроса
+   * @returns {Promise<any>}
+   */
+  public auth(url: string, username: string, password: string): Promise<any> {
+    return this.http.post(url, {
+      auth: {
+        username,
+        password
+      }
+    });
   }
 
   /**
@@ -69,7 +77,9 @@ export class API {
    * @returns {Promise<any>}
    */
   public get(url: string, params: any): Promise<any> {
-    return this.http.get(baseURL + url, params, {});
+    return this.http.get(url, {
+      params,
+    });
   }
   /**
    * Выполняет PUT запрос к серверу апи
@@ -79,8 +89,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public put(url: string, data: any, params: any): Promise<any> {
-    return this.http.sendRequest(baseURL + url, {
-      method: 'put',
+    return this.http.put(url, {
       data,
       params
     });
@@ -93,8 +102,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public post(url: string, data: any, params: any): Promise<any> {
-    return this.http.sendRequest(baseURL + url, {
-      method: 'post',
+    return this.http.post(url, {
       data,
       params
     });
@@ -107,8 +115,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public patch(url: string, data: any, params: any): Promise<any> {
-    return this.http.sendRequest(baseURL + url, {
-      method: 'patch',
+    return this.http.patch(url, {
       data,
       params
     });
@@ -120,7 +127,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public delete(url: string, params: any): Promise<any> {
-    return this.http.sendRequest(baseURL + url, {
+    return this.http.patch(url, {
       method: 'delete',
       params
     });
@@ -134,9 +141,7 @@ export class API {
    * @returns {Promise<any>}
    */
   public putFile(url: string, params: any, file: string): Promise<any> {
-    return this.http.sendRequest(baseURL + url, {
-      method: 'upload',
-      filePath: file,
+    return this.http.post(url, {
       params
     });
   }
