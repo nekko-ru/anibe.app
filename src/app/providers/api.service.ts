@@ -43,7 +43,7 @@ export class API {
   ) {
     this.http = axios.create({
       baseURL: this.baseURL,
-      timeout: 1000,
+      timeout: 5000,
       responseType: this.responseType,
       ...settings
     });
