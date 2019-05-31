@@ -89,4 +89,5 @@
     <plugin name="cordova-plugin-firebase" spec="https://github.com/dpa99c/cordova-plugin-firebase#GH-1057-April-05-android-build-issue" />
     <content src="index.html" />
     <engine name="android" spec="7.1.4" />
+    <engine name="browser" spec="~5.0.4" />
 </widget>
