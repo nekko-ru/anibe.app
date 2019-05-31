@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/providers/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { NavController, ToastController } from '@ionic/angular';
@@ -15,7 +15,7 @@ export class SettingsPage implements OnInit {
   public showProfile: boolean;
   public toDay = new Date();
 
-  public preload_img: boolean;
+  public preload_img = true;
   public enablefcm: boolean;
 
   constructor(
@@ -29,7 +29,7 @@ export class SettingsPage implements OnInit {
   async ngOnInit() {
     this.load();
 
-    this.preload_img = (await this.storage.get('image_preload'));
+    this.preload_img = (await this.storage.get('image_preload')) || true;
     this.enablefcm = (await this.storage.get('enablefcm')) || true;
 
     await this.firebase.setScreenName('settings');
@@ -55,7 +55,7 @@ export class SettingsPage implements OnInit {
       await this.storage.set('user_local', this.info);
 
       // go to profile
-      this.navController.goBack();
+      this.navController.back();
     } catch (e) {
       console.warn(e);
       (await this.toast.create({

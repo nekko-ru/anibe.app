@@ -24,6 +24,11 @@
                 "glob": "**/*",
                 "input": "src/assets",
                 "output": "assets"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "node_modules/ionicons/dist/ionicons/svg",
+                "output": "./svg"
               }
             ],
             "styles": [
@@ -32,9 +37,13 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "src/app/app.scss"
               }
             ],
-            "scripts": []
+            "scripts": [],
+            "es5BrowserSupport": true
           },
           "configurations": {
             "production": {
@@ -159,6 +168,9 @@
             "devServerTarget": "app:serve"
           },
           "configurations": {
+            "production": {
+              "devServerTarget": "app:serve:production"
+            },
             "ci": {
               "devServerTarget": "app:serve:ci"
             }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/providers/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { INotif } from 'src/app/providers/interfaces';
+import { INotif } from 'src/app/services/interfaces';
 import { Storage } from '@ionic/storage';
 
 @Component({

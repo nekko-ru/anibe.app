@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, ModalController, ActionSheetController } from '@ionic/angular';
-import { IPostFull } from 'src/app/providers/interfaces';
-import { PostService } from 'src/app/providers/post.service';
+import { IPostFull } from 'src/app/services/interfaces';
+import { PostService } from 'src/app/services/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Storage } from '@ionic/storage';
-import { UserService } from 'src/app/providers/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { ReportPage } from 'src/app/modal/report/report.page';
 
 @Component({

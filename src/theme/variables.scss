@@ -74,14 +74,6 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
-
-  /** dark theme **/
-  // --ion-background-color: var(--ion-color-dark-tint);
-  // --ion-text-color: var(--ion-color-light);
-  // --ion-backdrop-color: var(--ion-color-light);
-  // --ion-tab-bar-background: var(--ion-color-dark-shade);
-  // --ion-tab-bar-color: var(--ion-color-light);
-  // --ion-toolbar-background: var(--ion-color-dark-shade);
-  // --ion-item-color: var(--ion-color-light);
-  // --ion-placeholder-color: var(--ion-color-light);
 }
+
+@import './dark.theme.scss';

@@ -1,13 +1,16 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>Центр уведомлений</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullpage>
   <ion-refresher slot="fixed" (ionRefresh)="load($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Потяните вниз для обновления" refreshingSpinner="crescent"
-      refreshingText="Обновление...">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Потяните вниз для обновления"
+      refreshingSpinner="crescent" refreshingText="Обновление...">
     </ion-refresher-content>
   </ion-refresher>
 

@@ -4,8 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
 import { SelectChapterPage } from '../select-chapter/select-chapter.page';
-import { IPostFull } from 'src/app/providers/interfaces';
-import { PostService } from 'src/app/providers/post.service';
+import { IPostFull } from 'src/app/services/interfaces';
+import { PostService } from 'src/app/services/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 

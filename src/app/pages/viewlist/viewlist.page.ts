@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NavParams, ModalController, ActionSheetController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { PostService } from 'src/app/providers/post.service';
+import { PostService } from 'src/app/services/post.service';
 import { async } from 'q';
-import { UserService } from 'src/app/providers/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { Storage } from '@ionic/storage';
 
 @Component({

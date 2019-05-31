@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, IonContent } from '@ionic/angular';
-import { IChat, IMessage, IUserSelf } from 'src/app/providers/interfaces';
-import { ChatService } from 'src/app/providers/chat.service';
-import { UserService } from 'src/app/providers/user.service';
+import { IChat, IMessage, IUserSelf } from 'src/app/services/interfaces';
+import { ChatService } from 'src/app/services/chat.service';
+import { UserService } from 'src/app/services/user.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Subscription } from 'rxjs';
 
@@ -68,7 +68,7 @@ export class ChatIdPage implements OnInit {
   }
 
   public goBack() {
-    this.router.navigateByUrl('/tabs/chats');
+    this.router.navigateByUrl('/chats');
   }
 
   public async update(event: any) {

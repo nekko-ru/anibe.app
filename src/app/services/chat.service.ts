@@ -17,7 +17,7 @@ export class ChatService {
    */
   private api: API;
   private token: string;
-  private socket: SocketIOClient.Socket;
+  private socket: socketIo.Socket;
 
   constructor(
     private storage: Storage  ) {

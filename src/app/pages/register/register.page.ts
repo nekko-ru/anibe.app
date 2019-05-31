@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/providers/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { ToastController } from '@ionic/angular';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Router } from '@angular/router';

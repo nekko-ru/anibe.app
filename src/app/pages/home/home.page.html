@@ -1,12 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Главная
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-
-  <!-- <ion-slides class="slider main" align-items-center *ngIf="enableSlider === 'true'">
-
-    <ion-slide *ngFor="let item of slider_data.slides">
-      <ion-img src="{{ item.img }}" (click)="openPage(item)"></ion-img>
-    </ion-slide>
-
-  </ion-slides> -->
 
   <ion-slides [options]="slideOpts" *ngIf="recommendations.length >= 3">
       <ion-slide *ngFor="let item of recommendations">
@@ -26,33 +29,12 @@
       </ion-slide>
     </ion-slides>
 
-  <!-- <ion-card>
-    <ion-card-header>
-      Обновления
-    </ion-card-header>
-    <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let item of lastupdates" (click)="openPost(item.id)" lines="none">
-          <ion-thumbnail slot="start" class="cover">
-            <img src="{{ item.cover }}">
-          </ion-thumbnail>
-          <ion-label>{{ item.name }}</ion-label>
-        </ion-item>
-
-      </ion-list>
-    </ion-card-content>
-  </ion-card> -->
-
   <ion-card *ngFor="let item of lastnews" (click)="openNews(item.id)">
     <ion-img src="{{ item.preview }}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>{{ item.type }}</ion-card-subtitle>
       <ion-card-title>{{ item.title }}</ion-card-title>
     </ion-card-header>
-    <!--<ion-item lines="none">
-      <ion-label>{{ item.title }}</ion-label>
-      <ion-button fill="outline" slot="end">Открыть</ion-button>
-    </ion-item> -->
 
     <ion-card-content>
       <p>{{ item.annotation }}</p>

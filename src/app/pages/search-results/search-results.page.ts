@@ -4,8 +4,8 @@ import { ModalController, IonVirtualScroll } from '@ionic/angular';
 import { SearchParamsPage } from '../search-params/search-params.page';
 
 import { Router } from '@angular/router';
-import { PostService } from 'src/app/providers/post.service';
-import { IPost } from 'src/app/providers/interfaces';
+import { PostService } from 'src/app/services/post.service';
+import { IPost } from 'src/app/services/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Storage } from '@ionic/storage';
 

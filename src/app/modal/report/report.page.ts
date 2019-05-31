@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ToastController, ModalController } from '@ionic/angular';
-import { ReportService } from 'src/app/providers/report.service';
+import { ReportService } from 'src/app/services/report.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Form } from '@angular/forms';
 

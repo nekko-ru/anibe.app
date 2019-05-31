@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PostService } from 'src/app/providers/post.service';
-import { IComment, IPost } from 'src/app/providers/interfaces';
+import { PostService } from 'src/app/services/post.service';
+import { IComment, IPost } from 'src/app/services/interfaces';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { ToastController, ModalController } from '@ionic/angular';
-import { ReportService } from 'src/app/providers/report.service';
+import { ReportService } from 'src/app/services/report.service';
 import { ReportPage } from 'src/app/modal/report/report.page';
 
 @Component({

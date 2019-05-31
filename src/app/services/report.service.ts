@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage';
   providedIn: 'root'
 })
 export class ReportService {
-/**
+  /**
    * Экземпляр класса для работы с апи через небольшую обертку
    */
   private api: API;

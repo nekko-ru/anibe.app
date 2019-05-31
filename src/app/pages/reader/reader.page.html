@@ -19,8 +19,8 @@
   >
     <ion-slide *ngFor="let img of episode">
       <div class="swiper-zoom-container">
-        <img *ngIf="preload" [src]="img">
-        <ion-img *ngIf="!preload" [src]="img"></ion-img>
+        <img *ngIf="!preload" [src]="img">
+        <ion-img *ngIf="preload" [src]="img"></ion-img>
       </div>
     </ion-slide>
 

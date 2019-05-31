@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, ToastController } from '@ionic/angular';
-import { IChat, IUser } from 'src/app/providers/interfaces';
-import { ChatService } from 'src/app/providers/chat.service';
-import { UserService } from 'src/app/providers/user.service';
+import { IChat, IUser } from 'src/app/services/interfaces';
+import { ChatService } from 'src/app/services/chat.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-chat-create',

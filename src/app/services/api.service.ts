@@ -23,12 +23,6 @@ export class API {
 
   /**
    * @private
-   * @description тип содержимого ответа и запроса
-   */
-  private responseType = 'json';
-
-  /**
-   * @private
    * @description содержит ссылку на api
    * @type {string}
   */
@@ -44,7 +38,7 @@ export class API {
     this.http = axios.create({
       baseURL: this.baseURL,
       timeout: 5000,
-      responseType: this.responseType,
+      responseType: 'json',
       ...settings
     });
   }

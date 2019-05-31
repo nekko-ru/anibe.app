@@ -1,4 +1,16 @@
 <ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Поиск</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="presentModal()">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
   <ion-searchbar mode="ios" (ionChange)="search($event)" placeholder="Название" type="text" animated="true"
     debounce="1000">
   </ion-searchbar>
@@ -41,8 +53,8 @@
   </ion-infinite-scroll>
 </ion-content>
 
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+<!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button (click)="presentModal()">
     <ion-icon name="settings"></ion-icon>
   </ion-fab-button>
-</ion-fab>
+</ion-fab> -->

@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { IPost, INewsPost } from 'src/app/services/interfaces';
 import { Router } from '@angular/router';
-import { PostService } from 'src/app/providers/post.service';
-import { IPost, INewsPost } from 'src/app/providers/interfaces';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { PostService } from 'src/app/services/post.service';
+import { NewsService } from 'src/app/services/news.service';
+import { UserService } from 'src/app/services/user.service';
 import { ToastController } from '@ionic/angular';
-import { NewsService } from 'src/app/providers/news.service';
 import { Storage } from '@ionic/storage';
-import { UserService } from 'src/app/providers/user.service';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
 })
-export class Tab1Page implements OnInit {
+export class HomePage {
   /**
    * Содержит последние изменения и обновления
    */
@@ -44,9 +43,9 @@ export class Tab1Page implements OnInit {
    * Параметры для слайдера на странице
    */
   public slideOpts: any = {
-    slidesPerView: 1.5,
+    slidesPerView: 2,
     spaceBetween: 5,
-    centeredSlides: true,
+    centeredSlides: false,
     autoplay: {
       delay: 5000,
       disableOnInteraction: false
@@ -64,14 +63,10 @@ export class Tab1Page implements OnInit {
     private news: NewsService,
     private user: UserService,
     private toast: ToastController,
-    private firebase: Firebase,
+    // private firebase: Firebase,
     private storage: Storage
   ) {}
 
-    /**
-   * Открывает выбраный пост
-   * @param id uuid поста
-   */
   public async openPost(id: string): Promise<any> {
     await this.router.navigateByUrl(`/info/${id}`);
   }
@@ -108,7 +103,7 @@ export class Tab1Page implements OnInit {
   }
 
   protected async ionViewDidEnter() {
-    await this.firebase.setScreenName('home');
+    // await this.firebase.setScreenName('home');
   }
 
   public async openNews(id: string): Promise<any> {

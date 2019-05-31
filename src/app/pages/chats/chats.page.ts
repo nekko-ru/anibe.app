@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IChat, IUserSelf } from 'src/app/providers/interfaces';
+import { IChat, IUserSelf } from 'src/app/services/interfaces';
 import { Router } from '@angular/router';
-import { ChatService } from 'src/app/providers/chat.service';
+import { ChatService } from 'src/app/services/chat.service';
 import { ModalController } from '@ionic/angular';
 import { ChatCreatePage } from '../chat-create/chat-create.page';
 import { Storage } from '@ionic/storage';

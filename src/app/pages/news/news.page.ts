@@ -3,8 +3,8 @@ import { Storage } from '@ionic/storage';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { INewsPost } from 'src/app/providers/interfaces';
-import { NewsService } from 'src/app/providers/news.service';
+import { INewsPost } from 'src/app/services/interfaces';
+import { NewsService } from 'src/app/services/news.service';
 
 @Component({
   selector: 'app-news',

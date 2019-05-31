@@ -1,3 +1,68 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<div class="{{global.state['theme']}}">
+  <ion-app>
+    <ion-split-pane>
+      <ion-menu>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Меню</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <!-- <ion-list>
+            <ion-menu-toggle auto-hide="false" >
+              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+                <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                <ion-label>
+                  {{p.title}}
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list> -->
+          
+          <ion-list lines="none">
+            <ion-menu-toggle auto-hide="false" >
+              <ion-item [routerDirection]="'root'" routerLink="/home" detail="false">
+                <ion-icon slot="start" name="home"></ion-icon>
+                <ion-label>
+                  Главная
+                </ion-label>
+              </ion-item>
+              <ion-item [routerDirection]="'root'" routerLink="/search" detail="false">
+                <ion-icon slot="start" name="search"></ion-icon>
+                <ion-label>
+                    Поиск
+                </ion-label>
+              </ion-item>
+              <ion-item [routerDirection]="'root'" routerLink="/chats" detail="false">
+                <ion-icon slot="start" name="chatbubbles"></ion-icon>
+                <ion-label>
+                    Чаты
+                </ion-label>
+              </ion-item>
+              <ion-item [routerDirection]="'root'" routerLink="/notifications" detail="false">
+                <ion-icon slot="start" name="notifications"></ion-icon>
+                <ion-label>
+                    Уведомления
+                </ion-label>
+              </ion-item>
+              <ion-item [routerDirection]="'root'" routerLink="/profile" detail="false">
+                <ion-icon slot="start" name="person"></ion-icon>
+                <ion-label>
+                    Профиль
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+
+          <ion-item lines="none">
+            <ion-label>
+              Ночная тема β
+            </ion-label>
+            <ion-toggle (ionChange)="ionChange($event)"></ion-toggle>
+          </ion-item>
+        </ion-content>
+      </ion-menu>
+      <ion-router-outlet main></ion-router-outlet>
+    </ion-split-pane>
+  </ion-app>
+</div>

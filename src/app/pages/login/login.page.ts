@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { UserService } from 'src/app/providers/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { ToastController } from '@ionic/angular';
 import { Firebase } from '@ionic-native/firebase/ngx';
 
@@ -42,11 +42,10 @@ export class LoginPage implements OnInit {
     }
 
     console.log(this);
+    this.router.navigateByUrl('/profile');
     await this.storage.set('token', data.token);
     await this.firebase.logEvent('login', { sign_up_method: 'email' });
     await this.firebase.setUserId(data.user.ud);
-
-    this.router.navigateByUrl('/tabs/profile');
   }
 
   async gotoreg() {

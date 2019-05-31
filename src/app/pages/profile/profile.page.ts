@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/providers/user.service';
+import { UserService } from 'src/app/services/user.service';
 import { Storage } from '@ionic/storage';
 import { ModalController, PopoverController, ToastController } from '@ionic/angular';
 import { Firebase } from '@ionic-native/firebase/ngx';
