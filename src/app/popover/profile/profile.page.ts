@@ -40,6 +40,7 @@ export class ProfilePopoverPage implements OnInit {
         icon: 'log-out',
         handler: async () => {
           await this.storage.remove('token');
+          await this.storage.remove('user_local');
           this.router.navigateByUrl('/');
         }
       }, {

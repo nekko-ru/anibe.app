@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginGuard } from './guards/login.guard';
+import { IntroGuard } from './guards/intro.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './pages/home/home.module#HomePageModule'
+    loadChildren: './pages/home/home.module#HomePageModule',
+    canActivate: [IntroGuard]
   },
   {
     path: 'list',
