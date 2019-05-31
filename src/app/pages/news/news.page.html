@@ -1,5 +1,22 @@
-<ion-content fullpage *ngIf="info">
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
 
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen *ngIf="info">
   <ion-card>
     <ion-img *ngIf="info.background" [src]="info.background"></ion-img>
     <ion-img *ngIf="!info.background" [src]="info.preview"></ion-img>
