@@ -47,7 +47,7 @@ export class AppComponent {
     private firebase: Firebase,
     private router: Router,
     private toastController: ToastController,
-    private global: AppState
+    public global: AppState
   ) {
     this.initializeApp();
   }
