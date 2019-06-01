@@ -4,3 +4,37 @@
 // styles are for the entire app and not just one component. Additionally, this 
 // file can hold Sass mixins, functions, and placeholder classes to be imported 
 // and used throughout the application.
+
+.menu-header {
+    padding: 5px 15px;
+    background-image: url('https://img2.goodfon.ru/original/1024x768/5/9c/art-gasone-japan-shkolnitsa-matroska-velosiped-ulochka-doma.jpg');
+    background-size: cover;
+    color: white;
+
+    .name {
+        font-weight: 500;
+        margin-bottom: 3px;
+    }
+
+    .e-mail {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
+}
+
+.user-avatar {
+    max-width: 125px;
+    height: 125px;
+    padding: .5em;
+    height: 12vh;
+}
+
+h3,
+.label {
+    color: #999;
+    font-weight: 400;
+}
+
+ion-icon {
+    color: #777;
+}

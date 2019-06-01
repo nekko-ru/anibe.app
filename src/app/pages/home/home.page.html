@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullpage>
 
   <ion-slides [options]="slideOpts" *ngIf="recommendations.length >= 3">
       <ion-slide *ngFor="let item of recommendations">
@@ -29,7 +29,7 @@
       </ion-slide>
     </ion-slides>
 
-  <ion-card *ngFor="let item of lastnews" (click)="openNews(item.id)">
+  <!-- <ion-card *ngFor="let item of lastnews" (click)="openNews(item.id)">
     <ion-img src="{{ item.preview }}"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>{{ item.type }}</ion-card-subtitle>
@@ -39,6 +39,12 @@
     <ion-card-content>
       <p>{{ item.annotation }}</p>
     </ion-card-content>
+  </ion-card> -->
+
+  <ion-card *ngFor="let item of lastnews" (click)="openNews(item.id)">
+    <ion-img [src]="item.preview"></ion-img>
+    <div class="card-title">{{ item.title }}</div>
+    <div class="card-subtitle">{{ item.type }}</div>
   </ion-card>
 
 </ion-content>

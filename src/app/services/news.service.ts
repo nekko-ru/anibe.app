@@ -33,7 +33,7 @@ export class NewsService {
     const url = `/news/${id}`;
 
     const res = await this.api.get(url, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -43,7 +43,7 @@ export class NewsService {
     const url = `/news`;
 
     const res = await this.api.get(url, {
-      'access_token': this.token,
+      access_token: this.token,
       page,
       limit
     });

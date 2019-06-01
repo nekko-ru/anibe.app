@@ -143,7 +143,7 @@ export class SearchParamsPage implements OnInit {
   ngOnInit() {
   }
 
-  protected async ionViewDidEnter () {
+  protected async ionViewDidEnter() {
     Object.assign(this.genres, await this.storage.get('search_genres'));
   }
 

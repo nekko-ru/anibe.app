@@ -51,7 +51,7 @@ export class UserService {
     const url = `/users/me`;
 
     const res = await this.api.get(url, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -65,7 +65,7 @@ export class UserService {
     const url = `/users/${id}`;
 
     const res = await this.api.get(url, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -79,7 +79,7 @@ export class UserService {
     const url = `/users/name/${name}`;
 
     const res = await this.api.get(url, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -91,7 +91,7 @@ export class UserService {
   public async update(body: any) {
     await this.setToken();
     const res = await this.api.put(`/users/me`, body, {
-      'access_token': this.token
+      access_token: this.token
     });
 
     return res.data;
@@ -101,7 +101,7 @@ export class UserService {
     const url = `/users/update/avatar`;
 
     const res = await this.api.putFile(url, {
-      'access_token': this.token
+      access_token: this.token
     }, file);
     return res.data;
   }
@@ -112,7 +112,7 @@ export class UserService {
     const res = await this.api.post('/users/me/fcm', {
       token,
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
   }
 
@@ -123,7 +123,7 @@ export class UserService {
       new: newtoken,
       old: oldtoken,
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
   }
 
@@ -131,7 +131,7 @@ export class UserService {
     await this.setToken();
 
     const res = await this.api.get(`/notifications`, {
-      'access_token': this.token,
+      access_token: this.token,
       page,
       limit
     });
@@ -145,7 +145,7 @@ export class UserService {
     await this.setToken();
 
     const res = await this.api.get('/users/me/offer', {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data.rows;
   }
@@ -157,7 +157,7 @@ export class UserService {
     await this.setToken();
 
     const res = await this.api.get('/users/me/recommendations', {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data.rows;
   }
