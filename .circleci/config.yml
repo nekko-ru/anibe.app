@@ -22,7 +22,7 @@ jobs:
           keys:
             - v1-cordova-{{ checksum "config.xml" }}
       - run:
-          command: ionic cordova build browser --prod --release
+          command: npx ionic cordova build browser --prod --release
           name: "Build web version with Cordova"
       - save_cache:
           paths:
