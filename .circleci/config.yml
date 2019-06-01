@@ -32,6 +32,12 @@ jobs:
             - plugins
             - www
           key: v1-cordova-{{ checksum "config.xml" }}
+      - save_cache:
+          paths:
+            - platforms
+            - plugins
+            - www
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
 
   lint:
     docker:
@@ -57,8 +63,8 @@ jobs:
     working_directory: ~/project
     steps:
         - run:
-            name: Show current branch
-            command: echo ${CIRCLE_BRANCH}
+            name: Insyall Firebase CLI
+            command: sudo npm i -g firebase-tools
         - restore_cache:
             key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
         - run:
