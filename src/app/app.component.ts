@@ -56,7 +56,7 @@ export class AppComponent {
   }
 
   public current_user: IUser;
-
+  
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleLightContent();

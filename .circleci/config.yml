@@ -1,0 +1,141 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.9.0
+    working_dirictory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - restore_cache:
+          keys:
+            - v1-cordova-{{ checksum "config.xml" }}
+      - run:
+          command: ionic cordova build browser --prod --release
+          name: "Build web version with Cordova"
+      - save_cache:
+          paths:
+            - platforms
+            - plugins
+            - www
+          key: v1-cordova-{{ checksum "config.xml" }}
+
+  lint:
+    docker:
+      - image: circleci/node:8.9.0
+    working_dirictory: ~/repo
+
+    steps:
+      - checkout
+      - run: chmod -R 777 *
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: yarn lint
+
+  deploy:
+    docker:
+        - image: circleci/node:chakracore-8.11-browsers-legacy
+    working_directory: ~/project
+    steps:
+        - run:
+            name: Show current branch
+            command: echo ${CIRCLE_BRANCH}
+        - restore_cache:
+            key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+        - run:
+             name: Deploy Master to Firebase
+             command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+        - run:
+            name: Deploy Master to Firebase
+            command: npm run firebase-deploy -- --token=$FIREBASE_TOKEN
+
+  buildapk:
+    docker:
+      - image: kusumoto/docker-ionic-android-sdk
+    working_dirictory: ~/repo
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: 
+          command: yes | /opt/android-sdk/tools/bin/sdkmanager --licenses || true
+          name: "Accept Android SDK Licenses"
+
+      - restore_cache:
+          keys:
+            - v1-cordova-{{ checksum "config.xml" }}
+      
+      - run:
+          command: touch google-services.json && echo $GOOGLE_SERVICES | base64 --decode > google-services.json
+          name: "Import Google Firebase config"
+          
+      - run:
+          command: ionic cordova build android
+          name: "Build APK with Cordova"
+
+      - save_cache:
+          paths:
+            - platforms
+            - plugins
+            - www
+          key: v1-cordova-{{ checksum "config.xml" }}
+
+      - store_artifacts:
+          path: platforms/android/app/build/outputs/apk/debug/app-debug.apk
+          destination: Android app-debug
+
+      - store_artifacts:
+          path: platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk
+          destination: Android app-release-unsigned
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - lint
+      - build
+      - deploy:
+          requires:
+            - lint
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master
+      - buildapk:
+          requires:
+            - lint
+            - build
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master

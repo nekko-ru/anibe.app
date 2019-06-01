@@ -33,6 +33,11 @@ const routes: Routes = [
   { path: 'notifications', loadChildren: './pages/notifications/notifications.module#NotificationsPageModule', canActivate: [LoginGuard] },
   { path: 'profile', loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [LoginGuard] },
   { path: 'chat-id/:id', loadChildren: './pages/chat-id/chat-id.module#ChatIdPageModule', canActivate: [LoginGuard] },
+
+  {
+    path: '**',
+    redirectTo: 'home',
+  },
 ];
 
 @NgModule({
