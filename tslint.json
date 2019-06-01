@@ -71,6 +71,15 @@
     "use-pipe-transform-interface": true,
     "one-variable-per-declaration": false,
     "component-class-suffix": [true, "Page", "Component"],
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-leading-underscore",
+        "allow-pascal-case",
+        "allow-snake-case"
+      ]
+    }
   }
 }

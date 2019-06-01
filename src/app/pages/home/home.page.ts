@@ -84,6 +84,7 @@ export class HomePage {
     // this.enableSlider = await this.remote_config.getValue('home_slider_enable');
   }
 
+  // tslint:disable-next-line: use-life-cycle-interface
   async ngOnInit() {
     try {
       this.lastnews = await this.news.getAll();

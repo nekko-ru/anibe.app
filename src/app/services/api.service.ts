@@ -25,7 +25,7 @@ export class API {
    * @private
    * @description содержит ссылку на api
    * @type {string}
-  */
+   */
   private baseURL = 'https://api.anibe.ru';
 
   /**

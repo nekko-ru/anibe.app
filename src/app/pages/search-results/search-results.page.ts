@@ -64,7 +64,7 @@ export class SearchResultsPage implements OnInit {
   ngOnInit() {
   }
 
-  protected async ionViewDidEnter () {
+  protected async ionViewDidEnter() {
     await this.firebase.setScreenName('search');
 
     const genres = await this.storage.get('search_genres');
@@ -95,11 +95,11 @@ export class SearchResultsPage implements OnInit {
     };
 
     if (this.activegenres.length !== 0) {
-      opt['genre'] = this.activegenres.join(',');
+      opt.genre = this.activegenres.join(',');
     }
 
     if (this.query) {
-      opt['q'] = this.query;
+      opt.q = this.query;
     }
 
     const temp = await this.post.getAll(query || this.query, { ...opt });

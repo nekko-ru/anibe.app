@@ -77,7 +77,7 @@ export class ChatService {
     const url = `/chats/${id}`;
 
     const res = await this.api.get(url, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -94,7 +94,7 @@ export class ChatService {
 
     const res = await this.api.get(url, {
       q: query,
-      'access_token': this.token
+      access_token: this.token
     });
 
     return res.data.rows;
@@ -122,7 +122,7 @@ export class ChatService {
       body,
       attachments,
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -135,7 +135,7 @@ export class ChatService {
     this.token = await this.storage.get('token') || 'invalid';
 
     const res = await this.api.get(`/messages/${id}`, {
-      'access_token': this.token,
+      access_token: this.token,
       page: Number(page).toString()
     });
 
@@ -157,7 +157,7 @@ export class ChatService {
       name,
       picture,
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -170,7 +170,7 @@ export class ChatService {
     this.token = await this.storage.get('token') || 'invalid';
 
     await this.api.delete(`/chats/${chat_id}`, {
-      'access_token': this.token
+      access_token: this.token
     });
     return true;
   }
@@ -191,7 +191,7 @@ export class ChatService {
       action,
       user_id,
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
     return true;
   }
@@ -213,7 +213,7 @@ export class ChatService {
       name,
       picture,
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }

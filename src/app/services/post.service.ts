@@ -33,7 +33,7 @@ export class PostService {
     const url = `/posts/${id}`;
 
     const res = await this.api.get(url, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -50,7 +50,7 @@ export class PostService {
     const url = `/posts`;
 
     const res = await this.api.get(url, {
-      'access_token': this.token,
+      access_token: this.token,
       ...params
     });
 
@@ -62,7 +62,7 @@ export class PostService {
     const res = await this.api.post(`/posts/${id}/user-list`, {
       status,
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
     (await this.toast.create({
       message: 'Добавлено',
@@ -76,7 +76,7 @@ export class PostService {
     const url = `/posts/${id}/user-list`;
 
     const res = await this.api.delete(url, {
-      'access_token': this.token
+      access_token: this.token
     });
 
     (await this.toast.create({
@@ -98,7 +98,7 @@ export class PostService {
       body,
       post_id,
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }
@@ -111,7 +111,7 @@ export class PostService {
     this.token = await this.storage.get('token') || 'invalid';
 
     const res = await this.api.get(`/comments/${id}?page=${page}`, {
-      'access_token': this.token
+      access_token: this.token
     });
 
     return res.data;
@@ -121,7 +121,7 @@ export class PostService {
     this.token = await this.storage.get('token') || 'invalid';
 
     await this.api.delete(`/comments/${id}`, {
-      'access_token': this.token
+      access_token: this.token
     });
   }
 }

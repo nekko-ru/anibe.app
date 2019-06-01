@@ -34,7 +34,7 @@ export class ReportService {
       ...body,
       status: 'Created',
     }, {
-      'access_token': this.token
+      access_token: this.token
     });
     return res.data;
   }

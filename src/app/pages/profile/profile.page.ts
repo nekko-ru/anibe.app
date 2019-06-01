@@ -95,7 +95,7 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  private async FCMToken () {
+  private async FCMToken() {
     let token = await this.storage.get('user_local_fcm');
     if (!token) {
       token = await this.firebase.getToken();
