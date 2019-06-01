@@ -22,7 +22,7 @@ jobs:
           keys:
             - v1-cordova-{{ checksum "config.xml" }}
 
-      - run: npm i -g cordova
+      - run: sudo npm i -g cordova
       - run:
           command: ./node_modules/ionic/bin/ionic cordova build browser --prod --release
           name: "Build web version with Cordova"
