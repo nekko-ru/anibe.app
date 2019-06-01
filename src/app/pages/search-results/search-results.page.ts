@@ -5,7 +5,7 @@ import { SearchParamsPage } from '../search-params/search-params.page';
 
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
-import { IPost } from 'src/app/services/interfaces';
+import { IPost, RequestParam } from 'src/app/services/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Storage } from '@ionic/storage';
 
@@ -88,7 +88,7 @@ export class SearchResultsPage implements OnInit {
   private async load(query?: string) {
     // инкрементируем страницу
     this.page += 1;
-    const opt = {
+    const opt: RequestParam = {
       limit: '25',
       page: Number(this.page).toString(),
       sort: '-rating',

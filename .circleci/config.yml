@@ -128,8 +128,6 @@ workflows:
             - lint
             - build
           filters:
-            tags:
-              only: /^v.*/
             branches:
               only: master
       - buildapk:
