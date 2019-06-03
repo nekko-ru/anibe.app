@@ -62,6 +62,8 @@ export class AppComponent {
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
 
+      this.storage.get('theme').then((theme) => this.global.set('theme', theme));
+
       this.storage.get('user_local').then((user) => this.current_user = user);
 
       this.firebase.onNotificationOpen()
@@ -93,8 +95,10 @@ export class AppComponent {
     console.log(e);
     if (e.detail.checked) {
       this.global.set('theme', 'theme-dark');
+      this.storage.set('theme', 'theme-dark');
     } else {
       this.global.set('theme', '');
+      this.storage.set('theme', 'theme-dark');
     }
   }
 }
