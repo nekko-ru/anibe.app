@@ -60,7 +60,7 @@ jobs:
   deploy:
     docker:
         - image: circleci/node:chakracore-8.11-browsers-legacy
-    working_directory: ~/project
+    working_directory: ~/repo
     steps:
         - run:
             name: Insyall Firebase CLI
