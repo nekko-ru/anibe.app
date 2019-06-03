@@ -6,6 +6,7 @@ import { NewsService } from 'src/app/services/news.service';
 import { UserService } from 'src/app/services/user.service';
 import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 @Component({
   selector: 'app-home',
@@ -63,7 +64,7 @@ export class HomePage {
     private news: NewsService,
     private user: UserService,
     private toast: ToastController,
-    // private firebase: Firebase,
+    private firebase: Firebase,
     private storage: Storage
   ) {}
 
@@ -84,6 +85,7 @@ export class HomePage {
     // this.enableSlider = await this.remote_config.getValue('home_slider_enable');
   }
 
+  // tslint:disable-next-line: use-life-cycle-interface
   async ngOnInit() {
     try {
       this.lastnews = await this.news.getAll();
@@ -103,7 +105,7 @@ export class HomePage {
   }
 
   protected async ionViewDidEnter() {
-    // await this.firebase.setScreenName('home');
+    await this.firebase.setScreenName('home');
   }
 
   public async openNews(id: string): Promise<any> {

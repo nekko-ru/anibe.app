@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Router } from '@angular/router';
 import { AppState } from './app.state';
+import { IUser } from './services/interfaces';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -47,15 +49,22 @@ export class AppComponent {
     private firebase: Firebase,
     private router: Router,
     private toastController: ToastController,
-    public global: AppState
+    public global: AppState,
+    private storage: Storage
   ) {
     this.initializeApp();
   }
+
+  public current_user: IUser;
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
+
+      this.storage.get('theme').then((theme) => this.global.set('theme', theme));
+
+      this.storage.get('user_local').then((user) => this.current_user = user);
 
       this.firebase.onNotificationOpen()
         .subscribe(async data => {
@@ -86,8 +95,10 @@ export class AppComponent {
     console.log(e);
     if (e.detail.checked) {
       this.global.set('theme', 'theme-dark');
+      this.storage.set('theme', 'theme-dark');
     } else {
       this.global.set('theme', '');
+      this.storage.set('theme', 'theme-dark');
     }
   }
 }

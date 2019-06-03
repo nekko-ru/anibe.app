@@ -5,7 +5,7 @@ import { SearchParamsPage } from '../search-params/search-params.page';
 
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
-import { IPost } from 'src/app/services/interfaces';
+import { IPost, RequestParam } from 'src/app/services/interfaces';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Storage } from '@ionic/storage';
 
@@ -64,7 +64,7 @@ export class SearchResultsPage implements OnInit {
   ngOnInit() {
   }
 
-  protected async ionViewDidEnter () {
+  protected async ionViewDidEnter() {
     await this.firebase.setScreenName('search');
 
     const genres = await this.storage.get('search_genres');
@@ -88,18 +88,18 @@ export class SearchResultsPage implements OnInit {
   private async load(query?: string) {
     // инкрементируем страницу
     this.page += 1;
-    const opt = {
+    const opt: RequestParam = {
       limit: '25',
       page: Number(this.page).toString(),
       sort: '-rating',
     };
 
     if (this.activegenres.length !== 0) {
-      opt['genre'] = this.activegenres.join(',');
+      opt.genre = this.activegenres.join(',');
     }
 
     if (this.query) {
-      opt['q'] = this.query;
+      opt.q = this.query;
     }
 
     const temp = await this.post.getAll(query || this.query, { ...opt });

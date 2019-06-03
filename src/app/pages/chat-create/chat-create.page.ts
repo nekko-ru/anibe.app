@@ -12,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class ChatCreatePage implements OnInit {
   @Input() public info?: IChat;
   @Input() public title: string;
-  public name: string = 'Новый чат';
+  public name = 'Новый чат';
 
   public picture = 'https://avatars.mds.yandex.net/get-pdb/1532603/ac56ac6f-b354-4c5b-bf06-533910e0fae8/s1200';
 
