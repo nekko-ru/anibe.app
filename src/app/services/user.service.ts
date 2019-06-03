@@ -145,6 +145,7 @@ export class UserService {
     await this.setToken();
 
     const res = await this.api.get('/users/me/offer', {
+      sort: '+genre',
       access_token: this.token
     });
     return res.data.rows;

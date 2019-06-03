@@ -10,13 +10,12 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-
-  <ion-searchbar mode="ios" (ionChange)="search($event)" placeholder="Название" type="text" animated="true"
-    debounce="1000">
-  </ion-searchbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar mode="ios" (ionChange)="search($event)" placeholder="Название" type="text" animated="true"
+    debounce="1000">
+  </ion-searchbar>
   <!-- old -->
   <!-- <ion-row>
     <ion-col size="6" *ngFor="let item of result">
