@@ -34,8 +34,8 @@ jobs:
           key: v1-cordova-{{ checksum "config.xml" }}
       - save_cache:
           paths:
-            - platforms
-            - plugins
+            - .firebaserc
+            - firebase.json
             - www
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
 
