@@ -40,7 +40,6 @@
       <p>{{ item.annotation }}</p>
     </ion-card-content>
   </ion-card> -->
-
   <ion-card *ngFor="let item of lastnews" (click)="openNews(item.id)">
     <ion-img [src]="item.preview"></ion-img>
     <div class="card-title">{{ item.title }}</div>
