@@ -70,7 +70,7 @@ jobs:
           key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
       - run:
            name: Deploy Master to Firebase
-           command: firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+           command: firebase deploy --token=$FIREBASE_DEPLOY_TOKEN --project=$FIREBASE_PROJECT_ID
 
   buildapk:
     docker:
