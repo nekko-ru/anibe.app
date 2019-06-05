@@ -32,12 +32,12 @@ jobs:
             - plugins
             - www
           key: v1-cordova-{{ checksum "config.xml" }}
-      - save_cache:
-          paths:
-            - .firebaserc
-            - firebase.json
-            - www
-          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Install Firebase CLI
+          command: sudo npm i -g firebase-tools
+      - run:
+           name: Deploy Master to Firebase
+           command: firebase deploy --token=$FIREBASE_DEPLOY_TOKEN --project=$FIREBASE_PROJECT_ID
 
   lint:
     docker:
@@ -56,21 +56,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: yarn lint
-
-  deploy:
-    docker:
-        - image: circleci/node:chakracore-8.11-browsers-legacy
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
-          name: Install Firebase CLI
-          command: sudo npm i -g firebase-tools
-      - restore_cache:
-          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-      - run:
-           name: Deploy Master to Firebase
-           command: firebase deploy --token=$FIREBASE_DEPLOY_TOKEN --project=$FIREBASE_PROJECT_ID
 
   buildapk:
     docker:
@@ -126,17 +111,13 @@ workflows:
   build_and_test:
     jobs:
       - lint
-      - build
-      - deploy:
-          requires:
-            - lint
-            - build
+      - build:
           filters:
             branches:
               only: master
       - buildapk:
           requires:
-            - deploy
+            - build
           filters:
             tags:
               only: /^v.*/
