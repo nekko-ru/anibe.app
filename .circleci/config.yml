@@ -62,14 +62,15 @@ jobs:
         - image: circleci/node:chakracore-8.11-browsers-legacy
     working_directory: ~/repo
     steps:
-        - run:
-            name: Insyall Firebase CLI
-            command: sudo npm i -g firebase-tools
-        - restore_cache:
-            key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
-        - run:
-             name: Deploy Master to Firebase
-             command: firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+      - checkout
+      - run:
+          name: Install Firebase CLI
+          command: sudo npm i -g firebase-tools
+      - restore_cache:
+          key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+           name: Deploy Master to Firebase
+           command: firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 
   buildapk:
     docker:
@@ -135,10 +136,7 @@ workflows:
               only: master
       - buildapk:
           requires:
-            - lint
-            - build
+            - deploy
           filters:
             tags:
               only: /^v.*/
-            branches:
-              only: master
