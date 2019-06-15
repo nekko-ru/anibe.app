@@ -15,3 +15,12 @@ ion-segment-button {
     --background-checked: #1e2023;
     --color: #f5f6f9;
 }
+
+ion-row.large {
+    ion-col {
+        align-self: center;
+    }
+    // fiv-gallery-image {
+    //     --background: #383a3e;
+    // }
+}
