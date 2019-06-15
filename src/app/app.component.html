@@ -76,3 +76,26 @@
     </ion-split-pane>
   </ion-app>
 </div>
+
+<fiv-dialog [pullEnabled]="alert.pull" (fivDurationOver)="dialog.close()" [inDuration]="alert.inDuration"
+  [outDuration]="alert.outDuration" #dialog [duration]="alert.duration" [shape]="alert.shape" [horizontalAlign]="alert.horizontalAlign"
+  [verticalAlign]="alert.verticalAlign" [backdrop]="alert.backdrop">
+
+  <ion-card-header>
+    <!-- <ion-card-subtitle>{{ alert.type }}</ion-card-subtitle> -->
+    <ion-card-title>{{ alert.title }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ alert.content }}</p>
+  </ion-card-content>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="dialog.close()">
+        Закрыть
+      </ion-button>
+      <ion-button color="primary" (click)="open(alert.url)">
+        Перейти
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</fiv-dialog>
