@@ -91,14 +91,12 @@ export class AppComponent {
     });
   }
 
-  public ionChange(e: any) {
+  public async ionChange(e: any) {
     console.log(e);
     if (e.detail.checked) {
-      this.global.set('theme', 'theme-dark');
-      this.storage.set('theme', 'theme-dark');
+      await this.global.setAsync('theme', 'theme-dark');
     } else {
-      this.global.set('theme', '');
-      this.storage.set('theme', 'theme-dark');
+      await this.global.setAsync('theme', '');
     }
   }
 }

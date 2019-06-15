@@ -1,4 +1,4 @@
-<div class="{{global.state['theme']}}">
+<div class="{{global.get('theme') || ''}}">
   <ion-app>
     <ion-split-pane>
       <ion-menu>
@@ -18,11 +18,11 @@
               </ion-item>
             </ion-menu-toggle>
           </ion-list> -->
-          <div class="menu-header" [routerDirection]="'root'" routerLink="/profile" *ngIf="current_user">
+          <div class="menu-header" [routerDirection]="'root'" routerLink="/profile" *ngIf="global.get('user_local')">
             <!--material-design-background-->
-            <img class="user-avatar round" style="height:90px;max-width:90px;" [src]="current_user.picture" />
-            <p class="name">{{ current_user.name }}</p>
-            <p class="e-mail">{{ current_user.email }}</p>
+            <img class="user-avatar round" style="height:90px;max-width:90px;" [src]="global.get('user_local').picture" />
+            <p class="name">{{ global.get('user_local').name }}</p>
+            <p class="e-mail">{{ global.get('user_local').email }}</p>
           </div>
 
           <ion-list lines="none">

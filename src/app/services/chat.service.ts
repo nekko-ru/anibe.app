@@ -4,6 +4,7 @@ import { IChat, IMessage } from './interfaces';
 import { Storage } from '@ionic/storage';
 import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
+import { AppState } from '../app.state';
 
 const SERVER_URL = 'https://api.anibe.ru';
 // const SERVER_URL = 'http://127.0.0.1:2300';
@@ -20,7 +21,8 @@ export class ChatService {
   private socket: socketIo.Socket;
 
   constructor(
-    private storage: Storage  ) {
+    private storage: AppState
+  ) {
     this.api = new API({  });
   }
 
@@ -28,7 +30,7 @@ export class ChatService {
       this.socket = socketIo(SERVER_URL, {
         // path: '/ws/',
         query: {
-          token: await this.storage.get('token') || 'invalid'
+          token: await this.storage.getAsync('token') || 'invalid'
         }
       });
   }
@@ -73,7 +75,7 @@ export class ChatService {
    * @returns {Promise<IChat>} результат
    */
   public async get(id: string): Promise<IChat> {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
     const url = `/chats/${id}`;
 
     const res = await this.api.get(url, {
@@ -89,7 +91,7 @@ export class ChatService {
    * @returns {Promise<IChat[]>}
    */
   public async getAll(query?: string): Promise<IChat[]> {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
     const url = `/chats`;
 
     const res = await this.api.get(url, {
@@ -116,7 +118,7 @@ export class ChatService {
       sticker: string
     } = { images: [], links: [], videos: [], sticker: ''}
   ): Promise<any> {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
 
     const res = await this.api.post(`/messages/${chat_id}`, {
       body,
@@ -132,7 +134,7 @@ export class ChatService {
    * @param {string} id uuid чата
    */
   public async getMessages(id: string, page: number = 1): Promise<IMessage[]> {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
 
     const res = await this.api.get(`/messages/${id}`, {
       access_token: this.token,
@@ -151,7 +153,7 @@ export class ChatService {
     name: string,
     picture: string
   ): Promise<any> {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
 
     const res = await this.api.post(`/chats`, {
       name,
@@ -167,7 +169,7 @@ export class ChatService {
    * @param {string} chat_id id чата
    */
   public async deleteChat(chat_id: string) {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
 
     await this.api.delete(`/chats/${chat_id}`, {
       access_token: this.token
@@ -185,7 +187,7 @@ export class ChatService {
     user_id: string,
     action: string,
   ): Promise<any> {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
 
     await this.api.post(`/chats/${chat_id}`, {
       action,
@@ -207,7 +209,7 @@ export class ChatService {
     name: string,
     picture: string
   ): Promise<any> {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
 
     const res = await this.api.put(`/chats/${chat_id}`, {
       name,
