@@ -8,6 +8,12 @@ import { IonicModule } from '@ionic/angular';
 import { ReaderPage } from './reader.page';
 import { SelectChapterPage } from '../select-chapter/select-chapter.page';
 
+import {
+  FivGalleryModule,
+  FivLoadingSpinnerModule,
+  FivCenterModule
+} from '@fivethree/core';
+
 const routes: Routes = [
   {
     path: '',
@@ -20,7 +26,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+
+    FivGalleryModule,
+    FivLoadingSpinnerModule,
+    FivCenterModule
   ],
   declarations: [
     ReaderPage,

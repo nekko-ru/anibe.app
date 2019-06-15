@@ -8,32 +8,31 @@ import { Firebase } from '@ionic-native/firebase/ngx';
   styleUrls: ['./select-chapter.page.scss'],
 })
 export class SelectChapterPage implements OnInit {
-  @Input() public chapters: string[];
-  @Input() private selected: string;
-  @Input() private allactives: { [k: string]: { chapter: string, page: number, pages: number } };
+  @Input() public stats: {
+    readed: string[],
+    inprogress: string[],
+    all: string[],
+    last: string
+  };
 
   constructor(private modalController: ModalController, private firebase: Firebase) { }
 
   async ngOnInit() {
     console.log(this);
-
-    console.log(this.allactives[this.selected]);
     await this.firebase.setScreenName('select-chapter');
   }
 
   public savePicks(name: string) {
-    this.modalController.dismiss({
-      chapter: name,
-    });
+    this.stats.last = name;
+    this.modalController.dismiss(this.stats);
   }
 
   public getColor(name: string): string {
-    if (this.allactives[name]) {
-      if (this.allactives[name].page === this.allactives[name].pages) {
-        return 'ended';
-      } else {
-        return 'active';
-      }
+    if (name in this.stats.inprogress) {
+      return 'ended';
+    }
+    if (name in this.stats.readed) {
+      return 'ended';
     }
     return '';
   }

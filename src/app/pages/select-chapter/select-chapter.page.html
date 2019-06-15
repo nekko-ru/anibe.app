@@ -12,7 +12,7 @@
         (click)="savePicks(item)"
         class="{{ getColor(item) }}"
         size="2"
-        *ngFor="let item of chapters"
+        *ngFor="let item of stats?.all"
       >
         {{ item }}
       </ion-col>
