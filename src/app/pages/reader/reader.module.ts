@@ -11,7 +11,9 @@ import { SelectChapterPage } from '../select-chapter/select-chapter.page';
 import {
   FivGalleryModule,
   FivLoadingSpinnerModule,
-  FivCenterModule
+  FivCenterModule,
+  FivFeatureDiscoveryModule,
+  FivIconModule
 } from '@fivethree/core';
 
 const routes: Routes = [
@@ -30,7 +32,9 @@ const routes: Routes = [
 
     FivGalleryModule,
     FivLoadingSpinnerModule,
-    FivCenterModule
+    FivCenterModule,
+    FivFeatureDiscoveryModule,
+    FivIconModule,
   ],
   declarations: [
     ReaderPage,

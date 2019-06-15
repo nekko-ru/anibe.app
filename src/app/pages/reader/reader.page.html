@@ -57,9 +57,23 @@
 
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="selectChapter()">
   <ion-fab-button>
-    <ion-icon name="bookmarks" color="white"></ion-icon>
+    <fiv-icon #feature="fivFeature" [fivFeature]="selectchp" name="bookmarks" color="white" (fivWillClose)="storage.set('reader_guide', true)"></fiv-icon>
   </ion-fab-button>
 </ion-fab>
+
+<ng-template #selectchp>
+  <div padding>
+    <ion-text color="light">
+      <h1>А вы знали что...</h1>
+      <p>Можно легко и быстро выбрать нужную главу</p>
+    </ion-text>
+  </div>
+  <ion-buttons>
+    <ion-button color="light" shape="round" fill="outline" (click)="feature.hide()">
+      Закрыть
+    </ion-button>
+  </ion-buttons>
+</ng-template>
 
 <!-- <ion-footer>
   <ion-toolbar>

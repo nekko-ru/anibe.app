@@ -9,6 +9,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppState } from 'src/app/app.state';
+import { FivFeature } from '@fivethree/core';
 
 @Component({
   selector: 'app-reader',
@@ -27,6 +28,8 @@ export class ReaderPage implements OnInit {
     all: string[],
     last: string
   };
+
+  @ViewChild('feature') feature: FivFeature;
 
   constructor(
     private storage: AppState,
@@ -72,6 +75,10 @@ export class ReaderPage implements OnInit {
 
     await this.firebase.setScreenName('reader');
     await this.firebase.logEvent('select_content', { item_id: this.info.id, content_type: 'manga' });
+
+    if (await this.storage.getAsync('reader_guide') !== true) {
+      this.feature.show();
+    }
   }
 
   public async selectChapter() {
