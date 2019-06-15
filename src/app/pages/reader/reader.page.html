@@ -1,13 +1,3 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button>
-        <ion-icon color="white" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content fullpage>
 
   <!-- <ion-slides
@@ -27,14 +17,14 @@
 
   </ion-slides> -->
 
-  <fiv-gallery>
+  <fiv-gallery #Viewer>
     <fiv-gallery-toolbar [position]="'top'">
       <fiv-gallery-toolbar-content></fiv-gallery-toolbar-content>
     </fiv-gallery-toolbar>
     <ion-grid fixed no-padding>
       <ion-row class="large">
-        <ion-col size="4" sizeLg="12" sizeXl="12" *ngFor="let img of episode">
-          <fiv-gallery-image [src]="img"></fiv-gallery-image>
+        <ion-col size="4" sizeLg="12" sizeXl="12" *ngFor="let img of episode; index as i">
+          <fiv-gallery-image [src]="img" (click)="open(i)"></fiv-gallery-image>
         </ion-col>
       </ion-row>
     </ion-grid>

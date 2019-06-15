@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, LoadingController, Events, IonSlide, ToastController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
 import { SelectChapterPage } from '../select-chapter/select-chapter.page';
@@ -9,7 +9,7 @@ import { PostService } from 'src/app/services/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppState } from 'src/app/app.state';
-import { FivFeature } from '@fivethree/core';
+import { FivFeature, FivGallery } from '@fivethree/core';
 
 @Component({
   selector: 'app-reader',
@@ -30,10 +30,12 @@ export class ReaderPage implements OnInit {
   };
 
   @ViewChild('feature') feature: FivFeature;
+  @ViewChild('Viewer') viewer: FivGallery;
 
   constructor(
     private storage: AppState,
     private route: ActivatedRoute,
+    private router: Router,
     private loadingController: LoadingController,
     private modalController: ModalController,
     private post: PostService,
@@ -79,6 +81,11 @@ export class ReaderPage implements OnInit {
     if (await this.storage.getAsync('reader_guide') !== true) {
       this.feature.show();
     }
+  }
+
+  public open(i: number) {
+    setTimeout(() => this.viewer.slides.slideTo(i, 1), 1000);
+    // this.viewer.open(i, this.viewer.images[i]);
   }
 
   public async selectChapter() {
