@@ -1,82 +1,45 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-back-button icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ info.name }}</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
 <ion-content fullpage>
 
-  <!-- <ion-slides
-    #mySlider
-    (ionSlideReachEnd)="ChapterEnded()"
-    (ionSlideDidChange)="sliderEvent()"
-    style="height: 100%"
-    align-items-center
-    [options]="slideOpts"
-  >
-    <ion-slide *ngFor="let img of episode">
-      <div class="swiper-zoom-container">
-        <img *ngIf="!preload" [src]="img">
-        <ion-img *ngIf="preload" [src]="img"></ion-img>
-      </div>
-    </ion-slide>
-
-  </ion-slides> -->
-
-  <fiv-gallery #Viewer>
-    <fiv-gallery-toolbar [position]="'top'">
-      <fiv-gallery-toolbar-content></fiv-gallery-toolbar-content>
-    </fiv-gallery-toolbar>
-    <ion-grid fixed no-padding>
-      <ion-row class="large">
-        <ion-col size="4" sizeLg="12" sizeXl="12" *ngFor="let img of episode; index as i">
-          <fiv-gallery-image [src]="img" (click)="open(i)"></fiv-gallery-image>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <fiv-gallery-toolbar [position]="'bottom'">
-      <ion-toolbar color="transparent">
-        <ion-text slot="start">
-          {{ info?.name }}
-        </ion-text>
-        <ion-text slot="end">
-          Глава: {{ stats?.last }} из {{ stats?.all.length }}
-        </ion-text>
-
-      </ion-toolbar>
-    </fiv-gallery-toolbar>
-
-  </fiv-gallery>
-
-</ion-content>
-
-<ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="selectChapter()">
-  <ion-fab-button>
-    <fiv-icon #feature="fivFeature" [fivFeature]="selectchp" name="bookmarks" color="white" (fivWillClose)="storage.set('reader_guide', true)"></fiv-icon>
-  </ion-fab-button>
-</ion-fab>
-
-<ng-template #selectchp>
-  <div padding>
-    <ion-text color="light">
-      <h1>А вы знали что...</h1>
-      <p>Можно легко и быстро выбрать нужную главу</p>
-    </ion-text>
-  </div>
-  <ion-buttons>
-    <ion-button color="light" shape="round" fill="outline" (click)="feature.hide()">
-      Закрыть
-    </ion-button>
-  </ion-buttons>
-</ng-template>
-
-<!-- <ion-footer>
-  <ion-toolbar>
-    <ion-segment>
-      <ion-segment-button (click)="slider.slidePrev(500)">
-        <ion-icon name="arrow-round-back"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button (click)="selectChapter()">
-        <ion-icon name="menu"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button (click)="slider.slideNext(500)">
-        <ion-icon name="arrow-round-forward"></ion-icon>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-</ion-footer> -->
+    <ion-slides
+      #mySlider
+      (ionSlideReachEnd)="ChapterEnded()"
+      (ionSlideDidChange)="sliderEvent()"
+      style="height: 100%"
+      align-items-center
+      [options]="slideOpts"
+    >
+      <ion-slide *ngFor="let img of episode">
+        <div class="swiper-zoom-container">
+          <img *ngIf="!preload" [src]="img">
+          <ion-img *ngIf="preload" [src]="img"></ion-img>
+        </div>
+      </ion-slide>
+  
+    </ion-slides>
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar>
+      <ion-segment>
+        <ion-segment-button (click)="slider.slidePrev(500)">
+          <ion-icon name="arrow-round-back"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button (click)="selectChapter()">
+          <ion-icon name="menu"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button (click)="slider.slideNext(500)">
+          <ion-icon name="arrow-round-forward"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-footer>
