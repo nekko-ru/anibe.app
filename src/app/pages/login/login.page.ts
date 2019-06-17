@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { UserService } from 'src/app/services/user.service';
 import { ToastController } from '@ionic/angular';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { AppState } from 'src/app/app.state';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginPage implements OnInit {
   public password: string;
 
   constructor(
-    private storage: Storage,
+    private storage: AppState,
     private router: Router,
     private user: UserService,
     private toastController: ToastController,
@@ -42,8 +43,8 @@ export class LoginPage implements OnInit {
     }
 
     console.log(this);
-    this.router.navigateByUrl('/profile');
-    await this.storage.set('token', data.token);
+    await this.storage.setAsync('token', data.token);
+    await this.router.navigateByUrl('/profile');
     await this.firebase.logEvent('login', { sign_up_method: 'email' });
     await this.firebase.setUserId(data.user.ud);
   }

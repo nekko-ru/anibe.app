@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ModalController, LoadingController, Events, IonSlide, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
-import { Storage } from '@ionic/storage';
 
 import { SelectChapterPage } from '../select-chapter/select-chapter.page';
 import { IPostFull } from 'src/app/services/interfaces';
 import { PostService } from 'src/app/services/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AppState } from 'src/app/app.state';
 
 @Component({
   selector: 'app-reader',
@@ -33,7 +33,7 @@ export class ReaderPage implements OnInit {
   private allactives: { [k: string]: { chapter: string, page: number, pages: number } };
 
   constructor(
-    private storage: Storage,
+    private storage: AppState,
     private route: ActivatedRoute,
     private loadingController: LoadingController,
     private modalController: ModalController,
@@ -57,9 +57,8 @@ export class ReaderPage implements OnInit {
       duration: 5000
     });
     await this.spiner.present();
-    await this.storage.ready();
 
-    this.preload = (await this.storage.get('image_preload'));
+    this.preload = (await this.storage.getAsync('image_preload'));
     if (this.preload === undefined) {
       this.preload = true;
     }
@@ -69,7 +68,7 @@ export class ReaderPage implements OnInit {
     // получаем первую главу
     // todo: добавить возможноть открывать последнию главу
 
-    const post = await this.storage.get(this.info.id);
+    const post = await this.storage.getAsync(this.info.id);
     console.log(this);
 
     // по умолчанию мы открывает первую главу
@@ -125,7 +124,7 @@ export class ReaderPage implements OnInit {
       [this.chapter]: this.active
     };
     // записываем всю активность и сохраняем, относительно последней и глобально по манге
-    await this.storage.set(this.info.id, {
+    await this.storage.setAsync(this.info.id, {
       allactives: this.allactives,
       active: this.active
     });
@@ -144,7 +143,7 @@ export class ReaderPage implements OnInit {
       ...this.allactives,
       [this.chapter]: this.active
     };
-    await this.storage.set(this.info.id, {
+    await this.storage.setAsync(this.info.id, {
       allactives: this.allactives,
       active: this.active
     });
@@ -178,7 +177,7 @@ export class ReaderPage implements OnInit {
         page: number,
         pages: number
       }
-    } = await this.storage.get(this.info.id);
+    } = await this.storage.getAsync(this.info.id);
 
     console.log(post, this.chapter in post.allactives);
 
@@ -207,7 +206,7 @@ export class ReaderPage implements OnInit {
     }
 
     // еще раз все сохроняем, после наших всех переходов
-    await this.storage.set(this.info.id, {
+    await this.storage.setAsync(this.info.id, {
       allactives: {
         ...this.allactives,
         [this.chapter]: this.active
