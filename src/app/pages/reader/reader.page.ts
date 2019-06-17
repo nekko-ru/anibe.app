@@ -83,6 +83,10 @@ export class ReaderPage implements OnInit {
     }
   }
 
+  protected async ionViewWillLeave() {
+    this.viewer.close();
+  }
+
   public open(i: number) {
     setTimeout(() => this.viewer.slides.slideTo(i, 1), 1000);
     // this.viewer.open(i, this.viewer.images[i]);
