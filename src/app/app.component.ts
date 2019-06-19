@@ -1,15 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform, ToastController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Router } from '@angular/router';
 import { AppState } from './app.state';
 import { IUser } from './services/interfaces';
-import { Storage } from '@ionic/storage';
 import { FivDialog } from '@fivethree/core';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -49,9 +47,7 @@ export class AppComponent {
     private statusBar: StatusBar,
     private firebase: Firebase,
     private router: Router,
-    private toastController: ToastController,
     public global: AppState,
-    private storage: Storage
   ) {
     this.initializeApp();
   }

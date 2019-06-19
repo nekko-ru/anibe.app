@@ -22,7 +22,23 @@
   </ion-refresher>
   <!-- end of page refresher -->
 
-  <ion-card>
+  <!-- todo: in future change to custom backgrounds -->
+  <div id="profile-bg" [ngStyle]="{'background-image': 'url(https://img2.goodfon.ru/original/1024x768/5/9c/art-gasone-japan-shkolnitsa-matroska-velosiped-ulochka-doma.jpg)'}"></div>
+  <div id="content">
+    <div id="profile-info" padding>
+      <img id="profile-image" [src]="info.picture">
+      <span>
+          <div id="profile-name">{{info.name}}</div>
+          <ion-text color="danger" *ngIf="info.role !== 'user'">
+            {{ info.role }}
+          </ion-text>
+      </span>
+      <!-- <p>{{user.occupation}} &bull; {{user.location}}</p> -->
+      <p class="profile-description">{{info.desc || '...'}}</p>
+    </div>
+  </div>
+  <hr/>
+  <!-- <ion-card>
     <ion-card-content>
       <ion-row>
 
@@ -43,7 +59,7 @@
         </ion-col>
       </ion-row>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
   <ion-card>
     <ion-card-content>
