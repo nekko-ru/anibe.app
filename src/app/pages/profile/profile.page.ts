@@ -27,6 +27,13 @@ export class ProfilePage implements OnInit {
     willread: []
   };
 
+  public roles = {
+    admin: 'Администратор',
+    moder: 'Модератор',
+    vip: 'VIP',
+    user: 'Пользователь',
+  };
+
   constructor(
     private user: UserService,
     private storage: AppState,

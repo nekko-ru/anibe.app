@@ -31,16 +31,16 @@
   <div class="card-profile_user-stats">
     <div class="stats-holder">
       <div class="user-stats">
-        <strong>Tweets</strong>
-        <span>{{info.tweets}}</span>
+        <strong>Прочитано манги</strong>
+        <span>{{info.readed.length + info.favorite.length + info.thrown.length}}</span>
       </div>
       <div class="user-stats">
-        <strong>Following</strong>
-        <span>{{info.following}}</span>
+        <strong>Зарегистрирован</strong>
+        <span>{{info.createdAt | date}}</span>
       </div>
       <div class="user-stats">
-        <strong>Followers</strong>
-        <span>{{info.followers}}</span>
+        <strong>Роль</strong>
+        <span>{{roles[info.role] || 'ошибка'}}</span>
       </div>
     </div>
   </div>

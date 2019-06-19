@@ -146,7 +146,6 @@ ion-header {
     }
 
     &_user-stats {
-        background: #fff;
         float: left;
         width: 100%;
         height: $datas-height;
@@ -176,7 +175,7 @@ ion-header {
             }
 
             span {
-                font-size: 26px;
+                font-size: 16px;
                 color: #5E5E5E;
                 padding: .18em 0;
                 display: inline-block;
