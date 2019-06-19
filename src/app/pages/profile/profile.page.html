@@ -13,20 +13,15 @@
 </ion-header>
 
 <ion-content fullscreen>
-
-  <!-- Page refrasher -->
-  <ion-refresher slot="fixed" (ionRefresh)="update($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Для обновления потяни вниз"
-      refreshingSpinner="circles" refreshingText="Обновление" cancelable="false">
-    </ion-refresher-content>
-  </ion-refresher>
-  <!-- end of page refresher -->
-
-
   <div class="card-profile_visual"></div>
   <div class="card-profile_user-infos">
     <span class="infos_name">{{info.name}}</span>
     <span class="infos_nick">{{info.email}}</span>
+    <div class="avatar">
+      <div class="avatar-preview">
+        <div id="imagePreview" [ngStyle]="{'background-image': 'url('+info.picture+')'}"></div>
+      </div>
+    </div>
   </div>
   <div class="card-profile_user-stats">
     <div class="stats-holder">
