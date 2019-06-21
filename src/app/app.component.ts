@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
-import { Platform, ToastController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Router } from '@angular/router';
 import { AppState } from './app.state';
 import { IUser } from './services/interfaces';
-import { Storage } from '@ionic/storage';
-
+import { FivDialog } from '@fivethree/core';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -48,57 +47,56 @@ export class AppComponent {
     private statusBar: StatusBar,
     private firebase: Firebase,
     private router: Router,
-    private toastController: ToastController,
     public global: AppState,
-    private storage: Storage
   ) {
     this.initializeApp();
   }
 
   public current_user: IUser;
 
+  @ViewChild('dialog') dialog: FivDialog;
+
+  public alert: any = {
+    backdrop: true,
+    pull: true,
+    verticalAlign: 'top',
+    horizontalAlign: 'left',
+    shape: 'fill',
+    duration: 3600,
+    inDuration: '220',
+    outDuration: '180',
+
+    url: '',
+    title: 'Новое уведомление',
+    content: 'На ваш комментарий кто то недавно ответили'
+  };
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleLightContent();
       this.splashScreen.hide();
 
-      this.storage.get('theme').then((theme) => this.global.set('theme', theme));
-
-      this.storage.get('user_local').then((user) => this.current_user = user);
-
       this.firebase.onNotificationOpen()
         .subscribe(async data => {
-          const counter: any = document.getElementById('notif-count');
-          counter.innerHTML = Number(counter.innerHTML) + 1;
 
-          const toast = await this.toastController.create({
-            message: data.body,
-            showCloseButton: true,
-            duration: 5000,
-            position: 'top',
-            closeButtonText: 'Открыть'
-          });
-          toast.present();
-
-          toast.onDidDismiss().then(async (value) => {
-            console.log(value);
-
-            if (value.role === 'cancel') {
-              await this.router.navigateByUrl(data.url);
-            }
-          });
+          this.alert.url = data.url;
+          this.alert.title = data.title;
+          this.alert.content = data.body;
+          this.dialog.open();
         });
     });
   }
 
-  public ionChange(e: any) {
+  public async open(url: string) {
+    await this.router.navigateByUrl(url);
+  }
+
+  public async ionChange(e: any) {
     console.log(e);
     if (e.detail.checked) {
-      this.global.set('theme', 'theme-dark');
-      this.storage.set('theme', 'theme-dark');
+      await this.global.setAsync('theme', 'theme-dark');
     } else {
-      this.global.set('theme', '');
-      this.storage.set('theme', 'theme-dark');
+      await this.global.setAsync('theme', '');
     }
   }
 }

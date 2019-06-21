@@ -12,17 +12,80 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullpage>
+<ion-content fullscreen>
+  <div class="card-profile_visual"></div>
+  <div class="card-profile_user-infos">
+    <span class="infos_name">{{info.name}}</span>
+    <span class="infos_nick">{{info.email}}</span>
+    <div class="avatar">
+      <div class="avatar-preview">
+        <div id="imagePreview" [ngStyle]="{'background-image': 'url('+info.picture+')'}"></div>
+      </div>
+    </div>
+  </div>
+  <div class="card-profile_user-stats">
+    <div class="stats-holder">
+      <div class="user-stats">
+        <strong>Прочитано манги</strong>
+        <span>{{info.readed.length + info.favorite.length + info.thrown.length}}</span>
+      </div>
+      <div class="user-stats">
+        <strong>Зарегистрирован</strong>
+        <span>{{info.createdAt | date}}</span>
+      </div>
+      <div class="user-stats">
+        <strong>Роль</strong>
+        <span>{{roles[info.role] || 'ошибка'}}</span>
+      </div>
+    </div>
+  </div>
 
-  <!-- Page refrasher -->
-  <ion-refresher slot="fixed" (ionRefresh)="update($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Для обновления потяни вниз"
-      refreshingSpinner="circles" refreshingText="Обновление" cancelable="false">
-    </ion-refresher-content>
-  </ion-refresher>
-  <!-- end of page refresher -->
+  <div class="content">
+    <ion-card>
+      <ion-card-content>
+        <ion-list lines="none">
 
-  <ion-card>
+          <ion-item (click)="openList('Буду читать', info.willread)">
+            <ion-label>Буду читать</ion-label>
+            <ion-note slot="end">{{ info.willread.length }}</ion-note>
+          </ion-item>
+          <ion-item (click)="openList('Читаю', info.inprogress)">
+            <ion-label>Читаю</ion-label>
+            <ion-note slot="end">{{ info.inprogress.length }}</ion-note>
+          </ion-item>
+          <ion-item (click)="openList('Прочитано', info.readed)">
+            <ion-label>Прочитано</ion-label>
+            <ion-note slot="end">{{ info.readed.length }}</ion-note>
+          </ion-item>
+          <ion-item (click)="openList('Любимые', info.favorite)">
+            <ion-label>Любимые</ion-label>
+            <ion-note slot="end">{{ info.favorite.length }}</ion-note>
+          </ion-item>
+          <ion-item (click)="openList('Брошено', info.thrown)">
+            <ion-label>Брошено</ion-label>
+            <ion-note slot="end">{{ info.thrown.length }}</ion-note>
+          </ion-item>
+
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <!-- todo: in future change to custom backgrounds -->
+  <!-- <div id="profile-bg" [ngStyle]="{'background-image': 'url(https://img2.goodfon.ru/original/1024x768/5/9c/art-gasone-japan-shkolnitsa-matroska-velosiped-ulochka-doma.jpg)'}"></div>
+  <div id="content">
+    <div id="profile-info" padding>
+      <img id="profile-image" [src]="info.picture">
+      <span>
+          <div id="profile-name">{{info.name}}</div>
+          <ion-text color="danger" *ngIf="info.role !== 'user'">
+            {{ info.role }}
+          </ion-text>
+      </span>
+      <p class="profile-description">{{info.desc || '...'}}</p>
+    </div>
+  </div>
+  <hr/> -->
+  <!-- <ion-card>
     <ion-card-content>
       <ion-row>
 
@@ -43,34 +106,5 @@
         </ion-col>
       </ion-row>
     </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-      <ion-list lines="none">
-
-        <ion-item (click)="openList('Буду читать', info.willread)">
-          <ion-label>Буду читать</ion-label>
-          <ion-note slot="end">{{ info.willread.length }}</ion-note>
-        </ion-item>
-        <ion-item (click)="openList('Читаю', info.inprogress)">
-          <ion-label>Читаю</ion-label>
-          <ion-note slot="end">{{ info.inprogress.length }}</ion-note>
-        </ion-item>
-        <ion-item (click)="openList('Прочитано', info.readed)">
-          <ion-label>Прочитано</ion-label>
-          <ion-note slot="end">{{ info.readed.length }}</ion-note>
-        </ion-item>
-        <ion-item (click)="openList('Любимые', info.favorite)">
-          <ion-label>Любимые</ion-label>
-          <ion-note slot="end">{{ info.favorite.length }}</ion-note>
-        </ion-item>
-        <ion-item (click)="openList('Брошено', info.thrown)">
-          <ion-label>Брошено</ion-label>
-          <ion-note slot="end">{{ info.thrown.length }}</ion-note>
-        </ion-item>
-
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 </ion-content>

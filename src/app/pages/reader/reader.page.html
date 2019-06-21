@@ -9,37 +9,37 @@
 
 <ion-content fullpage>
 
-  <ion-slides
-    #mySlider
-    (ionSlideReachEnd)="ChapterEnded()"
-    (ionSlideDidChange)="sliderEvent()"
-    style="height: 100%"
-    align-items-center
-    [options]="slideOpts"
-  >
-    <ion-slide *ngFor="let img of episode">
-      <div class="swiper-zoom-container">
-        <img *ngIf="!preload" [src]="img">
-        <ion-img *ngIf="preload" [src]="img"></ion-img>
-      </div>
-    </ion-slide>
-
-  </ion-slides>
-
-</ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-segment>
-      <ion-segment-button (click)="slider.slidePrev(500)">
-        <ion-icon name="arrow-round-back"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button (click)="selectChapter()">
-        <ion-icon name="menu"></ion-icon>
-      </ion-segment-button>
-      <ion-segment-button (click)="slider.slideNext(500)">
-        <ion-icon name="arrow-round-forward"></ion-icon>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar>
-</ion-footer>
+    <ion-slides
+      #mySlider
+      (ionSlideReachEnd)="ChapterEnded()"
+      (ionSlideDidChange)="sliderEvent()"
+      style="height: 100%"
+      align-items-center
+      [options]="slideOpts"
+    >
+      <ion-slide *ngFor="let img of episode">
+        <div class="swiper-zoom-container">
+          <img *ngIf="!preload" [src]="img">
+          <ion-img *ngIf="preload" [src]="img"></ion-img>
+        </div>
+      </ion-slide>
+  
+    </ion-slides>
+  
+  </ion-content>
+  
+  <ion-footer>
+    <ion-toolbar>
+      <ion-segment>
+        <ion-segment-button (click)="slider.slidePrev(500)">
+          <ion-icon name="arrow-round-back"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button (click)="selectChapter()">
+          <ion-icon name="menu"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button (click)="slider.slideNext(500)">
+          <ion-icon name="arrow-round-forward"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-footer>

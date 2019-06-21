@@ -4,6 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { AppState } from 'src/app/app.state';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,7 @@ export class RegisterPage implements OnInit {
     private toast: ToastController,
     private firebase: Firebase,
     private router: Router,
-    private storage: Storage,
+    private storage: AppState,
   ) { }
 
   async ngOnInit() {
@@ -61,7 +62,7 @@ export class RegisterPage implements OnInit {
         picture: null
       });
 
-      await this.storage.set('token', user.token);
+      await this.storage.setAsync('token', user.token);
       await this.firebase.logEvent('sign_up', { sign_up_method: 'email' });
       await this.firebase.setUserId(user.user.id);
       await this.router.navigateByUrl('/tabs/profile');

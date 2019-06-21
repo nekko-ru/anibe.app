@@ -56,14 +56,11 @@ In proggress
 
 ***Without system ui, only clear screenshots***
 
-| Home page with recommendations | Search page | Notifications page | User profile |
+| Home page with recommendations | Search page | Menu with dark theme | User profile |
 | -         | -           | -                  | -            |
-| ![](https://i.imgur.com/a3G73We.jpg) | ![](https://i.imgur.com/Mz8NLKL.jpg) | ![](https://i.imgur.com/wGiznmo.png) | ![](https://i.imgur.com/efaR8TM.png) |
+| ![](https://i.imgur.com/VJeHQCI.png) | ![](https://i.imgur.com/YWiflXA.png) | ![](https://i.imgur.com/HoPE0zt.png) | ![](https://i.imgur.com/efaR8TM.png) |
 
-| News screen | User's custom list | Search by name and genres | Manga info screen |
-| -         | -           | -                  | -            |
-| ![](https://i.imgur.com/j9rAB1n.jpg) | ![](https://i.imgur.com/kzoecZn.png) | ![](https://i.imgur.com/EcQMQdd.jpg) | ![](https://i.imgur.com/VO5bJeW.png) |
 
-| Reader | Select chapter | Another manga screen | Active chats | Chat |
+| Reader | Select chapter | Manga info | Active chats | Chat |
 | -      | - | -             | - | - |
 | ![](https://i.imgur.com/UAecKC6.jpg) | ![](https://i.imgur.com/mIPumrD.png) | ![](https://i.imgur.com/khZyH2l.png) | ![](https://i.imgur.com/pEXdJzZ.png) | ![](https://i.imgur.com/zollkqp.png) |

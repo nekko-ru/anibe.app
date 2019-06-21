@@ -1,4 +1,4 @@
-<div class="{{global.state['theme']}}">
+<div class="{{global.get('theme') || ''}}">
   <ion-app>
     <ion-split-pane>
       <ion-menu>
@@ -18,11 +18,11 @@
               </ion-item>
             </ion-menu-toggle>
           </ion-list> -->
-          <div class="menu-header" [routerDirection]="'root'" routerLink="/profile" *ngIf="current_user">
+          <div class="menu-header" [routerDirection]="'root'" routerLink="/profile" *ngIf="global.get('user_local')">
             <!--material-design-background-->
-            <img class="user-avatar round" style="height:90px;max-width:90px;" [src]="current_user.picture" />
-            <p class="name">{{ current_user.name }}</p>
-            <p class="e-mail">{{ current_user.email }}</p>
+            <img class="user-avatar round" style="height:90px;max-width:90px;" [src]="global.get('user_local').picture" />
+            <p class="name">{{ global.get('user_local').name }}</p>
+            <p class="e-mail">{{ global.get('user_local').email }}</p>
           </div>
 
           <ion-list lines="none">
@@ -76,3 +76,26 @@
     </ion-split-pane>
   </ion-app>
 </div>
+
+<fiv-dialog [pullEnabled]="alert.pull" (fivDurationOver)="dialog.close()" [inDuration]="alert.inDuration"
+  [outDuration]="alert.outDuration" #dialog [duration]="alert.duration" [shape]="alert.shape" [horizontalAlign]="alert.horizontalAlign"
+  [verticalAlign]="alert.verticalAlign" [backdrop]="alert.backdrop">
+
+  <ion-card-header>
+    <!-- <ion-card-subtitle>{{ alert.type }}</ion-card-subtitle> -->
+    <ion-card-title>{{ alert.title }}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ alert.content }}</p>
+  </ion-card-content>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="dialog.close()">
+        Закрыть
+      </ion-button>
+      <ion-button color="primary" (click)="open(alert.url)">
+        Перейти
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</fiv-dialog>

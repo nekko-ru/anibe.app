@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { AppState } from './app.state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FivethreeCoreModule } from '@fivethree/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +21,9 @@ import { AppState } from './app.state';
     BrowserModule,
     IonicModule.forRoot({ mode: 'ios' }),
     AppRoutingModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    BrowserAnimationsModule,
+    FivethreeCoreModule
   ],
   providers: [
     StatusBar,

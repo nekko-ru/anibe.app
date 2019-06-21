@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { ActionSheetController, PopoverController } from '@ionic/angular';
+import { AppState } from 'src/app/app.state';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ export class ProfilePopoverPage implements OnInit {
 
   constructor(
     private router: Router,
-    private storage: Storage,
+    private storage: AppState,
     private actionSheetController: ActionSheetController,
     private popoverController: PopoverController
   ) { }
@@ -39,8 +40,9 @@ export class ProfilePopoverPage implements OnInit {
         role: 'destructive',
         icon: 'log-out',
         handler: async () => {
-          await this.storage.remove('token');
-          await this.storage.remove('user_local');
+          // сохраняем обновляем пользователя сразу же и в приложении
+          await this.storage.setAsync('user_local', undefined);
+          await this.storage.setAsync('token', undefined);
           this.router.navigateByUrl('/');
         }
       }, {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { API } from './api.service';
-import { Storage } from '@ionic/storage';
+import { AppState } from '../app.state';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class ReportService {
   private ready: Promise<any>;
 
   constructor(
-    private storage: Storage,
+    private storage: AppState,
     private toast: ToastController
   ) {
     this.api = new API({  });
@@ -28,7 +28,7 @@ export class ReportService {
    * @returns {Promise<IPostFull>} результат
    */
   public async send(body: IReportBody): Promise<any> {
-    this.token = await this.storage.get('token') || 'invalid';
+    this.token = await this.storage.getAsync('token') || 'invalid';
 
     const res = await this.api.post(`/reports`, {
       ...body,

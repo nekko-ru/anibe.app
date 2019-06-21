@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { API } from './api.service';
-import { Storage } from '@ionic/storage';
 import { INotif, IPost, IUser } from './interfaces';
+import { AppState } from '../app.state';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +14,13 @@ export class UserService {
   private token: string;
 
   constructor(
-    private storage: Storage
+    private storage: AppState,
   ) {
     this.api = new API({  });
   }
 
   private async setToken() {
-    this.token = await this.storage.get('token');
+    this.token = await this.storage.getAsync('token');
   }
 
   public async reg(v: { email: string, name: string, password: string, picture?: string }) {
@@ -40,6 +40,8 @@ export class UserService {
    */
   public async auth(username: string, password: string) {
     const res = await this.api.auth('/auth', username, password);
+    // сохраняем обновляем пользователя сразу же и в приложении
+    this.storage.setAsync('user_local', res.data.user);
     return res.data;
   }
 
@@ -53,6 +55,8 @@ export class UserService {
     const res = await this.api.get(url, {
       access_token: this.token
     });
+    // сохраняем обновляем пользователя сразу же и в приложении
+    this.storage.setAsync('user_local', res.data);
     return res.data;
   }
 
@@ -94,6 +98,8 @@ export class UserService {
       access_token: this.token
     });
 
+    // сохраняем обновляем пользователя сразу же и в приложении
+    this.storage.setAsync('user_local', res.data);
     return res.data;
   }
   public async updateAvatar(file: any) {

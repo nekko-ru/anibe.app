@@ -7,6 +7,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 
 import { ViewlistPage } from '../viewlist/viewlist.page';
 import { ProfilePopoverPage } from '../../popover/profile/profile.page';
+import { AppState } from 'src/app/app.state';
 
 @Component({
   selector: 'app-profile',
@@ -26,9 +27,16 @@ export class ProfilePage implements OnInit {
     willread: []
   };
 
+  public roles = {
+    admin: 'Администратор',
+    moder: 'Модератор',
+    vip: 'VIP',
+    user: 'Пользователь',
+  };
+
   constructor(
     private user: UserService,
-    private storage: Storage,
+    private storage: AppState,
     private router: Router,
     private popoverController: PopoverController,
     private modalController: ModalController,
@@ -81,7 +89,7 @@ export class ProfilePage implements OnInit {
 
   private async load(full: boolean = false) {
     try {
-      const temp = await this.storage.get('user_local');
+      const temp = await this.storage.getAsync('user_local');
       if (temp && !full) {
         this.info = temp;
       } else {
@@ -90,13 +98,13 @@ export class ProfilePage implements OnInit {
       }
     } catch (e) {
       console.log(e);
-      await this.storage.remove('token');
+      await this.storage.setAsync('token', undefined);
       this.router.navigateByUrl('/');
     }
   }
 
   private async FCMToken() {
-    let token = await this.storage.get('user_local_fcm');
+    let token = await this.storage.getAsync('user_local_fcm');
     if (!token) {
       token = await this.firebase.getToken();
       if (!token) {
