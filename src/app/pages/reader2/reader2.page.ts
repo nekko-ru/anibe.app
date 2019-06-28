@@ -74,7 +74,7 @@ export class Reader2Page implements OnInit {
     this.stats.all = Object.keys(this.info.episodes);
     await this.storage.setAsync(`reader_${this.info.id}`, this.stats);
 
-    await this.viewer.updateImages();
+    setTimeout(() => this.viewer.updateImages(), 50);
 
     await this.firebase.setScreenName('reader');
     await this.firebase.logEvent('select_content', { item_id: this.info.id, content_type: 'manga' });

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ru.anibe.mobile" version="1.2.11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="ru.anibe.mobile" version="1.2.12" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Манга Anibe</name>
     <description>Поиск и чтение манги на русском.</description>
     <author email="deissh@yandex,ru" href="http://vk.com/keelvel/">Deissh</author>
@@ -92,5 +92,5 @@
     <plugin name="cordova-plugin-firebase-lib" spec="^4.0.1" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="8.0.0" />
-    <allow-navigation href="http://localhost:8100" sessionid="2339cd26" />
+    <allow-navigation href="http://localhost:8100" sessionid="54a5a4f8" />
 </widget>

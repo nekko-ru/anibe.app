@@ -4,9 +4,9 @@ import { LoadingController, ModalController, ActionSheetController } from '@ioni
 import { IPostFull } from 'src/app/services/interfaces';
 import { PostService } from 'src/app/services/post.service';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { Storage } from '@ionic/storage';
 import { UserService } from 'src/app/services/user.service';
 import { ReportPage } from 'src/app/modal/report/report.page';
+import { AppState } from 'src/app/app.state';
 
 @Component({
   selector: 'app-info',
@@ -27,7 +27,7 @@ export class InfoPage implements OnInit {
     private loadingController: LoadingController,
     private post: PostService,
     private user: UserService,
-    private storage: Storage,
+    private storage: AppState,
     private asc: ActionSheetController,
     private modalController: ModalController,
     private firebase: Firebase

@@ -9,18 +9,18 @@
           </ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-          <ion-button (click)="viewer.fullscreen()">
+          <!-- <ion-button (click)="viewer.fullscreen()">
             <fiv-icon slot="icon-only" [name]="viewer.inFullscreen ? 'contract': 'expand'"></fiv-icon>
           </ion-button>
           <ion-button (click)="viewer.zoom()">
             <fiv-icon slot="icon-only" [name]="viewer.zoomedIn ? 'remove': 'add'"></fiv-icon>
-          </ion-button>
+          </ion-button> -->
         </ion-buttons>
       </ion-toolbar>
     </fiv-gallery-toolbar>
     <ion-grid fixed no-padding>
       <ion-row class="large">
-        <ion-col size="4" sizeLg="12" sizeXl="12" *ngFor="let img of imgs">
+        <ion-col size="12" sizeLg="12" sizeXl="12" *ngFor="let img of imgs; let i = index">
           <fiv-gallery-image [src]="img"></fiv-gallery-image>
         </ion-col>
       </ion-row>
@@ -39,6 +39,4 @@
     </fiv-gallery-toolbar>
 
   </fiv-gallery>
-
-
 </ion-content>
