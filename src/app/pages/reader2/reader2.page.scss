@@ -19,3 +19,12 @@ ion-segment-button {
 ion-button {
     color: #fff;
 }
+
+ion-row {
+    ion-col {
+        align-self: center;
+    }
+    fiv-gallery-image {
+        --background: #383a3e;
+    }
+}
