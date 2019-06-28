@@ -1,0 +1,10 @@
+.cover {
+    height: 0px;
+
+    .background {
+        filter: blur(15px);
+        -webkit-filter: blur(15px);
+        height: 400px;
+        object-fit: cover;
+    }
+}

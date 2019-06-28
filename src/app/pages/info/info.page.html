@@ -1,7 +1,11 @@
 <ion-content fullpage>
 
+  <div class="cover">
+    <ion-img class="background" [src]="info?.cover"></ion-img>
+  </div>
+
   <ion-card>
-    <ion-img [src]="info?.cover"></ion-img>
+    <ion-img style="height: 350px" [src]="info?.cover"></ion-img>
     <ion-card-header>
       <ion-card-title>{{ info?.name }}</ion-card-title>
     </ion-card-header>
