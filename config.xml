@@ -22,6 +22,7 @@
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
         </edit-config>
+        <resource-file src="google-services.json" target="google-services.json" />
         <resource-file src="resources/android/xml/network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
         <preference name="android-minSdkVersion" value="19" />
         <allow-intent href="market:*" />
@@ -87,8 +88,9 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
-    <content src="index.html" />
+    <content original-src="index.html" src="http://localhost:8100" />
     <plugin name="cordova-plugin-firebase-lib" spec="^4.0.1" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="8.0.0" />
+    <allow-navigation href="http://localhost:8100" sessionid="2339cd26" />
 </widget>

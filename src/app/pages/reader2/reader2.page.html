@@ -1,0 +1,44 @@
+<ion-content fullpage>
+
+  <fiv-gallery #Viewer>
+    <fiv-gallery-toolbar [position]="'top'">
+      <ion-toolbar color="transparent">
+        <ion-buttons slot="start">
+          <ion-button (click)="viewer.close()">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+          <ion-button (click)="viewer.fullscreen()">
+            <fiv-icon slot="icon-only" [name]="viewer.inFullscreen ? 'contract': 'expand'"></fiv-icon>
+          </ion-button>
+          <ion-button (click)="viewer.zoom()">
+            <fiv-icon slot="icon-only" [name]="viewer.zoomedIn ? 'remove': 'add'"></fiv-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </fiv-gallery-toolbar>
+    <ion-grid fixed no-padding>
+      <ion-row class="large">
+        <ion-col size="4" sizeLg="12" sizeXl="12" *ngFor="let img of imgs">
+          <fiv-gallery-image [src]="img"></fiv-gallery-image>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <fiv-gallery-toolbar [position]="'bottom'">
+      <ion-toolbar color="transparent">
+        <ion-text slot="start">
+          {{ info?.name }}
+        </ion-text>
+        <ion-text slot="end">
+          Глава: {{ stats?.last }}/{{ stats?.all.length }}
+        </ion-text>
+
+      </ion-toolbar>
+    </fiv-gallery-toolbar>
+
+  </fiv-gallery>
+
+
+</ion-content>
