@@ -9,7 +9,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a0397ead617943baa02730fe82ffad11)](https://www.codacy.com/app/Deissh/anibe.app?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=deissh/anibe.app&amp;utm_campaign=Badge_Grade)
 [![CircleCI](https://circleci.com/gh/deissh/anibe.app/tree/master.svg?style=svg&circle-token=aba99847bae43629ad4c7cd71cf33bd98bafaf5a)](https://circleci.com/gh/deissh/anibe.app/tree/master)
 
-<a href="https://www.buymeacoffee.com/epicurl" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
+<a href="https://www.buymeacoffee.com/foobar" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
 :fire: WIP | Simple app to read manga on your phone
 
