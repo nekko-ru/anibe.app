@@ -31,7 +31,20 @@
   <!-- old -->
 
 
-  <ion-virtual-scroll [items]="render" approxItemHeight="20px" #scroller class="scroller">
+  <div class="movies-flex" *ngIf="render">
+    <div class="movie" *ngFor="let manga of render">
+      <div class="poster">
+        <img *ngIf="manga.cover" class="poster" [src]="manga.cover">
+        <img *ngIf="manga.cover" class="poster-effect" [src]="manga.cover">
+      </div>
+      <div class="title">{{ manga.name }}</div>
+      <div class="year">{{ manga.author }}</div>
+      <div class="vote"><ion-icon name="star"></ion-icon><b>{{ manga.rating }}</b>/10</div>
+    </div>
+  </div>
+
+
+  <!-- <ion-virtual-scroll [items]="render" approxItemHeight="20px" #scroller class="scroller">
     <ion-item *virtualItem="let item" class="post" (click)="openPost(item.id)">
       <ion-img (click)="openPost(item.id)" [src]="item.cover" class="cover"></ion-img>
       <ion-label text-wrap>
@@ -44,7 +57,7 @@
         </ion-text>
       </ion-label>
     </ion-item>
-  </ion-virtual-scroll>
+  </ion-virtual-scroll> -->
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadNewPage($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Загрузка...">
