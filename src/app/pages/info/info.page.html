@@ -1,4 +1,62 @@
-<ion-content fullpage>
+<ion-content padding>
+
+  <div class="backdrop" *ngIf="info">
+    <img [src]="info?.cover">
+  </div>
+  <div class="backdrop-separator1"></div>
+  <div class="backdrop-separator2"></div>
+
+  <div class="poster" *ngIf="info">
+    <img class="poster" [src]="info?.cover">
+    <img class="poster-effect" [src]="info?.cover">
+  </div>
+
+  <div class="manga-data" *ngIf="info">
+    <div class="title">{{ info.name }}</div>
+    <div class="year">{{ info.date }}</div>
+    <div class="vote">
+      <div class="text">
+        <b>{{ info.rating }}</b>/10
+      </div>
+      <div class="stars">
+        <ion-icon [name]="info.rating * 1 >= 2 ? 'star' : info.rating * 1 >= 1 ? 'star-half' : 'star-outline'"></ion-icon>
+        <ion-icon [name]="info.rating * 1 >= 4 ? 'star' : info.rating * 1 >= 3 ? 'star-half' : 'star-outline'"></ion-icon>
+        <ion-icon [name]="info.rating * 1 >= 6 ? 'star' : info.rating * 1 >= 5 ? 'star-half' : 'star-outline'"></ion-icon>
+        <ion-icon [name]="info.rating * 1 >= 8 ? 'star' : info.rating * 1 >= 7 ? 'star-half' : 'star-outline'"></ion-icon>
+        <ion-icon [name]="info.rating * 1 >= 10 ? 'star' : info.rating * 1 >= 9 ? 'star-half' : 'star-outline'"></ion-icon>
+      </div>
+      <!-- <div class="count">{{ info.vote_count }} votos</div> -->
+    </div>
+
+    <div class="overview">
+        <ion-button color="primary" (click)="Read()">
+            Читать
+          </ion-button>
+          <ion-button (click)="showMore()" color="primary" fill="outline">
+            <ion-icon name="bookmark"></ion-icon>
+          </ion-button>
+          <ion-button color="primary" fill="outline" (click)="report()">
+            <ion-icon name="warning"></ion-icon>
+          </ion-button>
+      
+          <ion-button (click)="Comments()" expand="full" fill="outline">Комментарии</ion-button>
+      {{ info.description }}
+    </div>
+
+    <div class="duration" *ngIf="info && info.runtime">
+      <div class="label"><ion-icon name="md-time"></ion-icon>Продолжительность</div>
+      <div class="value">{{ info.reading }} часов</div>
+    </div>
+    <div class="genres" *ngIf="info && info.genres && info.genres.length">
+      <div class="label"><ion-icon name="md-pricetag"></ion-icon>Жанры</div>
+      <div class="value"><span *ngFor="let genre of info.genres; let last = last">{{ genre }}<span *ngIf="!last">, </span></span></div>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<!-- <ion-content fullpage>
 
   <div class="cover">
     <ion-img class="background" [src]="info?.cover"></ion-img>
@@ -16,9 +74,6 @@
       <ion-button (click)="showMore()" color="primary" fill="outline">
         <ion-icon name="bookmark"></ion-icon>
       </ion-button>
-      <!-- <ion-button color="primary" fill="outline">
-        <ion-icon name="redo"></ion-icon>
-      </ion-button> -->
       <ion-button color="primary" fill="outline" (click)="report()">
         <ion-icon name="warning"></ion-icon>
       </ion-button>
@@ -95,4 +150,4 @@
     </ion-card-content>
   </ion-card>
 
-</ion-content>
+</ion-content> -->

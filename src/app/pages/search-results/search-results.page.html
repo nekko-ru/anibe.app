@@ -32,7 +32,7 @@
 
 
   <div class="movies-flex" *ngIf="render">
-    <div class="movie" *ngFor="let manga of render">
+    <div class="movie" *ngFor="let manga of render" (click)="openPost(item.id)">
       <div class="poster">
         <img *ngIf="manga.cover" class="poster" [src]="manga.cover">
         <img *ngIf="manga.cover" class="poster-effect" [src]="manga.cover">
