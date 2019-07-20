@@ -144,11 +144,11 @@ export class SearchParamsPage implements OnInit {
   }
 
   protected async ionViewDidEnter() {
-    Object.assign(this.genres, await this.storage.get('search_genres'));
+    // Object.assign(this.genres, await this.storage.get('search_genres'));
   }
 
   public async savePicks() {
-    await this.storage.set('search_genres', this.genres);
+    // await this.storage.set('search_genres', this.genres);
     await this.modalController.dismiss({
       activegenres: this.activeGenre(),
       changed: this.changed
