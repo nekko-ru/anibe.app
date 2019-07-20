@@ -1,0 +1,30 @@
+ion-content {
+    --background: #383a3e;
+    --color: #f5f6f9;
+}
+
+ion-toolbar, ion-title {
+    --background: #1e2023;
+    --color: #f5f6f9;
+}
+
+ion-segment-button {
+    --border-color: #1e2023;
+    --indicator-color-checked: transparent;
+    --color-checked: #f5f6f9;
+    --background-checked: #1e2023;
+    --color: #f5f6f9;
+}
+
+ion-button {
+    color: #fff;
+}
+
+ion-row {
+    ion-col {
+        align-self: center;
+    }
+    fiv-gallery-image {
+        --background: #383a3e;
+    }
+}

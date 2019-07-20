@@ -13,6 +13,8 @@ import { Firebase } from '@ionic-native/firebase/ngx';
 import { AppState } from './app.state';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FivethreeCoreModule } from '@fivethree/core';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +25,8 @@ import { FivethreeCoreModule } from '@fivethree/core';
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     BrowserAnimationsModule,
-    FivethreeCoreModule
+    FivethreeCoreModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     StatusBar,

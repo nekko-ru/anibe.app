@@ -112,7 +112,7 @@ export class SearchResultsPage implements OnInit {
     }
 
     // this.render = this.result;
-    this.scroller.checkEnd();
+    // this.scroller.checkEnd();
   }
 
   /**
