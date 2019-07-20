@@ -1,4 +1,27 @@
 
+<a name="v1.2.12"></a>
+## [v1.2.12](https://github.com/deissh/anibe.app/compare/1.2.11...v1.2.12)
+
+> 2019-07-20
+
+### Feat
+
+* **docs:** add changelog.md and git-chglog with template
+* **info:** new info page style
+* **search page:** new item style
+
+### Fix
+
+* **profile:** btn color in header
+* **search:** opening detail page + remove useless code
+* **search-params:** disable autosave last params
+* **sidebar:** remove chats
+
+### Pull Requests
+
+* Merge pull request [#14](https://github.com/deissh/anibe.app/issues/14) from deissh/dependabot/npm_and_yarn/lodash-4.17.14
+
+
 <a name="1.2.11"></a>
 ## [1.2.11](https://github.com/deissh/anibe.app/compare/v1.2.9...1.2.11)
 
@@ -21,19 +44,19 @@
 
 
 <a name="v1.2.8"></a>
-## [v1.2.8](https://github.com/deissh/anibe.app/compare/v1.2.5...v1.2.8)
+## [v1.2.8](https://github.com/deissh/anibe.app/compare/v1.2.4...v1.2.8)
 
 > 2019-05-31
 
 
-<a name="v1.2.5"></a>
-## [v1.2.5](https://github.com/deissh/anibe.app/compare/v1.2.4...v1.2.5)
+<a name="v1.2.4"></a>
+## [v1.2.4](https://github.com/deissh/anibe.app/compare/v1.2.5...v1.2.4)
 
 > 2019-05-11
 
 
-<a name="v1.2.4"></a>
-## [v1.2.4](https://github.com/deissh/anibe.app/compare/v1.2.1...v1.2.4)
+<a name="v1.2.5"></a>
+## [v1.2.5](https://github.com/deissh/anibe.app/compare/v1.2.1...v1.2.5)
 
 > 2019-05-11
 
