@@ -1,4 +1,4 @@
-# Anibe Manga Reader
+# Nekko Manga Reader
 
 ![Website](https://img.shields.io/website/https/api.anibe.ru.svg?down_message=is%20dead&label=api%20server&style=flat-square&up_message=is%20alive)
 ![GitHub tag (latest by date)](https://img.shields.io/github/tag-date/deissh/anibe.app.svg?color=green&label=latest&style=flat-square)
@@ -26,7 +26,7 @@ Service Anibe Manga can boast of its simplicity and reliability! A huge range of
 ## Dowanload
 
 - [GitHub Releases](https://github.com/deissh/anibe.app/releases)
-- [VK Group](https://vk.com/aniberu)
+- [VK Group](https://vk.com/nekko4)
 - [AppCenter public distribution group](https://install.appcenter.ms/orgs/anibe.ru/apps/anibe.ru/distribution_groups/globalpool)
 
 ## Feature
