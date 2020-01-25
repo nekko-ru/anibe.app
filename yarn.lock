@@ -81,6 +81,17 @@
     "@angular-devkit/core" "7.3.9"
     rxjs "6.3.3"
 
+"@angular-devkit/core@7.2.4":
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.2.4.tgz#4464d536f4838e5c61ab4bc1ff6b7f221fd43056"
+  integrity sha512-XHF59tIHg2qEM1Wd415xhykBLjjfOK6yMB7CjNk1bToUMX2QDT87izJF4y1Vwa0lIw9G0jdgP/4/M/OqXcbYmA==
+  dependencies:
+    ajv "6.6.2"
+    chokidar "2.0.4"
+    fast-json-stable-stringify "2.0.0"
+    rxjs "6.3.3"
+    source-map "0.7.3"
+
 "@angular-devkit/core@7.3.9", "@angular-devkit/core@~7.3.8":
   version "7.3.9"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.3.9.tgz#bef2aaa0be7219c546fb99ea0ba9dd3a6dcd288a"
@@ -91,6 +102,14 @@
     fast-json-stable-stringify "2.0.0"
     rxjs "6.3.3"
     source-map "0.7.3"
+
+"@angular-devkit/schematics@7.2.4":
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-7.2.4.tgz#d92b2b8b9114135806d593ea6a2b376c777354dc"
+  integrity sha512-ObIDnIxXRpts+Jzs0PQ7JVuK4d5vWEh9K+Ow8nMO5/LmYJQ8/2nMEQo/9lhdKPMiXmhbuvB7qZL5J+cxwwijhw==
+  dependencies:
+    "@angular-devkit/core" "7.2.4"
+    rxjs "6.3.3"
 
 "@angular-devkit/schematics@7.3.9", "@angular-devkit/schematics@~7.3.8":
   version "7.3.9"
@@ -197,10 +216,28 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/pwa@^0.12.4":
+  version "0.12.4"
+  resolved "https://registry.yarnpkg.com/@angular/pwa/-/pwa-0.12.4.tgz#37dece5ef3e8df419bf97a3cd478802314976d4d"
+  integrity sha512-hvIcj4tVA2Oox+oRky5IlQW7AdKNqg+UjBaaStBFC7JCuf9dZv0R1fJNHxzQTmQyZizXApo02tQhC2GcK09lDQ==
+  dependencies:
+    "@angular-devkit/core" "7.2.4"
+    "@angular-devkit/schematics" "7.2.4"
+    "@schematics/angular" "7.2.4"
+    parse5-html-rewriting-stream "5.1.0"
+    rxjs "6.3.3"
+
 "@angular/router@^7.2.2":
   version "7.2.15"
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-7.2.15.tgz#b2acbd07c17158801006cdd7e93113d6ec1f116e"
   integrity sha512-qAubRJRQanguUqJQ76J9GSZ4JFtoyhJKRmX5P23ANZJXpB6YLzF2fJmOGi+E6cV8F0tKBMEq1pjxFTisx0MXwQ==
+  dependencies:
+    tslib "^1.9.0"
+
+"@angular/service-worker@^7.2.2":
+  version "7.2.16"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-7.2.16.tgz#f9c42b3b26b280a00cdb71937470e6048fb9c972"
+  integrity sha512-l+VMoC2CZdq2Du4/W45zYjbmRxI0kEWHcm9Aqk1oPUt8NT3Kmk2sNDmQKNRdMbEdocvlZ0rejX91vDdTMh2OLQ==
   dependencies:
     tslib "^1.9.0"
 
@@ -484,6 +521,15 @@
     rxjs "6.3.3"
     tree-kill "1.2.1"
     webpack-sources "1.3.0"
+
+"@schematics/angular@7.2.4":
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-7.2.4.tgz#4c3c942e2fd0c32e177602a20f8fa16a88552fca"
+  integrity sha512-aflQwIX4E9tDhp6ZASuQCm8CzxLxdkuOe6qN1FbCxpxMUc9E+iK9jhOjw+Xnl3boJpWHAA+k9JO1sYe3wrh3Ng==
+  dependencies:
+    "@angular-devkit/core" "7.2.4"
+    "@angular-devkit/schematics" "7.2.4"
+    typescript "3.2.2"
 
 "@schematics/angular@7.3.9", "@schematics/angular@^7.0.3":
   version "7.3.9"
@@ -805,6 +851,16 @@ ajv-keywords@^3.1.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.4.0.tgz#4b831e7b531415a7cc518cd404e73f6193c6349d"
   integrity sha512-aUjdRFISbuFOl0EIZc+9e4FfZp0bDZgAdOOf30bJmw8VM9v84SHyVyxDfbWxpGYbdZD/9XoKxfHVNmxPkhwyGw==
+
+ajv@6.6.2:
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.6.2.tgz#caceccf474bf3fc3ce3b147443711a24063cc30d"
+  integrity sha512-FBHEW6Jf5TB9MGBgUUA9XHkTbjXYfAUjY43ACMfmdMRHniyoMHjHjzD50OK8LGDWQwp4rWEsIq5kEqq7rvIM1g==
+  dependencies:
+    fast-deep-equal "^2.0.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
 
 ajv@6.9.1:
   version "6.9.1"
@@ -2467,10 +2523,10 @@ cordova-plugin-statusbar@^2.4.2:
   resolved "https://registry.yarnpkg.com/cordova-plugin-statusbar/-/cordova-plugin-statusbar-2.4.2.tgz#fc1fbdc0d8d7033a7e8e1f1f7ff167ac9bd4faf6"
   integrity sha1-/B+9wNjXAzp+jh8ff/FnrJvU+vY=
 
-cordova-plugin-whitelist@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-whitelist/-/cordova-plugin-whitelist-1.3.3.tgz#b5e85ecdbbfe5aeded40a1bf4ee2372e67d96fb4"
-  integrity sha1-tehezbv+Wu3tQKG/TuI3LmfZb7Q=
+cordova-plugin-whitelist@^1.3.4:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-whitelist/-/cordova-plugin-whitelist-1.3.4.tgz#31938545c7c3e7de35c20ab08c2c3afa06e8a3f9"
+  integrity sha512-EYC5eQFVkoYXq39l7tYKE6lEjHJ04mvTmKXxGL7quHLdFPfJMNzru/UYpn92AOfpl3PQaZmou78C7EgmFOwFQQ==
 
 cordova-registry-mapper@^1.1.8:
   version "1.1.15"
@@ -7057,10 +7113,30 @@ parse-json@^4.0.0:
     error-ex "^1.3.1"
     json-parse-better-errors "^1.0.1"
 
+parse5-html-rewriting-stream@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/parse5-html-rewriting-stream/-/parse5-html-rewriting-stream-5.1.0.tgz#63f92c958764aea8cbe3aa68f2e5895c32068ab8"
+  integrity sha512-hZlaOTHJs4dpC5yFHnOSEMh26ErsqTsLzxKqkuRcUqtiu0kMsBQ9pkgANkECDyoBUhJ3+hvb2DPLsyqbtcS61Q==
+  dependencies:
+    parse5 "^5.1.0"
+    parse5-sax-parser "^5.1.0"
+
+parse5-sax-parser@^5.1.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/parse5-sax-parser/-/parse5-sax-parser-5.1.1.tgz#02834a9d08b23ea2d99584841c38be09d5247a15"
+  integrity sha512-9HIh6zd7bF1NJe95LPCUC311CekdOi55R+HWXNCsGY6053DWaMijVKOv1oPvdvPTvFicifZyimBVJ6/qvG039Q==
+  dependencies:
+    parse5 "^5.1.1"
+
 parse5@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
   integrity sha512-VrZ7eOd3T1Fk4XWNXMgiGBK/z0MG48BWG2uQNU4I72fkQuKUTZpl+u9k+CxEG0twMVzSmXEEz12z5Fnw1jIQFA==
+
+parse5@^5.1.0, parse5@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
+  integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
 
 parseqs@0.0.5:
   version "0.0.5"
@@ -9399,6 +9475,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.2.tgz#fe8101c46aa123f8353523ebdcf5730c2ae493e5"
+  integrity sha512-VCj5UiSyHBjwfYacmDuc/NOk4QQixbE+Wn7MFJuS0nRuPQbof132Pw4u53dm264O8LPc2MVsc7RJNml5szurkg==
 
 typescript@3.2.4:
   version "3.2.4"
