@@ -329,10 +329,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@fivethree/core@^0.8.10":
-  version "0.8.10"
-  resolved "https://registry.yarnpkg.com/@fivethree/core/-/core-0.8.10.tgz#6623e03913b929cb656c62be075d41db94d975c3"
-  integrity sha512-nl8YGCljTgrqMWnL31RYNnLYmHNjOwvdzCiHkR/niptbArN57yLd2O3xb3mGEcfpVHGqhj1/bspdRf0gCVsQfA==
+"@fivethree/core@^0.8.25":
+  version "0.8.25"
+  resolved "https://registry.yarnpkg.com/@fivethree/core/-/core-0.8.25.tgz#2da03a989d0f524b990677aab81dee2a13f702c0"
+  integrity sha512-0LWLUgopJrI15lzGUk9zUIREIDnaKMNZk3rtKSw+prXqy7dZuy6zQBAbI5mEOAVHETDDOF+2U3WexOC8OozFFg==
   dependencies:
     tslib "^1.9.0"
 
