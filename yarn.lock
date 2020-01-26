@@ -2506,10 +2506,10 @@ cordova-plugin-device@^2.0.2:
   resolved "https://registry.yarnpkg.com/cordova-plugin-device/-/cordova-plugin-device-2.0.2.tgz#fc08f3722e67eef7b6c67bfc99a83df6add0baba"
   integrity sha1-/Ajzci5n7ve2xnv8mag99q3Quro=
 
-cordova-plugin-firebase-lib@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-firebase-lib/-/cordova-plugin-firebase-lib-4.0.1.tgz#cc25b9f30757741fa3eeeb8996931f80775c6477"
-  integrity sha512-Y+xqbX+BRroRdmkrb/nA8r6gY/ldpD+Y8FoG0hAYMAc2ZMQGuUUgE7PJK0TGHx5UJzkfy1h4CKhqjqWDxaiMvA==
+cordova-plugin-firebase-lib@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-firebase-lib/-/cordova-plugin-firebase-lib-4.1.0.tgz#0bbd07ff4800a3076d44d8b3a7b58cbde3b77c57"
+  integrity sha512-yybb9eiNdXI2HAEiCQvfbF4hClSH++78fBNKz7sNqMf5Zzo9YM+vKUmtq5O1/RfLLVPjIHxKv0xejvSFmka3cw==
   dependencies:
     xcode "^2.0.0"
 
